@@ -7,11 +7,10 @@ export const Wrapper = tw.div`
 `;
 
 export const InputStyle = tw.textarea`
-    border
-    border-slate-200
+    border border-line
     rounded-sm
     px-[20px]
     py-[15px]
-    placeholder-slate-400
-    
+    placeholder-input-text
+    focus:outline-none focus:border-main
 `;

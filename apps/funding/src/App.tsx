@@ -1,12 +1,13 @@
-import { Header } from '@repo/ui/header';
+import { Header } from '@repo/ui/Header';
+import { Footer } from '@repo/ui/Footer';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import CreateFunding from './pages/createFunding';
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen bg-mainColor">
-      {/* <Header /> */}
+    <div className="flex flex-col">
+      <Header />
 
       <main className="flex-grow px-4 py-8">
         <Routes>
@@ -14,7 +15,7 @@ function App() {
         </Routes>
       </main>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

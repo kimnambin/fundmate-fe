@@ -19,7 +19,7 @@ module.exports = {
         'gray-background': '#F1F7EC',
       },
       fontFamily: {
-        sans: ['Pretendard', 'Inter', 'sans-serif'],
+        sans: ['Pretendard'],
       },
       maxWidth: {
         screen: '1200px',

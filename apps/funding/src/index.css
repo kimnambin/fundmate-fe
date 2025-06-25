@@ -1,13 +1,3 @@
-@import 'tailwindcss';
-
-@theme {
-  --color-main: #5fbdff;
-  --color-sub: #dff2ff;
-  --color-text: #000000;
-  --color-text-unactive: #343f59;
-  --color-sub-text: #7e7c7c;
-  --color-input-text: #94a3b8;
-  --color-red: #fb6565;
-  --color-line: #e2e8f0;
-  --color-gray-background: #f1f7ec;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -5,6 +5,7 @@ export const CreateFundingStyle = tw.div`
   flex-col
   text-left 
   gap-[30px]
+  px-[120px]
 `;
 
 export const Title = tw.div`

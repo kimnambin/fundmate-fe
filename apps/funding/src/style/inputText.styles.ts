@@ -1,6 +1,7 @@
 import tw from 'tailwind-styled-components';
 
-export const Wrapper = tw.div`
+export const Wrapper = tw.div<{ width?: string }>`
+    ${({ width }) => width ?? 'w-auto'}
     flex
     flex-col
     gap-[20px]
@@ -11,10 +12,10 @@ export const Label = tw.label`
 `;
 
 export const InputStyle = tw.input`
-    border
-    border-slate-200
+    border border-line
     rounded-sm
     px-[10px]
     py-[15px]
-    placeholder-slate-400
+    placeholder-input-text
+    focus:outline-none focus:border-main
 `;

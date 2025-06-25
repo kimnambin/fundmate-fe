@@ -1,6 +1,7 @@
 import tw from 'tailwind-styled-components';
 
-export const Wrapper = tw.div`
+export const Wrapper = tw.div<{ width?: string }>`
+    ${({ width }) => width ?? 'w-auto'}
     relative
     flex
     flex-col
@@ -21,5 +22,5 @@ export const DatePickerField = tw.input`
     pr-12
     text-text-active
     placeholder-input-text
-    focus:outline-none focus:border-main-color
+    focus:outline-none focus:border-main
 `;

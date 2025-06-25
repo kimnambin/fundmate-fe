@@ -7,13 +7,14 @@ import { Label } from '../style/inputText.styles';
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   placeholder?: string;
+  width?: string;
 }
 
-const InputDate = ({ label, placeholder }: Props) => {
+const InputDate = ({ label, placeholder, width }: Props) => {
   const [date, setDate] = useState<Date | null>(null);
 
   return (
-    <Wrapper>
+    <Wrapper width={width}>
       {label && <Label>{label}</Label>}
       <ReactDatePicker
         selected={date}
