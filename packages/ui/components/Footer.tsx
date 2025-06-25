@@ -3,7 +3,7 @@ export const Footer = () => {
   const year = date.getFullYear();
 
   return (
-    <div className="w-screen h-10 flex items-center justify-center">
+    <div className="w-full h-10 flex items-center justify-center">
       <span className="text-xl">Copyright (c) {year} Status404. All Rights Reserved.</span>
     </div>
   )

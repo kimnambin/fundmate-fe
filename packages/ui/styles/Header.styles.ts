@@ -3,7 +3,7 @@ import tw from "tailwind-styled-components";
 export const Container = tw.div`
   flex
   flex-row
-  w-screen
+  w-full
   items-center
   px-[120px]
 `
