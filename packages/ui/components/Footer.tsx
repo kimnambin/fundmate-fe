@@ -4,7 +4,9 @@ export const Footer = () => {
 
   return (
     <div className="w-full h-10 flex items-center justify-center">
-      <span className="text-xl">Copyright (c) {year} Status404. All Rights Reserved.</span>
+      <span className="text-xl">
+        Copyright (c) {year} Status404. All Rights Reserved.
+      </span>
     </div>
-  )
-}
+  );
+};

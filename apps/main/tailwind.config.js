@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/*.{tsx}",
+    './src/*.{tsx}',
     './src/**/*.{js,ts,jsx,tsx}',
-    '../../packages/ui/**/*.{js,ts,jsx,tsx}'
+    '../../packages/ui/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -12,7 +12,7 @@ module.exports = {
         secondary: '#F59E0B',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Pretendard'],
       },
     },
   },
