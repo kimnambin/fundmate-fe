@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "보드게임",
+    "imgName": "chess.png"
+  },
+  {
+    "id": 2,
+    "name": "만화",
+    "imgName": "cartoons.png"
+  },
+  {
+    "id": 3,
+    "name": "도서",
+    "imgName": "books.png"
+  },
+  {
+    "id": 4,
+    "name": "음식",
+    "imgName": "bibimbap.png"
+  },
+  {
+    "id": 5,
+    "name": "굿즈",
+    "imgName": "game.png"
+  },
+  {
+    "id": 6,
+    "name": "향수",
+    "imgName": "perfume.png"
+  },
+  {
+    "id": 7,
+    "name": "출판",
+    "imgName": "implementer.png"
+  },
+  {
+    "id": 8,
+    "name": "가방",
+    "imgName": "school-bag.png"
+  }
+]
