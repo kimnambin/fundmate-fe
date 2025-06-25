@@ -4,7 +4,9 @@
   "prettier": "@repo/prettier-config",
   "exports": {
     "./Header": "./components/Header.tsx",
-    "./Footer": "./components/Footer.tsx"
+    "./Footer": "./components/Footer.tsx",
+    "./mainPage/VerticalCard": "./components/mainPage/VerticalCard.tsx",
+    "./mainPage/HorizontalCard": "./components/mainPage/HorizontalCard.tsx"
   },
   "license": "MIT",
   "scripts": {
