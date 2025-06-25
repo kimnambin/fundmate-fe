@@ -1,9 +1,10 @@
-import './App.css';
-import { Button } from 'admin/Button';
+import './index.css';
+import { Main } from './pages/Main';
+
 function App() {
   return (
     <>
-      <Button />
+      <Main />
     </>
   );
 }
