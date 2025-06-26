@@ -17,8 +17,8 @@ export const DatePickerField = tw.input`
     w-full
     bg-white
     border border-line
-    rounded-sm
-    py-3 px-4
+    rounded-[5px]
+    py-[10px] px-[15px]
     pr-12
     text-text-active
     placeholder-input-text

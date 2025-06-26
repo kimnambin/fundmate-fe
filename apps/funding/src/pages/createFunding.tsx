@@ -1,14 +1,14 @@
-import InputDate from '../components/InputDate';
-import InputText from '../components/InputText';
-import InputTextArea from '../components/InputTextArea';
-import MainBtn from '../components/MainBtn';
-import PointBtn from '../components/PointBtn';
+import InputDate from '../components/input/InputDate';
+import InputText from '../components/input/InputText';
+import InputTextArea from '../components/input/InputTextArea';
+import MainBtn from '../components/button/MainBtn';
+import PointBtn from '../components/button/PointBtn';
 import {
   CreateFundingStyle,
   InputWrapper,
   Title,
-} from '../style/createFunding.styles';
-import { Label } from '../style/inputText.styles';
+} from '../style/page/createFunding.styles';
+import { Label } from '../style/input/inputText.styles';
 
 function CreateFunding() {
   return (
@@ -53,11 +53,17 @@ function CreateFunding() {
         <InputTextArea
           label="프로젝트 소개"
           placeholder="프로젝트(펀딩)에 대한 설명을 작성해 주세요!"
+          rows={10}
         />
         <div className="flex gap-5 justify-end">
           <MainBtn width="w-[200px]" label="AI 요약" />
-          <MainBtn width="w-[200px]" label="다시쓰기" />
         </div>
+        <InputTextArea
+          label="한 줄 소개"
+          placeholder="한 줄 소개를 입력하세요."
+          maxLength={50}
+          width="w-[350px]"
+        />
       </InputWrapper>
     </CreateFundingStyle>
   );

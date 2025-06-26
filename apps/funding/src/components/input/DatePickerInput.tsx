@@ -1,6 +1,9 @@
 import { forwardRef } from 'react';
-import CalendarIcon from '../assets/icons/ic_calendar-days.svg';
-import { DatePickerField, DatePickerWrapper } from '../style/inputDate.styles';
+import CalendarIcon from '../../assets/icons/ic_calendar-days.svg';
+import {
+  DatePickerField,
+  DatePickerWrapper,
+} from '../../style/input/inputDate.styles';
 
 interface CustomInputProps {
   value?: string;

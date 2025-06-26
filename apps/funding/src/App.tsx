@@ -9,7 +9,7 @@ function App() {
     <div className="flex flex-col">
       <Header />
 
-      <main className="flex-grow px-4 py-8">
+      <main className="flex-grow px-[120px] py-[30px]">
         <Routes>
           <Route path="/funding/create" element={<CreateFunding />} />
         </Routes>

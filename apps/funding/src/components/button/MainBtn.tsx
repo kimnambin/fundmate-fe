@@ -1,4 +1,4 @@
-import { Wrapper } from '../style/mainBtn.styles';
+import { Wrapper } from '../../style/button/mainBtn.styles';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
