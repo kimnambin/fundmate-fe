@@ -3,7 +3,7 @@ import CalendarIcon from '../../assets/icons/ic_calendar-days.svg';
 import {
   DatePickerField,
   DatePickerWrapper,
-} from '../../style/input/inputDate.styles';
+} from '../input-date/inputDate.styles';
 
 interface CustomInputProps {
   value?: string;
@@ -11,7 +11,7 @@ interface CustomInputProps {
   placeholder?: string;
 }
 
-const DatePickerInput = forwardRef<HTMLInputElement, CustomInputProps>(
+const InputDatePicker = forwardRef<HTMLInputElement, CustomInputProps>(
   ({ value, onClick, placeholder }, ref) => (
     <DatePickerWrapper>
       <DatePickerField
@@ -33,4 +33,4 @@ const DatePickerInput = forwardRef<HTMLInputElement, CustomInputProps>(
   ),
 );
 
-export default DatePickerInput;
+export default InputDatePicker;

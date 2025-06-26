@@ -2,7 +2,7 @@ import { Header } from '@repo/ui/Header';
 import { Footer } from '@repo/ui/Footer';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import CreateFunding from './pages/createFunding';
+import CreateFunding from './pages/createFunding/createFunding';
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Label } from '../../style/input/inputText.styles';
-import { InputStyle, Wrapper } from '../../style/input/inputTextArea.style';
+import { Label } from '../input-text/inputText.styles';
+import { InputStyle, Wrapper } from './inputTextArea.styles';
 
 interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;

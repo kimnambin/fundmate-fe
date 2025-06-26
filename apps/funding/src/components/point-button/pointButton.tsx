@@ -1,11 +1,11 @@
-import { Wrapper } from '../../style/button/pointBtn.styles';
+import { Wrapper } from './pointButton.styles';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
 }
 
-const PointBtn = ({ label, ...props }: Props) => {
+const PointButton = ({ label, ...props }: Props) => {
   return <Wrapper {...props}>{label}</Wrapper>;
 };
 
-export default PointBtn;
+export default PointButton;

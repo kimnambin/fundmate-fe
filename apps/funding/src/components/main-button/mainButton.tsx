@@ -1,11 +1,11 @@
-import { Wrapper } from '../../style/button/mainBtn.styles';
+import { Wrapper } from './mainButton.styles';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
   width?: string;
 }
 
-const MainBtn = ({ label, width, ...props }: Props) => {
+const MainButton = ({ label, width, ...props }: Props) => {
   return (
     <Wrapper width={width} {...props}>
       {label}
@@ -13,4 +13,4 @@ const MainBtn = ({ label, width, ...props }: Props) => {
   );
 };
 
-export default MainBtn;
+export default MainButton;

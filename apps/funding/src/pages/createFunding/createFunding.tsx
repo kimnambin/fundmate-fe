@@ -1,14 +1,14 @@
-import InputDate from '../components/input/InputDate';
-import InputText from '../components/input/InputText';
-import InputTextArea from '../components/input/InputTextArea';
-import MainBtn from '../components/button/MainBtn';
-import PointBtn from '../components/button/PointBtn';
+import InputDate from '../../components/input-date/inputDate';
+import InputText from '../../components/input-text/inputText';
+import InputTextArea from '../../components/input-text-area/inputTextArea';
+import MainBtn from '../../components/main-button/mainButton';
+import PointBtn from '../../components/point-button/pointButton';
 import {
   CreateFundingStyle,
   InputWrapper,
   Title,
-} from '../style/page/createFunding.styles';
-import { Label } from '../style/input/inputText.styles';
+} from './createFunding.styles';
+import { Label } from '../../components/input-text/inputText.styles';
 
 function CreateFunding() {
   return (

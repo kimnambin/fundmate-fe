@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
-import DatePickerInput from './DatePickerInput';
-import { Wrapper } from '../../style/input/inputDate.styles';
-import { Label } from '../../style/input/inputText.styles';
+import { Wrapper } from './inputDate.styles';
+import { Label } from '../input-text/inputText.styles';
+import InputDatePicker from '../input-date-picker/inputDatePicker';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -20,7 +20,7 @@ const InputDate = ({ label, placeholder, width }: Props) => {
         selected={date}
         onChange={(d) => setDate(d as Date)}
         placeholderText={placeholder}
-        customInput={<DatePickerInput placeholder={placeholder} />}
+        customInput={<InputDatePicker placeholder={placeholder} />}
         dateFormat="yyyy-MM-dd"
       />
     </Wrapper>
