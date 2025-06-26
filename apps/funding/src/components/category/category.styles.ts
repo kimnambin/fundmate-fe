@@ -14,10 +14,6 @@ export const Title = tw.p`
     pr-8
 `;
 
-export const OptionsWrapper = tw.ul`
-    
-`;
-
 export const Option = tw.ul`
     mb-1
     cursor-pointer

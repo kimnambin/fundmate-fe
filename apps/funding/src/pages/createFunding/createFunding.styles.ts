@@ -5,6 +5,7 @@ export const CreateFundingStyle = tw.div`
   flex-col
   text-left 
   gap-[30px]
+  pb-[40px]
 `;
 
 export const Title = tw.div`
@@ -15,7 +16,7 @@ export const InputWrapper = tw.div`
   flex flex-col gap-[30px]
 `;
 
-export const CategoryWrapper = tw.div`
-  flex
-  gap-[20px]
+export const CompWrapper = tw.div`
+  flex flex-col gap-5
+  w-[480px]
 `;

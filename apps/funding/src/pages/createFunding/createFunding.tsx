@@ -1,16 +1,17 @@
+import AddedItem from '../../components/added-item/addedItem';
+import Category from '../../components/category/category';
 import InputDate from '../../components/input-date/inputDate';
-import InputText from '../../components/input-text/inputText';
 import InputTextArea from '../../components/input-text-area/inputTextArea';
-import MainBtn from '../../components/main-button/mainButton';
-import PointBtn from '../../components/point-button/pointButton';
+import InputText from '../../components/input-text/inputText';
+import { Label } from '../../components/input-text/inputText.styles';
+import MainButton from '../../components/main-button/mainButton';
+import PointButton from '../../components/point-button/pointButton';
 import {
-  CategoryWrapper,
+  CompWrapper,
   CreateFundingStyle,
   InputWrapper,
   Title,
 } from './createFunding.styles';
-import { Label } from '../../components/input-text/inputText.styles';
-import Category from '../../components/category/category';
 
 function CreateFunding() {
   return (
@@ -21,7 +22,7 @@ function CreateFunding() {
         <Label>이미지</Label>
         <div className="flex gap-5 items-center">
           <div className="w-32 h-32 bg-[#D9D9D9] rounded-lg" />
-          <PointBtn label="대표 이미지 선택" />
+          <PointButton label="대표 이미지 선택" />
         </div>
       </div>
 
@@ -31,11 +32,13 @@ function CreateFunding() {
           label="프로젝트 제목"
           placeholder="제목을 입력하세요."
         />
+
         <InputText
           width="w-[350px]"
           label="목표 금액"
           placeholder="목표 금액을 입력하세요."
         />
+
         <div className="flex flex-col gap-[20px]">
           <InputDate
             width="w-[350px]"
@@ -47,28 +50,32 @@ function CreateFunding() {
             placeholder="펀딩 종료일을 입력하세요."
           />
         </div>
+
         <InputDate
           width="w-[350px]"
           label="상품 배송일"
           placeholder="예상 상품 배송일을 입력하세요."
         />
+
         <InputTextArea
           label="프로젝트 소개"
           placeholder="프로젝트(펀딩)에 대한 설명을 작성해 주세요!"
           rows={10}
         />
-        <div className="flex gap-5 justify-end">
-          <MainBtn width="w-[200px]" label="AI 요약" />
+        <div className="flex justify-end">
+          <MainButton width="w-[200px]" label="AI 요약" />
         </div>
+
         <InputTextArea
           label="한 줄 소개"
           placeholder="한 줄 소개를 입력하세요."
           maxLength={50}
           width="w-[350px]"
         />
-        <div className="flex flex-col gap-5">
+
+        <CompWrapper>
           <Label>분류</Label>
-          <CategoryWrapper>
+          <div className="flex gap-[20px]">
             {filters.map((filter) => (
               <Category
                 key={filter.title}
@@ -76,9 +83,30 @@ function CreateFunding() {
                 options={filter.options}
               />
             ))}
-          </CategoryWrapper>
-        </div>
+          </div>
+        </CompWrapper>
+
+        <CompWrapper>
+          <div className="flex justify-between items-center">
+            <Label>상품 추가</Label>
+            <PointButton label="상품 추가하기" />
+          </div>
+          <div className="flex flex-col gap-[10px]">
+            {addedItems.map((item) => (
+              <AddedItem
+                key={item.title}
+                price={item.price}
+                title={item.title}
+                content={item.content}
+              />
+            ))}
+          </div>
+        </CompWrapper>
       </InputWrapper>
+
+      <div className="flex justify-end">
+        <MainButton width="w-[200px]" label="개설하기" />
+      </div>
     </CreateFundingStyle>
   );
 }
@@ -100,13 +128,22 @@ const filters = [
       '예술',
     ],
   },
-  {
-    title: '가구형태',
-    options: ['1인 가구', '2인 가구', '다인 가구', '관계없음'],
-  },
   { title: '성별', options: ['남성', '여성', '관계없음'] },
   {
     title: '연령',
     options: ['10대', '20대', '30대', '40대', '50대 이상'],
+  },
+];
+
+const addedItems = [
+  {
+    price: '1,000원',
+    title: '선물 없이 후원하기',
+    content: '혜택 상품 없음',
+  },
+  {
+    price: '1,000원',
+    title: '선물 없이 후원하기',
+    content: '혜택 상품 없음',
   },
 ];

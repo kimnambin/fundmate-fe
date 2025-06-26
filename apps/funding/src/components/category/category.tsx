@@ -1,4 +1,4 @@
-import { Wrapper, Title, Option, OptionsWrapper } from './category.styles';
+import { Wrapper, Title, Option } from './category.styles';
 import { FaChevronDown } from 'react-icons/fa';
 
 interface Props {
@@ -11,13 +11,14 @@ const Category = ({ title, options }: Props) => {
     <Wrapper>
       <Title>
         {title}
-        <FaChevronDown fill="#000" size={12} />
+        <FaChevronDown fill="#000" size={10} />
       </Title>
-      <OptionsWrapper>
+
+      <ul>
         {options.map((option) => (
           <Option key={option}>{option}</Option>
         ))}
-      </OptionsWrapper>
+      </ul>
     </Wrapper>
   );
 };
