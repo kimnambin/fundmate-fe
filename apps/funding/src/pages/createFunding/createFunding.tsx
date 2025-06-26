@@ -26,6 +26,7 @@ function CreateFunding() {
   const [addedItems, setAddedItems] = useState<(typeof DEFAULT_ITEM)[]>([
     DEFAULT_ITEM,
   ]);
+  const [intro, setIntro] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [price, setPrice] = useState('');
@@ -60,48 +61,43 @@ function CreateFunding() {
 
   return (
     <CreateFundingStyle>
-      <Title>
-        프로젝트(펀딩) 개설{' '}
-        <span className="text-[16px] text-red">
-          *수정이 불가능합니다. 신중하게 작성해주세요!
-        </span>
-      </Title>
+      <Title>프로젝트(펀딩) 개설</Title>
 
       <div className="flex flex-col gap-5">
         <Label>이미지</Label>
-        <div className="flex gap-5 items-center">
-          <div className="w-32 h-32 bg-[#D9D9D9] rounded-lg" />
+        <div className="w-full flex gap-5 items-center">
+          <div className="w-[130px] h-[130px] bg-[#D9D9D9] rounded-lg" />
           <PointButton label="대표 이미지 선택" />
         </div>
       </div>
 
       <InputWrapper>
         <InputText
-          width="w-[350px]"
+          width="sm:w-[350px]"
           label="프로젝트 제목"
           placeholder="제목을 입력하세요."
         />
 
         <InputText
-          width="w-[350px]"
+          width="sm:w-[350px]"
           label="목표 금액"
           placeholder="목표 금액을 입력하세요."
         />
 
         <div className="flex flex-col gap-[20px]">
           <InputDate
-            width="w-[350px]"
+            width="sm:w-[350px]"
             label="프로젝트 기간"
             placeholder="펀딩 시작일을 입력하세요."
           />
           <InputDate
-            width="w-[350px]"
+            width="sm:w-[350px]"
             placeholder="펀딩 종료일을 입력하세요."
           />
         </div>
 
         <InputDate
-          width="w-[350px]"
+          width="sm:w-[350px]"
           label="상품 배송일"
           placeholder="예상 상품 배송일을 입력하세요."
         />
@@ -110,8 +106,11 @@ function CreateFunding() {
           label="프로젝트 소개"
           placeholder="프로젝트(펀딩)에 대한 설명을 작성해 주세요!"
           rows={10}
+          width="w-full"
+          value={intro}
+          onChange={(e) => setIntro(e.target.value)}
         />
-        <div className="flex justify-end">
+        <div className="w-auto flex justify-end">
           <MainButton
             width="w-[200px]"
             label="AI 요약"
@@ -127,10 +126,10 @@ function CreateFunding() {
               onClick={() => setIsFundiOpen(false)}
             />
           </div>
-          <div className="flex flex-col gap-5 w-[315px]">
+          <div className="flex flex-col gap-5 w-[70vw] sm:w-[315px]">
             <div className="flex flex-col gap-[10px]">
               <Title>내가 입력한 내용</Title>
-              <p>내가 입력한 내용</p>
+              <p>{intro}</p>
             </div>
             <HorizontalLine />
             <div className="flex flex-col gap-[10px]">
@@ -158,7 +157,7 @@ function CreateFunding() {
           label="한 줄 소개"
           placeholder="한 줄 소개를 입력하세요."
           maxLength={50}
-          width="w-[350px]"
+          width="sm:w-[350px]"
         />
 
         <CompWrapper>
@@ -175,7 +174,7 @@ function CreateFunding() {
         </CompWrapper>
 
         <CompWrapper>
-          <div className="flex justify-between items-center">
+          <div className="w-auto flex justify-between items-center">
             <Label>상품 추가</Label>
             {addedItems.length < 5 && (
               <PointButton
@@ -192,7 +191,7 @@ function CreateFunding() {
                 onClick={() => setIsAddOpen(false)}
               />
             </div>
-            <div className="flex flex-col gap-5 w-[440px]">
+            <div className="flex flex-col gap-5  w-[70vw] sm:w-[440px]">
               <Title>상품 추가</Title>
               <InputText
                 placeholder="상품명을 입력하세요."
@@ -241,13 +240,13 @@ function CreateFunding() {
           onClick={() => setIsSubmitOpen(true)}
         />
         <Modal isOpen={isSubmitOpen} onClose={() => setIsSubmitOpen(false)}>
-          <div className="flex flex-col gap-5 justify-center py-[20px] px-[30px]">
+          <div className="flex flex-col gap-5 justify-center py-[20px] px-[30px] w-[70vw] sm:w-auto">
             <div className="text-center flex flex-col gap-[10px]">
               <Title>개설 시 수정이 불가능합니다.</Title>
               <p>개설하시겠습니까?</p>
             </div>
 
-            <div className="flex gap-[20px]">
+            <div className="flex gap-[20px] justify-center">
               <PointButton
                 label="아니오"
                 width="w-[200px]"

@@ -11,6 +11,7 @@ export const Background = tw.div`
     absolute
     inset-0
     bg-black/40
+    w-full
 `;
 
 export const ModalContent = tw.div`

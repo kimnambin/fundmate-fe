@@ -1,6 +1,6 @@
 import tw from 'tailwind-styled-components';
 
-export const Wrapper = tw.div<{ width?: string }>`
+export const Wrapper = tw.div`
     flex flex-col
     gap-[15px]
     p-[25px]
