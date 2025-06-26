@@ -14,3 +14,8 @@ export const Title = tw.div`
 export const InputWrapper = tw.div`
   flex flex-col gap-[30px]
 `;
+
+export const CategoryWrapper = tw.div`
+  flex
+  gap-[20px]
+`;

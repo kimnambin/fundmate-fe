@@ -4,11 +4,13 @@ import InputTextArea from '../../components/input-text-area/inputTextArea';
 import MainBtn from '../../components/main-button/mainButton';
 import PointBtn from '../../components/point-button/pointButton';
 import {
+  CategoryWrapper,
   CreateFundingStyle,
   InputWrapper,
   Title,
 } from './createFunding.styles';
 import { Label } from '../../components/input-text/inputText.styles';
+import Category from '../../components/category/category';
 
 function CreateFunding() {
   return (
@@ -64,9 +66,47 @@ function CreateFunding() {
           maxLength={50}
           width="w-[350px]"
         />
+        <div className="flex flex-col gap-5">
+          <Label>분류</Label>
+          <CategoryWrapper>
+            {filters.map((filter) => (
+              <Category
+                key={filter.title}
+                title={filter.title}
+                options={filter.options}
+              />
+            ))}
+          </CategoryWrapper>
+        </div>
       </InputWrapper>
     </CreateFundingStyle>
   );
 }
 
 export default CreateFunding;
+
+// 임시 데이터
+const filters = [
+  {
+    title: '카테고리',
+    options: [
+      '게임',
+      '홈/리빙',
+      '테크/가전',
+      '향수/뷰티',
+      '의류',
+      '잡화',
+      '디자인',
+      '예술',
+    ],
+  },
+  {
+    title: '가구형태',
+    options: ['1인 가구', '2인 가구', '다인 가구', '관계없음'],
+  },
+  { title: '성별', options: ['남성', '여성', '관계없음'] },
+  {
+    title: '연령',
+    options: ['10대', '20대', '30대', '40대', '50대 이상'],
+  },
+];
