@@ -22,6 +22,30 @@ import FundiIcon from '../../assets/icons/ic_fundi.svg';
 function CreateFunding() {
   const [isFundiOpen, setIsFundiOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
+
+  const [addedItems, setAddedItems] = useState<(typeof DEFAULT_ITEM)[]>([
+    DEFAULT_ITEM,
+  ]);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [price, setPrice] = useState('');
+
+  const handleAdd = () => {
+    if (!title.trim() || !content.trim() || !price.trim()) return;
+    if (addedItems.length >= 5) return;
+
+    setAddedItems((prev) => [...prev, { price, title, content }]);
+
+    setTitle('');
+    setContent('');
+    setPrice('');
+    setIsAddOpen(false);
+  };
+
+  const handleRemove = (index: number) => {
+    setAddedItems((prev) => prev.filter((_, i) => i !== index));
+  };
 
   const summaryRef = useRef<HTMLParagraphElement>(null);
   const handleCopy = () => {
@@ -36,7 +60,12 @@ function CreateFunding() {
 
   return (
     <CreateFundingStyle>
-      <Title>프로젝트(펀딩) 개설</Title>
+      <Title>
+        프로젝트(펀딩) 개설{' '}
+        <span className="text-[16px] text-red">
+          *수정이 불가능합니다. 신중하게 작성해주세요!
+        </span>
+      </Title>
 
       <div className="flex flex-col gap-5">
         <Label>이미지</Label>
@@ -148,15 +177,57 @@ function CreateFunding() {
         <CompWrapper>
           <div className="flex justify-between items-center">
             <Label>상품 추가</Label>
-            <PointButton label="상품 추가하기" />
+            {addedItems.length < 5 && (
+              <PointButton
+                label="상품 추가하기"
+                onClick={() => setIsAddOpen(true)}
+              />
+            )}
           </div>
+          <Modal isOpen={isAddOpen} onClose={() => setIsAddOpen(false)}>
+            <div className="flex justify-end">
+              <IoClose
+                size={24}
+                className="cursor-pointer"
+                onClick={() => setIsAddOpen(false)}
+              />
+            </div>
+            <div className="flex flex-col gap-5 w-[440px]">
+              <Title>상품 추가</Title>
+              <InputText
+                placeholder="상품명을 입력하세요."
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <InputTextArea
+                placeholder="상품 내용을 입력하세요."
+                rows={5}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+              <InputText
+                placeholder="상품 금액을 입력하세요."
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+              <div className="flex justify-end">
+                <MainButton
+                  label="상품 추가하기"
+                  width="w-[200px]"
+                  className="cursor-pointer hover:opacity-50"
+                  onClick={handleAdd}
+                />
+              </div>
+            </div>
+          </Modal>
           <div className="flex flex-col gap-[10px]">
-            {addedItems.map((item) => (
+            {addedItems.map((item, index) => (
               <AddedItem
-                key={item.title}
+                key={index}
                 price={item.price}
                 title={item.title}
                 content={item.content}
+                onRemove={() => handleRemove(index)}
               />
             ))}
           </div>
@@ -194,15 +265,8 @@ const filters = [
   },
 ];
 
-const addedItems = [
-  {
-    price: '1,000원',
-    title: '선물 없이 후원하기',
-    content: '혜택 상품 없음',
-  },
-  {
-    price: '1,000원',
-    title: '선물 없이 후원하기2',
-    content: '혜택 상품 없음',
-  },
-];
+const DEFAULT_ITEM = {
+  price: '1,000원',
+  title: '선물 없이 후원하기',
+  content: '혜택 상품 없음',
+};
