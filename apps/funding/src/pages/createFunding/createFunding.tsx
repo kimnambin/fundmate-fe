@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import AddedItem from '../../components/added-item/addedItem';
 import Category from '../../components/category/category';
 import InputDate from '../../components/input-date/inputDate';
@@ -9,11 +10,30 @@ import PointButton from '../../components/point-button/pointButton';
 import {
   CompWrapper,
   CreateFundingStyle,
+  HorizontalLine,
   InputWrapper,
   Title,
 } from './createFunding.styles';
+import Modal from '../../components/modal/modal';
+import { IoClose } from 'react-icons/io5';
+import { FiCopy, FiCheck } from 'react-icons/fi';
+import FundiIcon from '../../assets/icons/ic_fundi.svg';
 
 function CreateFunding() {
+  const [isFundiOpen, setIsFundiOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const summaryRef = useRef<HTMLParagraphElement>(null);
+  const handleCopy = () => {
+    const text = summaryRef.current?.innerText || '';
+    if (!text) return;
+
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 3000);
+    });
+  };
+
   return (
     <CreateFundingStyle>
       <Title>프로젝트(펀딩) 개설</Title>
@@ -63,8 +83,47 @@ function CreateFunding() {
           rows={10}
         />
         <div className="flex justify-end">
-          <MainButton width="w-[200px]" label="AI 요약" />
+          <MainButton
+            width="w-[200px]"
+            label="AI 요약"
+            onClick={() => setIsFundiOpen(true)}
+          />
         </div>
+
+        <Modal isOpen={isFundiOpen} onClose={() => setIsFundiOpen(false)}>
+          <div className="flex justify-end">
+            <IoClose
+              size={24}
+              className="cursor-pointer"
+              onClick={() => setIsFundiOpen(false)}
+            />
+          </div>
+          <div className="flex flex-col gap-5 w-[315px]">
+            <div className="flex flex-col gap-[10px]">
+              <Title>내가 입력한 내용</Title>
+              <p>내가 입력한 내용</p>
+            </div>
+            <HorizontalLine />
+            <div className="flex flex-col gap-[10px]">
+              <div className="flex items-center gap-2">
+                <Title>펀디 요약</Title>
+                <img src={FundiIcon} width="20px" />
+              </div>
+              <p ref={summaryRef}>펀디가 요약한 내용</p>
+            </div>
+            <div className="flex justify-end">
+              {copied ? (
+                <FiCheck size={24} className="text-main" />
+              ) : (
+                <FiCopy
+                  size={24}
+                  className=" text-main cursor-pointer hover:opacity-50"
+                  onClick={handleCopy}
+                />
+              )}
+            </div>
+          </div>
+        </Modal>
 
         <InputTextArea
           label="한 줄 소개"
@@ -143,7 +202,7 @@ const addedItems = [
   },
   {
     price: '1,000원',
-    title: '선물 없이 후원하기',
+    title: '선물 없이 후원하기2',
     content: '혜택 상품 없음',
   },
 ];

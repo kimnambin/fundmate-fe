@@ -9,7 +9,7 @@ export const CreateFundingStyle = tw.div`
 `;
 
 export const Title = tw.div`
-  text-lg font-bold
+  text-[18px] font-bold
 `;
 
 export const InputWrapper = tw.div`
@@ -19,4 +19,8 @@ export const InputWrapper = tw.div`
 export const CompWrapper = tw.div`
   flex flex-col gap-5
   w-[480px]
+`;
+
+export const HorizontalLine = tw.div`
+  border-b border-line
 `;
