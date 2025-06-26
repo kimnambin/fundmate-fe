@@ -7,7 +7,7 @@ export const Wrapper = tw.button<{ width?: string }>`
     py-2
     justify-center
     items-center
-    gap-2
+    gap-[10px]
     rounded-[6px]
     text-white
     cursor-pointer

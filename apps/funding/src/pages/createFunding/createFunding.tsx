@@ -23,13 +23,13 @@ function CreateFunding() {
   const [isFundiOpen, setIsFundiOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
-
   const [addedItems, setAddedItems] = useState<(typeof DEFAULT_ITEM)[]>([
     DEFAULT_ITEM,
   ]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [price, setPrice] = useState('');
+  const [isSubmitOpen, setIsSubmitOpen] = useState(false);
 
   const handleAdd = () => {
     if (!title.trim() || !content.trim() || !price.trim()) return;
@@ -235,7 +235,28 @@ function CreateFunding() {
       </InputWrapper>
 
       <div className="flex justify-end">
-        <MainButton width="w-[200px]" label="개설하기" />
+        <MainButton
+          width="w-[200px]"
+          label="개설하기"
+          onClick={() => setIsSubmitOpen(true)}
+        />
+        <Modal isOpen={isSubmitOpen} onClose={() => setIsSubmitOpen(false)}>
+          <div className="flex flex-col gap-5 justify-center py-[20px] px-[30px]">
+            <div className="text-center flex flex-col gap-[10px]">
+              <Title>개설 시 수정이 불가능합니다.</Title>
+              <p>개설하시겠습니까?</p>
+            </div>
+
+            <div className="flex gap-[20px]">
+              <PointButton
+                label="아니오"
+                width="w-[200px]"
+                onClick={() => setIsSubmitOpen(false)}
+              />
+              <MainButton label="예" width="w-[200px]" />
+            </div>
+          </div>
+        </Modal>
       </div>
     </CreateFundingStyle>
   );
