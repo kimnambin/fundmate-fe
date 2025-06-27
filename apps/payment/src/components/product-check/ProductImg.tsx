@@ -3,9 +3,7 @@ import tw from 'tailwind-styled-components';
 const ProductImg = () => {
   return (
     <Wrapper>
-      <MainImgBox>
-        <MainImg src="https://imgnews.pstatic.net/image/094/2025/06/25/0000012740_001_20250625075019738.jpg?type=w860" />
-      </MainImgBox>
+      <MainImg src="https://imgnews.pstatic.net/image/094/2025/06/25/0000012740_001_20250625075019738.jpg?type=w860" />
     </Wrapper>
   );
 };
@@ -20,17 +18,9 @@ export const Wrapper = tw.div`
   mt-8
 `;
 
-const MainImgBox = tw.div`
-  aspect-[4/5]
-  w-full
-  h-[85%]
-  overflow-hidden
-  shadow-md
-`;
-
 const MainImg = tw.img`
-    w-full 
-    h-full
+    w-full
+    h-[85%]
     object-cover
 `;
 

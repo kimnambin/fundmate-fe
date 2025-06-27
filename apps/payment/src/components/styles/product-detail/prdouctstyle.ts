@@ -1,6 +1,6 @@
 import tw from 'tailwind-styled-components';
 
-interface HasProps {
+export interface HasProps {
   ishas?: boolean;
 }
 
@@ -8,6 +8,7 @@ export const Wrapper = tw.div`
   w-full 
   flex 
   flex-col
+  mt-8
 `;
 
 export const Header = tw.header<HasProps>`

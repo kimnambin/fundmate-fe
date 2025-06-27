@@ -56,7 +56,7 @@ const ProductInfo = () => {
               <IoShareSocialOutline className="w-8 h-8" />
             </IconButton>
           </IconGroup>
-          <DonateButton>후원하기</DonateButton>
+          <BaseButton>후원하기</BaseButton>
         </IconBox>
       </Bottom>
     </Wrapper>
@@ -131,7 +131,7 @@ const IconButton = tw.button`
   text-[10px]
 `;
 
-const DonateButton = tw.button`
+export const BaseButton = tw.button`
   bg-[#5FBDFF]
   text-white
   w-full
