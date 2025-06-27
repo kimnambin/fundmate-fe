@@ -12,7 +12,9 @@ export default defineConfig({
       remotes: {
         admin: 'http://localhost:5001/assets/remoteEntry.js',
       },
-      exposes: {},
+      exposes: {
+        './CreateFundingPage': './src/pages/createFunding/createFunding.tsx',
+      },
       shared: ['react', 'react-dom'],
     }),
   ],
