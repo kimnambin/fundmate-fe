@@ -1,7 +1,7 @@
 import tw from "tailwind-styled-components";
 
 interface CateogoryContainerProps {
-  isOpen: Boolean;
+  isOpen: boolean;
 }
 
 export const CateogoryContainer = tw.div<CateogoryContainerProps>`
