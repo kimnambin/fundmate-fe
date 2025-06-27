@@ -1,5 +1,10 @@
 [
   {
+    "id": 0,
+    "name": "전체",
+    "imgName": "menu.png"
+  },
+  {
     "id": 1,
     "name": "홈/리빙",
     "imgName": "interior-design.png"

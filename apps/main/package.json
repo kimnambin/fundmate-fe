@@ -13,6 +13,7 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@ramonak/react-progress-bar": "^5.4.0",
     "@repo/ui": "*",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -20,7 +21,8 @@
     "react-router-dom": "^7.6.2",
     "styled-components": "^6.1.19",
     "swiper": "^11.2.8",
-    "tailwind-styled-components": "^2.2.0"
+    "tailwind-styled-components": "^2.2.0",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

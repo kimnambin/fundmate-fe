@@ -10,7 +10,7 @@ export const PopularItems = () => {
           <span className="text-xl font-semibold">인기 프로젝트</span>
           <span className="text-base text-gray-400">2025.06.17 00:00 기준</span>
         </div>
-        <a className="text-base text-gray-400">전체보기</a>
+        <a href="#" className="text-base text-gray-400">전체보기</a>
       </PopularItemsHeader>
       <PopularItemsGrid>
         {
