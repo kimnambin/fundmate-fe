@@ -13,6 +13,7 @@ import {
   HorizontalLine,
   InputWrapper,
   Title,
+  WarningText,
 } from './createFunding.styles';
 import Modal from '../../components/modal/modal';
 import { IoClose } from 'react-icons/io5';
@@ -32,15 +33,30 @@ function CreateFunding() {
   const [price, setPrice] = useState('');
   const [isSubmitOpen, setIsSubmitOpen] = useState(false);
 
+  const [hasTitle, setHasTitle] = useState(true);
+  const [hasContent, setHasContent] = useState(true);
+  const [hasPrice, setHasPrice] = useState(true);
+
+  const isValidItem = () =>
+    [title, content, price].every((value) => value.trim());
+
   const handleAdd = () => {
-    if (!title.trim() || !content.trim() || !price.trim()) return;
+    if (!isValidItem()) {
+      setHasTitle(!!title.trim());
+      setHasContent(!!content.trim());
+      setHasPrice(!!price.trim());
+      return;
+    }
     if (addedItems.length >= 5) return;
 
     setAddedItems((prev) => [...prev, { price, title, content }]);
 
     setTitle('');
+    setHasTitle(true);
     setContent('');
+    setHasContent(true);
     setPrice('');
+    setHasPrice(true);
     setIsAddOpen(false);
   };
 
@@ -50,7 +66,9 @@ function CreateFunding() {
 
   const summaryRef = useRef<HTMLParagraphElement>(null);
   const handleCopy = () => {
-    const text = summaryRef.current?.innerText || '';
+    if (!summaryRef.current) return;
+
+    const text = summaryRef.current.innerText.trim();
     if (!text) return;
 
     navigator.clipboard.writeText(text).then(() => {
@@ -129,7 +147,13 @@ function CreateFunding() {
           <div className="flex flex-col gap-5 w-[70vw] sm:w-[315px]">
             <div className="flex flex-col gap-[10px]">
               <Title>내가 입력한 내용</Title>
-              <p className="break-words">{intro}</p>
+              <p className="break-words">
+                {intro ? (
+                  intro
+                ) : (
+                  <span className="text-sub-text">입력한 내용이 없습니다.</span>
+                )}
+              </p>
             </div>
             <HorizontalLine />
             <div className="flex flex-col gap-[10px]">
@@ -200,17 +224,20 @@ function CreateFunding() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
+              {!hasTitle && <WarningText>상품명을 입력하세요</WarningText>}
               <InputTextArea
                 placeholder="상품 내용을 입력하세요."
                 rows={5}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
+              {!hasContent && <WarningText>상품 내용을 입력하세요</WarningText>}
               <InputText
                 placeholder="상품 금액을 입력하세요."
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
+              {!hasPrice && <WarningText>상품 금액을 입력하세요</WarningText>}
               <div className="flex justify-end">
                 <MainButton
                   label="상품 추가하기"
@@ -254,7 +281,11 @@ function CreateFunding() {
                 width="w-[200px]"
                 onClick={() => setIsSubmitOpen(false)}
               />
-              <MainButton label="예" width="w-[200px]" />
+              <MainButton
+                label="예"
+                width="w-[200px]"
+                onClick={() => setIsSubmitOpen(false)}
+              />
             </div>
           </div>
         </Modal>

@@ -25,3 +25,8 @@ export const CompWrapper = tw.div`
 export const HorizontalLine = tw.div`
   border-b border-line
 `;
+
+export const WarningText = tw.p`
+  text-red font-bold
+  pl-4
+`;
