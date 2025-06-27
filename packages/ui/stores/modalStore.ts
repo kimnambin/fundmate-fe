@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 interface modalStoreProps {
-  isOpen: Boolean;
+  isOpen: boolean;
   setIsOpen: () => void;
 }
 

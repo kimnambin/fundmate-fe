@@ -4,7 +4,6 @@ import { CategoryIcons } from '@repo/ui/assets'
 
 export const MainCategory = () => {
   const { menu, ...mainPageCategoryIcons } = CategoryIcons;
-  console.log(mainPageCategoryIcons);
   return (
     <MainCategoryContainer>
       {

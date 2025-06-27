@@ -39,7 +39,7 @@ export const SwiperItems = ({ componentId }: SwiperItemsProps) => {
       >
         {
           range(componentId * 7).map(i => (
-            <SwiperSlide><VerticalCard key={i} /></SwiperSlide>
+            <SwiperSlide key={i} ><VerticalCard /></SwiperSlide>
           ))
         }
       </Swiper>

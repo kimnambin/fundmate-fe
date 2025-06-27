@@ -4,8 +4,7 @@ import tw from "tailwind-styled-components";
 export const BannerContainer = tw.div`
   col-span-4
   h-full
-  row-span-3
-  xl: row-span-2
+  row-span-2
 `
 
 //InterestingItems

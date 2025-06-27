@@ -11,7 +11,7 @@ const categoryIconModule = import.meta.glob('./icons/categoryIcons/*.{png, jpg, 
   eager: true,
 });
 
-export const Images: Record<string, assetsProps> = Object.fromEntries(
+export const Images: Record<string, string> = Object.fromEntries(
   Object.entries(imageModule).map(([key, mod]) => {
     const name = key.split('/').pop()?.split('.')[0] || '';
     return [name, (mod as any).default]
@@ -27,8 +27,8 @@ export const CategoryIcons: Record<string, assetsProps> = Object.fromEntries(
       electronics: "테크/가전",
       game: "게임",
       perfume: "향수/뷰티",
-      implementer: "디자인",
-      design: "홈/리빙",
+      design: "디자인",
+      living: "홈/리빙",
       stationery: "잡화",
       menu: "전체"
     }

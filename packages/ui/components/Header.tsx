@@ -42,7 +42,7 @@ export const Header = () => {
           <CateogoryContainer $isOpen={isOpen}>
             {
               Object.entries(CategoryIcons).map(([name, { src, menuName }], i) => (
-                <div className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
+                <div key={i} className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
                   <img src={src} className='w-8' />
                   <span>{menuName}</span>
                 </div>
@@ -59,12 +59,3 @@ export const Header = () => {
     </div>
   );
 };
-
-
-
-// categoryData.map((v, i) => {
-//   const imgPath = icons[`../assets/icons/categoryIcons/${v.imgName}`]
-//
-//   return (
-//   )
-// })

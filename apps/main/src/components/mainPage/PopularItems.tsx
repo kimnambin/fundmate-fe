@@ -15,7 +15,7 @@ export const PopularItems = () => {
       <PopularItemsGrid>
         {
           range(9).map(i => (
-            <HorizontalCard number={i.toString()} />
+            <HorizontalCard key={i} number={i.toString()} />
           ))
         }
       </PopularItemsGrid>
