@@ -3,14 +3,9 @@ import userDefaultImage from '../assets/icons/userDefault.png';
 import { IoMdMenu } from 'react-icons/io';
 import { Container, InputDiv, LoginButton } from '../styles/Header.styles';
 import { IoSearch } from 'react-icons/io5';
-import categoryData from '../utils/headerCategoryData.json';
 import { CateogoryContainer } from '../styles/Category.style';
 import { modalStore } from '../stores/modalStore';
-
-const icons = import.meta.glob('../assets/icons/categoryIcons/*.png', {
-  eager: true,
-  import: 'default',
-}) as Record<string, string>;
+import { CategoryIcons } from '../assets';
 
 export const Header = () => {
   const isOpen = modalStore((state) => state.isOpen);
@@ -46,16 +41,12 @@ export const Header = () => {
           <span className="font-semibold">카테고리</span>
           <CateogoryContainer $isOpen={isOpen}>
             {
-              categoryData.map((v, i) => {
-                const imgPath = icons[`../assets/icons/categoryIcons/${v.imgName}`]
-
-                return (
-                  <div className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
-                    <img src={imgPath} className='w-8' />
-                    <span>{v.name}</span>
-                  </div>
-                )
-              })
+              Object.entries(CategoryIcons).map(([name, { src, menuName }], i) => (
+                <div className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
+                  <img src={src} className='w-8' />
+                  <span>{menuName}</span>
+                </div>
+              ))
             }
           </CateogoryContainer>
         </button>
@@ -68,3 +59,12 @@ export const Header = () => {
     </div>
   );
 };
+
+
+
+// categoryData.map((v, i) => {
+//   const imgPath = icons[`../assets/icons/categoryIcons/${v.imgName}`]
+//
+//   return (
+//   )
+// })

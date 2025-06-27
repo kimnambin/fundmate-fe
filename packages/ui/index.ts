@@ -7,3 +7,6 @@ export { Footer } from './components/Footer';
 export { VerticalCard } from './components/mainPage/VerticalCard';
 export { HorizontalCard } from './components/mainPage/HorizontalCard';
 
+//assets
+export { Images } from './assets'
+export { CategoryIcons } from './assets'

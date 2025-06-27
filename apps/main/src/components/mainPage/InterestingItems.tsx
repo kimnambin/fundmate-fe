@@ -8,7 +8,7 @@ export const InterestingItems = () => {
       <InterestingItemsGrid>
         {
           range(8).map(i => (
-            <VerticalCard />
+            <VerticalCard key={i} />
           ))
         }
       </InterestingItemsGrid>
