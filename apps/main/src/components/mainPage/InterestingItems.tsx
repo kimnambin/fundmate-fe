@@ -1,4 +1,4 @@
-import { VerticalCard } from "@repo/ui/mainPage/VerticalCard"
+import { VerticalCard } from "@repo/ui/components"
 import { range } from "../../utils/tempRange"
 import { InterestingItemsContainer, InterestingItemsGrid } from "../../styles/MainPageComponents.style"
 
@@ -8,7 +8,9 @@ export const InterestingItems = () => {
       <InterestingItemsGrid>
         {
           range(8).map(i => (
-            <VerticalCard key={i} />
+            <div key={i}>
+              <VerticalCard />
+            </div>
           ))
         }
       </InterestingItemsGrid>

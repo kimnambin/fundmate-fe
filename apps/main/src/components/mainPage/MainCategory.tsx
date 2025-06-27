@@ -8,7 +8,7 @@ export const MainCategory = () => {
     <MainCategoryContainer>
       {
         Object.entries(mainPageCategoryIcons).map(([name, { src, menuName }], i) => (
-          <SingleCategory key={name} id={i} imgPath={src} name={menuName} />
+          <SingleCategory key={name} id={i} imgPath={src} name={menuName} location='main' />
         ))
       }
     </MainCategoryContainer>

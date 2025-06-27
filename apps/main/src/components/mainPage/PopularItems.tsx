@@ -1,4 +1,4 @@
-import { HorizontalCard } from "@repo/ui/mainPage/HorizontalCard"
+import { HorizontalCard } from "@repo/ui/components"
 import { range } from "../../utils/tempRange"
 import { PopularItemsContainer, PopularItemsGrid, PopularItemsHeader } from "../../styles/MainPageComponents.style"
 
@@ -15,7 +15,9 @@ export const PopularItems = () => {
       <PopularItemsGrid>
         {
           range(9).map(i => (
-            <HorizontalCard key={i} number={i.toString()} />
+            <div key={i}>
+              <HorizontalCard number={i.toString()} />
+            </div>
           ))
         }
       </PopularItemsGrid>
