@@ -129,7 +129,7 @@ function CreateFunding() {
           <div className="flex flex-col gap-5 w-[70vw] sm:w-[315px]">
             <div className="flex flex-col gap-[10px]">
               <Title>내가 입력한 내용</Title>
-              <p>{intro}</p>
+              <p className="break-words">{intro}</p>
             </div>
             <HorizontalLine />
             <div className="flex flex-col gap-[10px]">
@@ -137,7 +137,9 @@ function CreateFunding() {
                 <Title>펀디 요약</Title>
                 <img src={FundiIcon} width="20px" />
               </div>
-              <p ref={summaryRef}>펀디가 요약한 내용</p>
+              <p ref={summaryRef} className="break-words">
+                펀디가 요약한 내용
+              </p>
             </div>
             <div className="flex justify-end">
               {copied ? (

@@ -19,7 +19,7 @@ export const InputWrapper = tw.div`
 
 export const CompWrapper = tw.div`
   flex flex-col gap-5
-  sm:w-[480px]
+  md:w-[480px]
 `;
 
 export const HorizontalLine = tw.div`

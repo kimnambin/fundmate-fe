@@ -19,4 +19,6 @@ export const ModalContent = tw.div`
     py-[20px] px-[30px]
     bg-white
     border border-main rounded-[10px]
+    max-h-[80vh]
+    overflow-y-auto
 `;
