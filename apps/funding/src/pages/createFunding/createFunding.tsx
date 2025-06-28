@@ -158,7 +158,7 @@ function CreateFunding() {
             <HorizontalLine />
             <div className="flex flex-col gap-[10px]">
               <div className="flex items-center gap-2">
-                <Title>펀디 요약</Title>
+                <Title>펀디가 추천하는 한 줄 소개</Title>
                 <img src={FundiIcon} width="20px" />
               </div>
               <p ref={summaryRef} className="break-words">
