@@ -6,6 +6,7 @@ import { IoSearch } from 'react-icons/io5';
 import { CateogoryContainer } from '../styles/Category.style';
 import { modalStore } from '../stores/modalStore';
 import { CategoryIcons } from '../assets';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   const isOpen = modalStore((state) => state.isOpen);
@@ -42,20 +43,20 @@ export const Header = () => {
           <CateogoryContainer $isOpen={isOpen}>
             {
               Object.entries(CategoryIcons).map(([name, { src, menuName }], i) => (
-                <div key={i} className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
+                <Link to={`/search?category=${menuName}`} key={i} className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
                   <img src={src} className='w-8' />
                   <span>{menuName}</span>
-                </div>
+                </Link>
               ))
             }
           </CateogoryContainer>
         </button>
-        <a href="#">홈</a>
-        <a href="#">인기</a>
-        <a href="#">신규</a>
-        <a href="#">마감임박</a>
+        <Link to='/'>홈</Link>
+        <Link to='/search?popular=1'>인기</Link>
+        <Link to='/search?new=1'>신규</Link>
+        <Link to='/search?deadline=1'>마감임박</Link>
         <a href="#">데이터 분석</a>
       </Container>
-    </div>
+    </div >
   );
 };
