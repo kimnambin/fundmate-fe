@@ -1,5 +1,5 @@
-import { FlexColsm } from '../styles/flex';
-import { BaseText, BoldBigText, BoldText } from '../styles/text';
+import { FlexColsm } from '../styles/flex.style';
+import { BaseText, BoldBigText, BoldText } from '../styles/text.style';
 
 const PaymentListTop = () => {
   return (

@@ -1,8 +1,8 @@
-import { BaseText, BoldBigText, LightColor } from '../styles/text';
-import { BoxRow, FlexColsm, FlexRowsm } from '../styles/flex';
-import tw from 'tailwind-styled-components';
+import { BaseText, BoldBigText, LightColor } from '../styles/text.style';
+import { Box, BoxRow, FlexColsm, FlexRowsm } from '../styles/flex.style';
+import { Input, MoneyBox, Span } from '../styles/paymentPage/PaymentMid.style';
 
-// TODO : 임시
+// TODO : ant 타입 임시
 const PaymentMid = ({ subText }: any) => {
   return (
     <div className="w-full">
@@ -33,51 +33,5 @@ const PaymentMid = ({ subText }: any) => {
     </div>
   );
 };
-
-const Box = tw.div` 
-  flex
-  flex-row
-  justify-between 
-  items-center
-  w-full
-  p-3
-  border border-silver
-  rounded-md
-`;
-
-const MoneyBox = tw.div`
-  flex 
-  items-center 
-  border 
-  border-gray-300 
-  rounded-md 
-  p-2 
-  w-fit 
-  bg-white 
-  relative
-`;
-
-const Span = tw.span`
-  text-lg 
-  text-gray-800 
-  bg-gray-200 
-  px-2 
-  rounded-r-md 
-  absolute 
-  right-0 
-  h-full 
-  w-12 
-  flex 
-  items-center 
-  justify-center
-`;
-
-const Input = tw.input`
-  border-none 
-  text-lg 
-  pl-2 
-  w-full 
-  focus:outline-none
-`;
 
 export default PaymentMid;

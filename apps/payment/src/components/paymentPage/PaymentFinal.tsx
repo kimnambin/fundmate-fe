@@ -1,8 +1,8 @@
-import { BaseButton } from '../product-check/ProductInfo';
-import { BoxCol, BoxRow, FlexColsm } from '../styles/flex';
-import { BaseText, BoldText, LightColor } from '../styles/text';
+import { BoxCol, BoxRow, FlexColsm } from '../styles/flex.style';
+import { Radio } from '../styles/paymentPage/Adress.style';
+import { BaseButton } from '../styles/product-detail/productInfo.style';
+import { BaseText, BoldText, LightColor } from '../styles/text.style';
 import Adress from './Adress';
-import { Radio } from './PaySelect';
 
 const PaymentFinal = () => {
   return (

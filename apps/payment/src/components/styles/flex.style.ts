@@ -10,6 +10,10 @@ export const Container = tw.div`
     my-4
 `;
 
+export const FlexItem = tw.div`
+    w-1/2
+`;
+
 export const FlexCol = tw.div`
     flex
     flex-col

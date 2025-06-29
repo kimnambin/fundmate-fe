@@ -14,3 +14,7 @@ body,
 .mainTextColor {
   color: #5fbdff;
 }
+
+select option:disabled {
+  color: #d1d5db;
+}

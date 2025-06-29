@@ -12,9 +12,10 @@ import {
   ProfileInfo,
   ProfileInfos,
   SelectButton,
-} from '../../styles/product-detail/prdouctstyle';
+} from '../styles/product-detail/prdouctstyle.style';
 
 const PDBox = () => {
+  // TODO : 임시 데이터
   const CreatorData: (string | boolean)[] = [
     'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA2MTBfMTY1%2FMDAxNTkxNzQ2ODcyOTI2.Yw5WjjU3IuItPtqbegrIBJr3TSDMd_OPhQ2Nw-0-0ksg.8WgVjtB0fy0RCv0XhhUOOWt90Kz_394Zzb6xPjG6I8gg.PNG.lamute%2Fuser.png&type=sc960_832',
     '나는야 서포터',

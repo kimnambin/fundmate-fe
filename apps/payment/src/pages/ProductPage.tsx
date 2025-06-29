@@ -1,13 +1,12 @@
-import tw from 'tailwind-styled-components';
 import ProductImg from '../components/product-check/ProductImg';
 import ProductInfo from '../components/product-check/ProductInfo';
-import ProductDetail from '../components/product-check/product-detail/ProductDetail';
-import { FlexCol, FlexRow } from '../components/styles/flex';
+import ProductDetail from '../components/product-detail/ProductDetail';
+import { FlexCol, FlexItem, FlexRow } from '../components/styles/flex.style';
 
 function ProductPage({}) {
   return (
     <FlexCol>
-      <FlexRow>
+      <FlexRow className="items-start">
         <FlexItem>
           <ProductImg />
         </FlexItem>
@@ -19,9 +18,5 @@ function ProductPage({}) {
     </FlexCol>
   );
 }
-
-const FlexItem = tw.div`
-    w-1/2
-`;
 
 export default ProductPage;

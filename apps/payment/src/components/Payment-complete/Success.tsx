@@ -1,5 +1,5 @@
-import { Container, FlexColsm, FlexRowsm } from '../styles/flex';
-import { BaseText, BoldBigText } from '../styles/text';
+import { Container, FlexColsm, FlexRowsm } from '../styles/flex.style';
+import { BaseText, BoldBigText } from '../styles/text.style';
 
 const Success = () => {
   return (

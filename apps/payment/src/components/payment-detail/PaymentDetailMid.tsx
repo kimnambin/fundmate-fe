@@ -1,6 +1,6 @@
-import { BaseButton } from '../product-check/ProductInfo';
-import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/flex';
-import { BoldBigText, BoldText } from '../styles/text';
+import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/flex.style';
+import { BaseButton } from '../styles/product-detail/productInfo.style';
+import { BoldBigText, BoldText } from '../styles/text.style';
 
 const PaymentDetailMid = () => {
   const title = ['선물 정보', '추가 후원 정보'];

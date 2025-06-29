@@ -1,7 +1,7 @@
-import tw from 'tailwind-styled-components';
-import { FlexCol, FlexRowsm } from '../styles/flex';
-import { BoldBigText } from '../styles/text';
-import { BaseButton } from '../product-check/ProductInfo';
+import { FlexCol, FlexRowsm } from '../styles/flex.style';
+import { BoldBigText } from '../styles/text.style';
+import { BaseButton } from '../styles/product-detail/productInfo.style';
+import { InputText } from '../styles/paymentPage/Adress.style';
 
 const Adress = () => {
   return (
@@ -16,14 +16,5 @@ const Adress = () => {
     </FlexCol>
   );
 };
-
-const InputText = tw.input`
-  p-2
-  border
-  border-gray-300  
-  focus:outline-none
-  w-full
-  rounded-md
-`;
 
 export default Adress;

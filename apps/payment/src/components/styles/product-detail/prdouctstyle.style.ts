@@ -38,7 +38,7 @@ export const Topic = tw.div`
 export const Line = tw.div`
   w-[3px]
   bg-black
-  h-full
+  h-5
   mr-2
 `;
 

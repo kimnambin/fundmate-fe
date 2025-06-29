@@ -1,4 +1,4 @@
-import tw from 'tailwind-styled-components';
+import { MainImg, Wrapper } from '../styles/product-detail/ProductImg.style';
 
 const ProductImg = () => {
   return (
@@ -7,21 +7,5 @@ const ProductImg = () => {
     </Wrapper>
   );
 };
-
-export const Wrapper = tw.div`
-  w-[90%]
-  h-[80%]
-  flex
-  flex-col
-  items-center
-  gap-4
-  mt-8
-`;
-
-const MainImg = tw.img`
-    w-full
-    h-[85%]
-    object-cover
-`;
 
 export default ProductImg;

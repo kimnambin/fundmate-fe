@@ -2,7 +2,7 @@ import PaymentDetailBottom from '../components/payment-detail/PaymentDetailBotto
 import PaymentDetailBox from '../components/payment-detail/PaymentDetailBox';
 import PaymentDetailMid from '../components/payment-detail/PaymentDetailMid';
 import PaymentDetailTop from '../components/payment-detail/PaymentDetailTop';
-import { FlexCol } from '../components/styles/flex';
+import { FlexCol } from '../components/styles/flex.style';
 
 const PaymentDetail = () => {
   return (

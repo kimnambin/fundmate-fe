@@ -1,6 +1,6 @@
-import { ProdusctImg } from '../paymentPage/Productinfo';
-import { BoxRow, FlexColsm, FlexRowsm } from '../styles/flex';
-import { BaseText, BoldText, LightColor } from '../styles/text';
+import { BoxRow, FlexColsm, FlexRowsm } from '../styles/flex.style';
+import { ProdusctImg } from '../styles/paymentPage/Productinfo.style';
+import { BaseText, BoldText, LightColor } from '../styles/text.style';
 
 const PaymentListData = () => {
   return (

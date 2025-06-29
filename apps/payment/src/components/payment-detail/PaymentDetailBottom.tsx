@@ -1,6 +1,6 @@
-import { BaseButton } from '../product-check/ProductInfo';
-import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/flex';
-import { BaseText, BoldBigText, BoldText } from '../styles/text';
+import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/flex.style';
+import { BaseButton } from '../styles/product-detail/productInfo.style';
+import { BaseText, BoldBigText, BoldText } from '../styles/text.style';
 
 const PaymentDetailBottom = () => {
   const subTitle = ['결제 수단', '결제 금액', '결제 상태'];
