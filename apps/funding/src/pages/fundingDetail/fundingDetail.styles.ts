@@ -1,16 +1,17 @@
 import tw from 'tailwind-styled-components';
 
 export const Wrapper = tw.div<{ width?: string }>`
-    flex
+    flex flex-col
     gap-[20px]
     w-full
     mt-[30px]
 `;
 
 export const ItemTitleWrapper = tw.div`
-    flex
+    flex flex-col
     w-full
     gap-[35px]
+    sm:flex-row
 `;
 
 export const ItemTitleTextWrapper = tw.div`
@@ -34,3 +35,11 @@ export const ButtonWrapper = tw.div`
     items-start
     gap-[10px]
 `;
+
+export const FundingDetailTab = tw.div`
+  flex
+  -mx-[120px] pl-[120px] py-[25px] mt-[40px]
+  gap-[30px]
+  border-b-[1px] border-line
+  border-t-[1px] border-line
+  `;

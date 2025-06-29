@@ -2,6 +2,7 @@ import SampleItemImg from '../../assets/images/sampleItemImg.png';
 import { HorizontalLine, Title } from '../createFunding/createFunding.styles';
 import {
   ButtonWrapper,
+  FundingDetailTab,
   InfoLabel,
   InfoWrapperHorizontal,
   InfoWrapperVertical,
@@ -12,8 +13,13 @@ import {
 import HeartIcon from '../../assets/icons/ic_heart.svg';
 import ShareIcon from '../../assets/icons/ic_share.svg';
 import MainButton from '../../components/main-button/mainButton';
+import { useState } from 'react';
+import FundingPlanContent from '../../components/funding-detail-tab/fundingPlanContent';
+import FundingReviewContent from '../../components/funding-detail-tab/fundingReviewContent';
 
 const FundingDetail = () => {
+  const [activeTab, setActiveTab] = useState<'plan' | 'review'>('plan');
+
   return (
     <Wrapper>
       <ItemTitleWrapper>
@@ -86,6 +92,24 @@ const FundingDetail = () => {
           </ButtonWrapper>
         </ItemTitleTextWrapper>
       </ItemTitleWrapper>
+
+      <FundingDetailTab>
+        <button
+          className={`${activeTab === 'plan' ? 'font-bold' : 'font-normal'}`}
+          onClick={() => setActiveTab('plan')}
+        >
+          프로젝트 계획
+        </button>
+        <button
+          className={`${activeTab === 'review' ? 'font-bold' : 'font-normal'}`}
+          onClick={() => setActiveTab('review')}
+        >
+          후기
+        </button>
+      </FundingDetailTab>
+
+      {activeTab === 'plan' && <FundingPlanContent />}
+      {activeTab === 'review' && <FundingReviewContent />}
     </Wrapper>
   );
 };
