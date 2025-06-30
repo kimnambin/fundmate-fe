@@ -1,11 +1,22 @@
+import { Header } from '@repo/ui/Header';
+import { Footer } from '@repo/ui/Footer';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Button } from 'admin/Button';
+import CreateFunding from './pages/createFunding/createFunding';
 
 function App() {
   return (
-    <>
-      <Button />
-    </>
+    <div className="flex flex-col">
+      <Header />
+
+      <main className="flex px-4 sm:px-[120px] py-[30px]">
+        <Routes>
+          <Route path="/funding/create" element={<CreateFunding />} />
+        </Routes>
+      </main>
+
+      <Footer />
+    </div>
   );
 }
 

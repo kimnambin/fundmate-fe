@@ -6,6 +6,7 @@ export const Container = tw.div`
   w-full
   items-center
   px-[120px]
+  overflow-hidden
 `;
 
 export const InputDiv = tw.div`
