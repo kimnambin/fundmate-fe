@@ -7,6 +7,8 @@ export const ModalContainer = tw.div`
   justify-center
   items-center
   z-40
+  border
+  border-black
 `;
 
 export const ModalContent = tw.div`

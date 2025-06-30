@@ -1,4 +1,4 @@
-import { randomPlaceholder } from '../../utils/randomNum';
+import { randomPlaceholder } from '../../utils/numbers';
 import { IoCardOutline } from 'react-icons/io5';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import {
@@ -17,13 +17,20 @@ import {
   Select,
 } from '../styles/modal/modal.style';
 import { monthList, yearList } from '../../utils/date';
+import { BankBtn } from '../styles/modal/tansfetModal.style';
+import { FlexRowsm } from '../styles/flex.style';
 
-const PayModal = () => {
+// TODO : 여기 기능부터
+
+const PayModal = ({ addAmount }: { addAmount: number }) => {
   const placeholders = randomPlaceholder();
   return (
     <ModalContainer>
       <Container>
-        <H2>결제방법</H2>
+        <FlexRowsm className="justify-between items-center">
+          <H2>결제방법</H2>
+          <BankBtn className="mb-4">&times;</BankBtn>
+        </FlexRowsm>
         <CardType>
           <input
             type="radio"
@@ -96,7 +103,7 @@ const PayModal = () => {
                   </option>
                 ))}
               </Select>
-              <IoCardOutline className="absolute right-0 w-6 h-6 mt-2" />
+              <IoCardOutline className="absolute right-2 w-6 h-6 mb-3" />
             </MouthBox>
           </div>
           <SecBox>

@@ -4,22 +4,23 @@ import Productinfos from '../components/paymentPage/Productinfo';
 import PaymentMid from '../components/paymentPage/PaymentMid';
 import PaySelect from '../components/paymentPage/PaySelect';
 import PaymentFinal from '../components/paymentPage/PaymentFinal';
+import { useState } from 'react';
 
 const PaymentPage = () => {
-  // TODO : 기능 구현해야함 카드나 계좌이체 모달 선택 후 지도 입력이 뜨도록
-
   const subText = ['선물 정보', '추가 후원금', '후원자 정보', '결제 수단'];
+  const [selectedPayment, setSelectedPayment] = useState<string>('');
+  const [addAmount, setAddAmount] = useState<number>(1000);
 
   return (
     <FlexRow className="items-start justify-between">
       <FlexCol className="w-[55%] items-start gap-4">
         <Productinfos />
-        <PaymentMid subText={subText} />
-        <PaySelect />
+        <PaymentMid subText={subText} setAddAmount={setAddAmount} />
+        <PaySelect setSelectedPayment={setSelectedPayment} />
         <Blank></Blank>
       </FlexCol>
-      <FlexCol className="w-[40%] mt-0">
-        <PaymentFinal />
+      <FlexCol className="w-[40%] mt-0 h-auto">
+        <PaymentFinal selectedPayment={selectedPayment} addAmount={addAmount} />
       </FlexCol>
     </FlexRow>
   );

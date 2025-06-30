@@ -1,11 +1,12 @@
 import { BoxCol, FlexRowsm } from '../styles/flex.style';
 import { Radio } from '../styles/paymentPage/Adress.style';
 import { BaseText } from '../styles/text.style';
-import React, { useState } from 'react';
 
-const PaySelect = () => {
-  const [selectedPayment, setSelectedPayment] = useState<string>('');
+interface PaySelectProps {
+  setSelectedPayment: React.Dispatch<React.SetStateAction<string>>;
+}
 
+const PaySelect: React.FC<PaySelectProps> = ({ setSelectedPayment }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedPayment(event.target.value);
   };
@@ -18,7 +19,6 @@ const PaySelect = () => {
             type="radio"
             name="payment"
             value="transfer"
-            checked={selectedPayment === 'transfer'}
             onChange={handleChange}
             className="text-main"
           />
@@ -29,7 +29,6 @@ const PaySelect = () => {
             type="radio"
             name="payment"
             value="card"
-            checked={selectedPayment === 'card'}
             onChange={handleChange}
             className="text-main"
           />
