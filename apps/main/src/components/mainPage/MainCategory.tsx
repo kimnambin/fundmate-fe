@@ -1,4 +1,4 @@
-import { MainCategoryContainer } from '../../styles/MainPageComponents.style';
+import { MainCategoryContainer } from '../../styles/Main/MainPageComponents.style';
 import { SingleCategory } from './SingleCategory';
 import { CategoryIcons } from '@repo/ui/assets'
 

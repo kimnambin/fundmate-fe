@@ -1,8 +1,9 @@
 import { VerticalCard } from "@repo/ui/components"
-import { SearchContainer } from "../../styles/SearchContainer.style"
+import { SearchContainer } from "../../styles/Search/SearchContainer.style"
 import { range } from "../../utils/tempRange"
 import { SearchHeader } from "./SearchHeader"
 import { useSearchParams } from "react-router-dom"
+import { useEffect } from "react"
 
 export const SearchComponent = () => {
   const [searchParams] = useSearchParams();
@@ -16,6 +17,10 @@ export const SearchComponent = () => {
   if (isSearch) {
     queryValue = searchParams.get("query");
   }
+
+  useEffect(() => {
+    console.log(queryKey);
+  }, [searchParams])
 
 
   return (

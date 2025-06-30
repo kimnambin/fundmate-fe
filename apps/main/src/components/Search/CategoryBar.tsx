@@ -1,6 +1,6 @@
 import { CategoryIcons } from "@repo/ui/assets"
 import { SingleCategory } from "../mainPage/SingleCategory"
-import { CategoryBarContainer } from "../../styles/CategoryBar.style"
+import { CategoryBarContainer } from "../../styles/Category/CategoryBar.style"
 
 export const CategoryBar = () => {
   return (

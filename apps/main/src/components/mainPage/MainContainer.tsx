@@ -1,4 +1,4 @@
-import { MainGrid } from "../../styles/MainContainer.style"
+import { MainGrid } from "../../styles/Main/MainContainer.style"
 import { Banner } from "./Banner";
 import { InterestingItems } from "./InterestingItems";
 import { SwiperComponents } from "./SwiperComponent";

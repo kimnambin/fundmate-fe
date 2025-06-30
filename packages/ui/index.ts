@@ -13,3 +13,6 @@ export {
 //assets
 export { Images } from './assets'
 export { CategoryIcons } from './assets'
+
+//styled-components
+export { CommonButton } from './styles/Button.styles'

@@ -1,4 +1,4 @@
-import { CategoryImage, CategoryText, SingleCategoryContainer } from "../../styles/SingleCategory.style";
+import { CategoryImage, CategoryText, SingleCategoryContainer } from "../../styles/Category/SingleCategory.style";
 
 interface SingleCategoryProps {
   id: number;

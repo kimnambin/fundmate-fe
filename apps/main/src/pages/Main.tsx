@@ -1,3 +1,4 @@
+import { Footer } from '@repo/ui/components';
 import { MainContainer } from '../components/mainPage/MainContainer';
 import { Layout } from '../styles/Layout.style';
 
@@ -7,6 +8,7 @@ export const Main = () => {
       <Layout>
         <MainContainer />
       </Layout>
+      <Footer />
     </>
   );
 };

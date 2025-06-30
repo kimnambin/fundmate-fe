@@ -1,6 +1,6 @@
 import { HorizontalCard } from "@repo/ui/components"
 import { range } from "../../utils/tempRange"
-import { PopularItemsContainer, PopularItemsGrid, PopularItemsHeader } from "../../styles/MainPageComponents.style"
+import { PopularItemsContainer, PopularItemsGrid, PopularItemsHeader } from "../../styles/Main/MainPageComponents.style"
 
 export const PopularItems = () => {
   return (

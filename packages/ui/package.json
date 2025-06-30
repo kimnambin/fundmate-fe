@@ -4,7 +4,8 @@
   "prettier": "@repo/prettier-config",
   "exports": {
     "./components": "./components/index.ts",
-    "./assets": "./assets/index.ts"
+    "./assets": "./assets/index.ts",
+    "./CommonButton": "./styles/Button.styles.ts"
   },
   "license": "MIT",
   "scripts": {
