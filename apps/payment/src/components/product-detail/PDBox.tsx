@@ -16,12 +16,20 @@ import {
 
 const PDBox = () => {
   // TODO : 임시 데이터
-  const CreatorData: (string | boolean)[] = [
-    'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA2MTBfMTY1%2FMDAxNTkxNzQ2ODcyOTI2.Yw5WjjU3IuItPtqbegrIBJr3TSDMd_OPhQ2Nw-0-0ksg.8WgVjtB0fy0RCv0XhhUOOWt90Kz_394Zzb6xPjG6I8gg.PNG.lamute%2Fuser.png&type=sc960_832',
-    '나는야 서포터',
-    false,
-    'dsfjkldfklsdjkvldjkljfgdfklsdjfkdskj',
-  ];
+
+  interface CreatorData {
+    imageUrl: string;
+    name: string;
+    isFollowing: boolean;
+    description: string;
+  }
+
+  const creatorData: CreatorData = {
+    imageUrl: '이미지 URL',
+    name: '이름',
+    isFollowing: false,
+    description: '설명',
+  };
 
   const gift = [
     {
@@ -48,17 +56,17 @@ const PDBox = () => {
           <ProfileInfos>창작자 소개</ProfileInfos>
           <ProfileCard>
             <div className="flex flex-row items-center">
-              <ProfileImg src={CreatorData[0]} alt="prifile" />
-              <GiftItemTitle>{CreatorData[1]}</GiftItemTitle>
+              <ProfileImg src={creatorData.imageUrl} alt="prifile" />
+              <GiftItemTitle>{creatorData.name}</GiftItemTitle>
             </div>
 
-            {CreatorData[2] ? (
+            {creatorData.isFollowing ? (
               <SelectButton className="bg-white">+ 팔로우</SelectButton>
             ) : (
               <SelectButton className="bg-white">팔로잉</SelectButton>
             )}
           </ProfileCard>
-          <ProfileDesc>{CreatorData[3]}</ProfileDesc>
+          <ProfileDesc>{creatorData.description}</ProfileDesc>
         </ProfileInfo>
       </GiftCard>
 

@@ -2,8 +2,7 @@ import { BaseText, BoldBigText, LightColor } from '../styles/text.style';
 import { Box, BoxRow, FlexColsm, FlexRowsm } from '../styles/flex.style';
 import { Input, MoneyBox, Span } from '../styles/paymentPage/PaymentMid.style';
 
-// TODO : ant 타입 임시
-const PaymentMid = ({ subText }: any) => {
+const PaymentMid = ({ subText }: { subText: string[] }) => {
   return (
     <div className="w-full">
       <BoldBigText>{subText[0]}</BoldBigText>

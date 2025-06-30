@@ -7,14 +7,3 @@ body,
 #root {
   height: 100vh;
 }
-.main-color {
-  background-color: #5fbdff;
-}
-
-.mainTextColor {
-  color: #5fbdff;
-}
-
-select option:disabled {
-  color: #d1d5db;
-}

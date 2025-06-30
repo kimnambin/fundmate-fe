@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         primary: '#1D4ED8',
         secondary: '#F59E0B',
+        main: '#5fbdff',
       },
       fontFamily: {
         sans: ['Pretendard'],

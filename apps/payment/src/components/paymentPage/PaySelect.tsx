@@ -20,7 +20,7 @@ const PaySelect = () => {
             value="transfer"
             checked={selectedPayment === 'transfer'}
             onChange={handleChange}
-            className="main-color"
+            className="text-main"
           />
           <BaseText>계좌이체</BaseText>
         </Radio>
@@ -31,7 +31,7 @@ const PaySelect = () => {
             value="card"
             checked={selectedPayment === 'card'}
             onChange={handleChange}
-            className="main-color"
+            className="text-main"
           />
           <BaseText>카드결제</BaseText>
         </Radio>

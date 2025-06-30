@@ -91,6 +91,6 @@ export const ImgBox = tw.div`flex items-center space-x-2 mb-4`;
 
 export const ExpiryBox = tw.div`flex justify-between`;
 
-export const MouthBox = tw.div`flex tems-center relative`;
+export const MouthBox = tw.div`flex items-center relative`;
 
 export const SecBox = tw.div`w-[48%] relative`;

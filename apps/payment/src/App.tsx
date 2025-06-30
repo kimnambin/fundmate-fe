@@ -1,18 +1,16 @@
-import ProductPage from './pages/ProductPage';
 import { Header } from '@repo/ui/Header';
-import PaymentPage from './pages/PaymentPage';
 import { Container } from './components/styles/flex.style';
-import PaymentcompletedPage from './pages/PaymentcompletedPage';
-import PaymentDetail from './pages/PaymentDetail';
-import PaymentListPage from './pages/PaymentListPage';
-import { Suspense } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ProductProvider } from './context/ProductContext';
+import { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+const ProductPage = lazy(() => import('./pages/ProductPage'));
+const PaymentPage = lazy(() => import('./pages/PaymentPage'));
+const PaymentcompletedPage = lazy(() => import('./pages/PaymentcompletedPage'));
+const PaymentDetail = lazy(() => import('./pages/PaymentDetail'));
+const PaymentListPage = lazy(() => import('./pages/PaymentListPage'));
 
 // TODO : 화면 구상용 더미 데이터
-// interface HasProps {
-//   ishas?: boolean;
-// }
 
 export interface ProductDataProps {
   [key: string]: string;
@@ -34,31 +32,29 @@ const productPaymentData: ProductDataProps = {
 
 function App() {
   return (
-    <ProductProvider
-      productData={productData}
-      productPaymentData={productPaymentData}
-    >
-      <Router>
-        <div>
-          <Header />
-          <Container>
-            <Suspense fallback={<>로딩 중...</>}>
-              <Routes>
-                {/* TODO : 카테고리/상품ID 로 넣어도 좋을듯 */}
-                <Route path="/" element={<ProductPage />} />
-                <Route path="/payment" element={<PaymentPage />} />
-                <Route
-                  path="/payment-completed"
-                  element={<PaymentcompletedPage />}
-                />
-                <Route path="/payment-detail" element={<PaymentDetail />} />
-                <Route path="/payment-list" element={<PaymentListPage />} />
-              </Routes>
-            </Suspense>
-          </Container>
-        </div>
-      </Router>
-    </ProductProvider>
+    <Router>
+      <ProductProvider
+        productData={productData}
+        productPaymentData={productPaymentData}
+      >
+        <Header />
+        <Container>
+          <Suspense fallback={<>로딩 중...</>}>
+            <Routes>
+              {/* TODO : 카테고리/상품ID 로 넣어도 좋을듯 */}
+              <Route path="/" element={<ProductPage />} />
+              <Route path="/payment" element={<PaymentPage />} />
+              <Route
+                path="/payment-completed"
+                element={<PaymentcompletedPage />}
+              />
+              <Route path="/payment-detail" element={<PaymentDetail />} />
+              <Route path="/payment-list" element={<PaymentListPage />} />
+            </Routes>
+          </Suspense>
+        </Container>
+      </ProductProvider>
+    </Router>
   );
 }
 

@@ -19,7 +19,7 @@ export const Header = tw.header<HasProps>`
   justify-start
   p-3
   gap-7
-  border-t border-b border-[#silver]
+  border-t border-b border-gray-300
 `;
 
 export const Text = tw.p`

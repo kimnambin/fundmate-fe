@@ -76,7 +76,7 @@ const PayModal = () => {
             <Label htmlFor="expiry-date">만료일</Label>
             <MouthBox>
               <Select id="expiry-month" required className="mr-2 ">
-                <option value="01" disabled selected>
+                <option value="" disabled selected>
                   MM
                 </option>
 
@@ -87,7 +87,7 @@ const PayModal = () => {
                 ))}
               </Select>
               <Select id="expiry-year" required>
-                <option value="2025" disabled selected>
+                <option value="" disabled selected>
                   YY
                 </option>
                 {yearList().map((year) => (

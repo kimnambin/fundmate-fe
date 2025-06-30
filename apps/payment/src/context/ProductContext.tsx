@@ -32,5 +32,9 @@ export const ProductProvider = ({
 };
 
 export const useProductContext = (): ProductContextType => {
-  return useContext(ProductContext);
+  const context = useContext(ProductContext);
+  if (!context) {
+    throw new Error('ProductProvider 에러');
+  }
+  return context;
 };

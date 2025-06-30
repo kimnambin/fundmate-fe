@@ -3,7 +3,7 @@ import ProductInfo from '../components/product-check/ProductInfo';
 import ProductDetail from '../components/product-detail/ProductDetail';
 import { FlexCol, FlexItem, FlexRow } from '../components/styles/flex.style';
 
-function ProductPage({}) {
+function ProductPage() {
   return (
     <FlexCol>
       <FlexRow className="items-start">

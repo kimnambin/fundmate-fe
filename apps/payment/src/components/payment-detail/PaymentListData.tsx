@@ -1,11 +1,11 @@
 import { BoxRow, FlexColsm, FlexRowsm } from '../styles/flex.style';
-import { ProdusctImg } from '../styles/paymentPage/Productinfo.style';
+import { ProductImg } from '../styles/paymentPage/Productinfo.style';
 import { BaseText, BoldText, LightColor } from '../styles/text.style';
 
 const PaymentListData = () => {
   return (
     <BoxRow>
-      <ProdusctImg src={'sss'} alt="대표 이미지" className="w-28 h-28" />
+      <ProductImg src={'sss'} alt="대표 이미지" className="w-28 h-28" />
       <FlexColsm className="items-start gap-1">
         <FlexRowsm>
           <LightColor className="mr-5 text-xs">후원일 2025.06.17</LightColor>
