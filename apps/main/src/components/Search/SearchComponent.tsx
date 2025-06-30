@@ -8,14 +8,19 @@ export const SearchComponent = () => {
   const [searchParams] = useSearchParams();
   const queryKey = Array.from(searchParams.keys());
   const isCategory = queryKey.includes('category');
-  let menuName;
+  const isSearch = queryKey.includes('query');
+  let queryValue;
   if (isCategory) {
-    menuName = searchParams.get('category');
+    queryValue = searchParams.get('category');
   }
+  if (isSearch) {
+    queryValue = searchParams.get("query");
+  }
+
 
   return (
     <>
-      <SearchHeader isCategory={isCategory} menuName={menuName} />
+      <SearchHeader isCategory={isCategory} isSearch={isSearch} queryValue={queryValue} />
       <SearchContainer>
         {
           range(50).map(i => (

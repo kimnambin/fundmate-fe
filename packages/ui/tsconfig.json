@@ -12,7 +12,8 @@
       "vite/client"
     ],
     "lib": [
-      "ESNext"
+      "ESNext",
+      "DOM"
     ]
   }
 }

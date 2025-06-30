@@ -6,11 +6,24 @@ import { IoSearch } from 'react-icons/io5';
 import { CateogoryContainer } from '../styles/Category.style';
 import { modalStore } from '../stores/modalStore';
 import { CategoryIcons } from '../assets';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
+import React, { ChangeEvent, useState } from 'react';
 
 export const Header = () => {
   const isOpen = modalStore((state) => state.isOpen);
   const setIsOpen = modalStore((state) => state.setIsOpen);
+  const [searchInput, setSearchInput] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleClick = () => {
+    setSearchParams({ 'query': searchInput });
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleClick()
+    }
+  }
 
   return (
     <div className="flex flex-col shadow-md">
@@ -21,8 +34,11 @@ export const Header = () => {
             aria-label="검색"
             placeholder="검색어를 입력하세요."
             className="w-full h-full text-lg indent-2 border border-cyan-500 rounded-lg focus:outline-none focus:ring focus:ring-cyan-400"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
-          <IoSearch className="absolute end-5 top-1/2 -translate-y-1/2 text-2xl text-cyan-400" />
+          <IoSearch className="absolute end-5 top-1/2 -translate-y-1/2 text-2xl text-cyan-400 cursor-pointer" onClick={handleClick} />
         </InputDiv>
         <div className="flex flex-row gap-7 h-full items-center">
           <a href='#' className="text-lg font-semibold">프로젝트 올리기</a>
