@@ -7,7 +7,8 @@
     "./Footer": "./components/Footer.tsx",
     "./mainPage/VerticalCard": "./components/mainPage/VerticalCard.tsx",
     "./mainPage/HorizontalCard": "./components/mainPage/HorizontalCard.tsx",
-    "./assets": "./assets/index.ts"
+    "./assets": "./assets/index.ts",
+    "./Loading": "./components/Loading.tsx"
   },
   "license": "MIT",
   "scripts": {

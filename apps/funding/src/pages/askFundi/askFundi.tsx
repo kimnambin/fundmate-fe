@@ -9,6 +9,7 @@ import Modal from '../../components/modal/modal';
 import { useState } from 'react';
 import FundiIcon from '../../assets/icons/ic_fundi.svg';
 import { IoClose } from 'react-icons/io5';
+import { Loading } from '@repo/ui/Loading';
 
 const AskFundi = () => {
   const [isHelopOpen, setIsHelpOpen] = useState(false);
@@ -17,8 +18,27 @@ const AskFundi = () => {
   const [family, setFamily] = useState<string | null>(null);
   const [age, setAge] = useState<string | null>(null);
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isValid = category && family && age && content.trim().length > 0;
+
+  const handleNext = async () => {
+    setIsSubmit(true);
+    if (!isValid) return;
+    setIsLoading(true);
+
+    try {
+      // API 호출 로직
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // 로딩 시물레이션
+      // API 응답 처리
+    } catch (error) {
+      console.error('펀디 요청 실패 :', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (isLoading) return <Loading />;
 
   return (
     <Wrapper>
@@ -94,14 +114,7 @@ const AskFundi = () => {
       </div>
 
       <div className="flex justify-end">
-        <MainButton
-          label="다음"
-          width="w-[200px]"
-          onClick={() => {
-            setIsSubmit(true);
-            if (!isValid) return;
-          }}
-        />
+        <MainButton label="다음" width="w-[200px]" onClick={handleNext} />
       </div>
     </Wrapper>
   );
