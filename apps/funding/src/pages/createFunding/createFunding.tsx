@@ -297,7 +297,7 @@ function CreateFunding() {
 export default CreateFunding;
 
 // 임시 데이터
-const filters = [
+export const filters = [
   {
     title: '카테고리',
     options: [
@@ -314,7 +314,7 @@ const filters = [
   { title: '성별', options: ['남성', '여성', '관계없음'] },
   {
     title: '연령',
-    options: ['10대', '20대', '30대', '40대', '50대 이상'],
+    options: ['10대', '20대', '30대', '40대', '50대 이상', '모든 연령'],
   },
 ];
 

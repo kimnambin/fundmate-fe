@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import CreateFunding from './pages/createFunding/createFunding';
 import FundingDetail from './pages/fundingDetail/fundingDetail';
+import AskFundi from './pages/askFundi/askFundi';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/funding/create" element={<CreateFunding />} />
           <Route path="/funding/detail/:id" element={<FundingDetail />} />
+          <Route path="/ask-fundi" element={<AskFundi />} />
         </Routes>
       </main>
 
