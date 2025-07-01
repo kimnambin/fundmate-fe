@@ -2,7 +2,7 @@ import { Header } from '@repo/ui/components';
 import { Container } from './components/styles/flex.style';
 import { ProductProvider } from './context/ProductContext';
 import { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 const ProductPage = lazy(() => import('./pages/ProductPage'));
 const PaymentPage = lazy(() => import('./pages/PaymentPage'));
@@ -32,29 +32,27 @@ const productPaymentData: ProductDataProps = {
 
 function App() {
   return (
-    <Router>
-      <ProductProvider
-        productData={productData}
-        productPaymentData={productPaymentData}
-      >
-        <Header />
-        <Container>
-          <Suspense fallback={<>로딩 중...</>}>
-            <Routes>
-              {/* TODO : 카테고리/상품ID 로 넣어도 좋을듯 */}
-              <Route path="/" element={<ProductPage />} />
-              <Route path="/payment" element={<PaymentPage />} />
-              <Route
-                path="/payment-completed"
-                element={<PaymentcompletedPage />}
-              />
-              <Route path="/payment-detail" element={<PaymentDetail />} />
-              <Route path="/payment-list" element={<PaymentListPage />} />
-            </Routes>
-          </Suspense>
-        </Container>
-      </ProductProvider>
-    </Router>
+    <ProductProvider
+      productData={productData}
+      productPaymentData={productPaymentData}
+    >
+      <Header />
+      <Container>
+        <Suspense fallback={<>로딩 중...</>}>
+          <Routes>
+            {/* TODO : 카테고리/상품ID 로 넣어도 좋을듯 */}
+            <Route path="/" element={<ProductPage />} />
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route
+              path="/payment-completed"
+              element={<PaymentcompletedPage />}
+            />
+            <Route path="/payment-detail" element={<PaymentDetail />} />
+            <Route path="/payment-list" element={<PaymentListPage />} />
+          </Routes>
+        </Suspense>
+      </Container>
+    </ProductProvider>
   );
 }
 

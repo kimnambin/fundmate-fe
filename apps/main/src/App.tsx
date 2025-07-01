@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './index.css';
 import { Main } from './pages/Main';
 import { SearchPage } from './pages/SearchDivider';
@@ -14,10 +14,29 @@ const PaymentPage = lazy(() => import('payment/PaymentPage'));
 const PaymentCompleted = lazy(() => import('payment/PaymentCompleted'));
 const PaymentDetail = lazy(() => import('payment/PaymentDetail'));
 const PaymentListPage = lazy(() => import('payment/PaymentListPage'));
+import { ProductProvider } from 'payment/ProductProvider';
+
+export interface ProductDataProps {
+  [key: string]: string;
+}
+
+const productData: ProductDataProps = {
+  title: '3D 미니 프런터기기',
+  '모인 금액': '1,556,900원',
+  '남은 시간': '8일',
+  후원자: '10명',
+};
+
+const productPaymentData: ProductDataProps = {
+  '목표 금액': '500,000원',
+  '펀딩 기간': '2025.06.17 ~ 2025.08.20',
+  결제: '목표 금액 달성 시 2025.08.20에 결제 진행',
+  '예상 발송 및 시작일': '2025.08.20',
+};
 
 function App() {
   return (
-    <BrowserRouter>
+    <ProductProvider productData={productData} productPaymentData={productPaymentData}>
       <Header />
       <Routes>
         <Route path='/' element={<Main />} />
@@ -32,7 +51,7 @@ function App() {
         <Route path='/payment-detail' element={<PaymentDetail />} />
         <Route path='/payment-list' element={<PaymentListPage />} />
       </Routes>
-    </BrowserRouter>
+    </ProductProvider>
   );
 }
 
