@@ -46,7 +46,7 @@ export const Header = () => {
           <IoSearch className="absolute end-5 top-1/2 -translate-y-1/2 text-2xl text-cyan-400 cursor-pointer" onClick={handleClick} />
         </InputDiv>
         <div className="flex flex-row gap-7 h-full items-center">
-          <a href='#' className="text-lg font-semibold">프로젝트 올리기</a>
+          <Link to='/funding/create' className="text-lg font-semibold">프로젝트 올리기</Link>
           <LoginButton onClick={handleNavigate}>
             <img
               src={userDefaultImage}
@@ -64,8 +64,8 @@ export const Header = () => {
             <span className="font-semibold">카테고리</span>
             <CateogoryContainer $isOpen={isOpen}>
               {
-                Object.entries(CategoryIcons).map(([_name, { src, menuName }], i) => (
-                  <Link to={`/search?category=${menuName}`} key={i} className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
+                Object.entries(CategoryIcons).map(([name, { src, menuName }], i) => (
+                  <Link to={`/search?category=${menuName}`} key={name} className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
                     <img src={src} className='w-8' />
                     <span>{menuName}</span>
                   </Link>
@@ -77,7 +77,7 @@ export const Header = () => {
           <Link to='/search?popular=1'>인기</Link>
           <Link to='/search?new=1'>신규</Link>
           <Link to='/search?deadline=1'>마감임박</Link>
-          <a href="#">데이터 분석</a>
+          <Link to='/statistics'>데이터 분석</Link>
         </div>
         <FundiButton type='button'>
           <span>펀디에게 물어보기</span>
