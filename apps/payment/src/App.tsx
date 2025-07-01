@@ -1,4 +1,4 @@
-import { Header } from '@repo/ui/Header';
+import { Header } from '@repo/ui/components';
 import { Container } from './components/styles/flex.style';
 import { ProductProvider } from './context/ProductContext';
 import { Suspense, lazy } from 'react';
@@ -16,14 +16,14 @@ export interface ProductDataProps {
   [key: string]: string;
 }
 
-const productData: ProductDataProps = {
+export const productData: ProductDataProps = {
   title: '3D 미니 프런터기기',
   '모인 금액': '1,556,900원',
   '남은 시간': '8일',
   후원자: '10명',
 };
 
-const productPaymentData: ProductDataProps = {
+export const productPaymentData: ProductDataProps = {
   '목표 금액': '500,000원',
   '펀딩 기간': '2025.06.17 ~ 2025.08.20',
   결제: '목표 금액 달성 시 2025.08.20에 결제 진행',

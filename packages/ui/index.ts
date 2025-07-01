@@ -1,12 +1,18 @@
 // utils
-export { setupCounter } from './utils/counter';
+
 
 // components
-export { Header } from './components/Header';
-export { Footer } from './components/Footer';
-export { VerticalCard } from './components/mainPage/VerticalCard';
-export { HorizontalCard } from './components/mainPage/HorizontalCard';
+export {
+  Header,
+  Footer,
+  HorizontalCard,
+  VerticalCard,
+  Dropdown
+} from './components'
 
 //assets
 export { Images } from './assets'
 export { CategoryIcons } from './assets'
+
+//styled-components
+export { CommonButton } from './styles/Button.styles'

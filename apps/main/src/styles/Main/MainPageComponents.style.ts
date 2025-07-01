@@ -4,14 +4,12 @@ import tw from "tailwind-styled-components";
 export const BannerContainer = tw.div`
   col-span-4
   h-full
-  row-span-2
 `
 
 //InterestingItems
 export const InterestingItemsContainer = tw.div`
   col-start-1
   col-span-4
-  row-span-5
 `
 
 export const InterestingItemsGrid = tw.div`
@@ -34,7 +32,7 @@ export const MainCategoryContainer = tw.div`
 
 //PopularItems
 export const PopularItemsContainer = tw.div`
-  row-span-9
+  row-span-3
   row-start-1
   col-start-5
   col-span-2
