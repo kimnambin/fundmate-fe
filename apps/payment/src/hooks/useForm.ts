@@ -19,7 +19,7 @@ export const useTransferForm = ({
   };
 
   const handleTransfer = () => {
-    if (!accountNumber || !accountHolder || !birthDate) {
+    if (!isFormValid) {
       alert('모두 입력해주세요.');
       return;
     }
@@ -29,7 +29,7 @@ export const useTransferForm = ({
     );
 
     if (confirmed) {
-      movePage('/PaymentcompletedPage');
+      movePage('/payment-completed');
     }
   };
 
@@ -50,5 +50,56 @@ export const useTransferForm = ({
     setIsBusinessAccount,
     isFormValid,
     handleClose,
+  };
+};
+
+export const useCardPayForm = ({
+  addAmount,
+  setIsModalOpen,
+}: TransferProps) => {
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
+  const [cvv, setCvv] = useState('');
+  const [cardName, setCardName] = useState('');
+
+  const movePage = useNavigate();
+
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const isFormValid =
+    cardNumber.trim() !== '' &&
+    expiryDate.trim() !== '' &&
+    cvv.trim() !== '' &&
+    cardName.trim() !== '';
+
+  const handleCardPay = () => {
+    if (!isFormValid) {
+      alert('모두 입력해주세요.');
+      return;
+    }
+
+    const confirmed = confirm(
+      `${formatNum(addAmount)}원을 정말로 이체하시겠습니까??`
+    );
+
+    if (confirmed) {
+      movePage('/payment-completed');
+    }
+  };
+
+  return {
+    cardNumber,
+    setCardNumber,
+    expiryDate,
+    setExpiryDate,
+    cvv,
+    setCvv,
+    cardName,
+    setCardName,
+    isFormValid,
+    handleClose,
+    handleCardPay,
   };
 };

@@ -91,7 +91,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
             setIsModalOpen={handleCloseModal}
           />
         ) : (
-          <PayModal addAmount={addAmount} />
+          <PayModal addAmount={addAmount} setIsModalOpen={handleCloseModal} />
         ))}
     </>
   );

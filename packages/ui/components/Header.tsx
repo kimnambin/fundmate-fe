@@ -24,7 +24,9 @@ export const Header = () => {
           <IoSearch className="absolute end-5 top-1/2 -translate-y-1/2 text-2xl text-cyan-400" />
         </InputDiv>
         <div className="flex flex-row gap-7 h-full items-center">
-          <a href='#' className="text-lg font-semibold">프로젝트 올리기</a>
+          <a href="#" className="text-lg font-semibold">
+            프로젝트 올리기
+          </a>
           <LoginButton>
             <img
               src={userDefaultImage}
@@ -36,18 +38,23 @@ export const Header = () => {
         </div>
       </Container>
       <Container className="h-[60px] gap-7 text-lg">
-        <button type='button' onClick={setIsOpen} className="flex flex-row items-center gap-2 relative">
+        <button
+          type="button"
+          onClick={setIsOpen}
+          className="flex flex-row items-center gap-2 relative"
+        >
           <IoMdMenu />
           <span className="font-semibold">카테고리</span>
           <CateogoryContainer $isOpen={isOpen}>
-            {
-              Object.entries(CategoryIcons).map(([name, { src, menuName }], i) => (
-                <div key={i} className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
-                  <img src={src} className='w-8' />
-                  <span>{menuName}</span>
-                </div>
-              ))
-            }
+            {Object.entries(CategoryIcons).map(([_, { src, menuName }], i) => (
+              <div
+                key={i}
+                className="flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2"
+              >
+                <img src={src} className="w-8" />
+                <span>{menuName}</span>
+              </div>
+            ))}
           </CateogoryContainer>
         </button>
         <a href="#">홈</a>

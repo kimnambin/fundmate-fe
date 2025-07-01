@@ -19,17 +19,34 @@ import {
 import { monthList, yearList } from '../../utils/date';
 import { BankBtn } from '../styles/modal/tansfetModal.style';
 import { FlexRowsm } from '../styles/flex.style';
+import { TransferProps } from './TransferModal';
+import { useCardPayForm } from '../../hooks/useForm';
 
-// TODO : 여기 기능부터
-
-const PayModal = ({ addAmount }: { addAmount: number }) => {
+const PayModal = ({ addAmount, setIsModalOpen }: TransferProps) => {
   const placeholders = randomPlaceholder();
+  const {
+    cardNumber,
+    setCardNumber,
+    setExpiryDate,
+    setCvv,
+    setCardName,
+    handleClose,
+    handleCardPay,
+    isFormValid,
+  } = useCardPayForm({ addAmount, setIsModalOpen });
   return (
     <ModalContainer>
       <Container>
         <FlexRowsm className="justify-between items-center">
           <H2>결제방법</H2>
-          <BankBtn className="mb-4">&times;</BankBtn>
+          <BankBtn
+            className="mb-4"
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            &times;
+          </BankBtn>
         </FlexRowsm>
         <CardType>
           <input
@@ -57,6 +74,10 @@ const PayModal = ({ addAmount }: { addAmount: number }) => {
               maxLength="4"
               placeholder={text}
               required
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const newCardNumber = cardNumber + e.target.value;
+                setCardNumber(newCardNumber);
+              }}
             />
           ))}
         </CardInputContainer>
@@ -82,7 +103,14 @@ const PayModal = ({ addAmount }: { addAmount: number }) => {
           <div className="w-[48%]">
             <Label htmlFor="expiry-date">만료일</Label>
             <MouthBox>
-              <Select id="expiry-month" required className="mr-2 ">
+              <Select
+                id="expiry-month"
+                required
+                className="mr-2"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setExpiryDate(e.target.value)
+                }
+              >
                 <option value="" disabled selected>
                   MM
                 </option>
@@ -93,7 +121,13 @@ const PayModal = ({ addAmount }: { addAmount: number }) => {
                   </option>
                 ))}
               </Select>
-              <Select id="expiry-year" required>
+              <Select
+                id="expiry-year"
+                required
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setExpiryDate(e.target.value)
+                }
+              >
                 <option value="" disabled selected>
                   YY
                 </option>
@@ -112,17 +146,35 @@ const PayModal = ({ addAmount }: { addAmount: number }) => {
               id="cvv"
               type="text"
               placeholder="3자리"
+              maxLength={3}
               required
               className="pr-8"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setCvv(e.target.value)
+              }
             />
-            <IoCardOutline className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 mt-1" />
+            <IoCardOutline className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 mt-2" />
           </SecBox>
         </ExpiryBox>
 
         <Label htmlFor="card-name">카드 소유자 이름</Label>
-        <Input id="card-name" type="text" placeholder="J. Smith" required />
+        <Input
+          id="card-name"
+          type="text"
+          placeholder="J. Smith"
+          required
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setCardName(e.target.value)
+          }
+        />
 
-        <BaseButton className="ml-0">결제하기</BaseButton>
+        <BaseButton
+          className={`ml-0 ${!isFormValid ? 'bg-gray-400' : 'ml-0 mt-4'}`}
+          onClick={handleCardPay}
+          disabled={!isFormValid}
+        >
+          결제하기
+        </BaseButton>
       </Container>
     </ModalContainer>
   );
