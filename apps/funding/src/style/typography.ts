@@ -7,3 +7,7 @@ export const Title = tw.div`
 export const SubTitle = tw.div`
   text-[14px] font-bold
 `;
+
+export const WarningText = tw.p`
+  text-red font-bold
+`;

@@ -1,7 +1,7 @@
 import { Wrapper } from './askFundi.styles';
 import HelpIcon from '../../assets/icons/ic_help.svg';
 import InputTextArea from '../../components/input-text-area/inputTextArea';
-import { SubTitle, Title } from '../../style/typography';
+import { SubTitle, Title, WarningText } from '../../style/typography';
 import Category from '../../components/category/category';
 import { filters } from '../createFunding/createFunding';
 import MainButton from '../../components/main-button/mainButton';
@@ -12,6 +12,13 @@ import { IoClose } from 'react-icons/io5';
 
 const AskFundi = () => {
   const [isHelopOpen, setIsHelpOpen] = useState(false);
+  const [content, setContent] = useState('');
+  const [category, setCategory] = useState<string | null>(null);
+  const [family, setFamily] = useState<string | null>(null);
+  const [age, setAge] = useState<string | null>(null);
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const isValid = category && family && age && content.trim().length > 0;
 
   return (
     <Wrapper>
@@ -51,24 +58,50 @@ const AskFundi = () => {
           placeholder="내용을 입력하세요."
           width="w-full"
           rows={5}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
+        {isSubmit && content.trim().length === 0 && (
+          <WarningText>내용을 입력하세요.</WarningText>
+        )}
       </div>
 
       <div className="flex flex-col gap-[20px]">
         <SubTitle>카테고리와 타겟층을 선택하세요</SubTitle>
         <div className="flex gap-[20px]">
-          {filters.map((filter) => (
-            <Category
-              key={filter.title}
-              title={filter.title}
-              options={filter.options}
-            />
-          ))}
+          <Category
+            title={filters[0].title}
+            options={filters[0].options}
+            selected={category}
+            onSelect={setCategory}
+          />
+          <Category
+            title={filters[1].title}
+            options={filters[1].options}
+            selected={family}
+            onSelect={setFamily}
+          />
+          <Category
+            title={filters[2].title}
+            options={filters[2].options}
+            selected={age}
+            onSelect={setAge}
+          />
         </div>
+        {isSubmit && (!category || !family || !age) && (
+          <WarningText>카테고리와 타켓층을 선택하세요.</WarningText>
+        )}
       </div>
 
       <div className="flex justify-end">
-        <MainButton label="다음" width="w-[200px]" />
+        <MainButton
+          label="다음"
+          width="w-[200px]"
+          onClick={() => {
+            setIsSubmit(true);
+            if (!isValid) return;
+          }}
+        />
       </div>
     </Wrapper>
   );
