@@ -12,13 +12,12 @@ import {
   CreateFundingStyle,
   HorizontalLine,
   InputWrapper,
-  Title,
-  WarningText,
 } from './createFunding.styles';
 import Modal from '../../components/modal/modal';
 import { IoClose } from 'react-icons/io5';
 import { FiCopy, FiCheck } from 'react-icons/fi';
 import FundiIcon from '../../assets/icons/ic_fundi.svg';
+import { MediumFont, Title, WarningText } from '../../style/typography';
 
 function CreateFunding() {
   const [isFundiOpen, setIsFundiOpen] = useState(false);
@@ -36,6 +35,10 @@ function CreateFunding() {
   const [hasTitle, setHasTitle] = useState(true);
   const [hasContent, setHasContent] = useState(true);
   const [hasPrice, setHasPrice] = useState(true);
+
+  const [category, setCategory] = useState<string | null>(null);
+  const [family, setFamily] = useState<string | null>(null);
+  const [age, setAge] = useState<string | null>(null);
 
   const isValidItem = () =>
     [title, content, price].every((value) => value.trim());
@@ -147,13 +150,13 @@ function CreateFunding() {
           <div className="flex flex-col gap-5 w-[70vw] sm:w-[315px]">
             <div className="flex flex-col gap-[10px]">
               <Title>내가 입력한 내용</Title>
-              <p className="break-words">
+              <MediumFont className="break-words">
                 {intro ? (
                   intro
                 ) : (
                   <span className="text-sub-text">입력한 내용이 없습니다.</span>
                 )}
-              </p>
+              </MediumFont>
             </div>
             <HorizontalLine />
             <div className="flex flex-col gap-[10px]">
@@ -161,9 +164,9 @@ function CreateFunding() {
                 <Title>펀디가 추천하는 한 줄 소개</Title>
                 <img src={FundiIcon} width="20px" />
               </div>
-              <p ref={summaryRef} className="break-words">
+              <MediumFont ref={summaryRef} className="break-words">
                 펀디가 요약한 내용
-              </p>
+              </MediumFont>
             </div>
             <div className="flex justify-end">
               {copied ? (
@@ -189,13 +192,24 @@ function CreateFunding() {
         <CompWrapper>
           <Label>분류</Label>
           <div className="flex gap-[20px]">
-            {filters.map((filter) => (
-              <Category
-                key={filter.title}
-                title={filter.title}
-                options={filter.options}
-              />
-            ))}
+            <Category
+              title={filters[0].title}
+              options={filters[0].options}
+              selected={category}
+              onSelect={setCategory}
+            />
+            <Category
+              title={filters[1].title}
+              options={filters[1].options}
+              selected={family}
+              onSelect={setFamily}
+            />
+            <Category
+              title={filters[2].title}
+              options={filters[2].options}
+              selected={age}
+              onSelect={setAge}
+            />
           </div>
         </CompWrapper>
 
@@ -272,7 +286,7 @@ function CreateFunding() {
           <div className="flex flex-col gap-5 justify-center py-[20px] px-[30px] w-[70vw] sm:w-auto">
             <div className="text-center flex flex-col gap-[10px]">
               <Title>개설 시 수정이 불가능합니다.</Title>
-              <p>개설하시겠습니까?</p>
+              <MediumFont>개설하시겠습니까?</MediumFont>
             </div>
 
             <div className="flex gap-[20px] justify-center">

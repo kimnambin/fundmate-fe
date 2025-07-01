@@ -1,7 +1,12 @@
 import { Wrapper } from './askFundi.styles';
 import HelpIcon from '../../assets/icons/ic_help.svg';
 import InputTextArea from '../../components/input-text-area/inputTextArea';
-import { SubTitle, Title, WarningText } from '../../style/typography';
+import {
+  MediumFont,
+  SubTitle,
+  Title,
+  WarningText,
+} from '../../style/typography';
 import Category from '../../components/category/category';
 import { filters } from '../createFunding/createFunding';
 import MainButton from '../../components/main-button/mainButton';
@@ -63,13 +68,17 @@ const AskFundi = () => {
               <Title>펀디를 소개합니다!</Title>
               <img src={FundiIcon} alt="Fundi Icon" className="w-20 h-20" />
               <div className="flex flex-col gap-[10px]">
-                <p>
+                <MediumFont>
                   <span className="text-main font-bold">펀디</span>는 펀딩을
                   도와주는 당신의 든든한 친구예요!
-                </p>
-                <p>• 프로젝트 타겟층에 맞는 분석도 척척!</p>
-                <p>• 궁금한 점을 물어보면 쉽고 친절하게 설명해요.</p>
-                <p>• 누구나 쉽게 펀딩에 도전할 수 있도록 도와드릴게요.</p>
+                </MediumFont>
+                <MediumFont>• 프로젝트 타겟층에 맞는 분석도 척척!</MediumFont>
+                <MediumFont>
+                  • 궁금한 점을 물어보면 쉽고 친절하게 설명해요.
+                </MediumFont>
+                <MediumFont>
+                  • 누구나 쉽게 펀딩에 도전할 수 있도록 도와드릴게요.
+                </MediumFont>
               </div>
             </div>
           </Modal>

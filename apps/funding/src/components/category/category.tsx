@@ -4,8 +4,8 @@ import { Option, Title, Wrapper } from './category.styles';
 interface Props {
   title: string;
   options: string[];
-  selected?: string | null;
-  onSelect?: (value: string) => void;
+  selected: string | null;
+  onSelect: (value: string) => void;
 }
 
 const Category = ({ title, options, selected, onSelect }: Props) => {
