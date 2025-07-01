@@ -6,15 +6,16 @@ import { Header } from '@repo/ui/components';
 import { LogIn } from './pages/LogIn';
 import { SignUp } from './pages/SignUp';
 import { PasswordReset } from './pages/PasswordReset';
+import { ScrollToTop } from '@repo/ui/utils'
 import { lazy } from 'react';
 
-const CreateFundingPage = lazy(() => import('funding/CreateFundingPage'));
-const ProductPage = lazy(() => import('payment/ProductPage'));
-const PaymentPage = lazy(() => import('payment/PaymentPage'));
-const PaymentCompleted = lazy(() => import('payment/PaymentCompleted'));
-const PaymentDetail = lazy(() => import('payment/PaymentDetail'));
-const PaymentListPage = lazy(() => import('payment/PaymentListPage'));
-import { ProductProvider } from 'payment/ProductProvider';
+// const CreateFundingPage = lazy(() => import('funding/CreateFundingPage'));
+// const ProductPage = lazy(() => import('payment/ProductPage'));
+// const PaymentPage = lazy(() => import('payment/PaymentPage'));
+// const PaymentCompleted = lazy(() => import('payment/PaymentCompleted'));
+// const PaymentDetail = lazy(() => import('payment/PaymentDetail'));
+// const PaymentListPage = lazy(() => import('payment/PaymentListPage'));
+// import { ProductProvider } from 'payment/ProductProvider';
 
 export interface ProductDataProps {
   [key: string]: string;
@@ -36,7 +37,8 @@ const productPaymentData: ProductDataProps = {
 
 function App() {
   return (
-    <ProductProvider productData={productData} productPaymentData={productPaymentData}>
+    <>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path='/' element={<Main />} />
@@ -44,14 +46,14 @@ function App() {
         <Route path='/login' element={<LogIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/reset' element={<PasswordReset />} />
-        <Route path='/funding/create' element={<CreateFundingPage />} />
-        <Route path='/product' element={<ProductPage />} />
-        <Route path='/payment' element={<PaymentPage />} />
-        <Route path='/payment-completed' element={<PaymentCompleted />} />
-        <Route path='/payment-detail' element={<PaymentDetail />} />
-        <Route path='/payment-list' element={<PaymentListPage />} />
+        {/* <Route path='/funding/create' element={<CreateFundingPage />} /> */}
+        {/* <Route path='/product' element={<ProductPage />} /> */}
+        {/* <Route path='/payment' element={<PaymentPage />} /> */}
+        {/* <Route path='/payment-completed' element={<PaymentCompleted />} /> */}
+        {/* <Route path='/payment-detail' element={<PaymentDetail />} /> */}
+        {/* <Route path='/payment-list' element={<PaymentListPage />} /> */}
       </Routes>
-    </ProductProvider>
+    </>
   );
 }
 

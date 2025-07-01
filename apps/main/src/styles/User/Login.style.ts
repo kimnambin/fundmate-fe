@@ -20,6 +20,7 @@ export const SocialLoginIcon = tw.img`
   h-full
   w-12
   rounded-full
+  cursor-pointer
 `
 
 export const LoginContainer = tw.div`

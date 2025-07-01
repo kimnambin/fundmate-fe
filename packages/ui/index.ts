@@ -1,5 +1,5 @@
 // utils
-
+export { ScrollToTop } from './utils'
 
 // components
 export {

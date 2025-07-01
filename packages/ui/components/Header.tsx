@@ -33,7 +33,7 @@ export const Header = () => {
   return (
     <div className="flex flex-col shadow-md">
       <Container className="h-[100px] justify-between border-b border-gray-300">
-        <img src={logo} alt="Logo" className="w-auto h-14" />
+        <img src={logo} alt="Logo" className="w-auto h-14 cursor-pointer" onClick={() => navigate('/')} />
         <InputDiv>
           <input
             aria-label="검색"
@@ -64,7 +64,7 @@ export const Header = () => {
             <span className="font-semibold">카테고리</span>
             <CateogoryContainer $isOpen={isOpen}>
               {
-                Object.entries(CategoryIcons).map(([_unuseProp, { src, menuName }], i) => (
+                Object.entries(CategoryIcons).map(([_name, { src, menuName }], i) => (
                   <Link to={`/search?category=${menuName}`} key={i} className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
                     <img src={src} className='w-8' />
                     <span>{menuName}</span>

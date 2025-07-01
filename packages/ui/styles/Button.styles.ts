@@ -1,6 +1,6 @@
 import tw from "tailwind-styled-components";
 
-export const CommonButton = tw.button`
+export const CommonButton = tw.button<{ $isError?: boolean, $isVerificated?: boolean }>`
   bg-cyan-400
   flex
   flex-row
@@ -11,4 +11,7 @@ export const CommonButton = tw.button`
   py-3
   rounded-lg
   px-5
+  transition-opacity
+
+  ${(p) => p.$isError || p.$isVerificated ? 'opacity-50 cursor-not-allowed' : 'opacity-100'}
 `

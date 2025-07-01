@@ -5,7 +5,8 @@
   "exports": {
     "./components": "./components/index.ts",
     "./assets": "./assets/index.ts",
-    "./CommonButton": "./styles/Button.styles.ts"
+    "./CommonButton": "./styles/Button.styles.ts",
+    "./utils": "./utils/index.ts"
   },
   "license": "MIT",
   "scripts": {
