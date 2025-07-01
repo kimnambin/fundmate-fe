@@ -1,4 +1,4 @@
-import { Header } from '@repo/ui/Header';
+import { Header } from '@repo/ui/components';
 import { Container } from './components/styles/flex.style';
 import { ProductProvider } from './context/ProductContext';
 import { Suspense, lazy } from 'react';

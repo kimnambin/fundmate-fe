@@ -6,7 +6,7 @@ import { IoSearch } from 'react-icons/io5';
 import { CateogoryContainer } from '../styles/Category.style';
 import { modalStore } from '../stores/modalStore';
 import { CategoryIcons } from '../assets';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import fundi from '../assets/images/fundi.png'
 
@@ -64,7 +64,7 @@ export const Header = () => {
             <span className="font-semibold">카테고리</span>
             <CateogoryContainer $isOpen={isOpen}>
               {
-                Object.entries(CategoryIcons).map(([name, { src, menuName }], i) => (
+                Object.entries(CategoryIcons).map(([_unuseProp, { src, menuName }], i) => (
                   <Link to={`/search?category=${menuName}`} key={i} className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
                     <img src={src} className='w-8' />
                     <span>{menuName}</span>

@@ -8,9 +8,15 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: 'mypage',
+      name: 'payment',
       filename: 'remoteEntry.js',
-      exposes: {},
+      exposes: {
+        './ProductPage': './src/pages/ProductPage.tsx',
+        './PaymentPage': './src/pages/PaymentPage.tsx',
+        './PaymentCompleted': './src/pages/PaymentcompletedPage.tsx',
+        './PaymentDetail': './src/pages/PaymentDetail.tsx',
+        './PaymentListPage': './src/pages/PaymentListPage.tsx'
+      },
       shared: ['react', 'react-dom'],
     }),
     // tailwindcss(),
