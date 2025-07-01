@@ -20,7 +20,7 @@ type SignUpProps = yup.InferType<typeof schema>;
 export const SignUpComponent = () => {
   const { menu, ...categories } = CategoryIcons;
   const [userCategory, setUserCategory] = useState<number | null>(null);
-  const [verificationCode, setVerificationCode] = useState();
+  const [verificationCode, setVerificationCode] = useState<string | null>(null);
   const [verificateRequested, setVerificateRequest] = useState(false);
   const [tempVerificated, setTempVerificated] = useState(false);
 
@@ -86,7 +86,7 @@ export const SignUpComponent = () => {
                       <UserInput
                         type='text'
                         value={verificationCode}
-                        onChange={(e: any) => setVerificationCode(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVerificationCode(e.target.value)}
                         placeholder='인증 코드를 입력해주세요.'
                         disabled={tempVerificated}
                       />
@@ -105,13 +105,13 @@ export const SignUpComponent = () => {
                 type='password'
                 {...register('password')}
                 placeholder='비밀번호를 입력해주세요.'
-                $isError={errors.password}
+                $isError={!!errors.password}
               />
               <UserInput
                 type='password'
                 {...register('checkPassword')}
                 placeholder='비밀번호를 한 번 더 입력해주세요.'
-                $isError={errors.checkPassword}
+                $isError={!!errors.checkPassword}
               />
             </InputContainer>
             <InputContainer>

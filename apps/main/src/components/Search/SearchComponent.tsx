@@ -13,8 +13,7 @@ export const SearchComponent = () => {
   let queryValue;
   if (isCategory) {
     queryValue = searchParams.get('category');
-  }
-  if (isSearch) {
+  } else if (isSearch) {
     queryValue = searchParams.get("query");
   }
 

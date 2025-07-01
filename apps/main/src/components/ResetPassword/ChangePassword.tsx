@@ -3,7 +3,7 @@ import { InputContainer, SignUpTitle } from "../../styles/User/SignUp.style"
 import { UserInput } from "../../styles/User/UserPage.Styles"
 import { useNavigate } from "react-router-dom"
 import * as yup from 'yup'
-import { useForm } from "react-hook-form"
+import { useForm, type SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 
 const schema = yup.object({
@@ -23,6 +23,11 @@ export const ChangePassword = () => {
     reValidateMode: 'onChange'
   })
 
+  const onSubmit: SubmitHandler<ChangePasswordProps> = (data) => {
+    console.log(data);
+    navigate('/login')
+  }
+
   return (
     <form className="flex flex-col w-full gap-5">
       <SignUpTitle><span>비밀번호 재설정</span></SignUpTitle>
@@ -41,8 +46,8 @@ export const ChangePassword = () => {
         />
       </InputContainer>
       <CommonButton
-        onClick={() => { navigate('/login') }}
-        type='button'
+        onSubmit={handleSubmit(onSubmit)}
+        type='submit'
         $isError={!isValid}
         disabled={!isValid}
       >

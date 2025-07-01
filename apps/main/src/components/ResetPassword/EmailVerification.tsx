@@ -50,7 +50,11 @@ export const EmailVerificationComponent = () => {
           !isVerified ? '' : (
             <InputContainer>
               <SignUpSubTitle><span>인증번호</span></SignUpSubTitle>
-              <UserInput type='text' placeholder='인증번호를 입력해주세요' />
+              <UserInput
+                type='text'
+                placeholder='인증번호를 입력해주세요'
+                {...register('verificationCode')}
+              />
             </InputContainer>
           )
         }
