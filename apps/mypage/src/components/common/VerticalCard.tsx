@@ -24,11 +24,11 @@ export const VerticalCard = ({
   };
 
   return (
-    <VerticalCardContainer className="relative">
+    <VerticalCardContainer className="relative h-[310px]">
       {/* 하트 버튼 */}
       <button
         onClick={handleToggleLike}
-        className="absolute top-5 right-5 text-2xl"
+        className="absolute top-[45px] right-[30px] text-3xl"
       >
         {isLiked ? (
           <AiFillHeart className="text-red-500" />
@@ -38,22 +38,22 @@ export const VerticalCard = ({
       </button>
 
       {/* 썸네일 */}
-      <div className="h-[240px]">
+      <div className="w-[280px] h-[280px] mt-[20px]" >
         <img
           src={thumbnailUrl}
           alt={title}
-          className="w-full h-full rounded-xl object-cover"
+          className="w-[1600px] h-[180px] rounded-xl object-cover"
         />
       </div>
 
       {/* 제목 및 설명 */}
-      <div className="flex flex-col mt-2">
+      <div className="flex flex-col">
         <span className="text-[14px] font-semibold">{title}</span>
         <span className="text-[12px] text-gray-500">{description}</span>
       </div>
 
       {/* 진행률 */}
-      <div className="mt-2">
+      <div className="mt-1 mb-10">
         <span className="text-base font-bold text-cyan-400">
           {progress}% 달성
         </span>
