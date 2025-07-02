@@ -16,101 +16,104 @@ import MainButton from '../../components/main-button/mainButton';
 import { useState } from 'react';
 import FundingPlanContent from '../../components/funding-detail-tab/fundingPlanContent';
 import FundingReviewContent from '../../components/funding-detail-tab/fundingReviewContent';
+import { Layout } from '../../style/layout';
 
 const FundingDetail = () => {
   const [activeTab, setActiveTab] = useState<'plan' | 'review'>('plan');
 
   return (
-    <Wrapper>
-      <ItemTitleWrapper>
-        <img
-          src={itemData.itemImg}
-          alt="itemImg"
-          className="rounded-[6px] w-[508px] h-[461px]"
-        />
-        <ItemTitleTextWrapper>
-          <Title>{itemData.title}</Title>
-          <div className="flex flex-col gap-[20px]">
-            <InfoWrapperVertical>
-              <InfoLabel>모인 금액</InfoLabel>
-              <p>{itemData.funding_amount}원</p>
-            </InfoWrapperVertical>
-            <InfoWrapperVertical>
-              <InfoLabel>남은 시간</InfoLabel>
-              <p>{itemData.funding_end_date}일</p>
-            </InfoWrapperVertical>
-            <InfoWrapperVertical>
-              <InfoLabel>후원자</InfoLabel>
-              <p>{itemData.funding_participants}명</p>
-            </InfoWrapperVertical>
-          </div>
-
-          <HorizontalLine />
-
-          <div className="flex flex-col gap-[15px]">
-            <InfoWrapperHorizontal>
-              <InfoLabel>목표 금액</InfoLabel>
-              <p>{itemData.funding_goal}원</p>
-            </InfoWrapperHorizontal>
-            <InfoWrapperHorizontal>
-              <InfoLabel>펀딩 기간</InfoLabel>
-              <p>
-                {itemData.funding_start_date}~{itemData.funding_end_date}
-              </p>
-            </InfoWrapperHorizontal>
-            <InfoWrapperHorizontal>
-              <InfoLabel>결제</InfoLabel>
-              <p>목표 금액 달성 시 {itemData.funding_pay_date}에 결제 진행</p>
-            </InfoWrapperHorizontal>
-            <InfoWrapperHorizontal>
-              <InfoLabel>예상 발송 시작일</InfoLabel>
-              <p>{itemData.funding_delivery_date}</p>
-            </InfoWrapperHorizontal>
-          </div>
-
-          <ButtonWrapper>
-            <div className="flex flex-col items-center">
-              <img
-                src={HeartIcon}
-                alt="heartIcon"
-                className="w-[35px] h-[35px] cursor-pointer"
-              />
-              <p className="text-[10px]">{itemData.like}</p>
+    <Layout>
+      <Wrapper>
+        <ItemTitleWrapper>
+          <img
+            src={itemData.itemImg}
+            alt="itemImg"
+            className="rounded-[6px] w-[508px] h-[461px]"
+          />
+          <ItemTitleTextWrapper>
+            <Title>{itemData.title}</Title>
+            <div className="flex flex-col gap-[20px]">
+              <InfoWrapperVertical>
+                <InfoLabel>모인 금액</InfoLabel>
+                <p>{itemData.funding_amount}원</p>
+              </InfoWrapperVertical>
+              <InfoWrapperVertical>
+                <InfoLabel>남은 시간</InfoLabel>
+                <p>{itemData.funding_end_date}일</p>
+              </InfoWrapperVertical>
+              <InfoWrapperVertical>
+                <InfoLabel>후원자</InfoLabel>
+                <p>{itemData.funding_participants}명</p>
+              </InfoWrapperVertical>
             </div>
-            <img
-              src={ShareIcon}
-              alt="shareIcon"
-              className="w-[35px] h-[35px] pt-1 cursor-pointer"
-            />
-            <MainButton
-              label="후원하기"
-              width="w-full"
-              textSize="text-[20px]"
-              textWeight="font-bold"
-              className="ml-[10px]"
-            />
-          </ButtonWrapper>
-        </ItemTitleTextWrapper>
-      </ItemTitleWrapper>
 
-      <FundingDetailTab>
-        <button
-          className={`${activeTab === 'plan' ? 'font-bold' : 'font-normal'}`}
-          onClick={() => setActiveTab('plan')}
-        >
-          프로젝트 계획
-        </button>
-        <button
-          className={`${activeTab === 'review' ? 'font-bold' : 'font-normal'}`}
-          onClick={() => setActiveTab('review')}
-        >
-          후기
-        </button>
-      </FundingDetailTab>
+            <HorizontalLine />
 
-      {activeTab === 'plan' && <FundingPlanContent />}
-      {activeTab === 'review' && <FundingReviewContent />}
-    </Wrapper>
+            <div className="flex flex-col gap-[15px]">
+              <InfoWrapperHorizontal>
+                <InfoLabel>목표 금액</InfoLabel>
+                <p>{itemData.funding_goal}원</p>
+              </InfoWrapperHorizontal>
+              <InfoWrapperHorizontal>
+                <InfoLabel>펀딩 기간</InfoLabel>
+                <p>
+                  {itemData.funding_start_date}~{itemData.funding_end_date}
+                </p>
+              </InfoWrapperHorizontal>
+              <InfoWrapperHorizontal>
+                <InfoLabel>결제</InfoLabel>
+                <p>목표 금액 달성 시 {itemData.funding_pay_date}에 결제 진행</p>
+              </InfoWrapperHorizontal>
+              <InfoWrapperHorizontal>
+                <InfoLabel>예상 발송 시작일</InfoLabel>
+                <p>{itemData.funding_delivery_date}</p>
+              </InfoWrapperHorizontal>
+            </div>
+
+            <ButtonWrapper>
+              <div className="flex flex-col items-center">
+                <img
+                  src={HeartIcon}
+                  alt="heartIcon"
+                  className="w-[35px] h-[35px] cursor-pointer"
+                />
+                <p className="text-[10px]">{itemData.like}</p>
+              </div>
+              <img
+                src={ShareIcon}
+                alt="shareIcon"
+                className="w-[35px] h-[35px] pt-1 cursor-pointer"
+              />
+              <MainButton
+                label="후원하기"
+                width="w-full"
+                textSize="text-[20px]"
+                textWeight="font-bold"
+                className="ml-[10px]"
+              />
+            </ButtonWrapper>
+          </ItemTitleTextWrapper>
+        </ItemTitleWrapper>
+
+        <FundingDetailTab>
+          <button
+            className={`${activeTab === 'plan' ? 'font-bold' : 'font-normal'}`}
+            onClick={() => setActiveTab('plan')}
+          >
+            프로젝트 계획
+          </button>
+          <button
+            className={`${activeTab === 'review' ? 'font-bold' : 'font-normal'}`}
+            onClick={() => setActiveTab('review')}
+          >
+            후기
+          </button>
+        </FundingDetailTab>
+
+        {activeTab === 'plan' && <FundingPlanContent />}
+        {activeTab === 'review' && <FundingReviewContent />}
+      </Wrapper>
+    </Layout>
   );
 };
 

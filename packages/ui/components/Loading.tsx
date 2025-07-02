@@ -3,6 +3,7 @@ import LogoIcon from '../assets/icons/ic_fundi.svg';
 
 export const Loading = () => {
   return (
+    // <div className="flex justify-center items-center">
     <Wrapper>
       <img
         src={LogoIcon}
@@ -14,5 +15,6 @@ export const Loading = () => {
         AI예요
       </p>
     </Wrapper>
+    // </div>
   );
 };
