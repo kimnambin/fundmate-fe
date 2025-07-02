@@ -17,15 +17,23 @@ type EmailVerificationProps = yup.InferType<typeof schema>
 export const EmailVerificationComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isVerified, setIsVerified] = useState(false);
+  const tempCode = '000000'
+  const [tempCodeCheck, setTempCodeCheck] = useState<'pass' | 'fail' | null>(null);
+
   const tempHandleClick = () => {
-    if (!isVerified) {
-      setIsVerified(true);
+    setIsVerified(true);
+  }
+
+  const onSubmit = () => {
+    if (getValues('verificationCode') !== tempCode) {
+      setTempCodeCheck('fail');
+      return;
     } else {
       setSearchParams({ 'auth': 'done' })
     }
-  }
 
-  const { register, formState: { errors } } = useForm<EmailVerificationProps>({
+  }
+  const { register, getValues, formState: { errors } } = useForm<EmailVerificationProps>({
     resolver: yupResolver(schema),
     shouldFocusError: false,
     mode: 'onChange',
@@ -44,30 +52,48 @@ export const EmailVerificationComponent = () => {
           $isError={!!errors.email}
         />
         {
-          !isVerified ? <span className="text-sm text-gray-400">회원가입에 사용한 이메일 주소를 입력하시면 인증번호를 보내드립니다.</span> : ''
+          !isVerified ?
+            <span className="text-sm text-gray-400">회원가입에 사용한 이메일 주소를 입력하시면 인증번호를 보내드립니다.</span> :
+            <span className="text-sm text-gray-400">기입하신 이메일로 인증번호가 전송되었습니다.</span>
         }
         {
           !isVerified ? '' : (
-            <InputContainer>
-              <SignUpSubTitle><span>인증번호</span></SignUpSubTitle>
-              <UserInput
-                type='text'
-                placeholder='인증번호를 입력해주세요'
-                {...register('verificationCode')}
-              />
-            </InputContainer>
+            <>
+              <InputContainer>
+                <SignUpSubTitle><span>인증번호</span></SignUpSubTitle>
+                <UserInput
+                  type='text'
+                  placeholder='인증번호를 입력해주세요'
+                  {...register('verificationCode')}
+                  autoComplete='off'
+                />
+                {tempCodeCheck === 'fail' && <span className="text-base text-red-500">유효하지 않은 인증 번호입니다.</span>}
+              </InputContainer>
+            </>
           )
         }
       </InputContainer>
-      <CommonButton type='button' onClick={tempHandleClick} $isError={!!errors.email} disabled={!!errors.email}>
-        {
-          !isVerified ? (
+      {
+        !isVerified ? (
+          <CommonButton
+            type='button'
+            onClick={tempHandleClick}
+            $isError={!!errors.email}
+            disabled={!!errors.email}
+          >
             <span>인증번호 발송</span>
-          ) : (
+          </CommonButton>
+        ) : (
+          <CommonButton
+            type='button'
+            onClick={onSubmit}
+            $isError={!!errors.email}
+            disabled={!!errors.email}
+          >
             <span>인증하기</span>
-          )
-        }
-      </CommonButton>
+          </CommonButton>
+        )
+      }
     </form>
   )
 }

@@ -2,7 +2,7 @@ import { CommonButton } from "@repo/ui/CommonButton"
 import { UserContainer, UserInput, UserLayout, UserNaigater } from "../../styles/User/UserPage.Styles"
 import { InputContainer, SignUpContainer, SignUpSubTitle, SignUpTitle, SignUpVerificationContainer, UserCategoryButton } from "../../styles/User/SignUp.style"
 import { CategoryIcons } from "@repo/ui/assets"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { useState } from "react"
 import * as yup from 'yup'
@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 const schema = yup.object({
   nickname: yup.string().required(),
   email: yup.string().email().required(),
+  verificationCode: yup.string().required('인증 번호를 기입해주세요.'),
   password: yup.string().required(),
   checkPassword: yup.string().oneOf([yup.ref('password')]).required()
 })
@@ -20,30 +21,57 @@ type SignUpProps = yup.InferType<typeof schema>;
 export const SignUpComponent = () => {
   const { menu, ...categories } = CategoryIcons;
   const [userCategory, setUserCategory] = useState<number | null>(null);
-  const [verificationCode, setVerificationCode] = useState<string | null>(null);
   const [verificateRequested, setVerificateRequest] = useState(false);
   const [tempVerificated, setTempVerificated] = useState(false);
+  const [tempCodeCheck, setTempCodeCheck] = useState<'pass' | 'fail' | null>(null);
+  const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm<SignUpProps>({
-    resolver: yupResolver(schema),
-    shouldFocusError: false,
-    mode: 'onChange',
-    reValidateMode: 'onChange'
-  })
+  const tempCode = '000000';
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setError,
+    trigger,
+    formState: { errors, isValid } } = useForm<SignUpProps>({
+      resolver: yupResolver(schema),
+      shouldFocusError: false,
+      mode: 'onChange',
+      reValidateMode: 'onChange'
+    })
 
   const onSubmit: SubmitHandler<SignUpProps> = (data) => {
-    const { checkPassword, ...cleanData } = data;
+    const { checkPassword, verificationCode, ...cleanData } = data;
     const finalData = {
       ...cleanData,
       category_id: userCategory
     }
 
     console.log(finalData);
+    navigate('/login')
   };
 
-  const verificationHandle = () => {
-    setVerificateRequest(true);
+  const emailVerificationHandle = () => {
+    if (errors.email) {
+      return;
+    } else {
+      setVerificateRequest(true);
+    }
   }
+
+  const codeVerificationHandle = () => {
+    if (getValues('verificationCode') !== tempCode) {
+      setTempCodeCheck('fail');
+      return;
+    } else {
+      setTempCodeCheck('pass');
+      setTempVerificated(true);
+    }
+  }
+
+  console.log(getValues('verificationCode'))
+  console.log(errors.verificationCode?.message)
 
   return (
     <UserLayout>
@@ -58,6 +86,7 @@ export const SignUpComponent = () => {
                 {...register('nickname')}
                 placeholder='닉네임을 입력해주세요.'
                 $isError={!!errors.nickname}
+                autoComplete='off'
               />
             </InputContainer>
             <InputContainer>
@@ -68,13 +97,15 @@ export const SignUpComponent = () => {
                   placeholder='이메일을 입력해주세요.'
                   $isError={!!errors.email}
                   disabled={tempVerificated}
+                  autoComplete='email'
+                  onFocus={() => trigger('email')}
                 />
                 <CommonButton
                   type='button'
-                  $isError={!!errors.email}
+                  $isError={!!!getValues('email')}
                   $isVerificated={tempVerificated}
-                  disabled={!!errors.email}
-                  onClick={verificationHandle}
+                  disabled={!!!getValues('email')}
+                  onClick={emailVerificationHandle}
                 >
                   <span className='whitespace-nowrap'>인증하기</span>
                 </CommonButton>
@@ -82,18 +113,31 @@ export const SignUpComponent = () => {
               {
                 verificateRequested ?
                   (
-                    <SignUpVerificationContainer>
-                      <UserInput
-                        type='text'
-                        value={verificationCode}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVerificationCode(e.target.value)}
-                        placeholder='인증 코드를 입력해주세요.'
-                        disabled={tempVerificated}
-                      />
-                      <CommonButton type='button' $isVerificated={tempVerificated} onClick={() => setTempVerificated(true)}>
-                        <span className="whitespace-nowrap">확인하기</span>
-                      </CommonButton>
-                    </SignUpVerificationContainer>
+                    <>
+                      <SignUpVerificationContainer>
+                        <UserInput
+                          type='text'
+                          {...register('verificationCode')}
+                          $isError={!!errors.verificationCode}
+                          placeholder='인증 코드를 입력해주세요.'
+                          disabled={tempVerificated}
+                          onFocus={() => trigger('verificationCode')}
+                          autoComplete='off'
+                        />
+                        <CommonButton
+                          type='button'
+                          $isError={!!!getValues('verificationCode')}
+                          $isVerificated={tempVerificated}
+                          disabled={!!!getValues('verificationCode')}
+                          onClick={codeVerificationHandle}
+                        >
+                          <span className="whitespace-nowrap">확인하기</span>
+                        </CommonButton>
+                      </SignUpVerificationContainer>
+                      {
+                        tempCodeCheck === 'fail'
+                        && <span className="text-base text-red-500">유효하지 않은 인증 번호입니다.</span>}
+                    </>
                   ) : (
                     <></>
                   )
