@@ -1,5 +1,5 @@
 // utils
-export { ScrollToTop } from './utils'
+export { ScrollToTop, StatisticsTableData } from './utils';
 
 // components
 export {
@@ -7,12 +7,12 @@ export {
   Footer,
   HorizontalCard,
   VerticalCard,
-  Dropdown
-} from './components'
+  Dropdown,
+} from './components';
 
 //assets
-export { Images } from './assets'
-export { CategoryIcons } from './assets'
+export { Images } from './assets';
+export { CategoryIcons } from './assets';
 
 //styled-components
-export { CommonButton } from './styles/Button.styles'
+export { CommonButton } from './styles/Button.styles';
