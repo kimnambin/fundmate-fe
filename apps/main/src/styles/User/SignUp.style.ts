@@ -32,3 +32,13 @@ flex
 flex-row
 gap-3
 `
+
+export const UserCategoryButton = tw.button<{ $selected: boolean }>`
+  rounded-full
+  py-2
+  flex
+  flex-row
+  justify-center
+  items-center
+  ${(p) => p.$selected ? 'bg-cyan-400 font-semibold text-white' : 'bg-slate-200'}
+`

@@ -3,32 +3,51 @@ import { CommonButton } from "@repo/ui/CommonButton";
 import googleIcon from "../../assets/icons/googleIcon.png";
 import naverIcon from '../../assets/icons/naverIcon.svg';
 import kakaoTalkIcon from '../../assets/icons/kakaotalkIcon.png';
-import { useState, type ChangeEvent } from "react";
 import { HorizonLine, UserContainer, UserInput, UserLayout, UserNaigater } from "../../styles/User/UserPage.Styles";
 import { LoginContainer, SocialLoginContainer, SocialLoginIcon, SocialLoginIconContainer } from "../../styles/User/Login.style";
 import { Link } from "react-router-dom";
+import * as yup from 'yup';
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().required()
+})
+
+type LoginProps = yup.InferType<typeof schema>;
 
 export const LoginComponent = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginProps>({
+    resolver: yupResolver(schema),
+    shouldFocusError: false,
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+  })
+
+  const onSubmit: SubmitHandler<LoginProps> = (data) => {
+    console.log(data);
   }
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
-
   return (
     <UserLayout>
       <UserContainer>
         <LoginContainer>
           <img className="w-60 mb-12" src={Images.Fundmate} />
-          <form className="flex flex-col w-full gap-5">
+          <form className="flex flex-col w-full gap-5" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-3">
-              <UserInput type="text" placeholder="이메일을 입력해주세요" value={email} onChange={handleEmailChange} />
-              <UserInput type="password" placeholder="비밀번호를 입력해주세요" value={password} onChange={handlePasswordChange} />
+              <UserInput
+                type="text"
+                placeholder="이메일을 입력해주세요"
+                {...register('email')}
+                $isError={!!errors.email}
+              />
+              <UserInput
+                type="password"
+                placeholder="비밀번호를 입력해주세요"
+                {...register('password')}
+                $isError={!!errors.password}
+              />
             </div>
             <CommonButton type='submit'>
               <span>로그인</span>

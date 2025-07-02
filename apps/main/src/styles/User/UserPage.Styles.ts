@@ -16,15 +16,19 @@ export const UserContainer = tw.div`
   gap-7
 `
 
-export const UserInput = tw.input`
+export const UserInput = tw.input<{ $isError?: boolean }>`
   outline
-  outline-1
-  outline-gray-200
   rounded-md
   p-1.5
   indent-2
   text-lg
   w-full
+  transition-all
+  
+  focus:outline-cyan-400
+  focus:outline-2
+
+  ${(p) => p.$isError ? 'outline-2 outline-red-500' : 'outline-1 outline-gray-200'}
 `
 
 export const UserNaigater = tw.div`

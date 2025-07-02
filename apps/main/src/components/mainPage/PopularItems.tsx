@@ -1,6 +1,7 @@
 import { HorizontalCard } from "@repo/ui/components"
 import { range } from "../../utils/tempRange"
 import { PopularItemsContainer, PopularItemsGrid, PopularItemsHeader } from "../../styles/Main/MainPageComponents.style"
+import { Link } from "react-router-dom"
 
 export const PopularItems = () => {
   return (
@@ -10,7 +11,7 @@ export const PopularItems = () => {
           <span className="text-xl font-semibold">인기 프로젝트</span>
           <span className="text-base text-gray-400">2025.06.17 00:00 기준</span>
         </div>
-        <a href="#" className="text-base text-gray-400">전체보기</a>
+        <Link to='/search?popular=1' className="text-base text-gray-400">전체보기</Link>
       </PopularItemsHeader>
       <PopularItemsGrid>
         {

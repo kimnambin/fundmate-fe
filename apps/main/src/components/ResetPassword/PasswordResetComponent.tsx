@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { SignUpContainer } from "../../styles/User/SignUp.style"
 import { UserContainer, UserLayout, UserNaigater } from "../../styles/User/UserPage.Styles"
 import { EmailVerificationComponent } from "./EmailVerification"
@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import { ChangePassword } from "./ChangePassword"
 
 export const PasswordResetComponent = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [authState, setAuthState] = useState<string | null>(null)
   const isAuthorized = authState === 'done';
   useEffect(() => {
@@ -23,7 +23,7 @@ export const PasswordResetComponent = () => {
               : <EmailVerificationComponent />
           }
           <UserNaigater>
-            <span>로그인 화면으로 돌아가기</span>
+            <Link to='/login'>로그인 화면으로 돌아가기</Link>
           </UserNaigater>
         </SignUpContainer>
       </UserContainer>

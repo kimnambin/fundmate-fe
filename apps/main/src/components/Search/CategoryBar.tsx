@@ -7,7 +7,7 @@ export const CategoryBar = () => {
     <CategoryBarContainer>
       {
         Object.entries(CategoryIcons).map(([name, { src, menuName }], i) => (
-          <SingleCategory id={i} key={i} imgPath={src} name={menuName} location="bar" />
+          <SingleCategory id={i} key={name} imgPath={src} name={menuName} location="bar" />
         ))
       }
     </CategoryBarContainer>

@@ -39,7 +39,7 @@ export const Header = () => {
   return (
     <div className="flex flex-col shadow-md">
       <Container className="h-[100px] justify-between border-b border-gray-300">
-        <img src={logo} alt="Logo" className="w-auto h-14" />
+        <img src={logo} alt="Logo" className="w-auto h-14 cursor-pointer" onClick={() => navigate('/')} />
         <InputDiv>
           <input
             aria-label="검색"
@@ -55,9 +55,13 @@ export const Header = () => {
           />
         </InputDiv>
         <div className="flex flex-row gap-7 h-full items-center">
+<<<<<<< HEAD
           <a href="#" className="text-lg font-semibold">
             프로젝트 올리기
           </a>
+=======
+          <Link to='/funding/create' className="text-lg font-semibold">프로젝트 올리기</Link>
+>>>>>>> 130119013883e410f8669c7f0dac477fbb371d14
           <LoginButton onClick={handleNavigate}>
             <img
               src={userDefaultImage}
@@ -78,6 +82,7 @@ export const Header = () => {
             <IoMdMenu />
             <span className="font-semibold">카테고리</span>
             <CateogoryContainer $isOpen={isOpen}>
+<<<<<<< HEAD
               {Object.entries(CategoryIcons).map(
                 ([_unuseProp, { src, menuName }], i) => (
                   <Link
@@ -86,17 +91,31 @@ export const Header = () => {
                     className="flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2"
                   >
                     <img src={src} className="w-8" />
+=======
+              {
+                Object.entries(CategoryIcons).map(([name, { src, menuName }], i) => (
+                  <Link to={`/search?category=${menuName}`} key={name} className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
+                    <img src={src} className='w-8' />
+>>>>>>> 130119013883e410f8669c7f0dac477fbb371d14
                     <span>{menuName}</span>
                   </Link>
                 ),
               )}
             </CateogoryContainer>
           </button>
+<<<<<<< HEAD
           <Link to="/">홈</Link>
           <Link to="/search?popular=1">인기</Link>
           <Link to="/search?new=1">신규</Link>
           <Link to="/search?deadline=1">마감임박</Link>
           <a href="#">데이터 분석</a>
+=======
+          <Link to='/'>홈</Link>
+          <Link to='/search?popular=1'>인기</Link>
+          <Link to='/search?new=1'>신규</Link>
+          <Link to='/search?deadline=1'>마감임박</Link>
+          <Link to='/statistics'>데이터 분석</Link>
+>>>>>>> 130119013883e410f8669c7f0dac477fbb371d14
         </div>
         <FundiButton type="button">
           <span>펀디에게 물어보기</span>
