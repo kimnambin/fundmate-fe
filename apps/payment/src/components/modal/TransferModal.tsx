@@ -12,6 +12,9 @@ import {
 } from '../styles/modal/tansfetModal.style';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { useTransferForm } from '../../hooks/useForm';
+import { useState } from 'react';
+import { formatNum } from '../../utils/numbers';
+import { SafeLink } from '../feat/SafeLink';
 
 export interface TransferProps {
   addAmount: number;
@@ -32,14 +35,31 @@ export default function TransferModal({
     setAccountNumber,
     setAccountHolder,
     setBirthDate,
-    handleTransfer,
+
     setIsBusinessAccount,
     isFormValid,
     handleClose,
   } = useTransferForm({
-    addAmount,
     setIsModalOpen,
   });
+
+  const [confirmed, setConfirmed] = useState(false);
+
+  const handleTransfer = () => {
+    if (!isFormValid) {
+      alert('모두 입력해주세요.');
+      return;
+    }
+
+    const ok = confirm(`${formatNum(addAmount)}원을 정말로 이체하시겠습니까??`);
+    if (ok) {
+      setConfirmed(true);
+    }
+  };
+
+  if (confirmed) {
+    return <SafeLink to="//payment-completed">결제하기</SafeLink>;
+  }
 
   return (
     <ModalContainer>

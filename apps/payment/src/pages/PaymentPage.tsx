@@ -1,6 +1,6 @@
 import { FlexCol, FlexRow } from '../components/styles/flex.style';
 import { Blank } from '../components/styles/product-detail/prdouctstyle.style';
-import Productinfos from '../components/paymentPage/Productinfo';
+import Productinfos from '../components/paymentPage/ProductMiniInfo';
 import PaymentMid from '../components/paymentPage/PaymentMid';
 import PaySelect from '../components/paymentPage/PaySelect';
 import PaymentFinal from '../components/paymentPage/PaymentFinal';

@@ -1,36 +1,17 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { formatNum } from '../utils/numbers';
-import { TransferProps } from '../components/modal/TransferModal';
 
 export const useTransferForm = ({
-  addAmount,
   setIsModalOpen,
-}: TransferProps) => {
+}: {
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [accountNumber, setAccountNumber] = useState('');
   const [accountHolder, setAccountHolder] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [isBusinessAccount, setIsBusinessAccount] = useState(false);
 
-  const movePage = useNavigate();
-
   const handleClose = () => {
     setIsModalOpen(false);
-  };
-
-  const handleTransfer = () => {
-    if (!isFormValid) {
-      alert('모두 입력해주세요.');
-      return;
-    }
-
-    const confirmed = confirm(
-      `${formatNum(addAmount)}원을 정말로 이체하시겠습니까??`
-    );
-
-    if (confirmed) {
-      movePage('/payment-completed');
-    }
   };
 
   const isFormValid =
@@ -46,7 +27,6 @@ export const useTransferForm = ({
     setAccountNumber,
     setAccountHolder,
     setBirthDate,
-    handleTransfer,
     setIsBusinessAccount,
     isFormValid,
     handleClose,
@@ -54,15 +34,14 @@ export const useTransferForm = ({
 };
 
 export const useCardPayForm = ({
-  addAmount,
   setIsModalOpen,
-}: TransferProps) => {
+}: {
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
   const [cardName, setCardName] = useState('');
-
-  const movePage = useNavigate();
 
   const handleClose = () => {
     setIsModalOpen(false);
@@ -73,21 +52,6 @@ export const useCardPayForm = ({
     expiryDate.trim() !== '' &&
     cvv.trim() !== '' &&
     cardName.trim() !== '';
-
-  const handleCardPay = () => {
-    if (!isFormValid) {
-      alert('모두 입력해주세요.');
-      return;
-    }
-
-    const confirmed = confirm(
-      `${formatNum(addAmount)}원을 정말로 이체하시겠습니까??`
-    );
-
-    if (confirmed) {
-      movePage('/payment-completed');
-    }
-  };
 
   return {
     cardNumber,
@@ -100,6 +64,5 @@ export const useCardPayForm = ({
     setCardName,
     isFormValid,
     handleClose,
-    handleCardPay,
   };
 };

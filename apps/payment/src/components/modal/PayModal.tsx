@@ -1,4 +1,4 @@
-import { randomPlaceholder } from '../../utils/numbers';
+import { formatNum, randomPlaceholder } from '../../utils/numbers';
 import { IoCardOutline } from 'react-icons/io5';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import {
@@ -21,6 +21,8 @@ import { BankBtn } from '../styles/modal/tansfetModal.style';
 import { FlexRowsm } from '../styles/flex.style';
 import { TransferProps } from './TransferModal';
 import { useCardPayForm } from '../../hooks/useForm';
+import { useState } from 'react';
+import { SafeLink } from '../feat/SafeLink';
 
 const PayModal = ({ addAmount, setIsModalOpen }: TransferProps) => {
   const placeholders = randomPlaceholder();
@@ -31,9 +33,27 @@ const PayModal = ({ addAmount, setIsModalOpen }: TransferProps) => {
     setCvv,
     setCardName,
     handleClose,
-    handleCardPay,
     isFormValid,
-  } = useCardPayForm({ addAmount, setIsModalOpen });
+  } = useCardPayForm({ setIsModalOpen });
+
+  const [confirmed, setConfirmed] = useState(false);
+
+  const handleCardPay = () => {
+    if (!isFormValid) {
+      alert('모두 입력해주세요.');
+      return;
+    }
+
+    const ok = confirm(`${formatNum(addAmount)}원을 정말로 이체하시겠습니까??`);
+    if (ok) {
+      setConfirmed(true);
+    }
+  };
+
+  if (confirmed) {
+    return <SafeLink to="//payment-completed">결제하기</SafeLink>;
+  }
+
   return (
     <ModalContainer>
       <Container>

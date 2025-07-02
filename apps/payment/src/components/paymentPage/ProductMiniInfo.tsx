@@ -5,11 +5,9 @@ import {
   ProductImg,
   Title,
 } from '../styles/paymentPage/Productinfo.style';
-import { useProductContext } from '../../context/ProductContext';
+import { productData } from '../productPage/ProductInfo';
 
-const Productinfos = () => {
-  const { productData } = useProductContext();
-
+const ProductMiniInfo = () => {
   return (
     <ProductInfo>
       <ProductImg
@@ -24,4 +22,4 @@ const Productinfos = () => {
   );
 };
 
-export default Productinfos;
+export default ProductMiniInfo;
