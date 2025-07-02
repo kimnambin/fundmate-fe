@@ -19,6 +19,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState<'transfer' | 'pay' | null>(null);
+  const [addressData, setAddressData] = useState('');
 
   const [checks, setChecks] = useState([false, false]);
 
@@ -44,7 +45,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
 
   return (
     <>
-      {selectedPayment && <Adress />}
+      {selectedPayment && <Adress setAddressData={setAddressData} />}
       <BoxRow className="justify-between p-5 my-7">
         <LightColor className="bg-none">최종 후원 금액</LightColor>
         <BoldText>{formatNum(addAmount)}원</BoldText>
@@ -88,10 +89,15 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
         (modalType === 'transfer' ? (
           <TransferModal
             addAmount={addAmount}
+            addressData={addressData}
             setIsModalOpen={handleCloseModal}
           />
         ) : (
-          <PayModal addAmount={addAmount} setIsModalOpen={handleCloseModal} />
+          <PayModal
+            addAmount={addAmount}
+            addressData={addressData}
+            setIsModalOpen={handleCloseModal}
+          />
         ))}
     </>
   );

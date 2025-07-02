@@ -1,4 +1,4 @@
-import { formatNum, randomPlaceholder } from '../../utils/numbers';
+import { randomPlaceholder } from '../../utils/numbers';
 import { IoCardOutline } from 'react-icons/io5';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import {
@@ -21,37 +21,24 @@ import { BankBtn } from '../styles/modal/tansfetModal.style';
 import { FlexRowsm } from '../styles/flex.style';
 import { TransferProps } from './TransferModal';
 import { useCardPayForm } from '../../hooks/useForm';
-import { useState } from 'react';
 
-const PayModal = ({ addAmount, setIsModalOpen }: TransferProps) => {
+const PayModal = ({
+  addAmount,
+  addressData,
+  setIsModalOpen,
+}: TransferProps) => {
   const placeholders = randomPlaceholder();
   const {
     cardNumber,
     setCardNumber,
     setExpiryDate,
+    cvv,
     setCvv,
     setCardName,
     handleClose,
     isFormValid,
-  } = useCardPayForm({ setIsModalOpen });
-
-  const [confirmed, setConfirmed] = useState(false);
-
-  const handleCardPay = () => {
-    if (!isFormValid) {
-      alert('모두 입력해주세요.');
-      return;
-    }
-
-    const ok = confirm(`${formatNum(addAmount)}원을 정말로 이체하시겠습니까??`);
-    if (ok) {
-      setConfirmed(true);
-    }
-  };
-
-  if (confirmed) {
-    window.location.href = '/payment-completed';
-  }
+    handleCardPay,
+  } = useCardPayForm({ addAmount, setIsModalOpen });
 
   return (
     <ModalContainer>
@@ -90,16 +77,20 @@ const PayModal = ({ addAmount, setIsModalOpen }: TransferProps) => {
             <CardInput
               key={index}
               type="text"
-              maxLength="4"
+              inputMode="numeric"
+              maxLength={4}
+              value={cardNumber[index]}
               placeholder={text}
-              required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                const newCardNumber = cardNumber + e.target.value;
-                setCardNumber(newCardNumber);
+                const onlyNums = e.target.value.replace(/\D/g, '');
+                const inputNum = [...cardNumber];
+                inputNum[index] = onlyNums.slice(0, 4);
+                setCardNumber(inputNum);
               }}
             />
           ))}
         </CardInputContainer>
+
         <ImgBox>
           <img
             src="https://img.icons8.com/color/48/visa.png"
@@ -163,15 +154,20 @@ const PayModal = ({ addAmount, setIsModalOpen }: TransferProps) => {
             <Label htmlFor="cvv">보안 코드</Label>
             <Input
               id="cvv"
-              type="text"
+              type="number"
+              inputMode="numeric"
               placeholder="3자리"
-              maxLength={3}
+              value={cvv}
               required
-              className="pr-8"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setCvv(e.target.value)
-              }
+              pattern="[0-9]*"
+              maxLength={3}
+              className="pr-8 appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const onlyNums = e.target.value.replace(/\D/g, '');
+                setCvv(onlyNums.slice(0, 3));
+              }}
             />
+
             <IoCardOutline className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 mt-2" />
           </SecBox>
         </ExpiryBox>

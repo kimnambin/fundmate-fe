@@ -12,52 +12,35 @@ import {
 } from '../styles/modal/tansfetModal.style';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { useTransferForm } from '../../hooks/useForm';
-import { useState } from 'react';
-import { formatNum } from '../../utils/numbers';
 
 export interface TransferProps {
   addAmount: number;
+  addressData?: string;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function TransferModal({
   addAmount,
+  addressData,
   setIsModalOpen,
 }: TransferProps) {
   const bankList = ['KB국민은행', '농협', '신한', 'IBK', '토스'];
 
   const {
+    selectedBank,
     accountNumber,
     accountHolder,
     birthDate,
     isBusinessAccount,
+    handleBankChange,
     setAccountNumber,
     setAccountHolder,
     setBirthDate,
     setIsBusinessAccount,
     isFormValid,
     handleClose,
-  } = useTransferForm({
-    setIsModalOpen,
-  });
-
-  const [confirmed, setConfirmed] = useState(false);
-
-  const handleTransfer = () => {
-    if (!isFormValid) {
-      alert('모두 입력해주세요.');
-      return;
-    }
-
-    const ok = confirm(`${formatNum(addAmount)}원을 정말로 이체하시겠습니까??`);
-    if (ok) {
-      setConfirmed(true);
-    }
-  };
-
-  if (confirmed) {
-    window.location.href = '/payment-completed';
-  }
+    handleTransfer,
+  } = useTransferForm({ addAmount, setIsModalOpen });
 
   return (
     <ModalContainer>
@@ -68,21 +51,33 @@ export default function TransferModal({
         </BankBox>
 
         <Label>결제 은행</Label>
-        <select className="w-full border rounded-md p-2 mb-4">
+        <select
+          className="w-full border rounded-md p-2 mb-4"
+          onChange={handleBankChange}
+          value={selectedBank}
+        >
+          <option value="">은행을 선택하세요</option>
           {bankList.map((v, i) => (
-            <option key={i}>{v}</option>
+            <option key={i} value={v}>
+              {v}
+            </option>
           ))}
         </select>
 
         <Label>계좌번호</Label>
         <Input
-          type="text"
           placeholder="공백, - 없이 입력해주세요."
-          maxLength={12}
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          required
+          className="appearance-none [&::-webkit-inner-spin-button]:appearance-none 
+  [&::-webkit-outer-spin-button]:appearance-none"
           value={accountNumber}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setAccountNumber(e.target.value)
-          }
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const onlyNums = e.target.value.replace(/\D/g, '');
+            setAccountNumber(onlyNums.slice(0, 12));
+          }}
         />
 
         <EtxDiv>
@@ -114,10 +109,16 @@ export default function TransferModal({
             <input
               type="text"
               placeholder="예) 920101"
-              className="w-full border rounded-md p-2"
+              className="w-full border rounded-md p-2 appearance-none [&::-webkit-inner-spin-button]:appearance-none 
+              [&::-webkit-outer-spin-button]:appearance-none"
+              inputMode="numeric"
+              pattern="[0-9]*"
               maxLength={6}
               value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value)}
+              onChange={(e) => {
+                const onlyNums = e.target.value.replace(/\D/g, '');
+                setBirthDate(onlyNums.slice(0, 6));
+              }}
             />
           </div>
         </BottomWrapper>

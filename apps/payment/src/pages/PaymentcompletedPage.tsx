@@ -8,7 +8,7 @@ import { SafeLink } from '../components/feat/SafeLink';
 
 const PaymentcompletedPage = () => {
   return (
-    <Container className="mx-auto items-start">
+    <Container className="mt-[20%] items-start">
       <FlexColsm>
         <BoldBigText className="text-main">축하합니다. 12번째</BoldBigText>
         <BoldBigText>공식 후원자가 되셨습니다!</BoldBigText>

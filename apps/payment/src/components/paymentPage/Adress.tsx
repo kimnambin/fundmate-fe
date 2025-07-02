@@ -4,7 +4,11 @@ import { BoldBigText } from '../styles/text.style';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { InputText } from '../styles/paymentPage/Adress.style';
 
-const Adress = () => {
+const Adress = ({
+  setAddressData,
+}: {
+  setAddressData: (address: string) => void;
+}) => {
   const [postalCode, setPostalCode] = useState('');
   const [address, setAddress] = useState('');
   const [detailedAddress, setDetailedAddress] = useState('');
@@ -15,12 +19,14 @@ const Adress = () => {
         setPostalCode(data.zonecode);
         setAddress(data.address);
         setDetailedAddress('');
+        setAddressData(data.address + detailedAddress);
       },
     }).open();
   };
 
   const handleDetailed = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDetailedAddress(e.target.value);
+    setAddressData(address + e.target.value);
   };
 
   return (
