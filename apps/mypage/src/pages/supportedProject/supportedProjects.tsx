@@ -1,5 +1,5 @@
-import { Header } from "../../../../packages/ui/components/Header";
-import Sidebar from "../components/common/Sidebar";
+import { Header } from "../../../../../packages/ui/components/Header";
+import Sidebar from "../../components/common/Sidebar";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

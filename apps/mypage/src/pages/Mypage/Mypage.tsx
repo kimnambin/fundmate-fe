@@ -1,7 +1,7 @@
 // Header/Footer가 named export일 경우
-import { Header } from "../../../../packages/ui/components/Header";
-import Sidebar from "../components/common/Sidebar"; // ← 추가
-import UserSummary from "../components/UserSummary/UserSummary";
+import { Header } from "../../../../../packages/ui/components/Header";
+import Sidebar from "../../components/common/Sidebar"; // ← 추가
+import UserSummary from "./UserSummary/UserSummary";
 
 function App() {
   return (
