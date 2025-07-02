@@ -10,7 +10,7 @@ export default defineConfig({
       name: 'admin',
       filename: 'remoteEntry.js',
       exposes: {
-        './Button': './src/components/ExampleButton.tsx',
+        './Button': './src/components/temp/ExampleButton.tsx',
       },
       shared: ['react', 'react-dom'],
     }),

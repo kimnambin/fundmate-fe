@@ -1,12 +1,13 @@
-import { Header } from '@repo/ui/Header';
-import { Footer } from '@repo/ui/Footer';
+import { Footer } from '@repo/ui/components';
 import { MainContainer } from '../components/mainPage/MainContainer';
+import { Layout } from '../styles/Layout.style';
 
 export const Main = () => {
   return (
     <>
-      <Header />
-      <MainContainer />
+      <Layout>
+        <MainContainer />
+      </Layout>
       <Footer />
     </>
   );

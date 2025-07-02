@@ -1,5 +1,4 @@
-import { Header } from '@repo/ui/Header';
-import { Footer } from '@repo/ui/Footer';
+import { Header, Footer } from '@repo/ui/components';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import CreateFunding from './pages/createFunding/createFunding';

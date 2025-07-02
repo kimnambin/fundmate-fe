@@ -1,4 +1,4 @@
-import { VerticalCard } from '@repo/ui/mainPage/VerticalCard';
+import { VerticalCard } from '@repo/ui/components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 
