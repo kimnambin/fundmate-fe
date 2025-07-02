@@ -22,7 +22,6 @@ import { FlexRowsm } from '../styles/flex.style';
 import { TransferProps } from './TransferModal';
 import { useCardPayForm } from '../../hooks/useForm';
 import { useState } from 'react';
-import { SafeLink } from '../feat/SafeLink';
 
 const PayModal = ({ addAmount, setIsModalOpen }: TransferProps) => {
   const placeholders = randomPlaceholder();
@@ -51,7 +50,7 @@ const PayModal = ({ addAmount, setIsModalOpen }: TransferProps) => {
   };
 
   if (confirmed) {
-    return <SafeLink to="//payment-completed">결제하기</SafeLink>;
+    window.location.href = '/payment-completed';
   }
 
   return (

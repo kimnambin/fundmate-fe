@@ -12,7 +12,7 @@ const PaymentPage = () => {
   const [addAmount, setAddAmount] = useState<number>(1000);
 
   return (
-    <FlexRow className="items-start justify-between">
+    <FlexRow className="items-start justify-between px-[120px]">
       <FlexCol className="w-[55%] items-start gap-4">
         <Productinfos />
         <PaymentMid subText={subText} setAddAmount={setAddAmount} />

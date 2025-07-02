@@ -14,7 +14,6 @@ import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { useTransferForm } from '../../hooks/useForm';
 import { useState } from 'react';
 import { formatNum } from '../../utils/numbers';
-import { SafeLink } from '../feat/SafeLink';
 
 export interface TransferProps {
   addAmount: number;
@@ -35,7 +34,6 @@ export default function TransferModal({
     setAccountNumber,
     setAccountHolder,
     setBirthDate,
-
     setIsBusinessAccount,
     isFormValid,
     handleClose,
@@ -58,7 +56,7 @@ export default function TransferModal({
   };
 
   if (confirmed) {
-    return <SafeLink to="//payment-completed">결제하기</SafeLink>;
+    window.location.href = '/payment-completed';
   }
 
   return (

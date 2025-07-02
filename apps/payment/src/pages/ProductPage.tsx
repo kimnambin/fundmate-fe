@@ -5,7 +5,7 @@ import { FlexCol, FlexItem, FlexRow } from '../components/styles/flex.style';
 
 function ProductPage() {
   return (
-    <FlexCol>
+    <FlexCol className="px-[120px]">
       <FlexRow className="items-start">
         <FlexItem>
           <ProductImg />

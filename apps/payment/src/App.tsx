@@ -8,7 +8,6 @@ const PaymentPage = lazy(() => import('./pages/PaymentPage'));
 const PaymentcompletedPage = lazy(() => import('./pages/PaymentcompletedPage'));
 const PaymentDetail = lazy(() => import('./pages/PaymentDetail'));
 const PaymentListPage = lazy(() => import('./pages/PaymentListPage'));
-// const ProductInfo = lazy(() => import('./components/productPage/ProductInfo'));
 
 function App() {
   return (
@@ -25,9 +24,7 @@ function App() {
               element={<PaymentcompletedPage />}
             />
             <Route path="/payment-detail" element={<PaymentDetail />} />{' '}
-            {/* 잘됨 */}
             <Route path="/payment-list" element={<PaymentListPage />} />{' '}
-            {/* 잘됨 */}
           </Routes>
         </Suspense>
       </Container>
