@@ -1,3 +1,4 @@
+import { MediumFont } from '../../style/typography';
 import { Price, Wrapper } from './addedItem.styles';
 import { IoClose } from 'react-icons/io5';
 
@@ -16,9 +17,11 @@ const AddedItem = ({ price, title, content, onRemove }: Props) => {
           <Price>{price}</Price>
           <IoClose size={20} className="cursor-pointer" onClick={onRemove} />
         </div>
-        <p>{title}</p>
+        <MediumFont>{title}</MediumFont>
       </div>
-      <p className="text-sub-text whitespace-pre-line">{content}</p>
+      <MediumFont className="text-sub-text whitespace-pre-line">
+        {content}
+      </MediumFont>
     </Wrapper>
   );
 };

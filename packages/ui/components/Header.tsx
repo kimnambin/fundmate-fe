@@ -84,7 +84,7 @@ export const Header = () => {
             <span className="font-semibold">카테고리</span>
             <CateogoryContainer $isOpen={isOpen}>
               {Object.entries(CategoryIcons).map(
-                ([name, { src, menuName }]) => (
+                ([name, { src, menuName }], _i) => (
                   <Link
                     to={`/search?category=${menuName}`}
                     key={name}

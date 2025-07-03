@@ -17,7 +17,7 @@ export default defineConfig({
         './PaymentDetail': './src/pages/PaymentDetail.tsx',
         './PaymentListPage': './src/pages/PaymentListPage.tsx',
       },
-      shared: ['react', 'react-dom'],
+      shared: ['react', 'react-dom', 'react-router-dom'],
     }),
     // tailwindcss(),
   ],

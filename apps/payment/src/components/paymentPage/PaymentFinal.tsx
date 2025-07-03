@@ -22,7 +22,6 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   const [addressData, setAddressData] = useState('');
 
   const [checks, setChecks] = useState([false, false]);
-  const isDisabled = !modalType || !checks.every(Boolean);
 
   const handleCheck = (index: number) => {
     const newChecks = [...checks];
@@ -79,8 +78,8 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
         </Radio>
       </BoxCol>
       <BaseButton
-        className={`ml-0 mt-4 ${isDisabled ? 'bg-gray-400' : 'bg-main'}`}
-        disabled={modalType || !checks[0] || !checks[1]}
+        className={`ml-0 mt-4 ${!addressData || modalType || !checks[0] || !checks[1] ? 'bg-gray-400' : 'ml-0 mt-4'}`}
+        disabled={!addressData || modalType || !checks[0] || !checks[1]}
         onClick={handleBtn}
       >
         후원하기

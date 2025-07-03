@@ -14,8 +14,10 @@ export default defineConfig({
       },
       exposes: {
         './CreateFundingPage': './src/pages/createFunding/createFunding.tsx',
+        './AskFundiPage': './src/pages/askFundi/askFundi.tsx',
+        './AskFundiResultPage': './src/pages/askFundi/askFundiResult.tsx',
       },
-      shared: ['react', 'react-dom'],
+      shared: ['react', 'react-dom', 'react-router-dom'],
     }),
   ],
   build: {

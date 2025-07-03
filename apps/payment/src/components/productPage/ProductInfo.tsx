@@ -14,7 +14,8 @@ import {
   Wrapper,
 } from '../styles/product-detail/productInfo.style';
 import { useState } from 'react';
-import { SafeLink } from '../feat/SafeLink';
+import { Link } from 'react-router-dom';
+import useQueryString from '../../hooks/useQueryString';
 
 // TODO : 화면 구상용 더미 데이터
 
@@ -38,6 +39,8 @@ export const productPaymentData: ProductDataProps = {
 
 const ProductInfo = () => {
   const [click, setClick] = useState<boolean>(false);
+
+  useQueryString(productData.title);
 
   const copyClip = () => {
     const currentUrl = window.location.href;
@@ -91,12 +94,9 @@ const ProductInfo = () => {
               <IoShareSocialOutline className="w-8 h-8" />
             </IconButton>
           </IconGroup>
-          {/* <Link to="/payment" className="w-full">
+          <Link to={`/payment?title=${productData.title}`} className="w-full">
             <BaseButton>후원하기</BaseButton>
-          </Link> */}
-          <SafeLink to="/payment" className="w-full">
-            <BaseButton>후원하기</BaseButton>
-          </SafeLink>
+          </Link>
         </IconBox>
       </Bottom>
     </Wrapper>

@@ -4,20 +4,22 @@ import {
   FlexRowsm,
 } from '../components/styles/flex.style';
 import { BaseText, BoldBigText } from '../components/styles/text.style';
-import { SafeLink } from '../components/feat/SafeLink';
+import { Link } from 'react-router-dom';
+import { useGetQueryString } from '../hooks/useGetQueryString';
 
 const PaymentcompletedPage = () => {
+  const url = useGetQueryString();
   return (
-    <Container className="mt-[20%] items-start">
+    <Container className="mt-[10%] items-start">
       <FlexColsm>
         <BoldBigText className="text-main">축하합니다. 12번째</BoldBigText>
         <BoldBigText>공식 후원자가 되셨습니다!</BoldBigText>
         <FlexRowsm>
           <BaseText className="mt-6">
             * 후원 내역 변경은{' '}
-            <SafeLink to="/payment-list" className="text-main underline">
+            <Link to={`/payment-detail/${url}`} className="text-main underline">
               후원상세
-            </SafeLink>
+            </Link>
             에서 하실 수 있습니다.
           </BaseText>
         </FlexRowsm>

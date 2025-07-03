@@ -38,7 +38,7 @@ const PayModal = ({
     handleClose,
     isFormValid,
     handleCardPay,
-  } = useCardPayForm({ addAmount, setIsModalOpen });
+  } = useCardPayForm({ addAmount, addressData, setIsModalOpen });
 
   return (
     <ModalContainer>

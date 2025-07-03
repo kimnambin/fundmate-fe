@@ -1,5 +1,5 @@
-import PaymentListData from '../components/payment-detail/PaymentListData';
-import PaymentListTop from '../components/payment-detail/PaymentListTop';
+import PaymentListData from '../components/payment-list/PaymentListData';
+import PaymentListTop from '../components/payment-list/PaymentListTop';
 import { FlexCol } from '../components/styles/flex.style';
 
 const PaymentListPage = () => {

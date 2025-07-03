@@ -1,4 +1,5 @@
 import { Header } from '@repo/ui/components';
+import { Loading } from '@repo/ui/components';
 import { Container } from './components/styles/flex.style';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -14,7 +15,7 @@ function App() {
     <>
       <Header />
       <Container>
-        <Suspense fallback={<>로딩 중...</>}>
+        <Suspense fallback={<Loading />}>
           <Routes>
             {/* TODO : 카테고리/상품ID 로 넣어도 좋을듯 */}
             <Route path="/product" element={<ProductPage />} />

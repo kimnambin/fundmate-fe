@@ -35,7 +35,7 @@ export default function TransferModal({
     isFormValid,
     handleClose,
     handleTransfer,
-  } = useTransferForm({ addAmount, setIsModalOpen });
+  } = useTransferForm({ addAmount, addressData, setIsModalOpen });
 
   return (
     <ModalContainer>
