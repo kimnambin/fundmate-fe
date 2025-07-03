@@ -5,6 +5,8 @@ import LikedProjects from './pages/likedProjects/LikedProjects';
 import Following from './pages/Following/Following'; 
 import UserProfileSettings from './pages/UserProfileSettings/UserProfileSettings'; 
 import Withdrawal from './pages/withdrawal/withdrawal'; 
+import MyReviews from './pages/MyReviews/MyReviews'; 
+import SupporterProfile from './pages/SupporterProfile/SupporterProfile'; 
 
 const App = () => (
   <BrowserRouter>
@@ -15,8 +17,10 @@ const App = () => (
       <Route path="/following" element={<Following />} /> 
       <Route path="/userprofilesettings" element={<UserProfileSettings />} /> 
       <Route path="/withdrawal" element={<Withdrawal />} /> 
+      <Route path="/myreviews" element={<MyReviews />} /> 
+      <Route path="/supporterprofile" element={<SupporterProfile />} /> 
     </Routes>
   </BrowserRouter>
 );
 
-export default App;
+export default App; 

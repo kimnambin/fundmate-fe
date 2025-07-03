@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import userImg from "../../assets/images/user.png";
 
-
 const Sidebar = () => {
+  const navigate = useNavigate();
+
   return (
     <aside className="absolute left-[100px] top-[180px] w-[350px] bg-white rounded-[10px] flex flex-col items-center py-[40px] px-[25px] gap-[40px]">
       {/* 유저 프로필 */}
@@ -14,7 +16,10 @@ const Sidebar = () => {
           <p className="text-[15px] text-[#7E7C7C]">abc@email.com</p>
           <p className="text-[15px] text-black">한줄 소개</p>
         </div>
-        <button className="w-full h-[50px] bg-[#5FBDFF] text-white text-[18px] font-medium rounded-[6px]">
+        <button
+          className="w-full h-[50px] bg-[#5FBDFF] text-white text-[18px] font-medium rounded-[6px]"
+          onClick={() => navigate("/userprofilesettings")}
+        >
           내 정보 설정
         </button>
       </div>
@@ -23,17 +28,30 @@ const Sidebar = () => {
       <div className="w-full flex flex-col gap-[14px]">
         <p className="text-[15px] text-[#999999] font-semibold">나의 활동 (서포터)</p>
         <div className="flex flex-col gap-[10px]">
-          {["후원한 프로젝트", "찜한 프로젝트", "팔로잉", "내 후기"].map((label, idx) => (
-            <button
-              key={idx}
-              className="text-left text-[20px] text-black font-medium pl-[10px] hover:text-[#5FBDFF] transition-colors"
-              onClick={() => {
-                // 추후 해당 페이지로 이동 로직 추가 예정
-              }}
-            >
-              {label}
-            </button>
-          ))}
+          <button
+            className="text-left text-[20px] text-black font-medium pl-[10px] hover:text-[#5FBDFF] transition-colors"
+            onClick={() => navigate("/supported-projects")}
+          >
+            후원한 프로젝트
+          </button>
+          <button
+            className="text-left text-[20px] text-black font-medium pl-[10px] hover:text-[#5FBDFF] transition-colors"
+            onClick={() => navigate("/liked-projects")}
+          >
+            찜한 프로젝트
+          </button>
+          <button
+            className="text-left text-[20px] text-black font-medium pl-[10px] hover:text-[#5FBDFF] transition-colors"
+            onClick={() => navigate("/following")}
+          >
+            팔로잉
+          </button>
+          <button
+            className="text-left text-[20px] text-black font-medium pl-[10px] hover:text-[#5FBDFF] transition-colors"
+            onClick={() => navigate("/myreviews")}
+          >
+            내 후기
+          </button>
         </div>
       </div>
 
@@ -46,7 +64,7 @@ const Sidebar = () => {
               key={idx}
               className="text-left text-[20px] text-black font-medium pl-[10px] hover:text-[#5FBDFF] transition-colors"
               onClick={() => {
-                // 추후 해당 페이지로 이동 로직 추가 예정
+                // 메이커 마이페이지 작업 시작 시 경로 연결 예정
               }}
             >
               {label}

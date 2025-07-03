@@ -21,7 +21,7 @@ const Withdrawal = () => {
       <main className="flex flex-col justify-center items-center flex-grow">
 
         {/* 컨텐츠 박스 */}
-        <div className="flex flex-col justify-center items-center w-[430px] p-6 gap-6 bg-white rounded-md">
+        <div className="flex flex-col justify-center ml-[-40px] items-center w-[430px] p-6 gap-6 bg-white rounded-md mb-[50px]">
 
           {/* 로고 */}
           <img

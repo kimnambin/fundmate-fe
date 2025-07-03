@@ -1,5 +1,6 @@
 import { useState, useRef, ChangeEvent } from "react";
 import { Header } from "../../../../../packages/ui/components/Header";
+import { useNavigate } from "react-router-dom";
 
 const UserProfileSetting = () => {
   const [nickname, setNickname] = useState("");
@@ -10,6 +11,7 @@ const UserProfileSetting = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | null>(null);
 
+  const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const categories = [
@@ -27,13 +29,7 @@ const UserProfileSetting = () => {
   };
 
   const handleCancel = () => {
-    setNickname("");
-    setGender("");
-    setAge("");
-    setEmail("");
-    setIntro("");
-    setSelectedCategory(null);
-    setProfileImage(null);
+    navigate("/");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -220,17 +216,7 @@ const UserProfileSetting = () => {
           <button
             type="button"
             className="mt-4 w-[506px] h-[40px] flex justify-center items-center rounded-md text-[16px] mb-[100px] font-medium underline text-[#7E7C7C]"
-            onClick={() => {
-              const confirmDelete = window.confirm(
-                "⚠️ 정말 회원 탈퇴하시겠습니까?"
-              );
-              if (confirmDelete) {
-                // TODO: 회원탈퇴 API 연동 및 로그아웃/리다이렉트 처리
-                console.log("회원탈퇴 진행");
-              } else {
-                console.log("회원탈퇴 취소");
-              }
-            }}
+            onClick={() => navigate("/withdrawal")}
           >
             회원탈퇴
           </button>
