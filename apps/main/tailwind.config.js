@@ -25,7 +25,12 @@ module.exports = {
       fontFamily: {
         sans: ['Pretendard'],
       },
+      containers: {
+        '2xs': '16rem'
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/container-queries')
+  ],
 };
