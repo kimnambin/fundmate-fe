@@ -1,10 +1,26 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi"
+import type { DropdownProps } from "./Dropdown";
+import { useSearchParams } from "react-router-dom";
 
-export const CompleteDropdown = () => {
+export const CompleteDropdown = ({ query }: DropdownProps) => {
   const complete = ['75% 이상', '75% ~ 100%', '100% 이상'];
   const [title, setTitle] = useState('달성률');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setTitle('달성률');
+  }, [query])
+
+  const handleQueryChange = (i: string, v: string) => {
+    const currentQuery = new URLSearchParams(searchParams);
+    currentQuery.set('complete', i);
+    setSearchParams(currentQuery)
+    setTitle(v)
+  }
+
+  //complete의 쿼리값에 따라서 데이터 정렬 필요
 
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -23,14 +39,14 @@ export const CompleteDropdown = () => {
           {
             complete.map((v, i) => (
               <MenuItem>
-                <button
-                  type="button"
+                <div
+                  role="button"
                   key={i}
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
-                  onClick={() => setTitle(v)}
+                  onClick={() => handleQueryChange(i.toString(), v)}
                 >
                   {v}
-                </button>
+                </div>
               </MenuItem>
             ))
           }

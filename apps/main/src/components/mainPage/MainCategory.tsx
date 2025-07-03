@@ -7,8 +7,8 @@ export const MainCategory = () => {
   return (
     <MainCategoryContainer>
       {
-        Object.entries(mainPageCategoryIcons).map(([name, { src, menuName }], i) => (
-          <SingleCategory key={name} id={i} imgPath={src} name={menuName} location='main' />
+        Object.entries(mainPageCategoryIcons).map(([name, { src, menuName }]) => (
+          <SingleCategory key={name} imgPath={src} name={menuName} location='main' />
         ))
       }
     </MainCategoryContainer>

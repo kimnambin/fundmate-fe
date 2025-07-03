@@ -1,6 +1,5 @@
-import { Wrapper } from '../styles/Loading.style';
 import { FundiIcon } from '../assets';
-
+import { Wrapper } from '../styles/Loading.style';
 export const Loading = () => {
   return (
     <Wrapper>

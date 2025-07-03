@@ -1,3 +1,6 @@
+import FundiIcon from "../assets/icons/ic_fundi.png";
+export { FundiIcon }
+
 type assetsProps = {
   src: string;
   menuName: string;
@@ -51,4 +54,3 @@ export const CategoryIcons: Record<string, assetsProps> = Object.fromEntries(
     }),
 );
 
-export { default as FundiIcon } from './icons/ic_fundi.svg';
