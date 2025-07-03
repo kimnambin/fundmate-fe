@@ -32,7 +32,6 @@ export const SignUpComponent = () => {
     register,
     handleSubmit,
     getValues,
-    setError,
     trigger,
     formState: { errors, isValid } } = useForm<SignUpProps>({
       resolver: yupResolver(schema),
@@ -162,7 +161,7 @@ export const SignUpComponent = () => {
               <SignUpSubTitle>카테고리 선택</SignUpSubTitle>
               <div className="grid grid-cols-4 gap-3">
                 {
-                  Object.entries(categories).map(([_name, { menuName, src }], i) => (
+                  Object.entries(categories).map(([_name, { menuName }], i) => (
                     <UserCategoryButton type="button" key={i + 1} $selected={userCategory === i + 1} onClick={() => setUserCategory(i + 1)}>
                       <span>{menuName}</span>
                     </UserCategoryButton>
