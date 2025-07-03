@@ -24,7 +24,7 @@ export const SearchHeader = ({ isCategory, isSearch, queryValue }: SearchHeaderP
       </div>
       <div className="flex flex-row justify-between">
         <div>
-          <span className="text-cyan-400 font-semibold">10000</span>
+          <span className="text-[#26AAFF] font-semibold">10000</span>
           <span>개의 오브젝트가 있습니다.</span>
         </div>
         {

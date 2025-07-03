@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { CategoryImage, CategoryText, SingleCategoryContainer } from "../../styles/Category/SingleCategory.style";
 
 interface SingleCategoryProps {
@@ -9,10 +10,12 @@ interface SingleCategoryProps {
 
 export const SingleCategory = ({ id, imgPath, name, location }: SingleCategoryProps) => {
   return (
-    <SingleCategoryContainer id={id.toString()}>
-      <CategoryImage src={imgPath} $location={location} />
-      <CategoryText>{name}</CategoryText>
-    </SingleCategoryContainer>
+    <Link to={`/search?category=${name}`}>
+      <SingleCategoryContainer key={id.toString()}>
+        <CategoryImage src={imgPath} $location={location} />
+        <CategoryText>{name}</CategoryText>
+      </SingleCategoryContainer>
+    </Link>
 
   )
 }
