@@ -2,6 +2,16 @@ import { useState, useRef, ChangeEvent } from "react";
 import { Header } from "../../../../../packages/ui/components/Header";
 import { useNavigate } from "react-router-dom";
 
+const categories = [
+  "예술", "의류", "디자인", "테크/가전",
+  "게임", "홈/리빙", "향수/뷰티", "잡화"
+];
+
+const ageOptions = [
+  "10대", "20대", "30대", "40대", "50대",
+  "60대", "70대", "80대", "90대", "100대"
+];
+
 const UserProfileSetting = () => {
   const [nickname, setNickname] = useState("");
   const [gender, setGender] = useState("");
@@ -13,16 +23,6 @@ const UserProfileSetting = () => {
 
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const categories = [
-    "예술", "의류", "디자인", "테크/가전",
-    "게임", "홈/리빙", "향수/뷰티", "잡화"
-  ];
-
-  const ageOptions = [
-    "10대", "20대", "30대", "40대", "50대",
-    "60대", "70대", "80대", "90대", "100대"
-  ];
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(prev => (prev === category ? null : category));

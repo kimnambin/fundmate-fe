@@ -2,18 +2,7 @@ import { Header } from "../../../../../packages/ui/components/Header";
 import Sidebar from "../../components/common/Sidebar";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-// 후원한 프로젝트 타입 정의
-interface SupportedProject {
-  id: number;
-  supportDate: string;
-  supportNumber: string;
-  title: string;
-  option: string;
-  price: string;
-  paymentDate: string;
-  thumbnailUrl: string; // 썸네일 URL 추가
-}
+import type { SupportedProject } from "../../api/supportedProjects"; 
 
 const SupportedProjects = () => {
   const navigate = useNavigate();
@@ -33,7 +22,7 @@ const SupportedProjects = () => {
       option: "옵션 1",
       price: "1,556,900원",
       paymentDate: "2025.06.25 결제 예정",
-      thumbnailUrl: "https://picsum.photos/300/300", // 임시 썸네일
+      thumbnailUrl: "https://picsum.photos/300/300",
     },
     {
       id: 2,
@@ -43,7 +32,7 @@ const SupportedProjects = () => {
       option: "옵션 2",
       price: "99,000원",
       paymentDate: "2025.06.25 결제 예정",
-      thumbnailUrl: "https://picsum.photos/300/300", // 임시 썸네일
+      thumbnailUrl: "https://picsum.photos/300/300",
     },
   ];
 
@@ -65,8 +54,8 @@ const SupportedProjects = () => {
             {sampleData.map((project) => (
               <div
                 key={project.id}
-                onClick={() => navigate(`/supported-projects/${project.id}`)} // 상세 페이지로 이동
-                className="cursor-pointer flex flex-row items-center mr-[00px] p-[15px] pr-[20px] border border-[#E2E8F0] rounded-[6px] w-[440px] h-[160px] hover:shadow-md transition"
+                onClick={() => navigate(`/supported-projects/${project.id}`)}
+                className="cursor-pointer flex flex-row items-center p-[15px] pr-[20px] border border-[#E2E8F0] rounded-[6px] w-[440px] h-[160px] hover:shadow-md transition"
               >
                 {/* 썸네일 */}
                 <img

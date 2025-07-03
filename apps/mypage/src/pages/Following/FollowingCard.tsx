@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 interface FollowingCardProps {
-  id: number;
   name: string; // 닉네임
   initial: string;
   isFollowing: boolean;

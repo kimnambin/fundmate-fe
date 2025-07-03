@@ -1,10 +1,10 @@
 import tw from "tailwind-styled-components";
 
-interface CateogoryContainerProps {
+interface CategoryContainerProps {
   isOpen: boolean;
 }
 
-export const CateogoryContainer = tw.div<CateogoryContainerProps>`
+export const CateogoryContainer = tw.div<CategoryContainerProps>`
   ${p => p.$isOpen ? 'visible' : 'invisible'}
   absolute
   top-full

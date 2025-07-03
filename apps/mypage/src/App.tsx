@@ -15,10 +15,10 @@ const App = () => (
       <Route path="/supported-projects" element={<SupportedProjects />} />
       <Route path="/liked-projects" element={<LikedProjects />} /> 
       <Route path="/following" element={<Following />} /> 
-      <Route path="/userprofilesettings" element={<UserProfileSettings />} /> 
+      <Route path="/userprofile-settings" element={<UserProfileSettings />} /> 
       <Route path="/withdrawal" element={<Withdrawal />} /> 
       <Route path="/myreviews" element={<MyReviews />} /> 
-      <Route path="/supporterprofile" element={<SupporterProfile />} /> 
+      <Route path="/supporter-profile" element={<SupporterProfile />} /> 
     </Routes>
   </BrowserRouter>
 );

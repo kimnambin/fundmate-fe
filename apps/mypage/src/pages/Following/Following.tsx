@@ -82,7 +82,6 @@ const Following = () => {
               {currentList.map((user) => (
                 <FollowingCard
                   key={user.id}
-                  id={user.id}
                   name={user.name}
                   initial={user.initial}
                   isFollowing={user.isFollowing}

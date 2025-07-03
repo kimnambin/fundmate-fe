@@ -18,7 +18,7 @@ const Sidebar = () => {
         </div>
         <button
           className="w-full h-[50px] bg-[#5FBDFF] text-white text-[18px] font-medium rounded-[6px]"
-          onClick={() => navigate("/userprofilesettings")}
+          onClick={() => navigate("/userprofile-settings")}
         >
           내 정보 설정
         </button>

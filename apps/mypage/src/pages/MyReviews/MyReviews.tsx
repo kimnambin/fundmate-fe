@@ -64,7 +64,6 @@ const MyReviews = () => {
               {reviews.map((item) => (
                 <ReviewListItem
                   key={item.id}
-                  id={item.id}
                   productName={item.productName}
                   review={item.review}
                   imageUrl={item.imageUrl}

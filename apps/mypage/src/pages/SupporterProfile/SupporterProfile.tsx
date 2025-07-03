@@ -14,10 +14,9 @@ interface Supporter {
 const SupporterProfile = () => {
   const [supporter, setSupporter] = useState<Supporter | null>(null);
 
-  
   useEffect(() => {
     // 예시 mock 데이터
-    const fetchData = async () => {
+    const fetchData = () => {
       const mockData: Supporter = {
         nickname: '서포터1',
         following: 5,

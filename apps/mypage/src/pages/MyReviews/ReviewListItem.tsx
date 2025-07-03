@@ -3,7 +3,6 @@
 import React from 'react';
 
 interface ReviewListItemProps {
-  id: number;
   productName: string;
   review: string;
   imageUrl: string;

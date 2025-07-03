@@ -1,10 +1,8 @@
-// LikedProjects.tsx
 import { useEffect, useState } from 'react';
 import Sidebar from "../../components/common/Sidebar";
 import { VerticalCard } from "./VerticalCard";
 import { Header } from "../../../../../packages/ui/components/Header";
-// import { getLikedProjects } from "../api/getLikedProjects";
-// import type { Project } from "../api/getLikedProjects";
+import type { Project } from "../../api/getLikedProjects"; 
 
 interface Project { // 임시 타입
   id: number;
