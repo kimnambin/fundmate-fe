@@ -69,9 +69,6 @@ export const SignUpComponent = () => {
     }
   }
 
-  console.log(getValues('verificationCode'))
-  console.log(errors.verificationCode?.message)
-
   return (
     <UserLayout>
       <UserContainer>
