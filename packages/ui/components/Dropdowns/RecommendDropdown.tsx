@@ -1,11 +1,25 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi"
+import { DropdownProps } from "./Dropdown";
+import { useSearchParams } from "react-router-dom";
 
-export const RecommendDropdown = () => {
-  const [title, setTitle] = useState('추천순');
-
+export const RecommendDropdown = ({ query }: DropdownProps) => {
+  const [title, setTitle] = useState('정렬');
   const recommend = ['추천순', '인기순', '최신순', '마감임박순'];
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setTitle('정렬')
+  }, [query]);
+
+  const handleQueryChange = (i: string, v: string) => {
+    const currentQuery = new URLSearchParams(searchParams);
+    currentQuery.set('recommend', i);
+    setSearchParams(currentQuery);
+    setTitle(v);
+  }
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -23,14 +37,14 @@ export const RecommendDropdown = () => {
           {
             recommend.map((v, i) => (
               <MenuItem>
-                <button
-                  type="button"
+                <div
+                  role="button"
                   key={i}
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
-                  onClick={() => setTitle(v)}
+                  onClick={() => handleQueryChange(i.toString(), v)}
                 >
                   {v}
-                </button>
+                </div>
               </MenuItem>
             ))
           }
