@@ -12,12 +12,7 @@ import {
 } from '../styles/modal/tansfetModal.style';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { useTransferForm } from '../../hooks/useForm';
-
-export interface TransferProps {
-  addAmount: number;
-  addressData?: string;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { TransferProps } from '../../types/modal.model';
 
 export default function TransferModal({
   addAmount,

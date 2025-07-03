@@ -19,8 +19,8 @@ import {
 import { monthList, yearList } from '../../utils/date';
 import { BankBtn } from '../styles/modal/tansfetModal.style';
 import { FlexRowsm } from '../styles/flex.style';
-import { TransferProps } from './TransferModal';
 import { useCardPayForm } from '../../hooks/useForm';
+import { TransferProps } from '../../types/modal.model';
 
 const PayModal = ({
   addAmount,

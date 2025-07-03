@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { formatNum } from '../utils/numbers';
-import { TransferProps } from '../components/modal/TransferModal';
 import axios from 'axios';
 import { coverSec } from '../utils/security';
+import { TransferProps } from '../types/modal.model';
 
 export const useTransferForm = ({
   addAmount,
@@ -13,7 +13,6 @@ export const useTransferForm = ({
   const [accountHolder, setAccountHolder] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [isBusinessAccount, setIsBusinessAccount] = useState(false);
-  const [confirmed] = useState(false);
   const [, setIsLoading] = useState(false);
 
   const handleBankChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -58,10 +57,6 @@ export const useTransferForm = ({
     }
   };
 
-  if (confirmed) {
-    window.location.href = '/payment-completed';
-  }
-
   return {
     selectedBank,
     accountNumber,
@@ -87,7 +82,6 @@ export const useCardPayForm = ({
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
   const [cardName, setCardName] = useState('');
-  const [confirmed] = useState(false);
   const [, setIsLoading] = useState(false);
 
   const handleClose = () => {
@@ -130,10 +124,6 @@ export const useCardPayForm = ({
       setIsLoading(false);
     }
   };
-
-  if (confirmed) {
-    window.location.href = '/payment-completed';
-  }
 
   return {
     cardNumber,

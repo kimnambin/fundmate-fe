@@ -19,14 +19,15 @@ const Adress = ({
         setPostalCode(data.zonecode);
         setAddress(data.address);
         setDetailedAddress('');
-        setAddressData(data.address + detailedAddress);
+        setAddressData(data.address);
       },
     }).open();
   };
 
   const handleDetailed = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDetailedAddress(e.target.value);
-    setAddressData(address + e.target.value);
+    const detail = e.target.value;
+    setDetailedAddress(detail);
+    setAddressData(address + ' ' + detail);
   };
 
   return (
