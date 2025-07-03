@@ -16,7 +16,6 @@ import {
 import Modal from '../../components/modal/modal';
 import { IoClose } from 'react-icons/io5';
 import { FiCopy, FiCheck } from 'react-icons/fi';
-import FundiIcon from '../../assets/icons/ic_fundi.svg';
 import { MediumFont, Title, WarningText } from '../../style/typography';
 import { Layout } from '../../style/layout';
 
@@ -166,7 +165,7 @@ function CreateFunding() {
               <div className="flex flex-col gap-[10px]">
                 <div className="flex items-center gap-2">
                   <Title>펀디가 추천하는 한 줄 소개</Title>
-                  <img src={FundiIcon} width="20px" />
+                  <img src="/assets/icons/ic_fundi.svg" width="20px" />
                 </div>
                 <MediumFont ref={summaryRef} className="break-words">
                   펀디가 요약한 내용

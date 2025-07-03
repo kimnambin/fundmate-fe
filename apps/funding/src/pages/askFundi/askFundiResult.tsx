@@ -1,10 +1,10 @@
-import { useLocation } from 'react-router-dom';
-import { Bottom, Wrapper } from './askFundi.styles';
-import { Layout } from '../../style/layout';
 import MarkdownEditor from '@uiw/react-markdown-editor';
-import MainButton from '../../components/main-button/mainButton';
-import { useRef, useState } from 'react';
 import html2pdf from 'html2pdf.js';
+import { useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import MainButton from '../../components/main-button/mainButton';
+import { Layout } from '../../style/layout';
+import { Bottom, ResultWrapper } from './askFundi.styles';
 
 const AskFundiResult = () => {
   const location = useLocation();
@@ -35,9 +35,9 @@ const AskFundiResult = () => {
 
   return (
     <Layout>
-      <Wrapper ref={ref} isCapture={isCapture}>
+      <ResultWrapper ref={ref} isCapture={isCapture}>
         <MarkdownEditor.Markdown source={response.message} />
-      </Wrapper>
+      </ResultWrapper>
       <Bottom>
         <MainButton
           label="저장하기"

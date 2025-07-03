@@ -1,25 +1,25 @@
-import logo from "../assets/images/Fundmate.png";
-import userDefaultImage from "../assets/icons/userDefault.png";
-import { IoMdMenu } from "react-icons/io";
+import logo from '../assets/images/Fundmate.png';
+import userDefaultImage from '../assets/icons/userDefault.png';
+import { IoMdMenu } from 'react-icons/io';
 import {
   Container,
   FundiButton,
   InputDiv,
   LoginButton,
   SpaceContainer,
-} from "../styles/Header.styles";
-import { IoSearch } from "react-icons/io5";
-import { CateogoryContainer } from "../styles/Category.style";
-import { modalStore } from "../stores/modalStore";
-import { CategoryIcons } from "../assets";
-import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import fundi from "../assets/images/fundi.png";
+} from '../styles/Header.styles';
+import { IoSearch } from 'react-icons/io5';
+import { CateogoryContainer } from '../styles/Category.style';
+import { modalStore } from '../stores/modalStore';
+import { CategoryIcons } from '../assets';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import fundi from '../assets/images/fundi.png';
 
 export const Header = () => {
   const isOpen = modalStore((state) => state.isOpen);
   const setIsOpen = modalStore((state) => state.setIsOpen);
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -27,13 +27,13 @@ export const Header = () => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleClick();
     }
   };
 
   const handleNavigate = () => {
-    navigate("/login");
+    navigate('/login');
   };
 
   return (
@@ -43,7 +43,7 @@ export const Header = () => {
           src={logo}
           alt="Logo"
           className="w-auto h-14 cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => navigate('/')}
         />
         <InputDiv>
           <input
@@ -84,7 +84,7 @@ export const Header = () => {
             <span className="font-semibold">카테고리</span>
             <CateogoryContainer $isOpen={isOpen}>
               {Object.entries(CategoryIcons).map(
-                ([name, { src, menuName }], i) => (
+                ([name, { src, menuName }], _i) => (
                   <Link
                     to={`/search?category=${menuName}`}
                     key={name}
@@ -93,7 +93,7 @@ export const Header = () => {
                     <img src={src} className="w-8" />
                     <span>{menuName}</span>
                   </Link>
-                )
+                ),
               )}
             </CateogoryContainer>
           </button>

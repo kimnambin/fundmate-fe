@@ -12,7 +12,6 @@ import { filters } from '../createFunding/createFunding';
 import MainButton from '../../components/main-button/mainButton';
 import Modal from '../../components/modal/modal';
 import { useState } from 'react';
-import FundiIcon from '../../assets/icons/ic_fundi.svg';
 import { IoClose } from 'react-icons/io5';
 import { Loading } from '@repo/ui/components';
 import { useNavigate } from 'react-router-dom';
@@ -81,7 +80,11 @@ const AskFundi = () => {
               </div>
               <div className="flex flex-col gap-[30px] items-center my-[40px] mx-[140px]">
                 <Title>펀디를 소개합니다!</Title>
-                <img src={FundiIcon} alt="Fundi Icon" className="w-20 h-20" />
+                <img
+                  src="/assets/icons/ic_fundi.svg"
+                  alt="Fundi Icon"
+                  className="w-20 h-20"
+                />
                 <div className="flex flex-col gap-[10px]">
                   <MediumFont>
                     <span className="text-main font-bold">펀디</span>는 펀딩을

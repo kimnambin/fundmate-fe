@@ -6,10 +6,13 @@ import { Header } from '@repo/ui/components';
 import { LogIn } from './pages/LogIn';
 import { SignUp } from './pages/SignUp';
 import { PasswordReset } from './pages/PasswordReset';
-import { ScrollToTop } from '@repo/ui/utils'
+import { ScrollToTop } from '@repo/ui/utils';
 // import { lazy } from 'react';
+// import 'react-datepicker/dist/react-datepicker.css';
 
 // const CreateFundingPage = lazy(() => import('funding/CreateFundingPage'));
+// const AskFundiPage = lazy(() => import('funding/AskFundiPage'));
+// const AskFundiResultPage = lazy(() => import('funding/AskFundiResultPage'));
 // const ProductPage = lazy(() => import('payment/ProductPage'));
 // const PaymentPage = lazy(() => import('payment/PaymentPage'));
 // const PaymentCompleted = lazy(() => import('payment/PaymentCompleted'));
@@ -41,12 +44,14 @@ function App() {
       <ScrollToTop />
       <Header />
       <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/search' element={<SearchPage />} />
-        <Route path='/login' element={<LogIn />} />
-        <Route path='/signup' element={<SignUp />} />
-        <Route path='/reset' element={<PasswordReset />} />
-        {/* <Route path='/funding/create' element={<CreateFundingPage />} /> */}
+        <Route path="/" element={<Main />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/reset" element={<PasswordReset />} />
+        {/* <Route path="/funding/create" element={<CreateFundingPage />} />
+        <Route path="/ask-fundi" element={<AskFundiPage />} />
+        <Route path="/ask-fundi/result" element={<AskFundiResultPage />} /> */}
         {/* <Route path='/product' element={<ProductPage />} /> */}
         {/* <Route path='/payment' element={<PaymentPage />} /> */}
         {/* <Route path='/payment-completed' element={<PaymentCompleted />} /> */}

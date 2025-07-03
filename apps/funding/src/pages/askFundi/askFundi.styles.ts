@@ -1,6 +1,12 @@
 import tw from 'tailwind-styled-components';
 
-export const Wrapper = tw.div<{ isCapture: boolean }>`
+export const Wrapper = tw.div`
+    flex flex-col
+    gap-[30px] mb-[30px]
+    w-full h-[calc(100vh-270px)]
+`;
+
+export const ResultWrapper = tw.div<{ isCapture: boolean }>`
     flex flex-col
     gap-[30px] pb-[30px]
     w-full h-[calc(100vh-270px)]
