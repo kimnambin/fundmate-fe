@@ -1,14 +1,20 @@
 import logo from '../assets/images/Fundmate.png';
 import userDefaultImage from '../assets/icons/userDefault.png';
 import { IoMdMenu } from 'react-icons/io';
-import { Container, FundiButton, InputDiv, LoginButton, SpaceContainer } from '../styles/Header.styles';
+import {
+  Container,
+  FundiButton,
+  InputDiv,
+  LoginButton,
+  SpaceContainer,
+} from '../styles/Header.styles';
 import { IoSearch } from 'react-icons/io5';
 import { CateogoryContainer } from '../styles/Category.style';
 import { modalStore } from '../stores/modalStore';
 import { CategoryIcons } from '../assets';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
-import fundi from '../assets/images/fundi.png'
+import fundi from '../assets/images/fundi.png';
 
 const menuBar = [
   {
@@ -48,23 +54,28 @@ export const Header = () => {
   const currentFullPath = location.pathname + location.search;
 
   const handleClick = () => {
-    navigate(`/search?query=${searchInput}`)
-  }
+    navigate(`/search?query=${searchInput}`);
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleClick()
+      handleClick();
     }
-  }
+  };
 
   const handleNavigate = () => {
     navigate('/login');
-  }
+  };
 
   return (
     <div className="flex flex-col shadow-md">
       <Container className="h-[100px] justify-between border-b border-gray-300">
-        <img src={logo} alt="Logo" className="w-auto h-14 cursor-pointer" onClick={() => navigate('/')} />
+        <img
+          src={logo}
+          alt="Logo"
+          className="w-auto h-14 cursor-pointer"
+          onClick={() => navigate('/')}
+        />
         <InputDiv>
           <input
             aria-label="검색"
@@ -77,7 +88,9 @@ export const Header = () => {
           <IoSearch className="absolute end-5 top-1/2 -translate-y-1/2 text-2xl text-[#26AAFF] cursor-pointer" onClick={handleClick} />
         </InputDiv>
         <div className="flex flex-row gap-7 h-full items-center">
-          <Link to='/funding/create' className="text-lg font-semibold">프로젝트 올리기</Link>
+          <Link to="/funding/create" className="text-lg font-semibold">
+            프로젝트 올리기
+          </Link>
           <LoginButton onClick={handleNavigate}>
             <img
               src={userDefaultImage}
@@ -90,18 +103,26 @@ export const Header = () => {
       </Container>
       <SpaceContainer>
         <div className=" flex flex-row items-center h-[60px] gap-7 text-lg">
-          <button type='button' onClick={setIsOpen} className="flex flex-row items-center gap-2 relative">
+          <button
+            type="button"
+            onClick={setIsOpen}
+            className="flex flex-row items-center gap-2 relative"
+          >
             <IoMdMenu />
             <span className="font-semibold">카테고리</span>
             <CateogoryContainer $isOpen={isOpen}>
-              {
-                Object.entries(CategoryIcons).map(([name, { src, menuName }], i) => (
-                  <Link to={`/search?category=${menuName}`} key={name} className='flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2'>
-                    <img src={src} className='w-8' />
+              {Object.entries(CategoryIcons).map(
+                ([name, { src, menuName }]) => (
+                  <Link
+                    to={`/search?category=${menuName}`}
+                    key={name}
+                    className="flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2"
+                  >
+                    <img src={src} className="w-8" />
                     <span>{menuName}</span>
                   </Link>
-                ))
-              }
+                ),
+              )}
             </CateogoryContainer>
           </button>
           {
@@ -123,12 +144,12 @@ export const Header = () => {
               )
             })
           }
-        </div>
-        <FundiButton type='button'>
+        </div >
+        <FundiButton type="button">
           <span>펀디에게 물어보기</span>
-          <img src={fundi} className='w-6' />
+          <img src={fundi} className="w-6" />
         </FundiButton>
-      </SpaceContainer>
+      </SpaceContainer >
     </div >
   );
 };
