@@ -1,12 +1,14 @@
 import ProgressBar from "@ramonak/react-progress-bar";
 import { HorizontalCardContainer } from "../../styles/Card.style";
+import { useNavigate } from "react-router-dom";
 interface HorizontalCardProps {
   number: string;
 }
 
 export const HorizontalCard = ({ number }: HorizontalCardProps) => {
+  const navigate = useNavigate();
   return (
-    <HorizontalCardContainer>
+    <HorizontalCardContainer onClick={() => navigate('/product')}>
       <div className="col-span-4">
         <img src="https://picsum.photos/id/30/100/100" className="w-full h-full object-cover rounded-xl" />
       </div>
