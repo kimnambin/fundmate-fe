@@ -16,7 +16,6 @@ export default defineConfig({
         './PaymentCompleted': './src/pages/PaymentcompletedPage.tsx',
         './PaymentDetail': './src/pages/PaymentDetail.tsx',
         './PaymentListPage': './src/pages/PaymentListPage.tsx',
-        './ProductProvider': './src/context/ProductContext.tsx'
       },
       shared: ['react', 'react-dom'],
     }),

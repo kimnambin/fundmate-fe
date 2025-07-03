@@ -13,12 +13,30 @@ import {
   ValueP,
   Wrapper,
 } from '../styles/product-detail/productInfo.style';
-import { useProductContext } from '../../context/ProductContext';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { SafeLink } from '../feat/SafeLink';
+
+// TODO : 화면 구상용 더미 데이터
+
+export interface ProductDataProps {
+  [key: string]: string;
+}
+
+export const productData: ProductDataProps = {
+  title: '3D 미니 프런터기기',
+  '모인 금액': '1,556,900원',
+  '남은 시간': '8일',
+  후원자: '10명',
+};
+
+export const productPaymentData: ProductDataProps = {
+  '목표 금액': '500,000원',
+  '펀딩 기간': '2025.06.17 ~ 2025.08.20',
+  결제: '목표 금액 달성 시 2025.08.20에 결제 진행',
+  '예상 발송 및 시작일': '2025.08.20',
+};
 
 const ProductInfo = () => {
-  const { productData, productPaymentData } = useProductContext();
   const [click, setClick] = useState<boolean>(false);
 
   const copyClip = () => {
@@ -39,7 +57,7 @@ const ProductInfo = () => {
         {Object.entries(productData).map(([key, value]) => (
           <Top key={key}>
             {key !== 'title' && <KeyP>{key}</KeyP>}
-            <ValueP ishas={key === 'title'}>{value}</ValueP>
+            <ValueP $ishas={key === 'title'}>{value}</ValueP>
           </Top>
         ))}
       </Top>
@@ -73,9 +91,12 @@ const ProductInfo = () => {
               <IoShareSocialOutline className="w-8 h-8" />
             </IconButton>
           </IconGroup>
-          <Link to="/payment" className="w-full">
+          {/* <Link to="/payment" className="w-full">
             <BaseButton>후원하기</BaseButton>
-          </Link>
+          </Link> */}
+          <SafeLink to="/payment" className="w-full">
+            <BaseButton>후원하기</BaseButton>
+          </SafeLink>
         </IconBox>
       </Bottom>
     </Wrapper>

@@ -7,6 +7,8 @@ export const ModalContainer = tw.div`
   justify-center
   items-center
   z-40
+  border
+  border-black
 `;
 
 export const ModalContent = tw.div`
@@ -71,6 +73,7 @@ outline-none
   w-1/6
   mr-2
   border-b
+  appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
 `;
 
 export const Select = tw.select`
