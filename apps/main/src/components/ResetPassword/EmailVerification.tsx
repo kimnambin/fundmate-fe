@@ -33,7 +33,7 @@ export const EmailVerificationComponent = () => {
     }
 
   }
-  const { register, getValues, formState: { errors } } = useForm<EmailVerificationProps>({
+  const { register, getValues, trigger, formState: { errors, isValid } } = useForm<EmailVerificationProps>({
     resolver: yupResolver(schema),
     shouldFocusError: false,
     mode: 'onChange',
@@ -50,6 +50,8 @@ export const EmailVerificationComponent = () => {
           placeholder='가입하신 이메일 주소를 입력해주세요.'
           {...register('email')}
           $isError={!!errors.email}
+          autoComplete='email'
+          onFocus={() => trigger('email')}
         />
         {
           !isVerified ?
@@ -78,8 +80,8 @@ export const EmailVerificationComponent = () => {
           <CommonButton
             type='button'
             onClick={tempHandleClick}
-            $isError={!!errors.email}
-            disabled={!!errors.email}
+            $isError={!!!getValues('email')}
+            disabled={!!!getValues('email')}
           >
             <span>인증번호 발송</span>
           </CommonButton>
@@ -87,8 +89,8 @@ export const EmailVerificationComponent = () => {
           <CommonButton
             type='button'
             onClick={onSubmit}
-            $isError={!!errors.email}
-            disabled={!!errors.email}
+            $isError={!!!getValues('verificationCode')}
+            disabled={!!!getValues('verificationCode')}
           >
             <span>인증하기</span>
           </CommonButton>

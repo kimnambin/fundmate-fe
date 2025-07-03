@@ -1,7 +1,7 @@
 import tw from "tailwind-styled-components";
 
 export const CommonButton = tw.button<{ $isError?: boolean, $isVerificated?: boolean }>`
-  bg-cyan-400
+  bg-[#26AAFF]
   flex
   flex-row
   justify-center

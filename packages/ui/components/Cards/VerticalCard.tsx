@@ -14,8 +14,8 @@ export const VerticalCard = () => {
         </div>
       </div>
       <div>
-        <span className="text-base font-bold text-cyan-400">100% 달성</span>
-        <ProgressBar completed={100} height="5px" isLabelVisible={false} bgColor="#26C6DA" />
+        <span className="text-base font-bold text-[#26AAFF]">100% 달성</span>
+        <ProgressBar completed={100} height="5px" isLabelVisible={false} bgColor="#26AAFF" />
       </div>
     </VerticalCardContainer>
   )

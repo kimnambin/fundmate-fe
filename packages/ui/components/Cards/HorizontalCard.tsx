@@ -11,7 +11,7 @@ export const HorizontalCard = ({ number }: HorizontalCardProps) => {
         <img src="https://picsum.photos/id/30/100/100" className="w-full h-full object-cover rounded-xl" />
       </div>
       <div className="col-span-1 flex justify-center py-2">
-        <span className="font-bold text-cyan-400">{number}</span>
+        <span className="font-bold text-[#26AAFF]">{number}</span>
       </div>
       <div className="col-span-6 flex flex-col items-start justify-between py-2">
         <div className="flex flex-col">
@@ -19,8 +19,8 @@ export const HorizontalCard = ({ number }: HorizontalCardProps) => {
           <span className="text-base text-gray-500">이것은 상품의 상세 설명입니다.</span>
         </div>
         <div className="w-full">
-          <span className="font-bold text-cyan-400">100% 달성</span>
-          <ProgressBar completed={100} height="5px" isLabelVisible={false} bgColor="#26C6DA" />
+          <span className="font-bold text-[#26AAFF]">100% 달성</span>
+          <ProgressBar completed={100} height="5px" isLabelVisible={false} bgColor="#26AAFF" />
         </div>
       </div>
     </HorizontalCardContainer>
