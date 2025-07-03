@@ -14,6 +14,11 @@ export interface SupportedProject {
 
 // 사용자 후원한 프로젝트 리스트 불러오기
 export const getSupportedProjects = async (): Promise<SupportedProject[]> => {
-  const response = await axios.get("/api/users/me/supported-projects");
-  return response.data;
+  try {
+    const response = await axios.get<SupportedProject[]>("/api/users/me/supported-projects");
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch supported projects:", error);
+    return []; // Prevent UI crashes on error
+  }
 };

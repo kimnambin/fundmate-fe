@@ -42,7 +42,7 @@ export const VerticalCard = ({
         <img
           src={thumbnailUrl}
           alt={title}
-          className="w-[1600px] h-[180px] rounded-xl object-cover"
+          className="w-full h-[180px] rounded-xl object-cover"
         />
       </div>
 

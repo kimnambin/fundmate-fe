@@ -3,7 +3,7 @@ import { Header } from "../../../../../packages/ui/components/Header";
 import Sidebar from "../../components/common/Sidebar"; // ← 추가
 import UserSummary from "./UserSummary/UserSummary";
 
-function App() {
+function MyPage() {
   return (
     <>
       <Header />
@@ -21,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default MyPage;

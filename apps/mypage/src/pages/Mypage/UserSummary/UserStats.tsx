@@ -8,7 +8,7 @@ const stats = [
 
 const UserStats = () => {
   return (
-   <div className="flex justify-center items-center px-[60px] py-[24px] mt-[-300px] gap-[60px] w-[580px] h-[160px] border border-[#DDDDDD] rounded-[12px] shadow-sm mt-[-37px]">
+   <div className="flex justify-center items-center px-[60px] py-[24px] gap-[60px] w-[580px] h-[160px] border border-[#DDDDDD] rounded-[12px] shadow-sm mt-[-37px]">
 
       {stats.map(({ icon, label, value }, idx) => (
         <div key={idx} className="flex flex-col items-center gap-[10px] w-[60px]">

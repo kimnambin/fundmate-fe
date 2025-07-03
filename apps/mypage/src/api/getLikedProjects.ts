@@ -12,6 +12,11 @@ export interface Project {
 }
 
 export const getLikedProjects = async (): Promise<Project[]> => {
-  const response = await axios.get("/api/mypage/liked-projects");
-  return response.data;
+  try {
+    const response = await axios.get<Project[]>("/api/mypage/liked-projects");
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch liked projects:", error);
+    return [];
+  }
 };

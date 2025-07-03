@@ -49,19 +49,22 @@ export const useRecentViewedProjectsStore = create<RecentViewedProjectsState>((s
       title: "테스트 프로젝트 5",
       description: "프로젝트 설명입니다.",
       progress: 45,
-    },{
+    },
+    {
       id: 6,
       thumbnailUrl: "https://picsum.photos/300/300",
       title: "테스트 프로젝트 6",
       description: "프로젝트 설명입니다.",
       progress: 45,
-    },{
+    },
+    {
       id: 7,
       thumbnailUrl: "https://picsum.photos/300/300",
-      title: "테스트 프로젝트7",
+      title: "테스트 프로젝트 7",
       description: "프로젝트 설명입니다.",
       progress: 45,
-    },{
+    },
+    {
       id: 8,
       thumbnailUrl: "https://picsum.photos/300/300",
       title: "테스트 프로젝트 8",
@@ -96,11 +99,13 @@ export const useRecentViewedProjectsStore = create<RecentViewedProjectsState>((s
       description: "프로젝트 설명입니다.",
       progress: 45,
     },
-    
   ],
 
   addProject: (project) =>
     set((state) => ({
-      recentViewedProjects: [project, ...state.recentViewedProjects.slice(0, 9)],
+      recentViewedProjects: [
+        project,
+        ...state.recentViewedProjects.filter((p) => p.id !== project.id),
+      ].slice(0, 12),
     })),
 }));
