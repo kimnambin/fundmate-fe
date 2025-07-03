@@ -112,7 +112,7 @@ export const Header = () => {
             <span className="font-semibold">카테고리</span>
             <CateogoryContainer $isOpen={isOpen}>
               {Object.entries(CategoryIcons).map(
-                ([name, { src, menuName }]) => (
+                ([name, { src, menuName }], _i) => (
                   <Link
                     to={`/search?category=${menuName}`}
                     key={name}
@@ -145,7 +145,7 @@ export const Header = () => {
             })
           }
         </div >
-        <FundiButton type="button">
+        <FundiButton type="button" onClick={() => navigate('/ask-fundi')}>
           <span>펀디에게 물어보기</span>
           <img src={fundi} className="w-6" />
         </FundiButton>

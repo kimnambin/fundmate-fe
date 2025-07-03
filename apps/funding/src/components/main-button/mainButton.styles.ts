@@ -1,6 +1,10 @@
 import tw from 'tailwind-styled-components';
 
-export const Wrapper = tw.button<{ width?: string }>`
+export const Wrapper = tw.button<{
+  width?: string;
+  textSize?: string;
+  textWeight?: string;
+}>`
     ${({ width }) => width ?? 'w-auto'}
     flex
     px-[16px]
@@ -13,4 +17,6 @@ export const Wrapper = tw.button<{ width?: string }>`
     cursor-pointer
     bg-main
     hover:opacity-50
+    ${({ textSize }) => textSize ?? 'text-[14px]'}
+    ${({ textWeight }) => textWeight ?? 'font-normal'}
 `;
