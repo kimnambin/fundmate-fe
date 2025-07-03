@@ -9,6 +9,15 @@ export const Container = tw.div`
   overflow-hidden
 `;
 
+export const SpaceContainer = tw.div`
+  flex
+  flex-row
+  justify-between
+  items-center
+  w-full
+  px-[120px]
+`
+
 export const InputDiv = tw.div`
   relative
   h-10
@@ -26,3 +35,16 @@ export const LoginButton = tw.button`
   border
   border-gray-100
 `;
+
+export const FundiButton = tw.button`
+  flex
+  flex-row
+  gap-2 
+  text-lg
+  bg-cyan-400
+  font-semibold
+  text-white
+  px-5
+  py-1
+  rounded-lg
+`

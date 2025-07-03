@@ -1,5 +1,5 @@
 import bannerImage from '../../assets/images/banner.png';
-import { BannerContainer } from '../../styles/MainPageComponents.style';
+import { BannerContainer } from '../../styles/Main/MainPageComponents.style';
 
 export const Banner = () => {
   return (

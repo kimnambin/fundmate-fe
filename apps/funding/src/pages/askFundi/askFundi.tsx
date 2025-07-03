@@ -14,7 +14,7 @@ import Modal from '../../components/modal/modal';
 import { useState } from 'react';
 import FundiIcon from '../../assets/icons/ic_fundi.svg';
 import { IoClose } from 'react-icons/io5';
-import { Loading } from '@repo/ui/Loading';
+import { Loading } from '@repo/ui/components';
 import { useNavigate } from 'react-router-dom';
 import { Layout } from '../../style/layout';
 
