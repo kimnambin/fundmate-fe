@@ -133,6 +133,7 @@ export const Header = () => {
 
               return (
                 <button
+                  key={v.name}
                   type='button'
                   className={`px-3 h-full ${isActive ? 'shadow-[inset_0_-2px_0_0_#26AAFF]' : 'transition-shadow'}`}
                   onClick={() => {
