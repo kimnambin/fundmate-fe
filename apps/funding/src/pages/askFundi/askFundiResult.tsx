@@ -36,7 +36,7 @@ const AskFundiResult = () => {
   return (
     <Layout>
       <ResultWrapper ref={ref} isCapture={isCapture}>
-        <MarkdownEditor.Markdown source={response.message} />
+        <MarkdownEditor.Markdown source={response?.message} />
       </ResultWrapper>
       <Bottom>
         <MainButton
