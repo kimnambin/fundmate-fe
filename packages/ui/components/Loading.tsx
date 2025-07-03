@@ -1,11 +1,11 @@
 import { Wrapper } from '../styles/Loading.style';
-import LogoIcon from '../assets/icons/ic_fundi.svg';
+import { FundiIcon } from '../assets';
 
 export const Loading = () => {
   return (
     <Wrapper>
       <img
-        src={LogoIcon}
+        src={FundiIcon}
         alt="Loading"
         className="w-[140px] h-[140px] animate-spin-slow origin-center"
       />

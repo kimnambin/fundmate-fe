@@ -2,7 +2,13 @@ import { BaseText, BoldBigText, LightColor } from '../styles/text.style';
 import { Box, BoxRow, FlexColsm, FlexRowsm } from '../styles/flex.style';
 import { Input, MoneyBox, Span } from '../styles/paymentPage/PaymentMid.style';
 
-const PaymentMid = ({ subText }: { subText: string[] }) => {
+const PaymentMid = ({
+  subText,
+  setAddAmount,
+}: {
+  subText: string[];
+  setAddAmount: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   return (
     <div className="w-full">
       <BoldBigText>{subText[0]}</BoldBigText>
@@ -11,7 +17,13 @@ const PaymentMid = ({ subText }: { subText: string[] }) => {
       <Box>
         <BaseText>후원금</BaseText>
         <MoneyBox>
-          <Input type="number" placeholder="금액" />
+          <Input
+            type="number"
+            placeholder="1,000원"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setAddAmount(Number(e.target.value))
+            }
+          />
           <Span>원</Span>
         </MoneyBox>
       </Box>

@@ -1,4 +1,4 @@
-import Productinfos from '../paymentPage/Productinfo';
+import Productinfos from '../paymentPage/ProductMiniInfo';
 
 const PaymentDetailTop = () => {
   return (
