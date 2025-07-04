@@ -12,11 +12,11 @@ import { lazy } from 'react';
 // const CreateFundingPage = lazy(() => import('funding/CreateFundingPage'));
 // const AskFundiPage = lazy(() => import('funding/AskFundiPage'));
 // const AskFundiResultPage = lazy(() => import('funding/AskFundiResultPage'));
-// const ProductPage = lazy(() => import('payment/ProductPage'));
-// const PaymentPage = lazy(() => import('payment/PaymentPage'));
-// const PaymentCompleted = lazy(() => import('payment/PaymentCompleted'));
-// const PaymentDetail = lazy(() => import('payment/PaymentDetail'));
-// const PaymentListPage = lazy(() => import('payment/PaymentListPage'));
+const ProductPage = lazy(() => import('payment/ProductPage'));
+const PaymentPage = lazy(() => import('payment/PaymentPage'));
+const PaymentCompleted = lazy(() => import('payment/PaymentCompleted'));
+const PaymentDetail = lazy(() => import('payment/PaymentDetail'));
+const PaymentListPage = lazy(() => import('payment/PaymentListPage'));
 // import { ProductProvider } from 'payment/ProductProvider';
 
 // export interface ProductDataProps {
@@ -51,11 +51,11 @@ function App() {
         {/* <Route path="/funding/create" element={<CreateFundingPage />} />
         <Route path="/ask-fundi" element={<AskFundiPage />} />
         <Route path="/ask-fundi/result" element={<AskFundiResultPage />} /> */}
-        {/* <Route path="/product" element={<ProductPage />} />
+        <Route path="/product" element={<ProductPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/payment-completed" element={<PaymentCompleted />} />
         <Route path="/payment-detail" element={<PaymentDetail />} />
-        <Route path="/payment-list" element={<PaymentListPage />} /> */}
+        <Route path="/payment-list" element={<PaymentListPage />} />
       </Routes>
     </>
   );
