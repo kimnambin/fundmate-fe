@@ -1,10 +1,24 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BiChevronDown } from 'react-icons/bi'
+import type { DropdownProps } from './Dropdown';
+import { useSearchParams } from 'react-router-dom'
 
-export const StatusDropdown = () => {
+export const StatusDropdown = ({ query }: DropdownProps) => {
   const status = ['전체 프로젝트', '진행 중인 프로젝트', '완료된 프로젝트'];
   const [title, setTitle] = useState('상태');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setTitle('상태')
+  }, [query])
+
+  const handleQueryChange = (i: string, v: string) => {
+    const currentQuery = new URLSearchParams(searchParams);
+    currentQuery.set('status', i);
+    setSearchParams(currentQuery);
+    setTitle(v);
+  }
 
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -23,14 +37,14 @@ export const StatusDropdown = () => {
           {
             status.map((v, i) => (
               <MenuItem>
-                <button
-                  type='button'
+                <div
+                  role='button'
                   key={i}
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
-                  onClick={() => setTitle(v)}
+                  onClick={() => handleQueryChange(i.toString(), v)}
                 >
                   {v}
-                </button>
+                </div>
               </MenuItem>
             ))
           }

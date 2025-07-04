@@ -14,6 +14,7 @@ export {
 //assets
 export { Images } from './assets';
 export { CategoryIcons } from './assets';
+export { FundiIcon } from './assets';
 
 //styled-components
 export { CommonButton } from './styles/Button.styles';

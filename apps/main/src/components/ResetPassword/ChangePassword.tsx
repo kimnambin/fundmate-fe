@@ -29,7 +29,7 @@ export const ChangePassword = () => {
   }
 
   return (
-    <form className="flex flex-col w-full gap-5">
+    <form className="flex flex-col w-full gap-5" onSubmit={handleSubmit(onSubmit)} >
       <SignUpTitle><span>비밀번호 재설정</span></SignUpTitle>
       <InputContainer>
         <UserInput
@@ -44,9 +44,9 @@ export const ChangePassword = () => {
           {...register('checkPassword')}
           $isError={!!errors.checkPassword}
         />
+        {errors.checkPassword && <span className="text-base text-red-500">비밀번호가 동일하지 않습니다</span>}
       </InputContainer>
       <CommonButton
-        onSubmit={handleSubmit(onSubmit)}
         type='submit'
         $isError={!isValid}
         disabled={!isValid}
