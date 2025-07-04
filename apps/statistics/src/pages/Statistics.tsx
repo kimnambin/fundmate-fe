@@ -1,13 +1,11 @@
-import { Header } from '@repo/ui/components';
 import { StatisticsBody } from '../components/StatisticsBody';
 import { StatisticsHeader } from '../components/StatisticsHeader';
-import { Layout } from '../styles/Layout.style';
+import { Layout } from '@repo/ui/Layout'
 
 export const StatisticsPage = () => {
   return (
     <>
-      <Header />
-      <Layout>
+      <Layout className='my-[70px]'>
         <StatisticsHeader />
         <StatisticsBody />
       </Layout>
