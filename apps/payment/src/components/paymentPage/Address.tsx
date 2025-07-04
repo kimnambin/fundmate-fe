@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { FlexCol, FlexRowsm } from '../styles/layout.style';
 import { BoldBigText } from '../styles/text.style';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
-import { InputText } from '../styles/paymentPage/Adress.style';
+import { InputText } from '../styles/paymentPage/Address.style';
 
-const Adress = ({
+const Address = ({
   setAddressData,
 }: {
   setAddressData: (address: string) => void;
@@ -55,4 +55,4 @@ const Adress = ({
   );
 };
 
-export default Adress;
+export default Address;

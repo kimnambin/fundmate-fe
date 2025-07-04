@@ -1,5 +1,5 @@
 import { BoxCol, FlexRowsm } from '../styles/layout.style';
-import { Radio } from '../styles/paymentPage/Adress.style';
+import { Radio } from '../styles/paymentPage/Address.style';
 import { BaseText } from '../styles/text.style';
 
 interface PaySelectProps {
