@@ -1,6 +1,6 @@
 import tw from "tailwind-styled-components";
 
-export const CommonButton = tw.button<{ $isError?: boolean, $isVerificated?: boolean }>`
+export const CommonButton = tw.button<{ $isError?: boolean, $isVerificated?: boolean, $bigSize?: boolean }>`
   bg-[#26AAFF]
   flex
   flex-row
@@ -13,5 +13,6 @@ export const CommonButton = tw.button<{ $isError?: boolean, $isVerificated?: boo
   px-5
   transition-opacity
 
+  ${(p) => p.$bigSize ? 'w-72' : ''}
   ${(p) => p.$isError || p.$isVerificated ? 'opacity-50 cursor-not-allowed' : 'opacity-100'}
 `
