@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BoxRow, FlexColsm, FlexRowsm } from '../styles/flex.style';
+import { BoxRow, FlexColsm, FlexRowsm } from '../styles/layout.style';
 import { ProductImg } from '../styles/paymentPage/Productinfo.style';
 import { BaseText, BoldText, LightColor } from '../styles/text.style';
 

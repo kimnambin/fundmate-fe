@@ -1,4 +1,4 @@
-import { FlexColsm } from '../styles/flex.style';
+import { FlexColsm } from '../styles/layout.style';
 import { BaseText, BoldBigText, BoldText } from '../styles/text.style';
 
 const PaymentListTop = () => {

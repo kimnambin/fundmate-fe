@@ -18,7 +18,7 @@ import {
 } from '../styles/modal/modal.style';
 import { monthList, yearList } from '../../utils/date';
 import { BankBtn } from '../styles/modal/tansfetModal.style';
-import { FlexRowsm } from '../styles/flex.style';
+import { FlexRowsm } from '../styles/layout.style';
 import { useCardPayForm } from '../../hooks/useForm';
 import { TransferProps } from '../../types/modal.model';
 

@@ -1,4 +1,4 @@
-import { BoxCol, FlexRowsm } from '../styles/flex.style';
+import { BoxCol, FlexRowsm } from '../styles/layout.style';
 import { Radio } from '../styles/paymentPage/Adress.style';
 import { BaseText } from '../styles/text.style';
 

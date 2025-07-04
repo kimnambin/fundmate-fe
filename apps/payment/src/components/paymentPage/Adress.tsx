@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlexCol, FlexRowsm } from '../styles/flex.style';
+import { FlexCol, FlexRowsm } from '../styles/layout.style';
 import { BoldBigText } from '../styles/text.style';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { InputText } from '../styles/paymentPage/Adress.style';
@@ -31,7 +31,7 @@ const Adress = ({
   };
 
   return (
-    <FlexCol className="items-start justify-start gap-4 mb-10">
+    <FlexCol className="items-start justify-start gap-4 mb-10 px-6 sm:px-0">
       <BoldBigText>주소 입력</BoldBigText>
       <FlexRowsm className="mt-5 w-full">
         <InputText
@@ -40,8 +40,8 @@ const Adress = ({
           value={postalCode}
           readOnly
         />
-        <BaseButton className="p-2 w-[30%]" onClick={handleFind}>
-          우편번호 찾기
+        <BaseButton className="w-[30%] p-2" onClick={handleFind}>
+          번호찾기
         </BaseButton>
       </FlexRowsm>
       <InputText type="text" placeholder="주소" value={address} readOnly />

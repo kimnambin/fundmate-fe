@@ -1,4 +1,4 @@
-import { FlexColsm } from '../styles/flex.style';
+import { FlexColsm } from '../styles/layout.style';
 import { BoldBigText } from '../styles/text.style';
 import {
   ProductInfo,

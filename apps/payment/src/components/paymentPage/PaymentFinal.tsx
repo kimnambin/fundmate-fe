@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PayModal from '../modal/PayModal';
 import TransferModal from '../modal/TransferModal';
-import { BoxCol, BoxRow, FlexColsm } from '../styles/flex.style';
+import { BoxCol, BoxRow, FlexColsm } from '../styles/layout.style';
 import { Radio } from '../styles/paymentPage/Adress.style';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { BaseText, BoldText, LightColor } from '../styles/text.style';
@@ -46,7 +46,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   return (
     <>
       {selectedPayment && <Adress setAddressData={setAddressData} />}
-      <BoxRow className="justify-between p-5 my-7">
+      <BoxRow className="justify-between p-5 my-4 sm:my-7">
         <LightColor className="bg-none">최종 후원 금액</LightColor>
         <BoldText>{formatNum(addAmount)}원</BoldText>
       </BoxRow>

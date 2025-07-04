@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/flex.style';
+import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/layout.style';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { BaseText, BoldBigText, BoldText } from '../styles/text.style';
 
@@ -29,7 +29,7 @@ const PaymentDetailBottom = () => {
             </FlexRowsm>
           ))}
         </FlexColsm>
-        <BaseButton className="bg-[#E2E8F0] w-[10%] p-2 text-xs text-black">
+        <BaseButton className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black">
           취소하기
         </BaseButton>
       </BoxRow>
@@ -37,7 +37,7 @@ const PaymentDetailBottom = () => {
       <div className="flex justify-center w-full mt-4">
         <Link
           to="/payment-list"
-          className="flex items-center justify-center w-[30%] p-2 mb-8"
+          className="flex items-center justify-center w-[50%] sm:w-[30%] p-2 mb-8"
         >
           <BaseButton>후원 목록 보기</BaseButton>
         </Link>

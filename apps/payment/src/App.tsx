@@ -1,8 +1,9 @@
 import { Header } from '@repo/ui/components';
 import { Loading } from '@repo/ui/components';
-import { Container } from './components/styles/flex.style';
+import { Container } from './components/styles/layout.style';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useIsMobile } from './hooks/useMobile';
 
 const ProductPage = lazy(() => import('./pages/ProductPage'));
 const PaymentPage = lazy(() => import('./pages/PaymentPage'));
@@ -11,9 +12,11 @@ const PaymentDetail = lazy(() => import('./pages/PaymentDetail'));
 const PaymentListPage = lazy(() => import('./pages/PaymentListPage'));
 
 function App() {
+  const isMobile = useIsMobile();
   return (
     <>
-      <Header />
+      {/* TODO : 임시로 모바일 환경 시 헤더 가림 */}
+      {!isMobile && <Header />}
       <Container>
         <Suspense fallback={<Loading />}>
           <Routes>
