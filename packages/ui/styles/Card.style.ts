@@ -12,6 +12,7 @@ export const VerticalCardContainer = tw.div`
   transition-shadow
   p-3
   m-3
+  bg-white
 
   hover:shadow-md
 `
@@ -25,6 +26,7 @@ export const HorizontalCardContainer = tw.div`
   rounded-xl  
   transition-shadow
   p-3
+  bg-white
 
   hover:shadow-md
 `

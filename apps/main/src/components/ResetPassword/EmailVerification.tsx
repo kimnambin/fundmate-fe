@@ -4,7 +4,7 @@ import { UserInput } from "../../styles/User/UserPage.Styles"
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import * as yup from 'yup'
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const schema = yup.object({
@@ -15,7 +15,7 @@ const schema = yup.object({
 type EmailVerificationProps = yup.InferType<typeof schema>
 
 export const EmailVerificationComponent = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_searchParams, setSearchParams] = useSearchParams();
   const [isVerified, setIsVerified] = useState(false);
   const tempCode = '000000'
   const [tempCodeCheck, setTempCodeCheck] = useState<'pass' | 'fail' | null>(null);
@@ -33,7 +33,7 @@ export const EmailVerificationComponent = () => {
     }
 
   }
-  const { register, getValues, formState: { errors } } = useForm<EmailVerificationProps>({
+  const { register, getValues, trigger, formState: { errors } } = useForm<EmailVerificationProps>({
     resolver: yupResolver(schema),
     shouldFocusError: false,
     mode: 'onChange',
@@ -50,6 +50,8 @@ export const EmailVerificationComponent = () => {
           placeholder='가입하신 이메일 주소를 입력해주세요.'
           {...register('email')}
           $isError={!!errors.email}
+          autoComplete='email'
+          onFocus={() => trigger('email')}
         />
         {
           !isVerified ?
@@ -78,8 +80,8 @@ export const EmailVerificationComponent = () => {
           <CommonButton
             type='button'
             onClick={tempHandleClick}
-            $isError={!!errors.email}
-            disabled={!!errors.email}
+            $isError={!!!getValues('email') || !!errors.email}
+            disabled={!!!getValues('email') || !!errors.email}
           >
             <span>인증번호 발송</span>
           </CommonButton>
@@ -87,8 +89,8 @@ export const EmailVerificationComponent = () => {
           <CommonButton
             type='button'
             onClick={onSubmit}
-            $isError={!!errors.email}
-            disabled={!!errors.email}
+            $isError={!!!getValues('verificationCode')}
+            disabled={!!!getValues('verificationCode')}
           >
             <span>인증하기</span>
           </CommonButton>

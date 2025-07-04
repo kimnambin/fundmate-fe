@@ -15,7 +15,7 @@ export default defineConfig({
         payment: 'http://localhost:5004/assets/remoteEntry.js',
         statistics: 'http://localhost:5005/assets/remoteEntry.js',
       },
-      shared: ['react', 'react-dom'],
+      shared: ['react', 'react-dom', 'react-router-dom'],
     }),
   ],
   build: {

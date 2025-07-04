@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SwiperItems } from "../Swiper"
+import { SwiperContainer, SwiperLayout } from "../../styles/Swiper.style";
 
 interface SwiperComponentsProps {
   componentId: number;
@@ -12,16 +13,18 @@ export const SwiperComponents = ({ componentId, componentName }: SwiperComponent
   if (componentId === 3) viewFullNav = '/search?new=1';
 
   return (
-    <div className='relative flex flex-col gap-[20px]'>
-      <div className="flex flex-row justify-between px-6">
-        <span className="text-xl font-semibold">{componentName}</span>
-        {
-          componentId === 1 ? '' : <Link to={viewFullNav} className="text-base text-gray-300">전체보기</Link>
-        }
-      </div>
-      <div>
-        <SwiperItems componentId={componentId} />
-      </div>
-    </div>
+    <SwiperLayout $id={componentId}>
+      <SwiperContainer>
+        <div className="flex flex-row justify-between items-end px-6">
+          <span className="text-xl font-semibold">{componentName}</span>
+          {
+            componentId === 1 ? '' : <Link to={viewFullNav} className="text-base text-gray-400">전체보기</Link>
+          }
+        </div>
+        <div>
+          <SwiperItems componentId={componentId} />
+        </div>
+      </SwiperContainer>
+    </SwiperLayout>
   )
 }

@@ -1,7 +1,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
 import { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi"
-import { DropdownProps } from "./Dropdown";
+import type { DropdownProps } from "./Dropdown";
 import { useSearchParams } from "react-router-dom";
 
 export const RecommendDropdown = ({ query }: DropdownProps) => {

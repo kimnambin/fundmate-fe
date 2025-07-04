@@ -1,5 +1,5 @@
 // utils
-export { ScrollToTop, StatisticsTableData } from './utils';
+export { ScrollToTop } from './utils';
 
 // components
 export {
@@ -8,11 +8,13 @@ export {
   HorizontalCard,
   VerticalCard,
   Dropdown,
+  Loading,
 } from './components';
 
 //assets
 export { Images } from './assets';
 export { CategoryIcons } from './assets';
+export { FundiIcon } from './assets';
 
 //styled-components
 export { CommonButton } from './styles/Button.styles';

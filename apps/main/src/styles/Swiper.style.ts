@@ -24,3 +24,16 @@ export const NavButton = tw.button<NavProps>`
   h-16
   shadow-md
 `
+
+export const SwiperLayout = tw.div<{ $id: number }>`
+  px-[120px]
+  py-10
+  ${(p) => p.$id === 2 ? 'bg-[#26AAFF1A]' : ''}
+`
+
+export const SwiperContainer = tw.div`
+  relative
+  flex
+  flex-col
+  gap-[20px]
+`
