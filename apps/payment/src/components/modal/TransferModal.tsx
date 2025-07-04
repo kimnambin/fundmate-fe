@@ -16,7 +16,7 @@ import { TransferProps } from '../../types/modal.model';
 
 export default function TransferModal({
   addAmount,
-  addressData,
+  // addressData,
   setIsModalOpen,
 }: TransferProps) {
   const bankList = ['KB국민은행', '농협', '신한', 'IBK', '토스'];

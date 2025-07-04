@@ -18,3 +18,4 @@ export { FundiIcon } from './assets';
 
 //styled-components
 export { CommonButton } from './styles/Button.styles';
+export { HorizontalCardContainer, VerticalCardContainer } from './styles'

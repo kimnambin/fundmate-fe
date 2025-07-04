@@ -24,7 +24,7 @@ import { TransferProps } from '../../types/modal.model';
 
 const PayModal = ({
   addAmount,
-  addressData,
+  // addressData,
   setIsModalOpen,
 }: TransferProps) => {
   const placeholders = randomPlaceholder();

@@ -1,6 +1,7 @@
 import ProgressBar from "@ramonak/react-progress-bar";
 import { HorizontalCardContainer } from "../../styles/Card.style";
 import { useNavigate } from "react-router-dom";
+import { HeartButton } from "../Likes/HeartButton";
 interface HorizontalCardProps {
   number: string;
 }
@@ -9,8 +10,9 @@ export const HorizontalCard = ({ number }: HorizontalCardProps) => {
   const navigate = useNavigate();
   return (
     <HorizontalCardContainer onClick={() => navigate('/product')}>
-      <div className="col-span-4">
-        <img src="https://picsum.photos/id/30/100/100" className="w-full h-full object-cover rounded-xl" />
+      <div className="col-span-4 relative">
+        <img src="https://picsum.photos/id/30/100/100" className="w-auto h-full object-cover rounded-xl" />
+        <HeartButton />
       </div>
       <div className="col-span-1 flex justify-center py-2">
         <span className="font-bold text-[#26AAFF]">{number}</span>

@@ -28,7 +28,7 @@ export const SwiperItems = ({ componentId }: SwiperItemsProps) => {
       <Swiper
         slidesPerView={5}
         spaceBetween={20}
-        className='latestView'
+        className='latestView !py-2'
         slidesPerGroup={5}
         speed={1000}
         navigation={{
