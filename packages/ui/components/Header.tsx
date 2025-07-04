@@ -40,7 +40,7 @@ const menuBar = [
   {
     name: 'statistics',
     menuName: '데이터 분석',
-    route: '/statisics'
+    route: '/statistics'
   }
 ]
 

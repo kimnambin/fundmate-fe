@@ -17,7 +17,7 @@ const PaymentPage = lazy(() => import('payment/PaymentPage'));
 const PaymentCompleted = lazy(() => import('payment/PaymentCompleted'));
 const PaymentDetail = lazy(() => import('payment/PaymentDetail'));
 const PaymentListPage = lazy(() => import('payment/PaymentListPage'));
-
+const Statistics = lazy(() => import('statistics/Statistics'));
 
 function App() {
   return (
@@ -38,6 +38,7 @@ function App() {
         <Route path="/payment-completed" element={<PaymentCompleted />} />
         <Route path="/payment-detail" element={<PaymentDetail />} />
         <Route path="/payment-list" element={<PaymentListPage />} />
+        <Route path='/statistics' element={<Statistics />} />
       </Routes>
     </>
   );
