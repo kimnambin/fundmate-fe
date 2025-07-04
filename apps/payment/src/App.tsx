@@ -23,12 +23,11 @@ function App() {
             {/* TODO : 카테고리/상품ID 로 넣어도 좋을듯 */}
             <Route path="/product" element={<ProductPage />} />
             <Route path="/payment" element={<PaymentPage />} />
-            <Route
-              path="/payment-completed"
-              element={<PaymentcompletedPage />}
-            />
-            <Route path="/payment-detail" element={<PaymentDetail />} />
-            <Route path="/payment-list" element={<PaymentListPage />} />
+            <Route path="/payment" element={<PaymentPage />}>
+              <Route path="completed" element={<PaymentcompletedPage />} />
+              <Route path="detail" element={<PaymentDetail />} />
+              <Route path="list" element={<PaymentListPage />} />
+            </Route>
           </Routes>
         </Suspense>
       </Container>
