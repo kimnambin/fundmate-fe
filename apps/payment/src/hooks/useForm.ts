@@ -59,7 +59,7 @@ export const useTransferForm = ({
 
       console.log('응답 데이터', res.data);
       alert('이체가 완료되었습니다.');
-      nav(`/payment-completed${url}`);
+      nav(`/payment/completed${url}`);
     } catch (err) {
       alert(`입력한 내용을 다시 한번 확인해주세요`);
     } finally {
@@ -133,7 +133,7 @@ export const useCardPayForm = ({
 
       console.log('응답 데이터', res.data);
       alert('결제가 완료되었습니다.');
-      nav(`/payment-completed${url}`);
+      nav(`/payment/completed${url}`);
     } catch (err) {
       alert(`입력한 내용을 다시 한번 확인해주세요`);
     } finally {

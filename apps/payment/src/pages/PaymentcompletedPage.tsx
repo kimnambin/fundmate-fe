@@ -12,6 +12,7 @@ import { Blank } from '../components/styles/product-detail/prdouctstyle.style';
 
 const PaymentcompletedPage = () => {
   const url = useGetQueryString();
+
   return (
     <Container className="mt-[10%] px-6 items-start sm:px-0">
       <FlexColsm>
@@ -20,7 +21,7 @@ const PaymentcompletedPage = () => {
         <FlexRowsm>
           <BaseText className="mt-6 text-xs sm:text-base">
             * 후원 내역 변경은{' '}
-            <Link to={`/payment-detail/${url}`} className="text-main underline">
+            <Link to={`/payment/detail/${url}`} className="text-main underline">
               후원상세
             </Link>
             에서 하실 수 있습니다.
@@ -32,9 +33,14 @@ const PaymentcompletedPage = () => {
           </BoldBigText>
 
           <GridCol4 className="w-full">
-            {Array.from({ length: 8 }).map((_, index) => (
-              <VerticalCard key={index} />
-            ))}
+            {Array.from({ length: 8 }).map((_, index) => {
+              try {
+                return <VerticalCard key={index} />;
+              } catch (error) {
+                console.error('Card 오류:', error);
+                return <div key={index}>오류 발생</div>;
+              }
+            })}
           </GridCol4>
         </div>
         <Blank></Blank>

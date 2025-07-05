@@ -5,13 +5,11 @@ import {
   CardInput,
   CardInputContainer,
   CardType,
-  Container,
   ExpiryBox,
   H2,
   ImgBox,
   Input,
   Label,
-  ModalContainer,
   MouthBox,
   SecBox,
   Select,
@@ -21,6 +19,7 @@ import { BankBtn } from '../styles/modal/tansfetModal.style';
 import { FlexRowsm } from '../styles/layout.style';
 import { useCardPayForm } from '../../hooks/useForm';
 import { TransferProps } from '../../types/modal.model';
+import { Modal } from '@repo/ui/components';
 
 const PayModal = ({
   addAmount,
@@ -41,16 +40,11 @@ const PayModal = ({
   } = useCardPayForm({ addAmount, addressData, setIsModalOpen });
 
   return (
-    <ModalContainer>
-      <Container>
+    <Modal isOpen={true} onClose={() => setIsModalOpen(false)}>
+      <div className="max-w-md mx-auto  p-6">
         <FlexRowsm className="justify-between items-center">
           <H2>결제방법</H2>
-          <BankBtn
-            className="mb-4"
-            onClick={() => {
-              handleClose();
-            }}
-          >
+          <BankBtn className="mb-4" onClick={handleClose}>
             &times;
           </BankBtn>
         </FlexRowsm>
@@ -117,7 +111,7 @@ const PayModal = ({
                 id="expiry-month"
                 required
                 className="mr-2"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                   setExpiryDate(e.target.value)
                 }
               >
@@ -134,7 +128,7 @@ const PayModal = ({
               <Select
                 id="expiry-year"
                 required
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                   setExpiryDate(e.target.value)
                 }
               >
@@ -167,7 +161,6 @@ const PayModal = ({
                 setCvv(onlyNums.slice(0, 3));
               }}
             />
-
             <IoCardOutline className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 mt-2" />
           </SecBox>
         </ExpiryBox>
@@ -190,8 +183,8 @@ const PayModal = ({
         >
           결제하기
         </BaseButton>
-      </Container>
-    </ModalContainer>
+      </div>
+    </Modal>
   );
 };
 

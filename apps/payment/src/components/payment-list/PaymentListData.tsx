@@ -6,7 +6,7 @@ import { BaseText, BoldText, LightColor } from '../styles/text.style';
 const PaymentListData = () => {
   // TODO : 추후 실제 데이터를 받아 쿼리 스트링으로 전달 예정
   return (
-    <Link to="/payment-detail" className="w-full">
+    <Link to="/payment/detail" className="w-full">
       <BoxRow>
         <ProductImg src={'sss'} alt="대표 이미지" className="w-28 h-28" />
         <FlexColsm className="items-start gap-1">
