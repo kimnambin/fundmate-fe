@@ -31,7 +31,7 @@ const ProductDetail = () => {
         <Line />
         <Title>{currentPage ? '프로젝트 소개' : '프로젝트 후기'}</Title>
       </Topic>
-      <Main>
+      <Main className="">
         <Box>{currentPage ? <PDdetail /> : <PDReview />}</Box>
         <PDBox />
       </Main>

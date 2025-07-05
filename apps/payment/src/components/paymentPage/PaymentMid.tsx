@@ -1,5 +1,5 @@
 import { BaseText, BoldBigText, LightColor } from '../styles/text.style';
-import { Box, BoxRow, FlexColsm, FlexRowsm } from '../styles/flex.style';
+import { Box, BoxRow, FlexColsm, FlexRowsm } from '../styles/layout.style';
 import { Input, MoneyBox, Span } from '../styles/paymentPage/PaymentMid.style';
 
 const PaymentMid = ({

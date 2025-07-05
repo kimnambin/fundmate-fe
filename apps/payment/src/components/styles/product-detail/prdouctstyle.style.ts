@@ -9,6 +9,8 @@ export const Wrapper = tw.div`
   flex 
   flex-col
   mt-8
+  px-6
+  sm:px-0
 `;
 
 export const Header = tw.header<HasProps>`
@@ -44,7 +46,8 @@ export const Line = tw.div`
 
 export const Main = tw.main`
   flex 
-  flex-row
+  flex-col
+  sm:flex-row
   items-start
   justify-start 
   px-3
@@ -58,7 +61,8 @@ export const Box = tw.div`
   items-start
   justify-start
   p-0
-  m-0
+  sm:m-0
+  mb-12
 `;
 
 export const Title = tw.h2`
@@ -148,6 +152,7 @@ export const SelectButton = tw.button`
 
 export const Blank = tw.div`
   h-7
+  py-4
 `;
 
 export const Button = tw.button`

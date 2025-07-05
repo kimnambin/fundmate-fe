@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import PayModal from '../modal/PayModal';
 import TransferModal from '../modal/TransferModal';
-import { BoxCol, BoxRow, FlexColsm } from '../styles/flex.style';
-import { Radio } from '../styles/paymentPage/Adress.style';
+import { BoxCol, BoxRow, FlexColsm } from '../styles/layout.style';
+import { Radio } from '../styles/paymentPage/Address.style';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { BaseText, BoldText, LightColor } from '../styles/text.style';
-import Adress from './Adress';
+import Address from './Address';
 import { formatNum } from '../../utils/numbers';
 
 interface PaymentFinalProps {
@@ -22,7 +22,6 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   const [addressData, setAddressData] = useState('');
 
   const [checks, setChecks] = useState([false, false]);
-  const isDisabled = !modalType || !checks.every(Boolean);
 
   const handleCheck = (index: number) => {
     const newChecks = [...checks];
@@ -46,8 +45,8 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
 
   return (
     <>
-      {selectedPayment && <Adress setAddressData={setAddressData} />}
-      <BoxRow className="justify-between p-5 my-7">
+      {selectedPayment && <Address setAddressData={setAddressData} />}
+      <BoxRow className="justify-between p-5 my-4 sm:my-7">
         <LightColor className="bg-none">최종 후원 금액</LightColor>
         <BoldText>{formatNum(addAmount)}원</BoldText>
       </BoxRow>
@@ -79,8 +78,8 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
         </Radio>
       </BoxCol>
       <BaseButton
-        className={`ml-0 mt-4 ${isDisabled ? 'bg-gray-400' : 'bg-main'}`}
-        disabled={modalType || !checks[0] || !checks[1]}
+        className={`ml-0 mt-4 ${!addressData || modalType || !checks[0] || !checks[1] ? 'bg-gray-400' : 'ml-0 mt-4'}`}
+        disabled={!addressData || modalType || !checks[0] || !checks[1]}
         onClick={handleBtn}
       >
         후원하기

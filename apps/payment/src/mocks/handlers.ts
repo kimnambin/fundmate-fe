@@ -5,6 +5,7 @@ interface CardRequestProps {
   expiryDate: string;
   cvv: string;
   cardName: string;
+  address: string;
 }
 
 interface TransferTypes {
@@ -12,6 +13,7 @@ interface TransferTypes {
   accountNumber: string;
   accountHolder: string;
   birthDate: string;
+  address: string;
 }
 
 export const handlers = [

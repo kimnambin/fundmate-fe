@@ -28,5 +28,5 @@ export const VerticalCard = () => {
         </div>
       </div>
     </VerticalCardContainer>
-  )
-}
+  );
+};

@@ -48,13 +48,28 @@ export const BottomItems = tw.div`
 `;
 
 export const IconBox = tw.div`
-    flex
-    flex-row
-    items-center
-    justify-start
-    gap-3
-    w-full
-    `;
+  flex
+  flex-row
+  items-center
+  justify-start
+  gap-3
+  w-full
+  p-6
+  border
+  border-t-gray-600
+  fixed 
+  bottom-0 
+  left-0 
+  right-0 
+  bg-white 
+  z-50
+  sm:static 
+  sm:bottom-auto 
+  sm:left-auto 
+  sm:right-auto
+  sm:p-0
+  sm:border-none
+`;
 
 export const IconGroup = tw.div`
   flex
