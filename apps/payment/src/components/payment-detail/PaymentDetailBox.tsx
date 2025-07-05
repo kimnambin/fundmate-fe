@@ -1,4 +1,4 @@
-import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/flex.style';
+import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/layout.style';
 import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { BoldBigText, BoldText, LightColor } from '../styles/text.style';
 
@@ -40,7 +40,7 @@ const PaymentDetailBox = () => {
             </FlexRowsm>
           ))}
         </FlexColsm>
-        <BaseButton className="bg-[#E2E8F0] w-[10%] p-2 text-xs text-black">
+        <BaseButton className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black">
           취소하기
         </BaseButton>
       </BoxRow>

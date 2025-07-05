@@ -9,6 +9,7 @@ export {
   VerticalCard,
   Dropdown,
   Loading,
+  Modal,
 } from './components';
 
 //assets

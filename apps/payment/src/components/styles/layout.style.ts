@@ -6,7 +6,7 @@ export const Container = tw.div`
     justify-center
     h-full
     w-full
-    px-[120px]
+    px-[24px] sm:px-[60px] md:px-[120px]
     my-4
 `;
 
@@ -78,4 +78,10 @@ export const Line = tw.div`
   w-full
   border
   border-b-gray-300
+`;
+
+export const GridCol4 = tw.div`
+   grid
+   grid-cols-4 
+   gap-4
 `;

@@ -3,9 +3,14 @@ import { formatNum } from '../utils/numbers';
 import axios from 'axios';
 import { coverSec } from '../utils/security';
 import { TransferProps } from '../types/modal.model';
+import { useNavigate } from 'react-router-dom';
+import { useGetQueryString } from './useGetQueryString';
+// import { Loading } from '@repo/ui/components';
+// TODO : 추후 tanstack query를 이용하여 적용 예정
 
 export const useTransferForm = ({
   addAmount,
+  addressData,
   setIsModalOpen,
 }: TransferProps) => {
   const [selectedBank, setSelectedBank] = useState('');
@@ -14,6 +19,9 @@ export const useTransferForm = ({
   const [birthDate, setBirthDate] = useState('');
   const [isBusinessAccount, setIsBusinessAccount] = useState(false);
   const [, setIsLoading] = useState(false);
+
+  const nav = useNavigate();
+  const url = useGetQueryString();
 
   const handleBankChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedBank(event.target.value);
@@ -24,6 +32,7 @@ export const useTransferForm = ({
   };
 
   const isFormValid =
+    addressData.trim() !== '' &&
     accountNumber.trim() !== '' &&
     accountHolder.trim() !== '' &&
     birthDate.trim() !== '';
@@ -45,11 +54,12 @@ export const useTransferForm = ({
         accountHolder: coverSec(accountHolder),
         birthDate: coverSec(birthDate),
         amount: addAmount,
+        address: coverSec(addressData),
       });
 
       console.log('응답 데이터', res.data);
-      alert('결제가 완료되었습니다.');
-      window.location.href = '/payment-completed';
+      alert('이체가 완료되었습니다.');
+      nav(`/payment/completed${url}`);
     } catch (err) {
       alert(`입력한 내용을 다시 한번 확인해주세요`);
     } finally {
@@ -76,6 +86,7 @@ export const useTransferForm = ({
 
 export const useCardPayForm = ({
   addAmount,
+  addressData,
   setIsModalOpen,
 }: TransferProps) => {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
@@ -83,12 +94,16 @@ export const useCardPayForm = ({
   const [cvv, setCvv] = useState('');
   const [cardName, setCardName] = useState('');
   const [, setIsLoading] = useState(false);
+  const nav = useNavigate();
+
+  const url = useGetQueryString();
 
   const handleClose = () => {
     setIsModalOpen(false);
   };
 
   const isFormValid =
+    addressData.trim() !== '' &&
     cardNumber.some((num) => num.trim() === '') === false &&
     expiryDate.trim() !== '' &&
     cvv.trim() !== '' &&
@@ -102,7 +117,7 @@ export const useCardPayForm = ({
       return;
     }
 
-    const ok = confirm(`${formatNum(addAmount)}원을 정말로 이체하시겠습니까??`);
+    const ok = confirm(`${formatNum(addAmount)}원을 정말로 결제하시겠습니까??`);
     if (!ok) return;
 
     setIsLoading(true);
@@ -113,11 +128,12 @@ export const useCardPayForm = ({
         cvv: coverSec(cvv),
         cardName: coverSec(cardName),
         amount: addAmount,
+        address: coverSec(addressData),
       });
 
       console.log('응답 데이터', res.data);
       alert('결제가 완료되었습니다.');
-      window.location.href = '/payment-completed';
+      nav(`/payment/completed${url}`);
     } catch (err) {
       alert(`입력한 내용을 다시 한번 확인해주세요`);
     } finally {
