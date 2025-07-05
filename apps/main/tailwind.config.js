@@ -12,6 +12,7 @@ module.exports = {
         secondary: '#F59E0B',
 
         main: '#5FBDFF',
+        mainOpacity: '#5FBDFF1A',
         'sub-color': '#DFF2FF',
         'text-active': '#000000',
         'text-unactive': '#343F59',

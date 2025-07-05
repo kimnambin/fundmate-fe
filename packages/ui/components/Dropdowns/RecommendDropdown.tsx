@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi"
 import type { DropdownProps } from "./Dropdown";
 import { useSearchParams } from "react-router-dom";
+import { SmallFont } from "../../styles";
 
 export const RecommendDropdown = ({ query }: DropdownProps) => {
   const [title, setTitle] = useState('정렬');
@@ -43,7 +44,9 @@ export const RecommendDropdown = ({ query }: DropdownProps) => {
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   onClick={() => handleQueryChange(i.toString(), v)}
                 >
-                  {v}
+                  <SmallFont>
+                    {v}
+                  </SmallFont>
                 </div>
               </MenuItem>
             ))

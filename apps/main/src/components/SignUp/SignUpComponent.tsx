@@ -1,12 +1,18 @@
-import { CommonButton } from "@repo/ui/CommonButton"
-import { UserContainer, UserInput, UserLayout, UserNaigater } from "../../styles/User/UserPage.Styles"
-import { InputContainer, SignUpContainer, SignUpSubTitle, SignUpTitle, SignUpVerificationContainer, UserCategoryButton } from "../../styles/User/SignUp.style"
+import { UserContainer, UserLayout, UserNaigater } from "../../styles/User/UserPage.Styles"
+import {
+  InputContainer,
+  SignUpContainer,
+  SignUpVerificationContainer,
+  UserCategoryButton
+} from "../../styles/User/SignUp.style"
 import { CategoryIcons } from "@repo/ui/assets"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { useState } from "react"
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { MediumFont, SmallFont, Title } from "@repo/ui/styles"
+import { InputText, MainButton } from "@repo/ui/components"
 
 const schema = yup.object({
   nickname: yup.string().required(),
@@ -19,7 +25,7 @@ const schema = yup.object({
 type SignUpProps = yup.InferType<typeof schema>;
 
 export const SignUpComponent = () => {
-  const { menu, ...categories } = CategoryIcons;
+  const { menu: _menu, ...categories } = CategoryIcons;
   const [userCategory, setUserCategory] = useState<number | null>(null);
   const [verificateRequested, setVerificateRequest] = useState(false);
   const [tempVerificated, setTempVerificated] = useState(false);
@@ -41,7 +47,7 @@ export const SignUpComponent = () => {
     })
 
   const onSubmit: SubmitHandler<SignUpProps> = (data) => {
-    const { checkPassword, verificationCode, ...cleanData } = data;
+    const { checkPassword: _cp, verificationCode: _vc, ...cleanData } = data;
     const finalData = {
       ...cleanData,
       category_id: userCategory
@@ -74,65 +80,67 @@ export const SignUpComponent = () => {
       <UserContainer>
         <SignUpContainer>
           <form className="flex flex-col w-full gap-5" onSubmit={handleSubmit(onSubmit)}>
-            <SignUpTitle><span>회원가입</span></SignUpTitle>
+            <Title>회원가입</Title>
             <InputContainer>
-              <SignUpSubTitle>닉네임</SignUpSubTitle>
-              <UserInput
-                type='text'
+              <MediumFont>닉네임</MediumFont>
+              <InputText
+                type="text"
+                placeholder="닉네임을 입력해주세요."
                 {...register('nickname')}
-                placeholder='닉네임을 입력해주세요.'
-                $isError={!!errors.nickname}
-                autoComplete='off'
+                isError={!!errors.nickname}
+                autoComplete="off"
               />
             </InputContainer>
             <InputContainer>
-              <SignUpSubTitle>이메일</SignUpSubTitle>
+              <MediumFont>이메일</MediumFont>
               <SignUpVerificationContainer>
-                <UserInput type='text'
+                <InputText
+                  type="text"
+                  placeholder="이메일을 입력해주세요."
                   {...register('email')}
-                  placeholder='이메일을 입력해주세요.'
-                  $isError={!!errors.email}
+                  isError={!!errors.email}
                   disabled={tempVerificated}
-                  autoComplete='email'
+                  autoComplete="email"
                   onFocus={() => trigger('email')}
                 />
-                <CommonButton
-                  type='button'
-                  $isError={!!!getValues('email')}
-                  $isVerificated={tempVerificated}
-                  disabled={!!!getValues('email')}
+                <MainButton
+                  type="button"
                   onClick={emailVerificationHandle}
-                >
-                  <span className='whitespace-nowrap'>인증하기</span>
-                </CommonButton>
+                  isError={!getValues('email')}
+                  isVerificated={tempVerificated}
+                  disabled={!getValues('email')}
+                  width="w-28"
+                  label="인증하기"
+                />
               </SignUpVerificationContainer>
               {
                 verificateRequested ?
                   (
                     <>
                       <SignUpVerificationContainer>
-                        <UserInput
-                          type='text'
+                        <InputText
+                          type="text"
+                          placeholder="인증 코드를 입력해주세요."
                           {...register('verificationCode')}
-                          $isError={!!errors.verificationCode}
-                          placeholder='인증 코드를 입력해주세요.'
+                          isError={!!errors.verificationCode}
                           disabled={tempVerificated}
                           onFocus={() => trigger('verificationCode')}
-                          autoComplete='off'
+                          autoComplete="off"
                         />
-                        <CommonButton
-                          type='button'
-                          $isError={!!!getValues('verificationCode')}
-                          $isVerificated={tempVerificated}
-                          disabled={!!!getValues('verificationCode')}
+                        <MainButton
+                          type="button"
                           onClick={codeVerificationHandle}
-                        >
-                          <span className="whitespace-nowrap">확인하기</span>
-                        </CommonButton>
+                          width="w-28"
+                          isError={!getValues('verificationCode')}
+                          isVerificated={tempVerificated}
+                          disabled={tempVerificated}
+                          label="확인하기"
+                        />
                       </SignUpVerificationContainer>
                       {
                         tempCodeCheck === 'fail'
-                        && <span className="text-base text-red-500">유효하지 않은 인증 번호입니다.</span>}
+                        && <SmallFont className="text-red-500">유효하지 않은 인증 번호입니다.</SmallFont>
+                      }
                     </>
                   ) : (
                     <></>
@@ -140,36 +148,44 @@ export const SignUpComponent = () => {
               }
             </InputContainer>
             <InputContainer>
-              <SignUpSubTitle>비밀번호</SignUpSubTitle>
-              <UserInput
+              <MediumFont>비밀번호</MediumFont>
+              <InputText
                 type='password'
+                placeholder="비밀번호를 입력해주세요."
                 {...register('password')}
-                placeholder='비밀번호를 입력해주세요.'
-                $isError={!!errors.password}
+                isError={!!errors.password}
               />
-              <UserInput
-                type='password'
+              <InputText
+                type="password"
+                placeholder="비밀번호를 한 번 더 입력해주세요."
                 {...register('checkPassword')}
-                placeholder='비밀번호를 한 번 더 입력해주세요.'
-                $isError={!!errors.checkPassword}
+                isError={!!errors.checkPassword}
               />
             </InputContainer>
             <InputContainer>
-              <SignUpSubTitle>카테고리 선택</SignUpSubTitle>
+              <MediumFont>카테고리 선택</MediumFont>
               <div className="grid grid-cols-4 gap-3">
                 {
-                  Object.entries(categories).map(([_name, { menuName }], i) => (
+                  Object.entries(categories).map(([_, { menuName }], i) => (
                     <UserCategoryButton type="button" key={i + 1} $selected={userCategory === i + 1} onClick={() => setUserCategory(i + 1)}>
-                      <span>{menuName}</span>
+                      <MediumFont>{menuName}</MediumFont>
                     </UserCategoryButton>
                   ))
                 }
               </div>
             </InputContainer>
-            <CommonButton type='submit' className='my-5' $isError={!isValid || !userCategory}><span>가입하기</span></CommonButton>
+            <MainButton
+              type="submit"
+              className="my-5"
+              isError={!isValid || !userCategory}
+              width="w-full"
+              label="가입하기"
+            />
           </form>
           <UserNaigater>
-            <Link to='/login'>이미 계정이 있으신가요?</Link>
+            <Link to='/login'>
+              <MediumFont>이미 계정이 있으신가요?</MediumFont>
+            </Link>
           </UserNaigater>
         </SignUpContainer>
       </UserContainer>
