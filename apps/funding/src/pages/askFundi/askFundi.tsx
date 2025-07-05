@@ -10,10 +10,9 @@ import {
 import Category from '../../components/category/category';
 import { filters } from '../createFunding/createFunding';
 import MainButton from '../../components/main-button/mainButton';
-import Modal from '../../components/modal/modal';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
-import { Loading } from '@repo/ui/components';
+import { Loading, Modal } from '@repo/ui/components';
 import { useNavigate } from 'react-router-dom';
 import { Layout } from '../../style/layout';
 import { FundiIcon } from '@repo/ui/assets';

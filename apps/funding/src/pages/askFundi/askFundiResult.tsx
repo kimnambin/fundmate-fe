@@ -36,7 +36,7 @@ const AskFundiResult = () => {
   return (
     <Layout>
       <ResultWrapper ref={ref} isCapture={isCapture}>
-        <div data-color-mode='light' className='wnde-markdown-var'>
+        <div data-color-mode="light" className="wnde-markdown-var">
           <MarkdownEditor.Markdown source={response?.message} />
         </div>
       </ResultWrapper>

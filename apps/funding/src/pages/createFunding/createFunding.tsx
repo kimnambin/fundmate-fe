@@ -13,11 +13,12 @@ import {
   HorizontalLine,
   InputWrapper,
 } from './createFunding.styles';
-import Modal from '../../components/modal/modal';
 import { IoClose } from 'react-icons/io5';
 import { FiCopy, FiCheck } from 'react-icons/fi';
 import { MediumFont, Title, WarningText } from '../../style/typography';
 import { Layout } from '../../style/layout';
+import { Modal } from '@repo/ui/components';
+import { FundiIcon } from '@repo/ui/assets';
 
 function CreateFunding() {
   const [isFundiOpen, setIsFundiOpen] = useState(false);
@@ -165,7 +166,7 @@ function CreateFunding() {
               <div className="flex flex-col gap-[10px]">
                 <div className="flex items-center gap-2">
                   <Title>펀디가 추천하는 한 줄 소개</Title>
-                  <img src="/assets/icons/ic_fundi.svg" width="20px" />
+                  <img src={FundiIcon} width="20px" />
                 </div>
                 <MediumFont ref={summaryRef} className="break-words">
                   펀디가 요약한 내용
