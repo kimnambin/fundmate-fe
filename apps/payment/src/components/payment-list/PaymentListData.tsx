@@ -8,7 +8,12 @@ const PaymentListData = () => {
   return (
     <Link to="/payment/detail" className="w-full">
       <BoxRow>
-        <ProductImg src={'sss'} alt="대표 이미지" className="w-28 h-28" />
+        {/* TODO : 임시 이미지 */}
+        <ProductImg
+          src="https://imgnews.pstatic.net/image/094/2025/06/25/0000012740_001_20250625075019738.jpg?type=w860"
+          alt="대표 이미지"
+          className="w-28 h-28"
+        />
         <FlexColsm className="items-start gap-1">
           <FlexRowsm>
             <LightColor className="mr-5 text-xs">후원일 2025.06.17</LightColor>
