@@ -15,8 +15,8 @@ function App() {
         <Routes>
           <Route path="/funding/create" element={<CreateFunding />} />
           <Route path="/funding/detail/:id" element={<FundingDetail />} />
-          <Route path="/ask-fundi" element={<AskFundi />} />
-          <Route path="/ask-fundi/result" element={<AskFundiResult />} />
+          <Route path="/fundi/request" element={<AskFundi />} />
+          <Route path="/fundi/response" element={<AskFundiResult />} />
         </Routes>
       </main>
 

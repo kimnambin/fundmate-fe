@@ -44,7 +44,7 @@ const AskFundi = () => {
         message: markdownString,
       };
 
-      navigate('/ask-fundi/result', { state: response });
+      navigate('/fundi/response', { state: response });
     } catch (error) {
       console.error('펀디 요청 실패 :', error);
     } finally {

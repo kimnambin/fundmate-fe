@@ -20,29 +20,29 @@ const menuBar = [
   {
     name: 'home',
     menuName: '홈',
-    route: '/'
+    route: '/',
   },
   {
     name: 'popular',
     menuName: '인기',
-    route: '/search?popular=1'
+    route: '/search?popular=1',
   },
   {
     name: 'new',
     menuName: '신규',
-    route: '/search?new=1'
+    route: '/search?new=1',
   },
   {
     name: 'deadline',
     menuName: '마감임박',
-    route: '/search?deadline=1'
+    route: '/search?deadline=1',
   },
   {
     name: 'statistics',
     menuName: '데이터 분석',
-    route: '/statisics'
-  }
-]
+    route: '/statisics',
+  },
+];
 
 export const Header = () => {
   const isOpen = modalStore((state) => state.isOpen);
@@ -85,7 +85,10 @@ export const Header = () => {
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <IoSearch className="absolute end-5 top-1/2 -translate-y-1/2 text-2xl text-[#26AAFF] cursor-pointer" onClick={handleClick} />
+          <IoSearch
+            className="absolute end-5 top-1/2 -translate-y-1/2 text-2xl text-[#26AAFF] cursor-pointer"
+            onClick={handleClick}
+          />
         </InputDiv>
         <div className="flex flex-row gap-7 h-full items-center">
           <Link to="/funding/create" className="text-lg font-semibold">
@@ -125,32 +128,31 @@ export const Header = () => {
               )}
             </CateogoryContainer>
           </button>
-          {
-            menuBar.map((v) => {
-              const isActive = v.route === '/'
+          {menuBar.map((v) => {
+            const isActive =
+              v.route === '/'
                 ? location.pathname === '/'
                 : currentFullPath.includes(v.route);
 
-              return (
-                <button
-                  key={v.name}
-                  type='button'
-                  className={`px-3 h-full ${isActive ? 'shadow-[inset_0_-2px_0_0_#26AAFF]' : 'transition-shadow'}`}
-                  onClick={() => {
-                    if (!isActive) navigate(v.route)
-                  }}
-                >
-                  <span>{v.menuName}</span>
-                </button>
-              )
-            })
-          }
-        </div >
-        <FundiButton type="button" onClick={() => navigate('/ask-fundi')}>
+            return (
+              <button
+                key={v.name}
+                type="button"
+                className={`px-3 h-full ${isActive ? 'shadow-[inset_0_-2px_0_0_#26AAFF]' : 'transition-shadow'}`}
+                onClick={() => {
+                  if (!isActive) navigate(v.route);
+                }}
+              >
+                <span>{v.menuName}</span>
+              </button>
+            );
+          })}
+        </div>
+        <FundiButton type="button" onClick={() => navigate('/fundi/request')}>
           <span>펀디에게 물어보기</span>
           <img src={fundi} className="w-6" />
         </FundiButton>
-      </SpaceContainer >
-    </div >
+      </SpaceContainer>
+    </div>
   );
 };
