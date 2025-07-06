@@ -3,6 +3,7 @@ import tw from "tailwind-styled-components";
 export const VerticalCardContainer = tw.div`
   flex
   flex-col
+  grow
   justify-between
   cursor-pointer
   rounded-xl

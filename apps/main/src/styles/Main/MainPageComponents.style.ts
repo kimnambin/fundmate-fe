@@ -9,6 +9,7 @@ export const BannerContainer = tw.div`
 export const InterestingItemsContainer = tw.div`
   col-start-1
   col-span-4
+  h-full
 `
 
 export const InterestingItemsGrid = tw.div`
@@ -16,6 +17,7 @@ export const InterestingItemsGrid = tw.div`
   grid-rows-2
   grid-cols-4
   gap-3
+  h-full
 `
 
 //MainCategory

@@ -9,7 +9,7 @@ export const VerticalCard = () => {
 
   return (
     <VerticalCardContainer onClick={() => navigate('/product')}>
-      <div className="flex flex-col @[250px]/vertical:gap-5 @[270px]/vertical:gap-7">
+      <div className="flex flex-col h-full justify-between @[250px]/vertical:gap-5 @[270px]/vertical:gap-7">
         <div className="flex flex-col gap-3">
           <div className="relative">
             <img src="https://picsum.photos/id/40/300/300" className="w-full h-auto rounded-xl object-cover" />

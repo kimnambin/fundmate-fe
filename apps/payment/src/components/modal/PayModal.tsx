@@ -23,7 +23,7 @@ import { Modal } from '@repo/ui/components';
 
 const PayModal = ({
   addAmount,
-  // addressData,
+  addressData,
   setIsModalOpen,
 }: TransferProps) => {
   const placeholders = randomPlaceholder();
