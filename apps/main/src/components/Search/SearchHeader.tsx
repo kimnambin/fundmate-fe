@@ -1,4 +1,5 @@
 import { Dropdown } from "@repo/ui/components"
+import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 
 type SearchHeaderProps = {
   isCategory: boolean;
@@ -11,10 +12,10 @@ export const SearchHeader = ({ isCategory, isSearch, queryValue }: SearchHeaderP
   return (
     <div className="flex flex-col gap-7 my-7">
       {
-        isCategory ? <span className="text-2xl font-semibold">{queryValue}</span> : <></>
+        isCategory ? <Title>{queryValue}</Title> : <></>
       }
       {
-        isSearch ? <span className="text-2xl font-semibold">'{queryValue}'에 대한 검색 결과</span> : <></>
+        isSearch ? <Title>'{queryValue}'에 대한 검색 결과</Title> : <></>
       }
       <div className="flex flex-row gap-3">
         {
@@ -23,9 +24,9 @@ export const SearchHeader = ({ isCategory, isSearch, queryValue }: SearchHeaderP
         <Dropdown kind="complete" />
       </div>
       <div className="flex flex-row justify-between">
-        <div>
-          <span className="text-[#26AAFF] font-semibold">10000</span>
-          <span>개의 오브젝트가 있습니다.</span>
+        <div className="flex flex-row">
+          <SubTitle className='text-main'>10000</SubTitle>
+          <MediumFont>개의 오브젝트가 있습니다.</MediumFont>
         </div>
         {
           isCategory || isSearch ? <Dropdown kind="recommand" /> : <></>

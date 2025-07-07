@@ -13,6 +13,7 @@
   "devDependencies": {
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
+    "tailwindcss": "^4.1.11",
     "turbo": "^2.5.4"
   },
   "name": "with-vite",

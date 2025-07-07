@@ -10,9 +10,7 @@ export const InterestingItems = () => {
     <InterestingItemsContainer>
       <InterestingItemsGrid>
         {range(8).map((i) => (
-          <div key={i}>
-            <VerticalCard />
-          </div>
+          <VerticalCard key={i} />
         ))}
       </InterestingItemsGrid>
     </InterestingItemsContainer>

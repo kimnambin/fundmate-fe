@@ -1,5 +1,5 @@
 import { LoginComponent } from "../components/Login/LoginComponent"
-import { Layout } from "../styles/Layout.style"
+import { Layout } from "@repo/ui/styles"
 
 export const LogIn = () => {
   return (

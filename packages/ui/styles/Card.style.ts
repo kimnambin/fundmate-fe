@@ -3,25 +3,26 @@ import tw from "tailwind-styled-components";
 export const VerticalCardContainer = tw.div`
   flex
   flex-col
-  gap-3
-  h-full
+  grow
   justify-between
-  aspect-[5/7]
   cursor-pointer
   rounded-xl
   transition-shadow
-  p-3
-  m-3
   bg-white
+  p-3
+  w-full
+  h-full
+  @container/vertical
 
   hover:shadow-md
 `
 
 export const HorizontalCardContainer = tw.div`
-  grid
-  grid-cols-12
-  aspect-[9/1]
+  flex
+  flex-row
+  gap-3
   w-full
+  h-full
   cursor-pointer
   rounded-xl  
   transition-shadow

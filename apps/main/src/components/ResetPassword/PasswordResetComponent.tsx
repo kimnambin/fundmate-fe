@@ -4,6 +4,7 @@ import { UserContainer, UserLayout, UserNaigater } from "../../styles/User/UserP
 import { EmailVerificationComponent } from "./EmailVerification"
 import { useEffect, useState } from "react"
 import { ChangePassword } from "./ChangePassword"
+import { MediumFont } from "@repo/ui/styles"
 
 export const PasswordResetComponent = () => {
   const [searchParams] = useSearchParams();
@@ -23,7 +24,11 @@ export const PasswordResetComponent = () => {
               : <EmailVerificationComponent />
           }
           <UserNaigater>
-            <Link to='/login'>로그인 화면으로 돌아가기</Link>
+            <Link to='/login'>
+              <MediumFont>
+                로그인 화면으로 돌아가기
+              </MediumFont>
+            </Link>
           </UserNaigater>
         </SignUpContainer>
       </UserContainer>

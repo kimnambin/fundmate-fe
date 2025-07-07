@@ -4,7 +4,7 @@ import { RecommendDropdown } from "./RecommendDropdown"
 import { StatusDropdown } from "./StatusDropdown"
 
 export type DropdownProps = {
-  query: string;
+  query: string | unknown;
 }
 
 type kindOfDropdown = {
@@ -13,7 +13,7 @@ type kindOfDropdown = {
 
 export const Dropdown = ({ kind }: kindOfDropdown) => {
   const [searchParams] = useSearchParams();
-  const queryKey = Array.from(searchParams.keys())[0];
+  const queryKey = Array.from(searchParams.keys())[0]
   if (kind === 'status') return <StatusDropdown query={queryKey} />
   if (kind === 'recommand') return <RecommendDropdown query={queryKey} />
   if (kind === 'complete') return <CompleteDropdown query={queryKey} />

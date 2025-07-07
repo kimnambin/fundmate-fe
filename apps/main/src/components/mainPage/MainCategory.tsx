@@ -3,7 +3,7 @@ import { SingleCategory } from './SingleCategory';
 import { CategoryIcons } from '@repo/ui/assets'
 
 export const MainCategory = () => {
-  const { menu, ...mainPageCategoryIcons } = CategoryIcons;
+  const { menu: _, ...mainPageCategoryIcons } = CategoryIcons;
   return (
     <MainCategoryContainer>
       {
