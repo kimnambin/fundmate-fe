@@ -1,10 +1,10 @@
-import { CommonButton } from "@repo/ui/CommonButton"
-import { InputContainer, SignUpTitle } from "../../styles/User/SignUp.style"
-import { UserInput } from "../../styles/User/UserPage.Styles"
+import { InputContainer } from "../../styles/User/SignUp.style"
 import { useNavigate } from "react-router-dom"
 import * as yup from 'yup'
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { InputText, MainButton } from "@repo/ui/components"
+import { MediumFont, Title } from "@repo/ui/styles"
 
 const schema = yup.object({
   password: yup.string().required(),
@@ -30,29 +30,29 @@ export const ChangePassword = () => {
 
   return (
     <form className="flex flex-col w-full gap-5" onSubmit={handleSubmit(onSubmit)} >
-      <SignUpTitle><span>비밀번호 재설정</span></SignUpTitle>
+      <Title>비밀번호 재설정</Title>
       <InputContainer>
-        <UserInput
-          type='password'
-          placeholder='변경할 이메일을 입력해주세요.'
+        <InputText
+          type="password"
+          placeholder="변경할 비밀번호를 입력해주세요."
+          isError={!!errors.password}
           {...register('password')}
-          $isError={!!errors.password}
         />
-        <UserInput
-          type='password'
-          placeholder='변경할 이메일을 한 번 더 입력해주세요.'
+        <InputText
+          type="password"
+          placeholder="변경할 비밀번호를 한 번 더 입력해주세요."
+          isError={!!errors.checkPassword}
           {...register('checkPassword')}
-          $isError={!!errors.checkPassword}
         />
-        {errors.checkPassword && <span className="text-base text-red-500">비밀번호가 동일하지 않습니다</span>}
+        {errors.checkPassword && <MediumFont className="text-red">비밀번호가 동일하지 않습니다</MediumFont>}
       </InputContainer>
-      <CommonButton
-        type='submit'
-        $isError={!isValid}
+      <MainButton
+        type="submit"
+        isError={!isValid}
         disabled={!isValid}
-      >
-        <span>비밀번호 재설정</span>
-      </CommonButton>
+        width="w-full"
+        label="비밀번호 재설정"
+      />
     </form>
   )
 }

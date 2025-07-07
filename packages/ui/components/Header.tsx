@@ -15,6 +15,8 @@ import { CategoryIcons } from '../assets';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import fundi from '../assets/images/fundi.png';
+import { MediumFont, SubTitle } from '../styles';
+import { InputText } from './Inputs/Input';
 
 const menuBar = [
   {
@@ -77,19 +79,22 @@ export const Header = () => {
           onClick={() => navigate('/')}
         />
         <InputDiv>
-          <input
-            aria-label="검색"
-            placeholder="검색어를 입력하세요."
-            className="w-full h-full text-lg indent-2 border-2 border-[#26AAFF] rounded-lg focus:outline-none"
+          <InputText
+            width='w-full'
+            placeholder='검색어를 입력하세요.'
+            textSize='text-[18px]'
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleKeyDown}
+            className='border-main'
           />
           <IoSearch className="absolute end-5 top-1/2 -translate-y-1/2 text-2xl text-[#26AAFF] cursor-pointer" onClick={handleClick} />
         </InputDiv>
         <div className="flex flex-row gap-7 h-full items-center">
           <Link to="/funding/create" className="text-lg font-semibold">
-            프로젝트 올리기
+            <SubTitle>
+              프로젝트 올리기
+            </SubTitle>
           </Link>
           <LoginButton onClick={handleNavigate}>
             <img
@@ -97,7 +102,7 @@ export const Header = () => {
               alt="default user icon"
               className="w-10 h-10"
             />
-            <span className="text-lg">로그인/회원가입</span>
+            <MediumFont>로그인/회원가입</MediumFont>
           </LoginButton>
         </div>
       </Container>
@@ -109,7 +114,7 @@ export const Header = () => {
             className="flex flex-row items-center gap-2 relative"
           >
             <IoMdMenu />
-            <span className="font-semibold">카테고리</span>
+            <SubTitle>카테고리</SubTitle>
             <CateogoryContainer $isOpen={isOpen}>
               {Object.entries(CategoryIcons).map(
                 ([name, { src, menuName }], _i) => (
@@ -118,8 +123,8 @@ export const Header = () => {
                     key={name}
                     className="flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2"
                   >
-                    <img src={src} className="w-8" />
-                    <span>{menuName}</span>
+                    <img src={src} className="w-6" />
+                    <MediumFont>{menuName}</MediumFont>
                   </Link>
                 ),
               )}
@@ -140,14 +145,14 @@ export const Header = () => {
                     if (!isActive) navigate(v.route)
                   }}
                 >
-                  <span>{v.menuName}</span>
+                  <MediumFont>{v.menuName}</MediumFont>
                 </button>
               )
             })
           }
         </div >
         <FundiButton type="button" onClick={() => navigate('/ask-fundi')}>
-          <span>펀디에게 물어보기</span>
+          <SubTitle>펀디에게 물어보기</SubTitle>
           <img src={fundi} className="w-6" />
         </FundiButton>
       </SpaceContainer >

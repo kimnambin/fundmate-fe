@@ -1,18 +1,27 @@
 import tw from "tailwind-styled-components";
 
-export const CommonButton = tw.button<{ $isError?: boolean, $isVerificated?: boolean, $bigSize?: boolean }>`
-  bg-[#26AAFF]
+export const ButtonWrapper = tw.button<{
+  $isError?: boolean,
+  $isVerificated?: boolean,
+  $width?: string,
+  textSize?: string,
+  textWeight?: string
+}>`
   flex
-  flex-row
   justify-center
   items-center
+  px-1
+  py-2
+  gap-[10px]
+  rounded-[6px]
   text-white
-  font-semibold
-  py-3
-  rounded-lg
-  px-5
-  transition-opacity
+  bg-main
+  cursor-pointer
 
-  ${(p) => p.$bigSize ? 'w-72' : ''}
-  ${(p) => p.$isError || p.$isVerificated ? 'opacity-50 cursor-not-allowed' : 'opacity-100'}
-`
+  hover:opacity-50
+  
+  ${({ $isError, $isVerificated }) => ($isError || $isVerificated) && 'opacity-50 cursor-not-allowed'}
+  ${({ $width }) => $width ?? 'w-auto'}
+  ${({ $textSize }) => $textSize ?? 'text-[14px]'}
+  ${({ $textWeight }) => $textWeight ?? 'font-normal'}
+`;

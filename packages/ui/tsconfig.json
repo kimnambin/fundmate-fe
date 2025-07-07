@@ -12,7 +12,9 @@
       "vite/client"
     ],
     "lib": [
-      "ESNext", "DOM"
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
     ]
   }
 }

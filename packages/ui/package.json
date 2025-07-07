@@ -6,8 +6,8 @@
     "./components": "./components/index.ts",
     "./assets": "./assets/index.ts",
     "./CommonButton": "./styles/Button.styles.ts",
-    "./Layout": "./styles/Layout.style.ts",
-    "./utils": "./utils/index.ts"
+    "./utils": "./utils/index.ts",
+    "./styles": "./styles/index.ts"
   },
   "license": "MIT",
   "scripts": {

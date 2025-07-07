@@ -19,7 +19,7 @@ export const SearchComponent = () => {
 
   useEffect(() => {
     console.log(queryKey);
-  }, [searchParams])
+  }, [queryKey])
 
 
   return (

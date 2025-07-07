@@ -41,7 +41,7 @@ export const FundiButton = tw.button`
   flex-row
   gap-2 
   text-lg
-  bg-[#26AAFF]
+  bg-main
   font-semibold
   text-white
   px-5
