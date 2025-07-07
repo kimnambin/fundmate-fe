@@ -30,6 +30,7 @@ const PayModal = ({
   const {
     cardNumber,
     setCardNumber,
+    expiryDate,
     setExpiryDate,
     cvv,
     setCvv,
@@ -41,7 +42,7 @@ const PayModal = ({
 
   return (
     <Modal isOpen={true} onClose={() => setIsModalOpen(false)}>
-      <div className="max-w-md mx-auto  p-6">
+      <div className="max-w-md mx-auto !border-none">
         <FlexRowsm className="justify-between items-center">
           <H2>결제방법</H2>
           <BankBtn className="mb-4" onClick={handleClose}>
@@ -111,11 +112,12 @@ const PayModal = ({
                 id="expiry-month"
                 required
                 className="mr-2"
+                value={expiryDate}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                   setExpiryDate(e.target.value)
                 }
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   MM
                 </option>
 
@@ -128,11 +130,12 @@ const PayModal = ({
               <Select
                 id="expiry-year"
                 required
+                value={expiryDate}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                   setExpiryDate(e.target.value)
                 }
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   YY
                 </option>
                 {yearList().map((year) => (

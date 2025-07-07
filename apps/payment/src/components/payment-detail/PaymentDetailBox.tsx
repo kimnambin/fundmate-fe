@@ -1,5 +1,5 @@
+import { MainButton } from '@repo/ui/components';
 import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/layout.style';
-import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { BoldBigText, BoldText, LightColor } from '../styles/text.style';
 
 const PaymentDetailBox = () => {
@@ -40,9 +40,12 @@ const PaymentDetailBox = () => {
             </FlexRowsm>
           ))}
         </FlexColsm>
-        <BaseButton className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black">
-          취소하기
-        </BaseButton>
+        <MainButton
+          label="취소하기"
+          className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black"
+          textSize={'text-base'}
+          textWeight={'font-bold'}
+        />
       </BoxRow>
     </FlexCol>
   );

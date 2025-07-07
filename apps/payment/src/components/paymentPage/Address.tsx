@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { FlexCol, FlexRowsm } from '../styles/layout.style';
 import { BoldBigText } from '../styles/text.style';
-import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { InputText } from '../styles/paymentPage/Address.style';
+import { MainButton } from '@repo/ui/components';
+import { useIsMobile } from '../../hooks/useMobile';
 
 const Address = ({
   setAddressData,
@@ -12,6 +13,7 @@ const Address = ({
   const [postalCode, setPostalCode] = useState('');
   const [address, setAddress] = useState('');
   const [detailedAddress, setDetailedAddress] = useState('');
+  const isMobile = useIsMobile();
 
   const handleFind = () => {
     new window.daum.Postcode({
@@ -33,16 +35,20 @@ const Address = ({
   return (
     <FlexCol className="items-start justify-start gap-4 mb-10 px-6 sm:px-0">
       <BoldBigText>주소 입력</BoldBigText>
-      <FlexRowsm className="mt-5 w-full">
+      <FlexRowsm className="w-full justify-between gap-3">
         <InputText
           type="text"
           placeholder="우편번호"
           value={postalCode}
           readOnly
         />
-        <BaseButton className="w-[30%] p-2" onClick={handleFind}>
-          번호찾기
-        </BaseButton>
+        <MainButton
+          label={isMobile ? '찾기' : '번호찾기'}
+          className="p-2 w-[20%]"
+          textSize={'text-base'}
+          textWeight={'font-bold'}
+          onClick={handleFind}
+        />
       </FlexRowsm>
       <InputText type="text" placeholder="주소" value={address} readOnly />
       <InputText

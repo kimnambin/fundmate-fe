@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@originjs/vite-plugin-federation": "^1.4.1",
-    
+    "@ramonak/react-progress-bar": "^5.4.0",
     "@tailwindcss/postcss": "^4.1.11",
     "axios": "^1.10.0",
     "react": "^19.1.0",

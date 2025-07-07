@@ -3,10 +3,10 @@ import PayModal from '../modal/PayModal';
 import TransferModal from '../modal/TransferModal';
 import { BoxCol, BoxRow, FlexColsm } from '../styles/layout.style';
 import { Radio } from '../styles/paymentPage/Address.style';
-import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { BaseText, BoldText, LightColor } from '../styles/text.style';
 import Address from './Address';
 import { formatNum } from '../../utils/numbers';
+import { MainButton } from '@repo/ui/components';
 
 interface PaymentFinalProps {
   selectedPayment: string;
@@ -77,14 +77,14 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
           </FlexColsm>
         </Radio>
       </BoxCol>
-      <BaseButton
-        className={`ml-0 mt-4 ${!addressData || modalType || !checks[0] || !checks[1] ? 'bg-gray-400' : 'ml-0 mt-4'}`}
-        disabled={!addressData || modalType || !checks[0] || !checks[1]}
+      <MainButton
+        label="후원하기"
+        className={`ml-0 mt-4 w-full px-6 py-3 ${!addressData || modalType || !checks[0] || !checks[1] ? 'bg-gray-400' : ''} hover:opacity-100`}
+        disabled={!addressData || !checks[0] || !checks[1]}
+        textSize={'text-base'}
+        textWeight={'font-bold'}
         onClick={handleBtn}
-      >
-        후원하기
-      </BaseButton>
-
+      />
       {isModalOpen &&
         (modalType === 'transfer' ? (
           <TransferModal
