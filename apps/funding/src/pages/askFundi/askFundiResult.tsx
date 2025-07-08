@@ -1,13 +1,14 @@
+import { MainButton } from '@repo/ui/components';
+import { SmallFont, Title } from '@repo/ui/styles';
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import html2pdf from 'html2pdf.js';
 import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { MainButton } from '@repo/ui/components';
+import LeftArrow from '../../assets/icons/ic_left-arrow.svg';
+import PieChart from '../../components/chart/pie';
 import Map from '../../components/map/map';
 import { Layout } from '../../style/layout';
 import { Bottom, ResultWrapper } from './askFundi.styles';
-import LeftArrow from '../../assets/icons/ic_left-arrow.svg';
-import { SmallFont, Title } from '@repo/ui/styles';
 
 const AskFundiResult = () => {
   const location = useLocation();
@@ -50,6 +51,7 @@ const AskFundiResult = () => {
       <ResultWrapper ref={ref} isCapture={isCapture}>
         <div className="flex gap-[80px]">
           <Map data={data} />
+          <PieChart data={chartData} />
         </div>
         <div data-color-mode="light" className="wnde-markdown-var">
           <MarkdownEditor.Markdown source={response?.message} />
@@ -92,4 +94,27 @@ const data = [
   { locale: '전라남도', count: 250 },
   { locale: '울산광역시', count: 100 },
   { locale: '서울특별시', count: 10000 },
+];
+
+// 차트 임시 데이터
+export interface ChartData {
+  id: string;
+  label: string;
+  value: number;
+  color: string;
+}
+
+const chartData = [
+  {
+    id: '여성',
+    label: '여성',
+    value: 210,
+    color: '#5FBDFF',
+  },
+  {
+    id: '남성',
+    label: '남성',
+    value: 182,
+    color: '#85CEFF',
+  },
 ];
