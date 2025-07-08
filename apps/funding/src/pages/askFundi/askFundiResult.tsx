@@ -1,5 +1,5 @@
 import { MainButton } from '@repo/ui/components';
-import { SmallFont, Title } from '@repo/ui/styles';
+import { SmallFont, Title, Layout } from '@repo/ui/styles';
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import html2pdf from 'html2pdf.js';
 import { useRef, useState } from 'react';
@@ -7,7 +7,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import LeftArrow from '../../assets/icons/ic_left-arrow.svg';
 import PieChart from '../../components/chart/pie';
 import Map from '../../components/map/map';
-import { Layout } from '../../style/layout';
 import { Bottom, ResultWrapper } from './askFundi.styles';
 
 const AskFundiResult = () => {
@@ -39,7 +38,7 @@ const AskFundiResult = () => {
   };
 
   return (
-    <Layout>
+    <Layout className="flex flex-col gap-[20px]">
       <div className="flex gap-2 cursor-pointer" onClick={() => navigate('/')}>
         <img src={LeftArrow} alt="left arrow" />
         <SmallFont className="text-main font-bold text-[12px]">

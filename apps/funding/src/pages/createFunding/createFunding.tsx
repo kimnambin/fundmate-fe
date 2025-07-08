@@ -1,6 +1,6 @@
 import { FundiIcon } from '@repo/ui/assets';
 import { MainButton, Modal } from '@repo/ui/components';
-import { MediumFont, Title, WarningText } from '@repo/ui/styles';
+import { MediumFont, Title, WarningText, Layout } from '@repo/ui/styles';
 import { useRef, useState } from 'react';
 import { FiCheck, FiCopy } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
@@ -11,7 +11,6 @@ import InputTextArea from '../../components/input-text-area/inputTextArea';
 import InputText from '../../components/input-text/inputText';
 import { Label } from '../../components/input-text/inputText.styles';
 import PointButton from '../../components/point-button/pointButton';
-import { Layout } from '../../style/layout';
 import {
   CompWrapper,
   CreateFundingStyle,
@@ -81,7 +80,7 @@ function CreateFunding() {
   };
 
   return (
-    <Layout>
+    <Layout className="flex flex-col gap-[20px]">
       <CreateFundingStyle>
         <Title>프로젝트(펀딩) 개설</Title>
 
