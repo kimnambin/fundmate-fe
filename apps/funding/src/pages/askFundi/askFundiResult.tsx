@@ -1,15 +1,17 @@
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import html2pdf from 'html2pdf.js';
 import { useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import MainButton from '../../components/main-button/mainButton';
 import Map from '../../components/map/map';
 import { Layout } from '../../style/layout';
 import { Bottom, ResultWrapper } from './askFundi.styles';
+import LeftArrow from '../../assets/icons/ic_left-arrow.svg';
 
 const AskFundiResult = () => {
   const location = useLocation();
   const response = location.state;
+  const navigate = useNavigate();
 
   const [isCapture, setIsCapture] = useState(false);
 
@@ -36,6 +38,11 @@ const AskFundiResult = () => {
 
   return (
     <Layout>
+      <div className="flex gap-2 cursor-pointer" onClick={() => navigate('/')}>
+        <img src={LeftArrow} alt="left arrow" />
+        <p className="text-main font-bold text-[12px]">메인페이지로 돌아가기</p>
+      </div>
+      <p className="text-[24px]">펀디에게 물어봐 - 분석결과</p>
       <ResultWrapper ref={ref} isCapture={isCapture}>
         <div className="flex gap-[80px]">
           <Map data={data} />
