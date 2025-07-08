@@ -9,7 +9,7 @@ export const Wrapper = tw.div`
 export const ResultWrapper = tw.div<{ isCapture: boolean }>`
     flex flex-col
     gap-[30px] pb-[30px]
-    w-full h-[calc(100vh-380px)]
+    w-full h-[calc(100vh-360px)]
     overflow-y-scroll [&::-webkit-scrollbar]:hidden
     ${({ isCapture }) => (isCapture ? 'h-auto overflow-visible px-12 pt-10' : 'px-0')}
     break-inside-avoid	
