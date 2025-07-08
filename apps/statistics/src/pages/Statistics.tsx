@@ -1,13 +1,15 @@
 import { StatisticsBody } from '../components/StatisticsBody';
 import { StatisticsHeader } from '../components/StatisticsHeader';
-import { Layout } from '@repo/ui/Layout'
+import { Layout } from '@repo/ui/styles'
 
 export const StatisticsPage = () => {
   return (
     <>
-      <Layout className='my-[70px]'>
-        <StatisticsHeader />
-        <StatisticsBody />
+      <Layout>
+        <div className='flex flex-col gap-10'>
+          <StatisticsHeader />
+          <StatisticsBody />
+        </div>
       </Layout>
     </>
   );

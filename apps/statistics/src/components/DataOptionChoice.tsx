@@ -2,6 +2,7 @@ import { TableDataStyle } from "../styles/TableData.style"
 import { StatisticsOptionData } from '@repo/ui/utils'
 import { CustomRadio } from "./CustomRadio"
 import { useState } from "react"
+import { MediumFont } from "../../../../packages/ui/styles/typograhpy.style"
 
 export const DataOptionChoiceTable = () => {
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({})
@@ -20,27 +21,37 @@ export const DataOptionChoiceTable = () => {
         <col />
       </colgroup>
       <thead>
-        <tr className='text-left text-lg'>
-          <td className='py-2 !text-center'>옵션명</td>
-          <td className='px-2 py-2'>선택</td>
+        <tr className='text-left'>
+          <td className='py-2 !text-center'>
+            <MediumFont>
+              옵션명
+            </MediumFont>
+          </td>
+          <td className='px-2 py-2'>
+            <MediumFont>
+              선택
+            </MediumFont>
+          </td>
         </tr>
       </thead>
       <tbody>
         {
           StatisticsOptionData.map((v) => (
             <tr className="text-lg" key={v.name}>
-              <TableDataStyle>{v.menuName}</TableDataStyle>
+              <TableDataStyle><MediumFont>{v.menuName}</MediumFont></TableDataStyle>
               <TableDataStyle>
-                <div className="grid grid-cols-9 gap-3">
+                <div className="grid grid-cols-9 gap-1">
                   {
                     v.options.map((item) => (
-                      <div key={item} className="flex flex-row gap-3">
+                      <div key={item} className="flex flex-row items-center gap-3">
                         <CustomRadio
                           id={`${v.name}-${item}`}
                           name={v.name}
                           selected={selectedOptions[v.name] || ""}
                           onChange={(value) => handleChange(v.name, value)} />
-                        {item}
+                        <MediumFont>
+                          {item}
+                        </MediumFont>
                       </div>
                     ))
                   }

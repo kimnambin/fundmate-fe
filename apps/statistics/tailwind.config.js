@@ -6,7 +6,29 @@ module.exports = {
     '../../packages/ui/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#1D4ED8',
+        secondary: '#F59E0B',
+
+        main: '#5FBDFF',
+        mainOpacity: '#5FBDFF1A',
+        'sub-color': '#DFF2FF',
+        'text-active': '#000000',
+        'text-unactive': '#343F59',
+        'sub-text': '#7E7C7C',
+        'input-text': '#94A3B8',
+        red: '#FB6565',
+        line: '#E2E8F0',
+        'gray-background': '#F1F7EC',
+      },
+      fontFamily: {
+        sans: ['Pretendard'],
+      },
+      containers: {
+        '2xs': '16rem'
+      }
+    },
   },
   plugins: [],
 };
