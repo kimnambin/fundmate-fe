@@ -11,7 +11,7 @@ jest.mock('axios');
 jest.mock('react-router-dom', () => {
   useNavigate: () => '?done=true';
 });
-jest.mock('./useGetQueryString', () => ({
+jest.mock('../useGetQueryString', () => ({
   useGetQueryString: () => '?done=true',
 }));
 
@@ -95,7 +95,7 @@ describe('useTransferForm', () => {
 jest.mock('react-router-dom', () => ({
   useNavigate: () => jest.fn(),
 }));
-jest.mock('./useGetQueryString', () => ({
+jest.mock('../useGetQueryString', () => ({
   useGetQueryString: () => '?confirm=true',
 }));
 

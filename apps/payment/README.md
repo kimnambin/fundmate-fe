@@ -5,3 +5,4 @@
   - react-icons
   - msw
   - jest
+  - jest-localstorage-mock

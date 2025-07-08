@@ -1,9 +1,12 @@
-// jest.config.js (CommonJS 형태 추천)
 module.exports = {
   projects: [
     {
       displayName: 'jsdom',
-      testEnvironment: 'jsdom',
+      // testEnvironment: 'jsdom',
+      testEnvironment: 'jest-environment-jsdom',
+      testEnvironmentOptions: {
+        url: 'http://localhost',
+      },
       testMatch: [
         '<rootDir>/src/hooks/**/*.test.ts',
         '<rootDir>/src/components/**/*.test.ts',
@@ -11,7 +14,7 @@ module.exports = {
       transform: {
         '^.+\\.(ts|tsx)$': 'ts-jest',
       },
-      setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'], // jsdom 환경용 셋업
+      setupFilesAfterEnv: ['jest-localstorage-mock', '<rootDir>/jest.setup.ts'],
     },
     {
       displayName: 'node',
