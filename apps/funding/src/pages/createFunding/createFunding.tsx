@@ -80,7 +80,7 @@ function CreateFunding() {
   };
 
   return (
-    <Layout className="flex flex-col gap-[20px]">
+    <Layout>
       <CreateFundingStyle>
         <Title>프로젝트(펀딩) 개설</Title>
 

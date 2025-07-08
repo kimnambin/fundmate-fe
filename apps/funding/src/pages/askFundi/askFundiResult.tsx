@@ -38,14 +38,19 @@ const AskFundiResult = () => {
   };
 
   return (
-    <Layout className="flex flex-col gap-[20px]">
-      <div className="flex gap-2 cursor-pointer" onClick={() => navigate('/')}>
-        <img src={LeftArrow} alt="left arrow" />
-        <SmallFont className="text-main font-bold text-[12px]">
-          메인페이지로 돌아가기
-        </SmallFont>
+    <Layout>
+      <div className="flex flex-col gap-[20px] mb-[20px]">
+        <div
+          className="flex gap-2 cursor-pointer"
+          onClick={() => navigate('/')}
+        >
+          <img src={LeftArrow} alt="left arrow" />
+          <SmallFont className="text-main font-bold text-[12px]">
+            메인페이지로 돌아가기
+          </SmallFont>
+        </div>
+        <Title>펀디에게 물어봐 - 분석결과</Title>
       </div>
-      <Title>펀디에게 물어봐 - 분석결과</Title>
 
       <ResultWrapper ref={ref} isCapture={isCapture}>
         <div className="flex gap-[80px]">

@@ -5,7 +5,7 @@ interface Props {
   data: ChartData[];
 }
 
-export const PieChart = ({ data }: Props) => {
+const PieChart = ({ data }: Props) => {
   return (
     <div className="w-[400px] h-[300px] my-auto mx-0">
       <ResponsivePie

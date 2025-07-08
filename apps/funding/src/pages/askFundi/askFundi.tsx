@@ -59,7 +59,7 @@ const AskFundi = () => {
     );
 
   return (
-    <Layout className="flex flex-col gap-[20px]">
+    <Layout>
       <Wrapper>
         <div className="flex flex-col gap-[20px]">
           <div className="flex items-center gap-[10px]">
