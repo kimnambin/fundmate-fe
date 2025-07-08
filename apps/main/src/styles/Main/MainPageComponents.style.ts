@@ -3,13 +3,13 @@ import tw from "tailwind-styled-components";
 //Banner
 export const BannerContainer = tw.div`
   col-span-4
-  h-full
 `
 
 //InterestingItems
 export const InterestingItemsContainer = tw.div`
   col-start-1
   col-span-4
+  h-full
 `
 
 export const InterestingItemsGrid = tw.div`
@@ -17,6 +17,7 @@ export const InterestingItemsGrid = tw.div`
   grid-rows-2
   grid-cols-4
   gap-3
+  h-full
 `
 
 //MainCategory
@@ -51,6 +52,7 @@ export const PopularItemsHeader = tw.div`
 export const PopularItemsGrid = tw.div`
   grid
   [grid-template-rows:repeat(auto-fit,minmax(0, 1fr))]
-  items-start
+  items-stretch
   gap-1.5
+  h-full
 `

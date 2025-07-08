@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { CategoryImage, CategoryText, SingleCategoryContainer } from "../../styles/Category/SingleCategory.style";
+import { CategoryImage, SingleCategoryContainer } from "../../styles/Category/SingleCategory.style";
+import { SubTitle } from "@repo/ui/styles";
 
 interface SingleCategoryProps {
   imgPath: string;
@@ -12,7 +13,7 @@ export const SingleCategory = ({ imgPath, name, location }: SingleCategoryProps)
     <Link to={`/search?category=${name}`}>
       <SingleCategoryContainer>
         <CategoryImage src={imgPath} $location={location} />
-        <CategoryText>{name}</CategoryText>
+        <SubTitle>{name}</SubTitle>
       </SingleCategoryContainer>
     </Link>
 

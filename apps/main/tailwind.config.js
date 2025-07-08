@@ -4,7 +4,6 @@ module.exports = {
     './src/*.{tsx}',
     './src/**/*.{js,ts,jsx,tsx}',
     '../../packages/ui/**/*.{js,ts,jsx,tsx}',
-    '../funding/src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -13,6 +12,7 @@ module.exports = {
         secondary: '#F59E0B',
 
         main: '#5FBDFF',
+        mainOpacity: '#5FBDFF1A',
         'sub-color': '#DFF2FF',
         'text-active': '#000000',
         'text-unactive': '#343F59',
@@ -28,7 +28,10 @@ module.exports = {
       animation: {
         'spin-slow': 'spin 3s linear infinite',
       },
+      containers: {
+        '2xs': '16rem',
+      },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/container-queries')],
 };

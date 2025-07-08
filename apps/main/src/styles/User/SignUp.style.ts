@@ -1,14 +1,5 @@
 import tw from "tailwind-styled-components";
 
-export const SignUpTitle = tw.div`
-  text-xl
-  font-semibold
-`
-
-export const SignUpSubTitle = tw.div`
-  text-lg
-`
-
 export const SignUpContainer = tw.div`
 flex
 flex-col

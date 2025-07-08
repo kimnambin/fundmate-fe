@@ -9,6 +9,8 @@ export {
   VerticalCard,
   Dropdown,
   Loading,
+  MainButton,
+  InputText,
   Modal,
 } from './components';
 
@@ -18,4 +20,14 @@ export { CategoryIcons } from './assets';
 export { FundiIcon } from './assets';
 
 //styled-components
-export { CommonButton } from './styles/Button.styles';
+export {
+  HorizontalCardContainer,
+  VerticalCardContainer,
+  Layout,
+  Title,
+  SubTitle,
+  BigFont,
+  MediumFont,
+  SmallFont,
+  WarningText
+} from './styles'

@@ -25,7 +25,6 @@ const Map = ({ data }: Props) => {
         setColorByCount={setColorByCount}
         data={data}
         unit="명"
-        style={{ height: '225px' }}
       />
     </Wrapper>
   );

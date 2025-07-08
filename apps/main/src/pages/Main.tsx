@@ -1,6 +1,6 @@
 import { Footer } from '@repo/ui/components';
 import { MainContainer } from '../components/mainPage/MainContainer';
-import { Layout } from '../styles/Layout.style';
+import { Layout } from '@repo/ui/styles';
 import { SwiperComponents } from '../components/mainPage/SwiperComponent';
 
 export const Main = () => {

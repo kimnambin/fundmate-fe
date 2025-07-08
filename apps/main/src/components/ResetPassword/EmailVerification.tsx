@@ -1,11 +1,11 @@
-import { CommonButton } from "@repo/ui/CommonButton"
-import { InputContainer, SignUpSubTitle, SignUpTitle } from "../../styles/User/SignUp.style"
-import { UserInput } from "../../styles/User/UserPage.Styles"
+import { InputContainer } from "../../styles/User/SignUp.style"
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import * as yup from 'yup'
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { InputText, MainButton } from "@repo/ui/components";
+import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 
 const schema = yup.object({
   email: yup.string().email().required(),
@@ -15,7 +15,7 @@ const schema = yup.object({
 type EmailVerificationProps = yup.InferType<typeof schema>
 
 export const EmailVerificationComponent = () => {
-  const [_searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
   const [isVerified, setIsVerified] = useState(false);
   const tempCode = '000000'
   const [tempCodeCheck, setTempCodeCheck] = useState<'pass' | 'fail' | null>(null);
@@ -42,34 +42,35 @@ export const EmailVerificationComponent = () => {
 
   return (
     <form className="flex flex-col w-full gap-5">
-      <SignUpTitle><span>비밀번호 재설정</span></SignUpTitle>
+      <Title>비밀번호 재설정</Title>
       <InputContainer>
-        <SignUpSubTitle><span>이메일</span></SignUpSubTitle>
-        <UserInput
-          type='text'
-          placeholder='가입하신 이메일 주소를 입력해주세요.'
+        <SubTitle>이메일</SubTitle>
+        <InputText
+          type="text"
+          placeholder="가입하신 이메일 주소를 입력해주세요."
+          isError={!!errors.email}
           {...register('email')}
-          $isError={!!errors.email}
           autoComplete='email'
           onFocus={() => trigger('email')}
         />
         {
           !isVerified ?
-            <span className="text-sm text-gray-400">회원가입에 사용한 이메일 주소를 입력하시면 인증번호를 보내드립니다.</span> :
-            <span className="text-sm text-gray-400">기입하신 이메일로 인증번호가 전송되었습니다.</span>
+            <MediumFont className="text-gray-400">회원가입에 사용한 이메일 주소를 입력하시면 인증번호를 보내드립니다.</MediumFont> :
+            <MediumFont className="text-gray-400">기입하신 이메일로 인증번호가 전송되었습니다.</MediumFont>
         }
         {
           !isVerified ? '' : (
             <>
               <InputContainer>
-                <SignUpSubTitle><span>인증번호</span></SignUpSubTitle>
-                <UserInput
-                  type='text'
-                  placeholder='인증번호를 입력해주세요'
+                <SubTitle>인증번호</SubTitle>
+                <InputText
+                  type="number"
+                  placeholder="인증번호를 입력해주세요."
+                  autoComplete="off"
                   {...register('verificationCode')}
-                  autoComplete='off'
+                  onFocus={() => trigger('verificationCode')}
                 />
-                {tempCodeCheck === 'fail' && <span className="text-base text-red-500">유효하지 않은 인증 번호입니다.</span>}
+                {tempCodeCheck === 'fail' && <MediumFont className="text-red">유효하지 않은 인증 번호입니다.</MediumFont>}
               </InputContainer>
             </>
           )
@@ -77,23 +78,22 @@ export const EmailVerificationComponent = () => {
       </InputContainer>
       {
         !isVerified ? (
-          <CommonButton
-            type='button'
+          <MainButton
+            type="button"
             onClick={tempHandleClick}
-            $isError={!!!getValues('email') || !!errors.email}
-            disabled={!!!getValues('email') || !!errors.email}
-          >
-            <span>인증번호 발송</span>
-          </CommonButton>
+            isError={!getValues('email') || !!errors.email}
+            disabled={!getValues('email') || !!errors.email}
+            width="w-full"
+            label="인증번호 발송"
+          />
         ) : (
-          <CommonButton
-            type='button'
+          <MainButton
+            type="button"
             onClick={onSubmit}
-            $isError={!!!getValues('verificationCode')}
-            disabled={!!!getValues('verificationCode')}
-          >
-            <span>인증하기</span>
-          </CommonButton>
+            isError={!getValues('verificationCode')}
+            disabled={!getValues('verificationCode')}
+            label="인증하기"
+          />
         )
       }
     </form>

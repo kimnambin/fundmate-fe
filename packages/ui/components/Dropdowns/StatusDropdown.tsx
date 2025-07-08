@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { BiChevronDown } from 'react-icons/bi'
 import type { DropdownProps } from './Dropdown';
 import { useSearchParams } from 'react-router-dom'
+import { SmallFont } from '../../styles';
 
 export const StatusDropdown = ({ query }: DropdownProps) => {
   const status = ['전체 프로젝트', '진행 중인 프로젝트', '완료된 프로젝트'];
@@ -43,7 +44,9 @@ export const StatusDropdown = ({ query }: DropdownProps) => {
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   onClick={() => handleQueryChange(i.toString(), v)}
                 >
-                  {v}
+                  <SmallFont key={i}>
+                    {v}
+                  </SmallFont>
                 </div>
               </MenuItem>
             ))

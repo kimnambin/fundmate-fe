@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { formatNum } from '../utils/numbers';
 import axios from 'axios';
 import { coverSec } from '../utils/security';

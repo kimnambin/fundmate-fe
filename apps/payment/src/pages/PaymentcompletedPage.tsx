@@ -15,7 +15,7 @@ const PaymentcompletedPage = () => {
 
   return (
     <Container className="mt-[10%] px-6 items-start sm:px-0">
-      <FlexColsm>
+      <FlexColsm className='w-full'>
         <BoldBigText className="text-main">축하합니다. 12번째</BoldBigText>
         <BoldBigText>공식 후원자가 되셨습니다!</BoldBigText>
         <FlexRowsm>
@@ -27,7 +27,7 @@ const PaymentcompletedPage = () => {
             에서 하실 수 있습니다.
           </BaseText>
         </FlexRowsm>
-        <div className="mt-[15%]">
+        <div className="mt-[15%] w-full">
           <BoldBigText className="pl-3 ml-3">
             이런 프로젝트도 좋아하실거에요
           </BoldBigText>

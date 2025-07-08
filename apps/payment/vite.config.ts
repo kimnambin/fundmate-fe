@@ -17,14 +17,18 @@ export default defineConfig({
         './PaymentDetail': './src/pages/PaymentDetail.tsx',
         './PaymentListPage': './src/pages/PaymentListPage.tsx',
       },
-      shared: ['react', 'react-dom', 'react-router-dom'],
+      shared: [
+        'react', 'react-dom', 'react-router-dom', '@ramonak/react-progress-bar'],
     }),
     // tailwindcss(),
   ],
   build: {
     modulePreload: false,
     target: 'esnext',
-    minify: true,
+    minify: false,
     cssCodeSplit: false,
+  },
+  resolve: {
+    dedupe: ['react', 'react-dom', 'react-router-dom'],
   },
 });

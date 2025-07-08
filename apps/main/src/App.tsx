@@ -33,10 +33,12 @@ function App() {
         <Route path="/fundi/request" element={<AskFundiPage />} />
         <Route path="/fundi/response" element={<AskFundiResultPage />} />
         <Route path="/product" element={<ProductPage />} />
-        <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/payment/completed" element={<PaymentCompleted />} />
-        <Route path="/payment/detail" element={<PaymentDetail />} />
-        <Route path="/payment/list" element={<PaymentListPage />} />
+        <Route path='/payment'>
+          <Route index element={<PaymentPage />} />
+          <Route path="completed" element={<PaymentCompleted />} />
+          <Route path="detail" element={<PaymentDetail />} />
+          <Route path="list" element={<PaymentListPage />} />
+        </Route>
       </Routes>
     </>
   );
