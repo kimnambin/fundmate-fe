@@ -1,15 +1,10 @@
 import { Wrapper } from './askFundi.styles';
 import HelpIcon from '../../assets/icons/ic_help.svg';
 import InputTextArea from '../../components/input-text-area/inputTextArea';
-import {
-  MediumFont,
-  SubTitle,
-  Title,
-  WarningText,
-} from '../../style/typography';
+import { MediumFont, SubTitle, Title, WarningText } from '@repo/ui/styles';
 import Category from '../../components/category/category';
 import { filters } from '../createFunding/createFunding';
-import MainButton from '../../components/main-button/mainButton';
+import { MainButton } from '@repo/ui/components';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { Loading, Modal } from '@repo/ui/components';

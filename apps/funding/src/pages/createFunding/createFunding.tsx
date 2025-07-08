@@ -1,24 +1,23 @@
+import { FundiIcon } from '@repo/ui/assets';
+import { MainButton, Modal } from '@repo/ui/components';
+import { MediumFont, Title, WarningText } from '@repo/ui/styles';
 import { useRef, useState } from 'react';
+import { FiCheck, FiCopy } from 'react-icons/fi';
+import { IoClose } from 'react-icons/io5';
 import AddedItem from '../../components/added-item/addedItem';
 import Category from '../../components/category/category';
 import InputDate from '../../components/input-date/inputDate';
 import InputTextArea from '../../components/input-text-area/inputTextArea';
 import InputText from '../../components/input-text/inputText';
 import { Label } from '../../components/input-text/inputText.styles';
-import MainButton from '../../components/main-button/mainButton';
 import PointButton from '../../components/point-button/pointButton';
+import { Layout } from '../../style/layout';
 import {
   CompWrapper,
   CreateFundingStyle,
   HorizontalLine,
   InputWrapper,
 } from './createFunding.styles';
-import { IoClose } from 'react-icons/io5';
-import { FiCopy, FiCheck } from 'react-icons/fi';
-import { MediumFont, Title, WarningText } from '../../style/typography';
-import { Layout } from '../../style/layout';
-import { Modal } from '@repo/ui/components';
-import { FundiIcon } from '@repo/ui/assets';
 
 function CreateFunding() {
   const [isFundiOpen, setIsFundiOpen] = useState(false);
