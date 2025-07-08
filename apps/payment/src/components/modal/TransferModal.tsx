@@ -1,4 +1,4 @@
-import { Modal } from '@repo/ui/components';
+import { MainButton, Modal } from '@repo/ui/components';
 import { ModalContainer } from '../styles/modal/modal.style';
 import {
   Wrapper,
@@ -6,14 +6,13 @@ import {
   BankTitle,
   BankBtn,
   Label,
-  Input,
   EtxDiv,
   BottomWrapper,
   Box,
 } from '../styles/modal/tansfetModal.style';
-import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { useTransferForm } from '../../hooks/useForm';
 import { TransferProps } from '../../types/modal.model';
+import { InputText } from '@repo/ui/components';
 
 export default function TransferModal({
   addAmount,
@@ -62,14 +61,14 @@ export default function TransferModal({
           </select>
 
           <Label>계좌번호</Label>
-          <Input
+          <InputText
             placeholder="공백, - 없이 입력해주세요."
-            type="text"
+            type={'text'}
             inputMode="numeric"
             pattern="[0-9]*"
             required
             className="appearance-none [&::-webkit-inner-spin-button]:appearance-none 
-            [&::-webkit-outer-spin-button]:appearance-none"
+            [&::-webkit-outer-spin-button]:appearance-none  mb-2"
             value={accountNumber}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               const onlyNums = e.target.value.replace(/\D/g, '');
@@ -131,14 +130,14 @@ export default function TransferModal({
               기본 결제수단으로 등록
             </label>
           </Box>
-
-          <BaseButton
-            className={`ml-0 ${!isFormValid ? 'bg-gray-400' : 'ml-0 mt-4'}`}
+          <MainButton
+            label="이체하기"
+            className={`ml-0 w-full ${!isFormValid ? 'bg-gray-400' : 'ml-0 mt-4'}`}
+            textSize={'text-base'}
+            textWeight={'font-bold'}
             onClick={handleTransfer}
-            disabled={!isFormValid}
-          >
-            이체하기
-          </BaseButton>
+            isVerificated={!isFormValid}
+          />
         </Wrapper>
       </ModalContainer>
     </Modal>

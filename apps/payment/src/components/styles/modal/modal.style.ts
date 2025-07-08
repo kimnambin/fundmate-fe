@@ -68,7 +68,6 @@ export const CardInputContainer = tw.div`
 export const CardInput = tw.input`
 border-0
 outline-none
-  rounded
   p-2
   w-1/6
   mr-2

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { FlexCol, FlexRowsm } from '../styles/layout.style';
 import { BoldBigText } from '../styles/text.style';
-import { InputText } from '../styles/paymentPage/Address.style';
-import { MainButton } from '@repo/ui/components';
+import { InputText, MainButton } from '@repo/ui/components';
 import { useIsMobile } from '../../hooks/useMobile';
 
 const Address = ({
@@ -37,14 +36,14 @@ const Address = ({
       <BoldBigText>주소 입력</BoldBigText>
       <FlexRowsm className="w-full justify-between gap-3">
         <InputText
-          type="text"
+          type={'text'}
           placeholder="우편번호"
           value={postalCode}
           readOnly
         />
         <MainButton
           label={isMobile ? '찾기' : '번호찾기'}
-          className="p-2 w-[20%]"
+          className="w-[20%]"
           textSize={'text-base'}
           textWeight={'font-bold'}
           onClick={handleFind}
@@ -52,7 +51,7 @@ const Address = ({
       </FlexRowsm>
       <InputText type="text" placeholder="주소" value={address} readOnly />
       <InputText
-        type="text"
+        type={'text'}
         placeholder="상세주소"
         value={detailedAddress}
         onChange={handleDetailed}

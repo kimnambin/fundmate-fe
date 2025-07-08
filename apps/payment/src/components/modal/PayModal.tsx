@@ -1,6 +1,5 @@
 import { randomPlaceholder } from '../../utils/numbers';
 import { IoCardOutline } from 'react-icons/io5';
-import { BaseButton } from '../styles/product-detail/productInfo.style';
 import {
   CardInput,
   CardInputContainer,
@@ -19,7 +18,7 @@ import { BankBtn } from '../styles/modal/tansfetModal.style';
 import { FlexRowsm } from '../styles/layout.style';
 import { useCardPayForm } from '../../hooks/useForm';
 import { TransferProps } from '../../types/modal.model';
-import { Modal } from '@repo/ui/components';
+import { MainButton, Modal } from '@repo/ui/components';
 
 const PayModal = ({
   addAmount,
@@ -178,14 +177,14 @@ const PayModal = ({
             setCardName(e.target.value)
           }
         />
-
-        <BaseButton
-          className={`ml-0 ${!isFormValid ? 'bg-gray-400' : 'ml-0 mt-4'}`}
+        <MainButton
+          label="결제하기"
+          className={`ml-0 w-full ${!isFormValid ? 'bg-gray-400' : 'ml-0 mt-4'}`}
+          textSize={'text-base'}
+          textWeight={'font-bold'}
           onClick={handleCardPay}
-          disabled={!isFormValid}
-        >
-          결제하기
-        </BaseButton>
+          isVerificated={!isFormValid}
+        />
       </div>
     </Modal>
   );

@@ -1,7 +1,7 @@
 import tw from 'tailwind-styled-components';
 
 export interface HasProps {
-  ishas?: boolean;
+  ishas?: string;
 }
 
 export const Wrapper = tw.div`
