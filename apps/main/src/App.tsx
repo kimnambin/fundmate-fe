@@ -30,10 +30,12 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/reset" element={<PasswordReset />} />
         <Route path="/funding/create" element={<CreateFundingPage />} />
-        <Route path="/fundi/request" element={<AskFundiPage />} />
-        <Route path="/fundi/response" element={<AskFundiResultPage />} />
+        <Route path="/fundi">
+          <Route path="request" element={<AskFundiPage />} />
+          <Route path="response" element={<AskFundiResultPage />} />
+        </Route>
         <Route path="/product" element={<ProductPage />} />
-        <Route path='/payment'>
+        <Route path="/payment">
           <Route index element={<PaymentPage />} />
           <Route path="completed" element={<PaymentCompleted />} />
           <Route path="detail" element={<PaymentDetail />} />
