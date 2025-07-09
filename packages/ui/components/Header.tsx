@@ -42,9 +42,9 @@ const menuBar = [
   {
     name: 'statistics',
     menuName: '데이터 분석',
-    route: '/statisics',
-  },
-];
+    route: '/statistics'
+  }
+]
 
 export const Header = () => {
   const isOpen = modalStore((state) => state.isOpen);
