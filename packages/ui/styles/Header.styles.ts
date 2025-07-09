@@ -20,8 +20,6 @@ export const SpaceContainer = tw.div`
 
 export const InputDiv = tw.div`
   relative
-  h-10
-  w-[40rem]
 `;
 
 export const LoginButton = tw.button`
