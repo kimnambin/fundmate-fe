@@ -2,7 +2,7 @@ import { TableDataStyle } from "../styles/TableData.style"
 import { StatisticsOptionData } from '@repo/ui/utils'
 import { CustomRadio } from "./CustomRadio"
 import { useState } from "react"
-import { MediumFont } from "../../../../packages/ui/styles/typograhpy.style"
+import { MediumFont } from "@repo/ui/styles"
 
 export const DataOptionChoiceTable = () => {
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({})

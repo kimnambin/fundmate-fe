@@ -6,7 +6,7 @@ import { Background, ModalContent, Wrapper } from '../styles/modal.style';
 interface Props {
   children: React.ReactNode;
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 export const Modal = ({ children, isOpen, onClose }: Props) => {

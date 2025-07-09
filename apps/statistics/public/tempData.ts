@@ -3,61 +3,61 @@ export const tempData = [
     "id": "stylus",
     "label": "stylus",
     "value": 270,
-    "color": "#ffaa00"
+    "color": "#d1edff" // 92%
   },
   {
     "id": "erlang",
     "label": "erlang",
     "value": 434,
-    "color": "#a055ff"
+    "color": "#b3dcf5" // 87%
   },
   {
     "id": "c",
     "label": "c",
     "value": 326,
-    "color": "#ff3322"
+    "color": "#96caeb" // 82%
   },
   {
     "id": "scala",
     "label": "scala",
     "value": 240,
-    "color": "#5533ff"
+    "color": "#78b9e1" // 77%
   },
   {
     "id": "php",
     "label": "php",
     "value": 151,
-    "color": "#55ff33"
+    "color": "#5aa7d7" // 72%
   },
   {
     "id": "stylus1",
     "label": "stylus1",
     "value": 270,
-    "color": "#ffaa00"
+    "color": "#3d96cd" // 67%
   },
   {
     "id": "erlang1",
     "label": "erlang1",
     "value": 434,
-    "color": "#a055ff"
+    "color": "#2184c3" // 62%
   },
   {
     "id": "c1",
     "label": "c1",
     "value": 326,
-    "color": "#ff3322"
+    "color": "#0572b9" // 57%
   },
   {
     "id": "scala1",
     "label": "scala1",
     "value": 240,
-    "color": "#5533ff"
+    "color": "#005fa1" // 52%
   },
   {
     "id": "php1",
     "label": "php1",
     "value": 151,
-    "color": "#55ff33"
+    "color": "#004d88" // 47%
   }
 ];
 

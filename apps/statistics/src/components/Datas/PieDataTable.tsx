@@ -1,5 +1,5 @@
 import { FaCircle } from "react-icons/fa6";
-import { MediumFont } from "../../../../../packages/ui/styles/typograhpy.style";
+import { MediumFont } from "@repo/ui/styles";
 import { tempData, tempYearData } from "../../../public/tempData";
 
 export const PieDataTable = () => {

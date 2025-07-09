@@ -20,7 +20,8 @@ export const ButtonWrapper = tw.button<{
 
   hover:opacity-50
   
-  ${({ $isError, $isVerificated }) => ($isError || $isVerificated) && 'opacity-50 cursor-not-allowed'}
+  ${({ $isError }) => $isError && 'bg-gray-400 cursor-not-allowed'}
+  ${({ $isVerificated }) => $isVerificated && 'opacity-50 cursor-not-allowed'}
   ${({ $width }) => $width ?? 'w-auto'}
   ${({ $textSize }) => $textSize ?? 'text-[14px]'}
   ${({ $textWeight }) => $textWeight ?? 'font-normal'}

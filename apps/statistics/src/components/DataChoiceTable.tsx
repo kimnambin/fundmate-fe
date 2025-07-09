@@ -1,4 +1,4 @@
-import { MediumFont } from "../../../../packages/ui/styles/typograhpy.style"
+import { MediumFont } from "@repo/ui/styles"
 import { TableDataStyle } from "../styles/TableData.style"
 import { CustomCheckbox } from "./CustomCheckbox"
 import { StatisticsTableData } from '@repo/ui/utils'

@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { StatisticsPage } from './pages/Statistics';
 import { Header } from '@repo/ui/components'
+import StatisticsPage from './pages/Statistics'
 
 function App() {
   return (

@@ -1,10 +1,22 @@
 import { ResponsivePie } from "@nivo/pie";
 
-export const StatisticsPie = ({ data }: any) => {
+type DataGroupProps = {
+  data: DataProps[]
+}
+
+interface DataProps {
+  id: string;
+  label: string;
+  value: number;
+  color: string;
+}
+
+export const StatisticsPie = ({ data }: DataGroupProps) => {
   return (
     <ResponsivePie
       data={data}
       margin={{ top: 80, right: 80, bottom: 80, left: 80 }}
+      colors={data.map(d => d.color)}
       innerRadius={0.5}
       padAngle={0.6}
       cornerRadius={2}
