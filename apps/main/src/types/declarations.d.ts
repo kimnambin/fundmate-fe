@@ -11,3 +11,4 @@ declare module 'payment/PaymentCompleted';
 declare module 'payment/PaymentDetail';
 declare module 'payment/PaymentListPage';
 
+declare module 'statistics/Statistics';
