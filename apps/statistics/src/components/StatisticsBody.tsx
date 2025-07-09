@@ -1,16 +1,18 @@
 import { SubTitle, Title } from "@repo/ui/styles"
 import { HorizonLine } from "../styles/Common.style";
 import { StatisticsPie } from "./Datas/PieData";
-import { tempData, tempYearData } from '../../public/tempData'
+import { tempData, tempYearData } from '../data/tempData'
 import { PieDataTable } from "./Datas/PieDataTable";
 import { MapData } from "./Datas/MapData";
 import { LineData } from "./Datas/LineData";
 
-
-const data = tempYearData().map((y, i) => ({
-  x: y,
-  y: tempData[i].value
-}))
+const data = tempYearData().reduce<{ x: number, y: number }[]>((acc, y, i) => {
+  const item = tempData[i];
+  if (item) {
+    acc.push({ x: y, y: item.value });
+  }
+  return acc
+}, []);
 
 const lineData = [
   {

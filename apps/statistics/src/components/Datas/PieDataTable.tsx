@@ -1,6 +1,6 @@
 import { FaCircle } from "react-icons/fa6";
 import { MediumFont } from "@repo/ui/styles";
-import { tempData, tempYearData } from "../../../public/tempData";
+import { tempData, tempYearData } from "../../data/tempData";
 
 export const PieDataTable = () => {
   const years = tempYearData();
@@ -36,8 +36,9 @@ export const PieDataTable = () => {
         {
           years.map((v, i) => {
             const item = tempData[i];
+            if (!item) return null;
             return (
-              <tr>
+              <tr key={v}>
                 <td className="p-3">
                   <div className="flex flex-row items-center gap-3">
                     <FaCircle style={{ color: item.color }} />

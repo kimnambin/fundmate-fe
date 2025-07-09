@@ -1,5 +1,5 @@
 import { SimpleSouthKoreaMapChart } from "react-simple-south-korea-map-chart";
-import { localeData } from "../../../public/tempData";
+import { localeData } from "../../data/tempData";
 
 export const MapData = () => {
   const setColorByCount = (count: number) => {

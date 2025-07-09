@@ -1,14 +1,14 @@
-import { useState } from "react"
 import { FaCheck } from "react-icons/fa6"
 import { CheckboxStyle } from "../styles/Checkbox.style";
 
 type CustomCheckboxProps = {
   id: string;
   value: string;
+  checked: boolean;
+  onChange: (id: string, checked: boolean) => void;
 }
 
-export const CustomCheckbox = ({ id, value }: CustomCheckboxProps) => {
-  const [checked, setChecked] = useState(false);
+export const CustomCheckbox = ({ id, value, checked, onChange }: CustomCheckboxProps) => {
   return (
     <div>
       <input
@@ -17,7 +17,7 @@ export const CustomCheckbox = ({ id, value }: CustomCheckboxProps) => {
         value={value}
         className="hidden"
         checked={checked}
-        onChange={() => setChecked(!checked)}
+        onChange={(e) => onChange(id, e.target.checked)}
       />
       <CheckboxStyle htmlFor={id} $checked={checked}>
         {

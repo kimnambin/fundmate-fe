@@ -13,10 +13,10 @@ export const StatisticsHeader = () => {
   const setIsSubmit = statisticsStore((state) => state.setIsSubmit);
 
   const handleNext = () => {
-    setIsLoading();
+    setIsLoading(true);
     setTimeout(() => {
-      setIsSubmit();
-      setIsLoading();
+      setIsSubmit(true);
+      setIsLoading(false);
     }, 2000)
   }
 
@@ -26,14 +26,14 @@ export const StatisticsHeader = () => {
       <div className='flex flex-col gap-5 my-3'>
         <DataChoiceTable />
         <div className='flex flex-col gap-2'>
-          <div className='flex flex-row items-center gap-3 text-sub-text' role='button' onClick={() => setIsOpen(!isOpen)}>
+          <button className='flex flex-row items-center gap-3 text-sub-text' type='button' onClick={() => setIsOpen(!isOpen)}>
             <MediumFont>
               <IoTriangle className={`${isOpen ? 'rotate-180' : 'rotate-90'} transition-all`} />
             </MediumFont>
             <MediumFont>
               옵션 선택하기
             </MediumFont>
-          </div>
+          </button>
           {
             isOpen && <DataOptionChoiceTable />
           }

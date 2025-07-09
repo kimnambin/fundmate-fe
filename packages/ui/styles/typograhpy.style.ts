@@ -2,7 +2,7 @@ import tw from 'tailwind-styled-components';
 
 export const Title = tw.p`text-[24px] font-bold`;
 
-export const SubTitle = tw.p`text-[14px] font-bold`;
+export const SubTitle = tw.p`text-[16px] font-bold`;
 
 export const BigFont = tw.p`text-[24px] font-medium`;
 

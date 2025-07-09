@@ -2,10 +2,18 @@ import { MediumFont } from "@repo/ui/styles"
 import { TableDataStyle } from "../styles/TableData.style"
 import { CustomCheckbox } from "./CustomCheckbox"
 import { StatisticsTableData } from '@repo/ui/utils'
+import { useState } from "react"
 
 export const DataChoiceTable = () => {
-  return (
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({})
+  const handleCheckboxChange = (id: string, checked: boolean) => {
+    setCheckedItems(prev => ({
+      ...prev,
+      [id]: checked,
+    }));
+  }
 
+  return (
     <table className='table-fixed w-full'>
       <colgroup>
         <col className='w-[55px]' />
@@ -37,7 +45,12 @@ export const DataChoiceTable = () => {
             <tr className='text-lg' key={v.name}>
               <TableDataStyle>
                 <div className="flex justify-center items-center">
-                  <CustomCheckbox id={v.name} value={v.name} />
+                  <CustomCheckbox
+                    id={v.name}
+                    value={v.name}
+                    checked={!!checkedItems[v.name]}
+                    onChange={handleCheckboxChange}
+                  />
                 </div>
               </TableDataStyle>
               <TableDataStyle><MediumFont>{v.menuName}</MediumFont></TableDataStyle>

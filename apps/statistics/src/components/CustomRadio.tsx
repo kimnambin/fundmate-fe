@@ -14,7 +14,7 @@ export const CustomRadio = ({ id, selected, name, onChange }: CustomRadioProps) 
   return (
     <div>
       <input
-        type='checkbox'
+        type='radio'
         id={id}
         name={name}
         className="hidden"
