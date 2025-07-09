@@ -4,6 +4,7 @@ module.exports = {
     './src/*.{tsx}',
     './src/**/*.{js,ts,jsx,tsx}',
     '../../packages/ui/**/*.{js,ts,jsx,tsx}',
+    '../funding/src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -25,12 +26,13 @@ module.exports = {
       fontFamily: {
         sans: ['Pretendard'],
       },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+      },
       containers: {
-        '2xs': '16rem'
-      }
+        '2xs': '16rem',
+      },
     },
   },
-  plugins: [
-    require('@tailwindcss/container-queries')
-  ],
+  plugins: [require('@tailwindcss/container-queries')],
 };

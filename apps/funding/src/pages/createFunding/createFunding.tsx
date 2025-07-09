@@ -1,11 +1,15 @@
+import { FundiIcon } from '@repo/ui/assets';
+import { MainButton, Modal } from '@repo/ui/components';
+import { MediumFont, Title, WarningText, Layout } from '@repo/ui/styles';
 import { useRef, useState } from 'react';
+import { FiCheck, FiCopy } from 'react-icons/fi';
+import { IoClose } from 'react-icons/io5';
 import AddedItem from '../../components/added-item/addedItem';
 import Category from '../../components/category/category';
 import InputDate from '../../components/input-date/inputDate';
 import InputTextArea from '../../components/input-text-area/inputTextArea';
 import InputText from '../../components/input-text/inputText';
 import { Label } from '../../components/input-text/inputText.styles';
-import MainButton from '../../components/main-button/mainButton';
 import PointButton from '../../components/point-button/pointButton';
 import {
   CompWrapper,
@@ -13,11 +17,6 @@ import {
   HorizontalLine,
   InputWrapper,
 } from './createFunding.styles';
-import Modal from '../../components/modal/modal';
-import { IoClose } from 'react-icons/io5';
-import { FiCopy, FiCheck } from 'react-icons/fi';
-import { MediumFont, Title, WarningText } from '../../style/typography';
-import { Layout } from '../../style/layout';
 
 function CreateFunding() {
   const [isFundiOpen, setIsFundiOpen] = useState(false);
@@ -165,7 +164,7 @@ function CreateFunding() {
               <div className="flex flex-col gap-[10px]">
                 <div className="flex items-center gap-2">
                   <Title>펀디가 추천하는 한 줄 소개</Title>
-                  <img src="/assets/icons/ic_fundi.svg" width="20px" />
+                  <img src={FundiIcon} width="20px" />
                 </div>
                 <MediumFont ref={summaryRef} className="break-words">
                   펀디가 요약한 내용
