@@ -71,6 +71,7 @@ outline-none
   p-2
   w-1/6
   mr-2
+  rounded-md
   border-b
   appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
 `;
