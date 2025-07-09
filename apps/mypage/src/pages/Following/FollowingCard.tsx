@@ -18,7 +18,7 @@ export const FollowingCard = ({
   };
 
   return (
-    <div className="flex justify-between items-center w-[1230px] h-[100px] p-4 ml-[50px] bg-white rounded shadow">
+    <div className="flex justify-between items-center w-full p-4 bg-white rounded shadow">
       <div className="flex items-center gap-4">
         {/* 아바타 */}
         <div className="w-14 h-14 rounded-full bg-slate-200 flex items-center justify-center text-[#5FBDFF] text-lg font-medium">

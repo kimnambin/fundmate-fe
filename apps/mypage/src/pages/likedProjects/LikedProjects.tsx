@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import Sidebar from "../../components/common/Sidebar";
-import { VerticalCard } from "./VerticalCard";
-import { Header } from "../../../../../packages/ui/components/Header";
-import type { Project } from "../../api/getLikedProjects"; 
+import { Title } from '@repo/ui/styles';
+import { VerticalCard } from '@repo/ui/components';
 
 
 interface Project { // 임시 타입
@@ -60,43 +58,22 @@ const LikedProjects = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <Header />
+    <div className="flex flex-col w-full">
+      <Title>찜한 프로젝트</Title>
 
-      {/* Sidebar + Main */}
-      <div className="flex flex-1">
-        <Sidebar />
-
-        {/* Main Content */}
-        <main className="flex-1 pl-[300px] pr-[50px] py-[30px] ml-[270px]">
-          <h2 className="mt-[30px] text-[24px] font-semibold mb-6">찜한 프로젝트</h2>
-
-          {loading ? (
-            <div>Loading...</div>
-          ) : projects.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[360px] gap-y-8">
-              {projects.map((project) => {
-                const progress = Math.floor(
-                  (project.currentAmount / project.targetAmount) * 100
-                );
-
-                return (
-                  <VerticalCard
-                    key={project.id}
-                    thumbnailUrl={project.thumbnailUrl}
-                    title={project.title}
-                    description={project.description}
-                    progress={progress}
-                  />
-                );
-              })}
-            </div>
-          ) : (
-            <div className="text-gray-500">찜한 프로젝트가 없습니다.</div>
-          )}
-        </main>
-      </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : projects.length > 0 ? (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+          {projects.map((_project) => {
+            return (
+              <VerticalCard />
+            );
+          })}
+        </div>
+      ) : (
+        <div className="text-gray-500">찜한 프로젝트가 없습니다.</div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { MediumFont } from '@repo/ui/styles';
 
 interface ReviewListItemProps {
   productName: string;
@@ -15,23 +16,23 @@ const ReviewListItem: React.FC<ReviewListItemProps> = ({
 }) => {
   return (
     <div
-      className="flex items-center px-[10px] h-[100px] w-[1100px] ml-[-140px] border-b border-gray-300 hover:bg-gray-50 cursor-pointer"
+      className="grid grid-cols-[200px_1fr_1fr] w-full hover:bg-gray-100 rounded-[10px] p-3 border border-gray-200"
       onClick={onClick}
     >
-      <div className="flex items-center gap-[15px] w-[309px] pr-[15px]">
-        <img
-          src={imageUrl}
-          alt={productName}
-          className="w-[80px] h-[80px] rounded-[10px] object-cover bg-gray-200"
-        />
-        <p className="text-[16px] font-medium text-black truncate pl-[8px]">
+      <img
+        src={imageUrl}
+        alt={productName}
+        className="w-[100px] h-auto rounded-[10px] object-cover bg-gray-200"
+      />
+      <div className='flex items-center'>
+        <MediumFont className="truncate">
           {productName}
-        </p>
+        </MediumFont>
       </div>
-      <div className="flex items-center justify-start w-[461px] px-[10px]">
-        <p className="text-[16px] font-medium text-black truncate pl-[8px]">
+      <div className='flex items-center'>
+        <MediumFont className="truncate">
           {review}
-        </p>
+        </MediumFont>
       </div>
     </div>
   );

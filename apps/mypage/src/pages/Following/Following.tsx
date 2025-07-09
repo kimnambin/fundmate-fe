@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Header } from "../../../../../packages/ui/components/Header";
 import { FollowingCard } from "./FollowingCard";
+import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 
 interface FollowingUser {
   id: number;
@@ -37,62 +37,53 @@ const Following = () => {
   const currentList = showFollowings ? followings : followers;
 
   return (
-    <div className="flex flex-col w-full min-h-screen">
-      {/* Header */}
-      <Header />
-
-      {/* Main */}
-      <div className="flex flex-1">
-
-        <main className="mt-[70px] ml-[470px] flex-1 p-8">
-          {/* 상단 팔로잉/팔로워 탭 */}
-          <h2 className="text-[25px] font-semibold mt-[-25px] ml-[60px] mb-[30px]">팔로잉</h2>
-          <div className="flex gap-8 mb-8 border-b pb-2 w-[200px] ml-[60px]">
-            <button
-              onClick={() => setShowFollowings(true)}
-              className={`flex items-center gap-1 text-[18px] ${
-                showFollowings
-                  ? "font-semibold text-black border-b-2 border-black pb-1"
-                  : "text-[#343F59]"
+    <div className="flex flex-col gap-7 w-full">
+      <Title>팔로잉</Title>
+      <div className="flex flex-col gap-5">
+        <div className="flex gap-8 border-b">
+          <button
+            onClick={() => setShowFollowings(true)}
+            className={`flex items-center gap-1 py-2 ${showFollowings
+              ? "font-semibold shadow-[inset_0_-2px_0_0_#000000]"
+              : "text-[#343F59]"
               }`}
-            >
-              <span>팔로잉</span>
-              <span className="text-[#5FBDFF]">{followings.length}</span>
-            </button>
-            <button
-              onClick={() => setShowFollowings(false)}
-              className={`flex items-center gap-1 text-[18px] ${
-                !showFollowings
-                  ? "font-semibold text-black border-b-2 border-black pb-1"
-                  : "text-[#343F59]"
+          >
+            <MediumFont>팔로잉</MediumFont>
+            <span className="text-[#5FBDFF]">{followings.length}</span>
+          </button>
+          <button
+            onClick={() => setShowFollowings(false)}
+            className={`flex flex-row items-center gap-2 ${!showFollowings
+              ? "font-semibold shadow-[inset_0_-2px_0_0_#000000]"
+              : "text-[#343F59]"
               }`}
-            >
-              <span>팔로워</span>
-              <span className="text-[#5FBDFF]">{followers.length}</span>
-            </button>
+          >
+            <MediumFont>팔로워</MediumFont>
+            <SubTitle className="text-main">{followers.length}</SubTitle>
+          </button>
+        </div>
+
+        {/* 리스트 */}
+        {loading ? (
+          <div>Loading...</div>
+        ) : currentList.length > 0 ? (
+          <div className="flex flex-col gap-4 w-full">
+            {currentList.map((user) => (
+              <FollowingCard
+                key={user.id}
+                name={user.name}
+                initial={user.initial}
+                isFollowing={user.isFollowing}
+              />
+            ))}
           </div>
-
-          {/* 리스트 */}
-          {loading ? (
-            <div>Loading...</div>
-          ) : currentList.length > 0 ? (
-            <div className="flex flex-col gap-4">
-              {currentList.map((user) => (
-                <FollowingCard
-                  key={user.id}
-                  name={user.name}
-                  initial={user.initial}
-                  isFollowing={user.isFollowing}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="text-gray-500">
-              {showFollowings ? "팔로잉한 사용자가 없습니다." : "팔로워가 없습니다."}
-            </div>
-          )}
-        </main>
+        ) : (
+          <div className="text-gray-500">
+            {showFollowings ? "팔로잉한 사용자가 없습니다." : "팔로워가 없습니다."}
+          </div>
+        )}
       </div>
+
     </div>
   );
 };

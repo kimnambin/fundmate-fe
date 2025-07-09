@@ -52,6 +52,7 @@ export const Header = () => {
   const [searchInput, setSearchInput] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
+  const islogined = window.localStorage.getItem('isLogined');
 
   const currentFullPath = location.pathname + location.search;
 
@@ -66,7 +67,11 @@ export const Header = () => {
   };
 
   const handleNavigate = () => {
-    navigate('/login');
+    if (islogined) {
+      navigate('/mypage');
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
@@ -103,7 +108,9 @@ export const Header = () => {
               alt="default user icon"
               className="w-10 h-10"
             />
-            <MediumFont>로그인/회원가입</MediumFont>
+            {
+              islogined ? <MediumFont>나는야 서포터</MediumFont> : <MediumFont>로그인/회원가입</MediumFont>
+            }
           </LoginButton>
         </div>
       </Container>
