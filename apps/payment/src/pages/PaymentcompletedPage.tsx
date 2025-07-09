@@ -2,7 +2,7 @@ import {
   Container,
   FlexColsm,
   FlexRowsm,
-  GridCol4,
+  GridCol6,
 } from '../components/styles/layout.style';
 import { BaseText, BoldBigText } from '../components/styles/text.style';
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ const PaymentcompletedPage = () => {
 
   return (
     <Container className="mt-[10%] px-6 items-start sm:px-0">
-      <FlexColsm className='w-full'>
+      <FlexColsm className="w-full">
         <BoldBigText className="text-main">축하합니다. 12번째</BoldBigText>
         <BoldBigText>공식 후원자가 되셨습니다!</BoldBigText>
         <FlexRowsm>
@@ -32,7 +32,7 @@ const PaymentcompletedPage = () => {
             이런 프로젝트도 좋아하실거에요
           </BoldBigText>
 
-          <GridCol4 className="w-full">
+          <GridCol6 className="w-full">
             {Array.from({ length: 8 }).map((_, index) => {
               try {
                 return <VerticalCard key={index} />;
@@ -41,7 +41,7 @@ const PaymentcompletedPage = () => {
                 return <div key={index}>오류 발생</div>;
               }
             })}
-          </GridCol4>
+          </GridCol6>
         </div>
         <Blank></Blank>
       </FlexColsm>

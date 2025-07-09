@@ -3,12 +3,12 @@ import Sidebar from './components/common/Sidebar';
 
 import Mypage from './pages/Mypage/Mypage';
 import SupportedProjects from './pages/supportedProject/supportedProjects';
-import LikedProjects from './pages/likedProjects/LikedProjects'; 
-import Following from './pages/Following/Following'; 
-import UserProfileSettings from './pages/UserProfileSettings/UserProfileSettings'; 
-import Withdrawal from './pages/withdrawal/withdrawal'; 
-import MyReviews from './pages/MyReviews/MyReviews'; 
-import SupporterProfile from './pages/SupporterProfile/SupporterProfile'; 
+import LikedProjects from './pages/likedProjects/LikedProjects';
+import Following from './pages/Following/Following';
+import UserProfileSettings from './pages/UserProfileSettings/UserProfileSettings';
+import Withdrawal from './pages/withdrawal/withdrawal';
+import MyReviews from './pages/MyReviews/MyReviews';
+import SupporterProfile from './pages/SupporterProfile/SupporterProfile';
 
 function LayoutWithSidebar() {
   return (

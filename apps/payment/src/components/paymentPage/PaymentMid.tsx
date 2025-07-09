@@ -12,7 +12,7 @@ const PaymentMid = ({
   return (
     <div className="w-full">
       <BoldBigText>{subText[0]}</BoldBigText>
-      <BoxRow>어쩌구 저쩌구 정보가 담길 예정</BoxRow>
+      <BoxRow>기본리워드</BoxRow>
       <BoldBigText className="mt-6">{subText[1]}</BoldBigText>
       <Box>
         <BaseText>후원금</BaseText>
