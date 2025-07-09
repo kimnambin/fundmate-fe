@@ -6,7 +6,7 @@ export const Wrapper = tw.div<{ width?: string }>`
     gap-1
 `;
 
-export const Title = tw.p`
+export const CategoryTitle = tw.p`
     flex
     items-center
     gap-1
