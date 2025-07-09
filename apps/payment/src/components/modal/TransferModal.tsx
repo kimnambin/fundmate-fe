@@ -1,4 +1,4 @@
-import { Modal } from '@repo/ui/components';
+import { MainButton, Modal } from '@repo/ui/components';
 import { ModalContainer } from '../styles/modal/modal.style';
 import {
   Wrapper,
@@ -11,7 +11,6 @@ import {
   BottomWrapper,
   Box,
 } from '../styles/modal/tansfetModal.style';
-import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { useTransferForm } from '../../hooks/useForm';
 import { TransferProps } from '../../types/modal.model';
 import PayConfirmModal from './confirm/PayConfirmModal';
@@ -143,14 +142,15 @@ export default function TransferModal({
                 기본 결제수단으로 등록
               </label>
             </Box>
-
-            <BaseButton
-              className={`ml-0 ${!isFormValid ? 'bg-gray-400' : 'ml-0 mt-4'}`}
+            <MainButton
+              label="결제하기"
+              className="ml-0 w-full"
+              textSize={'text-base'}
+              textWeight={'font-bold'}
               onClick={handleTransfer}
-              disabled={!isFormValid}
-            >
-              이체하기
-            </BaseButton>
+              isVerificated={!isFormValid}
+              isError={!isFormValid}
+            />
           </Wrapper>
         </ModalContainer>
       )}

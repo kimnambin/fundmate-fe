@@ -2,12 +2,19 @@ import { MainButton } from '@repo/ui/components';
 import { BoldBigText, BoldText } from '../../styles/text.style';
 import { formatNum } from '../../../utils/numbers';
 
+interface PayConfirmProps {
+  addAmount: number;
+  setIsConfirmModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  confirmPayment: () => void;
+  title: string;
+}
+
 const PayConfirmModal = ({
   addAmount,
   setIsConfirmModalOpen,
   confirmPayment,
   title,
-}: any) => {
+}: PayConfirmProps) => {
   return (
     <div className="flex flex-col p-5 gap-5">
       <div className="text-center flex flex-col gap-[10px]">

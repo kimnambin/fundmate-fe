@@ -34,6 +34,7 @@ const CardPaymentModal = ({
     setExpiryDate,
     cvv,
     setCvv,
+    cardName,
     setCardName,
     handleClose,
     isFormValid,
@@ -184,6 +185,7 @@ const CardPaymentModal = ({
             id="card-name"
             type="text"
             placeholder="J. Smith"
+            value={cardName}
             required
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setCardName(e.target.value)
@@ -191,11 +193,12 @@ const CardPaymentModal = ({
           />
           <MainButton
             label="결제하기"
-            className={`ml-0 w-full ${!isFormValid ? 'bg-gray-400' : 'ml-0 mt-4'}`}
+            className="ml-0 w-full"
             textSize={'text-base'}
             textWeight={'font-bold'}
             onClick={handleCardPay}
             isVerificated={!isFormValid}
+            isError={!isFormValid}
           />
         </div>
       )}
