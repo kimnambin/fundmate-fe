@@ -1,4 +1,4 @@
-import { MediumFont } from '../../style/typography';
+import { MediumFont } from '@repo/ui/styles';
 import { Price, Wrapper } from './addedItem.styles';
 import { IoClose } from 'react-icons/io5';
 

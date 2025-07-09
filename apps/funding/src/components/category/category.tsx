@@ -1,5 +1,5 @@
 import { FaChevronDown } from 'react-icons/fa';
-import { Option, Title, Wrapper } from './category.styles';
+import { Option, CategoryTitle, Wrapper } from './category.styles';
 
 interface Props {
   title: string;
@@ -11,10 +11,10 @@ interface Props {
 const Category = ({ title, options, selected, onSelect }: Props) => {
   return (
     <Wrapper>
-      <Title>
+      <CategoryTitle>
         {title}
         <FaChevronDown fill="#000" size={10} />
-      </Title>
+      </CategoryTitle>
 
       <ul>
         {options.map((option) => (

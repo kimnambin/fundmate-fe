@@ -6,16 +6,15 @@ import {
   SubTitle,
   Title,
   WarningText,
-} from '../../style/typography';
+  Layout,
+} from '@repo/ui/styles';
 import Category from '../../components/category/category';
 import { filters } from '../createFunding/createFunding';
-import MainButton from '../../components/main-button/mainButton';
-import Modal from '../../components/modal/modal';
+import { MainButton } from '@repo/ui/components';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
-import { Loading } from '@repo/ui/components';
+import { Loading, Modal } from '@repo/ui/components';
 import { useNavigate } from 'react-router-dom';
-import { Layout } from '../../style/layout';
 import { FundiIcon } from '@repo/ui/assets';
 
 const AskFundi = () => {
@@ -44,7 +43,7 @@ const AskFundi = () => {
         message: markdownString,
       };
 
-      navigate('/ask-fundi/result', { state: response });
+      navigate('/fundi/response', { state: response });
     } catch (error) {
       console.error('펀디 요청 실패 :', error);
     } finally {
