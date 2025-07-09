@@ -25,9 +25,12 @@ module.exports = {
       fontFamily: {
         sans: ['Pretendard'],
       },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+      },
       containers: {
         '2xs': '16rem'
-      }
+      },
     },
   },
   plugins: [],
