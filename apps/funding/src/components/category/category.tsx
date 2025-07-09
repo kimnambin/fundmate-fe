@@ -1,27 +1,26 @@
-import { useState } from 'react';
-import { Wrapper, Title, Option } from './category.styles';
 import { FaChevronDown } from 'react-icons/fa';
+import { Option, CategoryTitle, Wrapper } from './category.styles';
 
 interface Props {
   title: string;
   options: string[];
+  selected: string | null;
+  onSelect: (value: string) => void;
 }
 
-const Category = ({ title, options }: Props) => {
-  const [selected, setSelected] = useState<string | null>(null);
-
+const Category = ({ title, options, selected, onSelect }: Props) => {
   return (
     <Wrapper>
-      <Title>
+      <CategoryTitle>
         {title}
         <FaChevronDown fill="#000" size={10} />
-      </Title>
+      </CategoryTitle>
 
       <ul>
         {options.map((option) => (
           <Option
             key={option}
-            onClick={() => setSelected(option)}
+            onClick={() => onSelect(option)}
             className={
               selected === option ? 'text-main font-bold' : 'text-text-active'
             }

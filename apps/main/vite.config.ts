@@ -1,13 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
-import tailwindcss from '@tailwindcss/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss(),
     federation({
       name: 'main',
       remotes: {
@@ -17,7 +15,7 @@ export default defineConfig({
         payment: 'http://localhost:5004/assets/remoteEntry.js',
         statistics: 'http://localhost:5005/assets/remoteEntry.js',
       },
-      shared: ['react', 'react-dom'],
+      shared: ['react', 'react-dom', 'react-router-dom', '@ramonak/react-progress-bar'],
     }),
   ],
   build: {
@@ -25,5 +23,8 @@ export default defineConfig({
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
+  },
+  resolve: {
+    dedupe: ['react', 'react-dom', 'react-router-dom'],
   },
 });

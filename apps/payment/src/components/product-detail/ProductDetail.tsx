@@ -8,7 +8,6 @@ import {
   Main,
   Box,
   Line,
-  DescText,
   Blank,
 } from '../styles/product-detail/prdouctstyle.style';
 import PDBox from './PDBox';
@@ -21,10 +20,10 @@ const ProductDetail = () => {
   return (
     <Wrapper>
       <Header>
-        <Text ishas={currentPage} onClick={() => setCurrentPage(true)}>
+        <Text $ishas={currentPage} onClick={() => setCurrentPage(true)}>
           프로젝트 계획
         </Text>
-        <Text ishas={!currentPage} onClick={() => setCurrentPage(false)}>
+        <Text $ishas={!currentPage} onClick={() => setCurrentPage(false)}>
           후기
         </Text>
       </Header>
@@ -32,10 +31,8 @@ const ProductDetail = () => {
         <Line />
         <Title>{currentPage ? '프로젝트 소개' : '프로젝트 후기'}</Title>
       </Topic>
-      <Main>
-        <Box>
-          <DescText>{currentPage ? <PDdetail /> : <PDReview />}</DescText>
-        </Box>
+      <Main className="">
+        <Box>{currentPage ? <PDdetail /> : <PDReview />}</Box>
         <PDBox />
       </Main>
       <Blank></Blank>

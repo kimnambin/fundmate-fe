@@ -1,12 +1,33 @@
 // utils
-export { setupCounter } from './utils/counter';
+export { ScrollToTop } from './utils';
 
 // components
-export { Header } from './components/Header';
-export { Footer } from './components/Footer';
-export { VerticalCard } from './components/mainPage/VerticalCard';
-export { HorizontalCard } from './components/mainPage/HorizontalCard';
+export {
+  Header,
+  Footer,
+  HorizontalCard,
+  VerticalCard,
+  Dropdown,
+  Loading,
+  MainButton,
+  InputText,
+  Modal,
+} from './components';
 
 //assets
-export { Images } from './assets'
-export { CategoryIcons } from './assets'
+export { Images } from './assets';
+export { CategoryIcons } from './assets';
+export { FundiIcon } from './assets';
+
+//styled-components
+export {
+  HorizontalCardContainer,
+  VerticalCardContainer,
+  Layout,
+  Title,
+  SubTitle,
+  BigFont,
+  MediumFont,
+  SmallFont,
+  WarningText
+} from './styles'

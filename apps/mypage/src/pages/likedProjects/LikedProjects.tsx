@@ -4,6 +4,7 @@ import { VerticalCard } from "./VerticalCard";
 import { Header } from "../../../../../packages/ui/components/Header";
 import type { Project } from "../../api/getLikedProjects"; 
 
+
 interface Project { // 임시 타입
   id: number;
   title: string;
@@ -59,7 +60,7 @@ const LikedProjects = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full min-h-screen">
+    <div className="flex flex-col min-h-screen">
       {/* Header */}
       <Header />
 
@@ -68,13 +69,13 @@ const LikedProjects = () => {
         <Sidebar />
 
         {/* Main Content */}
-        <main className="ml-[450px] flex-1 p-8">
-          <h2 className="ml-[20px] text-lg font-semibold mt-[20px] mb-[-10px]">찜한 프로젝트</h2>
+        <main className="flex-1 pl-[300px] pr-[50px] py-[30px] ml-[270px]">
+          <h2 className="mt-[30px] text-[24px] font-semibold mb-6">찜한 프로젝트</h2>
 
           {loading ? (
             <div>Loading...</div>
           ) : projects.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-56">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[360px] gap-y-8">
               {projects.map((project) => {
                 const progress = Math.floor(
                   (project.currentAmount / project.targetAmount) * 100

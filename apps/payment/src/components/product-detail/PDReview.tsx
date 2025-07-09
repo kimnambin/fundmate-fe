@@ -1,7 +1,9 @@
+import { DescText } from '../styles/product-detail/prdouctstyle.style';
+
 const PDReview = () => {
   return (
     <>
-      <p>후기후기</p>
+      <DescText>후기후기</DescText>
     </>
   );
 };

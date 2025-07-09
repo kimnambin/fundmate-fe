@@ -1,49 +1,31 @@
 import ProgressBar from "@ramonak/react-progress-bar";
-import { HorizontalCardContainer } from "../../../../../packages/ui/styles/Card.style";
-
+import { HorizontalCardContainer } from "../style/Card.style";
+import { useNavigate } from "react-router-dom";
+import { HeartButton } from "../../../../../packages/ui/components/Likes/HeartButton";
+import { MediumFont, SubTitle } from "../../../../../packages/ui/styles";
 interface HorizontalCardProps {
-  imageUrl: string;
-  title: string;
-  description: string;
-  number: string | number;
+  number: string;
 }
 
-export const HorizontalCard = ({
-  imageUrl,
-  title,
-  description,
-  number,
-}: HorizontalCardProps) => {
+export const HorizontalCard = ({ number }: HorizontalCardProps) => {
+  const navigate = useNavigate();
   return (
-    <HorizontalCardContainer>
-      {/* 이미지 */}
-      <div className="col-span-4">
-        <img
-          src={imageUrl}
-          alt={title}
-          className="w-full h-full object-cover rounded-xl"
-        />
+    <HorizontalCardContainer onClick={() => navigate('/product')}>
+      <div className="col-span-4 relative">
+        <img src="https://picsum.photos/id/30/100/100" className="w-auto h-full object-cover rounded-xl" />
+        <HeartButton />
       </div>
-
-      {/* 숫자 */}
       <div className="col-span-1 flex justify-center py-2">
-        <span className="font-bold text-cyan-400">{number}</span>
+        <span className="font-bold text-[#26AAFF]">{number}</span>
       </div>
-
-      {/* 제목, 설명, 진행률 */}
       <div className="col-span-6 flex flex-col items-start justify-between py-2">
         <div className="flex flex-col">
-          <span className="text-lg">{title}</span>
-          <span className="text-base text-gray-500">{description}</span>
+          <MediumFont>이것은 상품의 이름입니다.</MediumFont>
+          <MediumFont className="text-gray-500">이것은 상품의 상세 설명입니다.</MediumFont>
         </div>
         <div className="w-full">
-          <span className="font-bold text-cyan-400">100% 달성</span>
-          <ProgressBar
-            completed={100}
-            height="5px"
-            isLabelVisible={false}
-            bgColor="#26C6DA"
-          />
+          <SubTitle className="text-[#26AAFF]">100% 달성</SubTitle>
+          <ProgressBar completed={100} height="5px" isLabelVisible={false} bgColor="#26AAFF" />
         </div>
       </div>
     </HorizontalCardContainer>

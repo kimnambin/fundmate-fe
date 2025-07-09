@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Header } from "../../../../../packages/ui/components/Header";
-import Sidebar from "../../components/common/Sidebar";
 import { FollowingCard } from "./FollowingCard";
 
 interface FollowingUser {
@@ -42,17 +41,16 @@ const Following = () => {
       {/* Header */}
       <Header />
 
-      {/* Sidebar + Main */}
+      {/* Main */}
       <div className="flex flex-1">
-        <Sidebar />
 
         <main className="mt-[70px] ml-[470px] flex-1 p-8">
           {/* 상단 팔로잉/팔로워 탭 */}
-          <h2 className="text-lg font-semibold mt-[-45px] mb-[30px]">팔로잉</h2>
-          <div className="flex gap-8 mb-8 border-b pb-2 w-[200px]">
+          <h2 className="text-[25px] font-semibold mt-[-25px] ml-[60px] mb-[30px]">팔로잉</h2>
+          <div className="flex gap-8 mb-8 border-b pb-2 w-[200px] ml-[60px]">
             <button
               onClick={() => setShowFollowings(true)}
-              className={`flex items-center gap-1 text-[16px] ${
+              className={`flex items-center gap-1 text-[18px] ${
                 showFollowings
                   ? "font-semibold text-black border-b-2 border-black pb-1"
                   : "text-[#343F59]"
@@ -63,7 +61,7 @@ const Following = () => {
             </button>
             <button
               onClick={() => setShowFollowings(false)}
-              className={`flex items-center gap-1 text-[16px] ${
+              className={`flex items-center gap-1 text-[18px] ${
                 !showFollowings
                   ? "font-semibold text-black border-b-2 border-black pb-1"
                   : "text-[#343F59]"

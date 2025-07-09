@@ -14,6 +14,7 @@ const InputTextArea = ({
   placeholder,
   width,
   rows = 1,
+  onChange,
   ...props
 }: Props) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -42,6 +43,7 @@ const InputTextArea = ({
         rows={rows}
         ref={textareaRef}
         onInput={handleInput}
+        onChange={onChange}
         {...props}
       />
     </Wrapper>

@@ -18,19 +18,19 @@ export const FollowingCard = ({
   };
 
   return (
-    <div className="flex justify-between items-center w-[900px] p-4 bg-white rounded shadow">
+    <div className="flex justify-between items-center w-[1230px] h-[100px] p-4 ml-[50px] bg-white rounded shadow">
       <div className="flex items-center gap-4">
         {/* 아바타 */}
-        <div className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center text-[#5FBDFF] text-lg font-medium">
+        <div className="w-14 h-14 rounded-full bg-slate-200 flex items-center justify-center text-[#5FBDFF] text-lg font-medium">
           {initial}
         </div>
-        <div className="text-[14px] font-semibold">{name}</div>
+        <div className="text-[18px] font-semibold">{name}</div>
       </div>
 
       {/* 팔로우/팔로잉 버튼 */}
       <button
         onClick={toggleFollow}
-        className={`px-4 py-2 rounded border flex items-center gap-1
+        className={`px-6 py-4 rounded border flex items-center gap-1
           ${isFollowing
             ? "bg-gray-100 text-gray-600 border-gray-300"
             : "bg-white text-[#5FBDFF] border-[#5FBDFF]"

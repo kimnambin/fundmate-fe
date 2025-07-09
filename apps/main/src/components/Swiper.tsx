@@ -1,4 +1,4 @@
-import { VerticalCard } from '@repo/ui/mainPage/VerticalCard';
+import { VerticalCard } from '@repo/ui/components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 
@@ -28,7 +28,7 @@ export const SwiperItems = ({ componentId }: SwiperItemsProps) => {
       <Swiper
         slidesPerView={5}
         spaceBetween={20}
-        className='latestView'
+        className='latestView !py-2'
         slidesPerGroup={5}
         speed={1000}
         navigation={{

@@ -1,10 +1,10 @@
 import tw from "tailwind-styled-components";
 
-interface CategoryContainerProps {
+interface CateogoryContainerProps {
   isOpen: boolean;
 }
 
-export const CateogoryContainer = tw.div<CategoryContainerProps>`
+export const CateogoryContainer = tw.div<CateogoryContainerProps>`
   ${p => p.$isOpen ? 'visible' : 'invisible'}
   absolute
   top-full
@@ -17,4 +17,5 @@ export const CateogoryContainer = tw.div<CategoryContainerProps>`
   flex
   flex-col
   gap-1
+  z-20
 `

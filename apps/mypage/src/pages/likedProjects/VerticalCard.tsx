@@ -1,8 +1,6 @@
-import { useState } from "react";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { VerticalCardContainer } from "../../components/style/Card.style";
-
+import { HeartButton } from "../../../../../packages/ui/components/Likes/HeartButton";
 
 interface VerticalCardProps {
   thumbnailUrl: string;
@@ -17,45 +15,35 @@ export const VerticalCard = ({
   description,
   progress,
 }: VerticalCardProps) => {
-  // 하트 상태 (화면 확인용)
-  const [isLiked, setIsLiked] = useState(false);
-
-  const handleToggleLike = () => {
-    setIsLiked((prev) => !prev);
-  };
-
   return (
-    <VerticalCardContainer className="relative h-[310px]">
+    <VerticalCardContainer
+      className="
+        relative flex flex-col p-3 rounded-xl shadow 
+        hover:shadow-lg w-[395px]"
+    >
       {/* 하트 버튼 */}
-      <button
-        onClick={handleToggleLike}
-        className="absolute top-[45px] right-[30px] text-3xl"
-      >
-        {isLiked ? (
-          <AiFillHeart className="text-red-500" />
-        ) : (
-          <AiOutlineHeart className="text-white/80" />
-        )}
-      </button>
+      <div className="absolute top-2 right-2 z-10">
+        <HeartButton />
+      </div>
 
       {/* 썸네일 */}
-      <div className="w-[280px] h-[280px] mt-[20px]" >
+      <div className="w-full h-[175px] mb-3">
         <img
           src={thumbnailUrl}
           alt={title}
-          className="w-full h-[180px] rounded-xl object-cover"
+          className="w-full h-full rounded-lg object-cover"
         />
       </div>
 
       {/* 제목 및 설명 */}
-      <div className="flex flex-col">
-        <span className="text-[14px] font-semibold">{title}</span>
-        <span className="text-[12px] text-gray-500">{description}</span>
+      <div className="flex flex-col mb-2 px-1">
+        <span className="text-[15px] font-semibold truncate">{title}</span>
+        <span className="text-[13px] text-gray-500 truncate">{description}</span>
       </div>
 
       {/* 진행률 */}
-      <div className="mt-1 mb-10">
-        <span className="text-base font-bold text-cyan-400">
+      <div className="mt-auto px-1">
+        <span className="text-[13px] font-bold text-cyan-500">
           {progress}% 달성
         </span>
         <ProgressBar
@@ -63,6 +51,7 @@ export const VerticalCard = ({
           height="5px"
           isLabelVisible={false}
           bgColor="#26C6DA"
+          className="mt-1"
         />
       </div>
     </VerticalCardContainer>

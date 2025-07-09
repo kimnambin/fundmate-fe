@@ -1,14 +1,14 @@
-import { MainCategoryContainer } from '../../styles/MainPageComponents.style';
+import { MainCategoryContainer } from '../../styles/Main/MainPageComponents.style';
 import { SingleCategory } from './SingleCategory';
 import { CategoryIcons } from '@repo/ui/assets'
 
 export const MainCategory = () => {
-  const { menu, ...mainPageCategoryIcons } = CategoryIcons;
+  const { menu: _, ...mainPageCategoryIcons } = CategoryIcons;
   return (
     <MainCategoryContainer>
       {
-        Object.entries(mainPageCategoryIcons).map(([name, { src, menuName }], i) => (
-          <SingleCategory key={name} id={i} imgPath={src} name={menuName} />
+        Object.entries(mainPageCategoryIcons).map(([name, { src, menuName }]) => (
+          <SingleCategory key={name} imgPath={src} name={menuName} location='main' />
         ))
       }
     </MainCategoryContainer>

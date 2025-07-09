@@ -1,15 +1,21 @@
+import { Link } from "react-router-dom";
+import { CategoryImage, SingleCategoryContainer } from "../../styles/Category/SingleCategory.style";
+import { SubTitle } from "@repo/ui/styles";
+
 interface SingleCategoryProps {
-  id: number;
   imgPath: string;
   name: string;
+  location: 'main' | 'bar';
 }
 
-export const SingleCategory = ({ id, imgPath, name }: SingleCategoryProps) => {
+export const SingleCategory = ({ imgPath, name, location }: SingleCategoryProps) => {
   return (
-    <div id={id.toString()} className="flex flex-col items-center gap-3 cursor-pointer">
-      <img src={imgPath} className="w-16" />
-      <span className="text-lg font-semibold">{name}</span>
-    </div>
+    <Link to={`/search?category=${name}`}>
+      <SingleCategoryContainer>
+        <CategoryImage src={imgPath} $location={location} />
+        <SubTitle>{name}</SubTitle>
+      </SingleCategoryContainer>
+    </Link>
 
   )
 }
