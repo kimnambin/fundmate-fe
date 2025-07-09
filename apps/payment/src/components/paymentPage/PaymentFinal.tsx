@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import PayModal from '../modal/PayModal';
+import CardPaymentModal from '../modal/CardPaymentModal';
 import TransferModal from '../modal/TransferModal';
 import { BoxCol, BoxRow, FlexColsm } from '../styles/layout.style';
 import { Radio } from '../styles/paymentPage/Address.style';
@@ -93,7 +93,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
             setIsModalOpen={handleCloseModal}
           />
         ) : (
-          <PayModal
+          <CardPaymentModal
             addAmount={addAmount}
             addressData={addressData}
             setIsModalOpen={handleCloseModal}
