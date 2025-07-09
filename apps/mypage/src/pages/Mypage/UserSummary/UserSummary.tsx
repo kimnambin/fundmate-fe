@@ -6,11 +6,11 @@ import UserRecentProjects from "./UserRecentProjects";
 
 const UserSummary = () => {
   return (
-    <div className="w-full flex flex-col items-center max-w-[1410px] max-h-[1000px] px-[50px] gap-[60px]">
+    <div className="w-full flex flex-col items-center max-w-[1830px] max-h-[1000px] px-[50px] gap-[60px]">
 
       {/* 상단: 인사말 + 통계 */}
       <div className="flex w-full justify-between items-start">
-        <div className="flex flex-col ml-[320px] pl-[100px] gap-[90px]">
+        <div className="flex flex-col mt-[20px] ml-[420px] pl-[100px] gap-[90px]">
           <UserGreeting />
           <UserStats />
         </div>

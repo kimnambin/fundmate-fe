@@ -47,10 +47,10 @@ const ProductInfo = () => {
       <Bottom>
         {Object.entries(productPaymentData).map(([key, value]) => (
           <BottomItems key={key}>
-            <div className="w-[120px]">
+            <div className="w-[140px]">
               <KeyP className="text-left">{key}</KeyP>
             </div>
-            <ValueP>{value}</ValueP>
+            <ValueP className="mb-0">{value}</ValueP>
           </BottomItems>
         ))}
         <ProductIconBox />

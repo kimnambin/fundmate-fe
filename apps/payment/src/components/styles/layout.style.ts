@@ -80,8 +80,8 @@ export const Line = tw.div`
   border-b-gray-300
 `;
 
-export const GridCol4 = tw.div`
+export const GridCol6 = tw.div`
    grid
-   grid-cols-4 
+   grid-cols-6 
    gap-4
 `;

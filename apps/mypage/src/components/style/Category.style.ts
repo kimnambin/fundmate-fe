@@ -17,4 +17,5 @@ export const CateogoryContainer = tw.div<CateogoryContainerProps>`
   flex
   flex-col
   gap-1
+  z-20
 `

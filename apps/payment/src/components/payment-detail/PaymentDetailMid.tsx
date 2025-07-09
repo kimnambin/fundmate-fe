@@ -1,5 +1,5 @@
+import { MainButton } from '@repo/ui/components';
 import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/layout.style';
-import { BaseButton } from '../styles/product-detail/productInfo.style';
 import { BoldBigText, BoldText } from '../styles/text.style';
 
 const PaymentDetailMid = () => {
@@ -21,9 +21,12 @@ const PaymentDetailMid = () => {
                 <BoldText className="text-left">{content[idx]}</BoldText>
               </FlexRowsm>
             </FlexColsm>
-            <BaseButton className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black">
-              변경
-            </BaseButton>
+            <MainButton
+              label="변경"
+              className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black"
+              textSize={'text-base'}
+              textWeight={'font-bold'}
+            />
           </BoxRow>
         </FlexCol>
       ))}

@@ -15,7 +15,7 @@ export const Top = tw.div`
     flex-col
     items-start
     justify-center
-    gap-3
+    gap-1
 `;
 
 export const KeyP = tw.p`
@@ -24,7 +24,8 @@ export const KeyP = tw.p`
 
 export const ValueP = tw.p<HasProps>`
     font-bold
-    ${({ ishas }) => (ishas ? 'text-[18px]' : 'text-[16px]')} 
+    mb-3
+    ${({ ishas }) => (ishas ? 'text-[19px]' : 'text-[17px]')} 
 `;
 
 export const Divide = tw.div`

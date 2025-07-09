@@ -1,7 +1,6 @@
-import { FaRegHeart } from 'react-icons/fa';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { IoShareSocialOutline } from 'react-icons/io5';
 import {
-  BaseButton,
   IconBox,
   IconButton,
   IconGroup,
@@ -10,6 +9,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useQueryString from '../../hooks/useQueryString';
 import { productData } from './ProductInfo';
+import { MainButton } from '@repo/ui/components';
 
 const ProductIconBox = () => {
   const [click, setClick] = useState<boolean>(false);
@@ -33,7 +33,7 @@ const ProductIconBox = () => {
         <IconButton onClick={() => setClick(!click)}>
           {click ? (
             <>
-              <FaRegHeart className="w-7 h-7 text-red-600" />
+              <FaHeart className="w-7 h-7 text-red-600" />
               <span>1</span>
             </>
           ) : (
@@ -48,7 +48,12 @@ const ProductIconBox = () => {
         </IconButton>
       </IconGroup>
       <Link to={`/payment?title=${productData.title}`} className="w-full">
-        <BaseButton className="w-72 sm:w-full">후원하기</BaseButton>
+        <MainButton
+          label={'후원하기'}
+          textSize={'text-base'}
+          textWeight={'font-bold'}
+          className="w-72 px-6 py-3 ml-3.5  sm:w-full"
+        />
       </Link>
     </IconBox>
   );
