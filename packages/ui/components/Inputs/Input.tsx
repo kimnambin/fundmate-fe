@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper } from '../../styles/Loading.style';
+import { Wrapper } from '../../styles/Input.style';
 import { Title } from '../../styles';
 import { InputStyle } from '../../styles/Input.style';
 
