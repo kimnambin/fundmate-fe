@@ -5,7 +5,7 @@ import App from './App.tsx';
 import './index.css';
 
 async function enableMocking() {
-  if (import.meta.env.MODE !== 'development') {
+  if (import.meta.env.MODE !== 'development' || typeof window === 'undefined') {
     return;
   }
 

@@ -1,7 +1,7 @@
 import tw from 'tailwind-styled-components';
 
 export interface HasProps {
-  ishas?: boolean;
+  ishas?: string;
 }
 
 export const Wrapper = tw.div`
@@ -25,7 +25,7 @@ export const Header = tw.header<HasProps>`
 `;
 
 export const Text = tw.p`
-  ${({ ishas }) => (ishas ? 'font-bold' : '')}
+  ${({ $ishas }) => ($ishas ? 'font-bold' : 'font-normal')}
 `;
 
 export const Topic = tw.div`

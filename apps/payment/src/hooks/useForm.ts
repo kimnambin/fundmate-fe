@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { formatNum } from '../utils/numbers';
 import axios from 'axios';
 import { coverSec } from '../utils/security';
 import { TransferProps } from '../types/modal.model';
@@ -19,6 +18,7 @@ export const useTransferForm = ({
   const [birthDate, setBirthDate] = useState('');
   const [isBusinessAccount, setIsBusinessAccount] = useState(false);
   const [, setIsLoading] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   const nav = useNavigate();
   const url = useGetQueryString();
@@ -42,10 +42,10 @@ export const useTransferForm = ({
       alert('모두 입력해주세요.');
       return;
     }
+    setIsConfirmModalOpen(true);
+  };
 
-    const ok = confirm(`${formatNum(addAmount)}원을 정말로 이체하시겠습니까??`);
-    if (!ok) return;
-
+  const confirmPayment = async () => {
     setIsLoading(true);
     try {
       const res = await axios.post('/payment/transfer', {
@@ -81,6 +81,9 @@ export const useTransferForm = ({
     isFormValid,
     handleClose,
     handleTransfer,
+    isConfirmModalOpen,
+    setIsConfirmModalOpen,
+    confirmPayment,
   };
 };
 
@@ -95,6 +98,7 @@ export const useCardPayForm = ({
   const [cardName, setCardName] = useState('');
   const [, setIsLoading] = useState(false);
   const nav = useNavigate();
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   const url = useGetQueryString();
 
@@ -117,9 +121,10 @@ export const useCardPayForm = ({
       return;
     }
 
-    const ok = confirm(`${formatNum(addAmount)}원을 정말로 결제하시겠습니까??`);
-    if (!ok) return;
+    setIsConfirmModalOpen(true);
+  };
 
+  const confirmPayment = async () => {
     setIsLoading(true);
     try {
       const res = await axios.post('/payment/card', {
@@ -138,9 +143,9 @@ export const useCardPayForm = ({
       alert(`입력한 내용을 다시 한번 확인해주세요`);
     } finally {
       setIsLoading(false);
+      setIsConfirmModalOpen(false);
     }
   };
-
   return {
     cardNumber,
     setCardNumber,
@@ -153,5 +158,8 @@ export const useCardPayForm = ({
     isFormValid,
     handleClose,
     handleCardPay,
+    confirmPayment,
+    isConfirmModalOpen,
+    setIsConfirmModalOpen,
   };
 };
