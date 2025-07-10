@@ -54,7 +54,7 @@ const CardPaymentModal = ({
           title={'card'}
         />
       ) : (
-        <div className="max-w-md mx-auto !border-none">
+        <div className="max-w-md mx-auto">
           <FlexRowsm className="justify-between items-center">
             <H2>결제방법</H2>
             <BankBtn className="mb-4" onClick={handleClose}>

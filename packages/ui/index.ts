@@ -29,5 +29,8 @@ export {
   BigFont,
   MediumFont,
   SmallFont,
-  WarningText
-} from './styles'
+  WarningText,
+} from './styles';
+
+//mocks
+export { worker, handlers } from './mocks';

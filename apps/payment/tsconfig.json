@@ -13,6 +13,8 @@
     "module": "ESNext",
     "verbatimModuleSyntax": false,
     "erasableSyntaxOnly": false,
-    "removeComments": false
+    "removeComments": false,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
   }
 }
