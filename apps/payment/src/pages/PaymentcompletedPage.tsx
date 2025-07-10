@@ -12,8 +12,6 @@ import { Blank } from '../components/styles/product-detail/prdouctstyle.style';
 
 const PaymentcompletedPage = () => {
   // const url = useGetQueryString();
-  console.log('VerticalCard 컴포넌트:', VerticalCard);
-  console.log('타입:', typeof VerticalCard);
 
   return (
     <Container className="mt-[10%] px-6 items-start sm:px-0">
