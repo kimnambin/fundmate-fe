@@ -17,6 +17,8 @@ import {
   HorizontalLine,
   InputWrapper,
 } from './createFunding.styles';
+import MarkdownEditor from '@uiw/react-markdown-editor';
+import { Wrapper } from '../../components/input-text-area/inputTextArea.styles';
 
 function CreateFunding() {
   const [isFundiOpen, setIsFundiOpen] = useState(false);
@@ -123,14 +125,18 @@ function CreateFunding() {
             placeholder="예상 상품 배송일을 입력하세요."
           />
 
-          <InputTextArea
-            label="프로젝트 소개"
-            placeholder="프로젝트(펀딩)에 대한 설명을 작성해 주세요!"
-            rows={10}
-            width="w-full"
-            value={intro}
-            onChange={(e) => setIntro(e.target.value)}
-          />
+          <Wrapper>
+            <Label>프로젝트 소개</Label>
+            <div data-color-mode="light">
+              <MarkdownEditor
+                value={intro}
+                height="400px"
+                onChange={(value) => {
+                  setIntro(value);
+                }}
+              />
+            </div>
+          </Wrapper>
           <div className="w-auto flex justify-end">
             <MainButton
               width="w-[200px]"
