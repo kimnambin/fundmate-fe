@@ -19,7 +19,7 @@ import {
   HorizontalLine,
   InputWrapper,
 } from './createFunding.styles';
-import { formatPrice } from '../../utils/format';
+import { formatPrice } from '@repo/ui/utils';
 
 function CreateFunding() {
   const [title, setTitle] = useState('');
