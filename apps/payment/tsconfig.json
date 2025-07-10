@@ -12,6 +12,9 @@
     "moduleResolution": "node",
     "module": "ESNext",
     "verbatimModuleSyntax": false,
-    "erasableSyntaxOnly": false
+    "erasableSyntaxOnly": false,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
   }
 }

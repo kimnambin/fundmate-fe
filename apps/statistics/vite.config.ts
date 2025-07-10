@@ -9,7 +9,9 @@ export default defineConfig({
     federation({
       name: 'statistics',
       filename: 'remoteEntry.js',
-      exposes: {},
+      exposes: {
+        "./Statistics": "./src/pages/Statistics.tsx"
+      },
       shared: ['react', 'react-dom'],
     }),
   ],

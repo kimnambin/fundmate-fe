@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
+// TODO : 추후 실제 명과 API로 수정 예정
 interface CardRequestProps {
   cardNumber: string;
   expiryDate: string;
@@ -28,13 +29,13 @@ export const handlers = [
         {
           message: '모든 입력창이 입력되지 않았습니다.',
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     return HttpResponse.json(
       { message: '결제 완료', cardNumber },
-      { status: 201 }
+      { status: 201 },
     );
   }),
 
@@ -50,13 +51,13 @@ export const handlers = [
         {
           message: '모든 입력창이 입력되지 않았습니다.',
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     return HttpResponse.json(
       { message: `${accountHolder}님 결좌이체 완료` },
-      { status: 201 }
+      { status: 201 },
     );
   }),
 ];
