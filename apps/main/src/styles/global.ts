@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         font-family: 'Pretendard';
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .wmde-markdown ul,

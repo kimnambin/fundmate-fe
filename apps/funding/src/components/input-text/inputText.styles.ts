@@ -8,7 +8,7 @@ export const Wrapper = tw.div<{ width?: string }>`
 `;
 
 export const Label = tw.label`
-    font-bold
+    font-bold text-[16px]
 `;
 
 export const InputStyle = tw.input<{ isError?: boolean }>`
