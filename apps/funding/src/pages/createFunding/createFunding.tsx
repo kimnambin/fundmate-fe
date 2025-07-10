@@ -30,6 +30,7 @@ function CreateFunding() {
   const [intro, setIntro] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [summary, setSummary] = useState('');
   const [price, setPrice] = useState('');
   const [isSubmitOpen, setIsSubmitOpen] = useState(false);
 
@@ -77,6 +78,7 @@ function CreateFunding() {
 
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true);
+      setSummary(text);
       setTimeout(() => setCopied(false), 3000);
     });
   };
@@ -196,6 +198,8 @@ function CreateFunding() {
           <InputTextArea
             label="한 줄 소개"
             placeholder="한 줄 소개를 입력하세요."
+            value={summary}
+            onChange={(e) => setSummary(e.target.value)}
             maxLength={50}
             width="sm:w-[350px]"
           />
