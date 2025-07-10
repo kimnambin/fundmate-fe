@@ -35,29 +35,14 @@ function CreateFunding() {
     DEFAULT_ITEM,
   ]);
 
-  const [hasTitle, setHasTitle] = useState(true);
-  const [hasTargetAmount, setHasTargetAmount] = useState(true);
-  const [hasStartDate, setHasStartDate] = useState(true);
-  const [hasEndDate, setHasEndDate] = useState(true);
-  const [hasDeliveryDate, setHasDeliveryDate] = useState(true);
-  const [hasIntro, setHasIntro] = useState(true);
-  const [hasSummary, setHasSummary] = useState(true);
-  const [hasCategory, setHasCategory] = useState(true);
-  const [hasGender, setHasGender] = useState(true);
-  const [hasAge, setHasAge] = useState(true);
-  const [hasItems, setHasItems] = useState(true);
-
   const [itemTitle, setItemTitle] = useState('');
   const [itemContent, setItemContent] = useState('');
   const [itemPrice, setItemPrice] = useState('');
 
-  const [hasItemTitle, setHasItemTitle] = useState(true);
-  const [hasItemContent, setHasItemContent] = useState(true);
-  const [hasItemPrice, setHasItemPrice] = useState(true);
-
   const [isSubmit, setIsSubmit] = useState(false);
   const [isSubmitOpen, setIsSubmitOpen] = useState(false);
   const [isFundiOpen, setIsFundiOpen] = useState(false);
+  const [isAdd, setIsAdd] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -65,10 +50,8 @@ function CreateFunding() {
     [itemTitle, itemContent, itemPrice].every((value) => value.trim());
 
   const handleAdd = () => {
+    setIsAdd(true);
     if (!isValidItem()) {
-      setHasItemTitle(!!itemTitle.trim());
-      setHasItemContent(!!itemContent.trim());
-      setHasItemPrice(!!itemPrice.trim());
       return;
     }
     if (addedItems.length >= 5) return;
@@ -76,47 +59,29 @@ function CreateFunding() {
     setAddedItems((prev) => [...prev, { itemPrice, itemTitle, itemContent }]);
 
     setItemTitle('');
-    setHasItemTitle(true);
     setItemContent('');
-    setHasItemContent(true);
     setItemPrice('');
-    setHasItemPrice(true);
     setIsAddOpen(false);
+    setIsAdd(false);
   };
 
-  const validateFunding = () => {
-    const isValid = {
-      title: !!title.trim(),
-      targetAmount: !!targetAmount.trim(),
-      startDate: !!startDate.trim(),
-      endDate: !!endDate.trim(),
-      deliveryDate: !!deliveryDate.trim(),
-      intro: !!intro.trim(),
-      summary: !!summary.trim(),
-      category: !!category,
-      gender: !!gender,
-      age: !!age,
-      items: addedItems.length > 0,
-    };
-
-    setHasTitle(isValid.title);
-    setHasTargetAmount(isValid.targetAmount);
-    setHasStartDate(isValid.startDate);
-    setHasEndDate(isValid.endDate);
-    setHasDeliveryDate(isValid.deliveryDate);
-    setHasIntro(isValid.intro);
-    setHasSummary(isValid.summary);
-    setHasCategory(isValid.category);
-    setHasGender(isValid.gender);
-    setHasAge(isValid.age);
-    setHasItems(isValid.items);
-
-    return Object.values(isValid).every(Boolean);
-  };
+  const isValidFunding = () =>
+    [
+      title.trim(),
+      targetAmount.trim(),
+      startDate.trim(),
+      endDate.trim(),
+      deliveryDate.trim(),
+      intro.trim(),
+      summary.trim(),
+      category,
+      gender,
+      age,
+    ].every(Boolean) && addedItems.length > 0;
 
   const handleSubmit = () => {
     setIsSubmit(true);
-    if (!validateFunding()) return;
+    if (!isValidFunding()) return;
     setIsSubmitOpen(true);
   };
 
@@ -331,27 +296,21 @@ function CreateFunding() {
                   placeholder="상품명을 입력하세요."
                   value={itemTitle}
                   onChange={(e) => setItemTitle(e.target.value)}
+                  isError={isAdd && itemTitle.trim().length === 0}
                 />
-                {!hasItemTitle && (
-                  <WarningText>상품명을 입력하세요</WarningText>
-                )}
                 <InputTextArea
                   placeholder="상품 내용을 입력하세요."
                   rows={5}
                   value={itemContent}
                   onChange={(e) => setItemContent(e.target.value)}
+                  isError={isAdd && itemContent.trim().length === 0}
                 />
-                {!hasItemContent && (
-                  <WarningText>상품 내용을 입력하세요</WarningText>
-                )}
                 <InputText
                   placeholder="상품 금액을 입력하세요."
                   value={itemPrice}
                   onChange={(e) => setItemPrice(e.target.value)}
+                  isError={isAdd && itemPrice.trim().length === 0}
                 />
-                {!hasItemPrice && (
-                  <WarningText>상품 금액을 입력하세요</WarningText>
-                )}
                 <div className="flex justify-end">
                   <MainButton
                     label="상품 추가하기"
