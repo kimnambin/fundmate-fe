@@ -11,10 +11,11 @@ export const Label = tw.label`
     font-bold
 `;
 
-export const InputStyle = tw.input`
+export const InputStyle = tw.input<{ isError?: boolean }>`
     border border-line
     rounded-[5px]
     py-[10px] px-[15px]
     placeholder-input-text
     focus:outline-none focus:border-main
+    ${({ isError }) => (isError ? 'border-red' : 'border-line')}
 `;

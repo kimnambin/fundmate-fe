@@ -9,10 +9,11 @@ interface CustomInputProps {
   value?: string;
   onClick?: () => void;
   placeholder?: string;
+  isError?: boolean;
 }
 
 const InputDatePicker = forwardRef<HTMLInputElement, CustomInputProps>(
-  ({ value, onClick, placeholder }, ref) => (
+  ({ value, onClick, placeholder, isError }, ref) => (
     <DatePickerWrapper>
       <DatePickerField
         ref={ref}
@@ -20,6 +21,7 @@ const InputDatePicker = forwardRef<HTMLInputElement, CustomInputProps>(
         value={value}
         onClick={onClick}
         placeholder={placeholder}
+        isError={isError}
       />
       <button
         type="button"

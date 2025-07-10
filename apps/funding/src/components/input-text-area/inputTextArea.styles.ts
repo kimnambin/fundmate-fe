@@ -6,7 +6,7 @@ export const Wrapper = tw.div<{ width?: string }>`
     gap-[20px]
 `;
 
-export const InputStyle = tw.textarea`
+export const InputStyle = tw.textarea<{ isError?: boolean }>`
     border border-line
     rounded-[5px]
     py-[10px] px-[15px]
@@ -14,4 +14,5 @@ export const InputStyle = tw.textarea`
     focus:outline-none focus:border-main
     resize-none overflow-hidden
     box-border
+    ${({ isError }) => (isError ? 'border-red' : 'border-line')}
 `;

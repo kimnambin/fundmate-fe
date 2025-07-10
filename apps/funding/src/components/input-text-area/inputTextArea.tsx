@@ -7,6 +7,7 @@ interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   placeholder?: string;
   width?: string;
   rows?: number;
+  isError?: boolean;
 }
 
 const InputTextArea = ({
@@ -14,6 +15,7 @@ const InputTextArea = ({
   placeholder,
   width,
   rows = 1,
+  isError,
   onChange,
   ...props
 }: Props) => {
@@ -44,6 +46,7 @@ const InputTextArea = ({
         ref={textareaRef}
         onInput={handleInput}
         onChange={onChange}
+        isError={isError}
         {...props}
       />
     </Wrapper>

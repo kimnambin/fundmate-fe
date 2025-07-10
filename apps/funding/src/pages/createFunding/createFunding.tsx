@@ -1,6 +1,7 @@
 import { FundiIcon } from '@repo/ui/assets';
 import { MainButton, Modal } from '@repo/ui/components';
-import { MediumFont, Title, WarningText, Layout } from '@repo/ui/styles';
+import { Layout, MediumFont, Title, WarningText } from '@repo/ui/styles';
+import MarkdownEditor from '@uiw/react-markdown-editor';
 import { useRef, useState } from 'react';
 import { FiCheck, FiCopy } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
@@ -8,6 +9,7 @@ import AddedItem from '../../components/added-item/addedItem';
 import Category from '../../components/category/category';
 import InputDate from '../../components/input-date/inputDate';
 import InputTextArea from '../../components/input-text-area/inputTextArea';
+import { Wrapper } from '../../components/input-text-area/inputTextArea.styles';
 import InputText from '../../components/input-text/inputText';
 import { Label } from '../../components/input-text/inputText.styles';
 import PointButton from '../../components/point-button/pointButton';
@@ -17,52 +19,105 @@ import {
   HorizontalLine,
   InputWrapper,
 } from './createFunding.styles';
-import MarkdownEditor from '@uiw/react-markdown-editor';
-import { Wrapper } from '../../components/input-text-area/inputTextArea.styles';
 
 function CreateFunding() {
-  const [isFundiOpen, setIsFundiOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [isAddOpen, setIsAddOpen] = useState(false);
-  const [addedItems, setAddedItems] = useState<(typeof DEFAULT_ITEM)[]>([
-    DEFAULT_ITEM,
-  ]);
-  const [intro, setIntro] = useState('');
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [targetAmount, setTargetAmount] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [deliveryDate, setDeliveryDate] = useState('');
+  const [intro, setIntro] = useState('');
   const [summary, setSummary] = useState('');
-  const [price, setPrice] = useState('');
-  const [isSubmitOpen, setIsSubmitOpen] = useState(false);
-
-  const [hasTitle, setHasTitle] = useState(true);
-  const [hasContent, setHasContent] = useState(true);
-  const [hasPrice, setHasPrice] = useState(true);
-
   const [category, setCategory] = useState<string | null>(null);
   const [gender, setGender] = useState<string | null>(null);
   const [age, setAge] = useState<string | null>(null);
+  const [addedItems, setAddedItems] = useState<(typeof DEFAULT_ITEM)[]>([
+    DEFAULT_ITEM,
+  ]);
+
+  const [hasTitle, setHasTitle] = useState(true);
+  const [hasTargetAmount, setHasTargetAmount] = useState(true);
+  const [hasStartDate, setHasStartDate] = useState(true);
+  const [hasEndDate, setHasEndDate] = useState(true);
+  const [hasDeliveryDate, setHasDeliveryDate] = useState(true);
+  const [hasIntro, setHasIntro] = useState(true);
+  const [hasSummary, setHasSummary] = useState(true);
+  const [hasCategory, setHasCategory] = useState(true);
+  const [hasGender, setHasGender] = useState(true);
+  const [hasAge, setHasAge] = useState(true);
+  const [hasItems, setHasItems] = useState(true);
+
+  const [itemTitle, setItemTitle] = useState('');
+  const [itemContent, setItemContent] = useState('');
+  const [itemPrice, setItemPrice] = useState('');
+
+  const [hasItemTitle, setHasItemTitle] = useState(true);
+  const [hasItemContent, setHasItemContent] = useState(true);
+  const [hasItemPrice, setHasItemPrice] = useState(true);
+
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [isSubmitOpen, setIsSubmitOpen] = useState(false);
+  const [isFundiOpen, setIsFundiOpen] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const isValidItem = () =>
-    [title, content, price].every((value) => value.trim());
+    [itemTitle, itemContent, itemPrice].every((value) => value.trim());
 
   const handleAdd = () => {
     if (!isValidItem()) {
-      setHasTitle(!!title.trim());
-      setHasContent(!!content.trim());
-      setHasPrice(!!price.trim());
+      setHasItemTitle(!!itemTitle.trim());
+      setHasItemContent(!!itemContent.trim());
+      setHasItemPrice(!!itemPrice.trim());
       return;
     }
     if (addedItems.length >= 5) return;
 
-    setAddedItems((prev) => [...prev, { price, title, content }]);
+    setAddedItems((prev) => [...prev, { itemPrice, itemTitle, itemContent }]);
 
-    setTitle('');
-    setHasTitle(true);
-    setContent('');
-    setHasContent(true);
-    setPrice('');
-    setHasPrice(true);
+    setItemTitle('');
+    setHasItemTitle(true);
+    setItemContent('');
+    setHasItemContent(true);
+    setItemPrice('');
+    setHasItemPrice(true);
     setIsAddOpen(false);
+  };
+
+  const validateFunding = () => {
+    const isValid = {
+      title: !!title.trim(),
+      targetAmount: !!targetAmount.trim(),
+      startDate: !!startDate.trim(),
+      endDate: !!endDate.trim(),
+      deliveryDate: !!deliveryDate.trim(),
+      intro: !!intro.trim(),
+      summary: !!summary.trim(),
+      category: !!category,
+      gender: !!gender,
+      age: !!age,
+      items: addedItems.length > 0,
+    };
+
+    setHasTitle(isValid.title);
+    setHasTargetAmount(isValid.targetAmount);
+    setHasStartDate(isValid.startDate);
+    setHasEndDate(isValid.endDate);
+    setHasDeliveryDate(isValid.deliveryDate);
+    setHasIntro(isValid.intro);
+    setHasSummary(isValid.summary);
+    setHasCategory(isValid.category);
+    setHasGender(isValid.gender);
+    setHasAge(isValid.age);
+    setHasItems(isValid.items);
+
+    return Object.values(isValid).every(Boolean);
+  };
+
+  const handleSubmit = () => {
+    setIsSubmit(true);
+    if (!validateFunding()) return;
+    setIsSubmitOpen(true);
   };
 
   const handleRemove = (index: number) => {
@@ -97,16 +152,24 @@ function CreateFunding() {
         </div>
 
         <InputWrapper>
-          <InputText
-            width="sm:w-[350px]"
-            label="프로젝트 제목"
-            placeholder="제목을 입력하세요."
-          />
+          <div className="flex flex-col gap-[20px]">
+            <InputText
+              width="sm:w-[350px]"
+              label="프로젝트 제목"
+              placeholder="제목을 입력하세요."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              isError={isSubmit && title.trim().length === 0}
+            />
+          </div>
 
           <InputText
             width="sm:w-[350px]"
             label="목표 금액"
             placeholder="목표 금액을 입력하세요."
+            value={targetAmount}
+            onChange={(e) => setTargetAmount(e.target.value)}
+            isError={isSubmit && targetAmount.trim().length === 0}
           />
 
           <div className="flex flex-col gap-[20px]">
@@ -114,10 +177,16 @@ function CreateFunding() {
               width="sm:w-[350px]"
               label="프로젝트 기간"
               placeholder="펀딩 시작일을 입력하세요."
+              value={startDate}
+              onChange={setStartDate}
+              isError={isSubmit && startDate.trim().length === 0}
             />
             <InputDate
               width="sm:w-[350px]"
               placeholder="펀딩 종료일을 입력하세요."
+              value={endDate}
+              onChange={setEndDate}
+              isError={isSubmit && endDate.trim().length === 0}
             />
           </div>
 
@@ -125,6 +194,9 @@ function CreateFunding() {
             width="sm:w-[350px]"
             label="상품 배송일"
             placeholder="예상 상품 배송일을 입력하세요."
+            value={deliveryDate}
+            onChange={setDeliveryDate}
+            isError={isSubmit && deliveryDate.trim().length === 0}
           />
 
           <Wrapper>
@@ -139,6 +211,9 @@ function CreateFunding() {
                 }}
               />
             </div>
+            {isSubmit && intro.trim().length === 0 && (
+              <WarningText>프로젝트 소개를 작성해주세요.</WarningText>
+            )}
           </Wrapper>
           <div className="w-auto flex justify-end">
             <MainButton
@@ -202,6 +277,7 @@ function CreateFunding() {
             onChange={(e) => setSummary(e.target.value)}
             maxLength={50}
             width="sm:w-[350px]"
+            isError={isSubmit && summary.trim().length === 0}
           />
 
           <CompWrapper>
@@ -226,6 +302,9 @@ function CreateFunding() {
                 onSelect={setAge}
               />
             </div>
+            {isSubmit && (!category || !gender || !age) && (
+              <WarningText>카테고리와 타켓층을 선택하세요.</WarningText>
+            )}
           </CompWrapper>
 
           <CompWrapper>
@@ -250,25 +329,29 @@ function CreateFunding() {
                 <Title>상품 추가</Title>
                 <InputText
                   placeholder="상품명을 입력하세요."
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  value={itemTitle}
+                  onChange={(e) => setItemTitle(e.target.value)}
                 />
-                {!hasTitle && <WarningText>상품명을 입력하세요</WarningText>}
+                {!hasItemTitle && (
+                  <WarningText>상품명을 입력하세요</WarningText>
+                )}
                 <InputTextArea
                   placeholder="상품 내용을 입력하세요."
                   rows={5}
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
+                  value={itemContent}
+                  onChange={(e) => setItemContent(e.target.value)}
                 />
-                {!hasContent && (
+                {!hasItemContent && (
                   <WarningText>상품 내용을 입력하세요</WarningText>
                 )}
                 <InputText
                   placeholder="상품 금액을 입력하세요."
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
+                  value={itemPrice}
+                  onChange={(e) => setItemPrice(e.target.value)}
                 />
-                {!hasPrice && <WarningText>상품 금액을 입력하세요</WarningText>}
+                {!hasItemPrice && (
+                  <WarningText>상품 금액을 입력하세요</WarningText>
+                )}
                 <div className="flex justify-end">
                   <MainButton
                     label="상품 추가하기"
@@ -283,13 +366,16 @@ function CreateFunding() {
               {addedItems.map((item, index) => (
                 <AddedItem
                   key={index}
-                  price={item.price}
-                  title={item.title}
-                  content={item.content}
+                  price={item.itemPrice}
+                  title={item.itemTitle}
+                  content={item.itemContent}
                   onRemove={() => handleRemove(index)}
                 />
               ))}
             </div>
+            {isSubmit && addedItems.length === 0 && (
+              <WarningText>상품을 추가해주세요.</WarningText>
+            )}
           </CompWrapper>
         </InputWrapper>
 
@@ -297,7 +383,7 @@ function CreateFunding() {
           <MainButton
             width="w-[200px]"
             label="개설하기"
-            onClick={() => setIsSubmitOpen(true)}
+            onClick={handleSubmit}
           />
           <Modal isOpen={isSubmitOpen} onClose={() => setIsSubmitOpen(false)}>
             <div className="flex flex-col gap-5 justify-center py-[20px] px-[30px] w-[70vw] sm:w-auto">
@@ -351,7 +437,7 @@ export const filters = [
 ];
 
 const DEFAULT_ITEM = {
-  price: '1,000원',
-  title: '선물 없이 후원하기',
-  content: '혜택 상품 없음',
+  itemPrice: '1,000',
+  itemTitle: '선물 없이 후원하기',
+  itemContent: '혜택 상품 없음',
 };
