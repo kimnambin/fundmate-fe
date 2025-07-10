@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
-import { Wrapper } from './inputDate.styles';
-import { Label } from '../input-text/inputText.styles';
 import InputDatePicker from '../input-date-picker/inputDatePicker';
+import { Label } from '../input-text/inputText.styles';
+import { Wrapper } from './inputDate.styles';
 
 interface Props {
   label?: string;
