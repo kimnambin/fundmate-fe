@@ -14,7 +14,7 @@ const AddedItem = ({ price, title, content, onRemove }: Props) => {
     <Wrapper>
       <div className="flex flex-col gap-2">
         <div className="flex justify-between items-center">
-          <Price>{price}</Price>
+          <Price>{price}원</Price>
           <IoClose size={20} className="cursor-pointer" onClick={onRemove} />
         </div>
         <MediumFont>{title}</MediumFont>

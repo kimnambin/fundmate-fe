@@ -6,13 +6,20 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   type?: 'text' | 'number';
   width?: string;
+  isError?: boolean;
 }
 
-const InputText = ({ label, type = 'text', width, ...props }: Props) => {
+const InputText = ({
+  label,
+  type = 'text',
+  width,
+  isError,
+  ...props
+}: Props) => {
   return (
     <Wrapper width={width}>
       {label && <Label>{label}</Label>}
-      <InputStyle type={type} {...props} />
+      <InputStyle type={type} isError={isError} {...props} />
     </Wrapper>
   );
 };

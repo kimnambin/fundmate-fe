@@ -42,9 +42,9 @@ const menuBar = [
   {
     name: 'statistics',
     menuName: '데이터 분석',
-    route: '/statistics'
-  }
-]
+    route: '/statistics',
+  },
+];
 
 export const Header = () => {
   const isOpen = modalStore((state) => state.isOpen);
@@ -151,7 +151,7 @@ export const Header = () => {
             );
           })}
         </div>
-        <FundiButton type="button" onClick={() => navigate('/ask-fundi')}>
+        <FundiButton type="button" onClick={() => navigate('/fundi/request')}>
           <SubTitle>펀디에게 물어보기</SubTitle>
           <img src={fundi} className="w-6" />
         </FundiButton>

@@ -16,7 +16,7 @@ import MainButton from '../../components/main-button/mainButton';
 import { useState } from 'react';
 import FundingPlanContent from '../../components/funding-detail-tab/fundingPlanContent';
 import FundingReviewContent from '../../components/funding-detail-tab/fundingReviewContent';
-import { Layout } from '../../style/layout';
+import { Layout } from '../../styles/layout';
 
 const FundingDetail = () => {
   const [activeTab, setActiveTab] = useState<'plan' | 'review'>('plan');
