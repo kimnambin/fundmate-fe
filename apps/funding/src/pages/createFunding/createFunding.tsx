@@ -19,6 +19,7 @@ import {
   HorizontalLine,
   InputWrapper,
 } from './createFunding.styles';
+import { formatPrice } from '../../utils/format';
 
 function CreateFunding() {
   const [title, setTitle] = useState('');
@@ -133,7 +134,7 @@ function CreateFunding() {
             label="목표 금액"
             placeholder="목표 금액을 입력하세요."
             value={targetAmount}
-            onChange={(e) => setTargetAmount(e.target.value)}
+            onChange={(e) => setTargetAmount(formatPrice(e.target.value))}
             isError={isSubmit && targetAmount.trim().length === 0}
           />
 
@@ -308,7 +309,7 @@ function CreateFunding() {
                 <InputText
                   placeholder="상품 금액을 입력하세요."
                   value={itemPrice}
-                  onChange={(e) => setItemPrice(e.target.value)}
+                  onChange={(e) => setItemPrice(formatPrice(e.target.value))}
                   isError={isAdd && itemPrice.trim().length === 0}
                 />
                 <div className="flex justify-end">
