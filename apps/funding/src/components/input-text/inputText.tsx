@@ -19,7 +19,7 @@ const InputText = ({
   return (
     <Wrapper width={width}>
       {label && <Label>{label}</Label>}
-      <InputStyle type={type} {...props} isError={isError} {...props} />
+      <InputStyle type={type} isError={isError} {...props} />
     </Wrapper>
   );
 };
