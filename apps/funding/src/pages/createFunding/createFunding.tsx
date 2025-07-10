@@ -38,7 +38,7 @@ function CreateFunding() {
   const [hasPrice, setHasPrice] = useState(true);
 
   const [category, setCategory] = useState<string | null>(null);
-  const [family, setFamily] = useState<string | null>(null);
+  const [gender, setGender] = useState<string | null>(null);
   const [age, setAge] = useState<string | null>(null);
 
   const isValidItem = () =>
@@ -131,6 +131,7 @@ function CreateFunding() {
               <MarkdownEditor
                 value={intro}
                 height="400px"
+                placeholder={'프로젝트(펀딩)에 대한 설명을 작성해주세요!'}
                 onChange={(value) => {
                   setIntro(value);
                 }}
@@ -153,12 +154,14 @@ function CreateFunding() {
                 onClick={() => setIsFundiOpen(false)}
               />
             </div>
-            <div className="flex flex-col gap-5 w-[70vw] sm:w-[315px]">
+            <div className="flex flex-col gap-5 min-w-[400px] max-w-[80vw]">
               <div className="flex flex-col gap-[10px]">
                 <Title>내가 입력한 내용</Title>
                 <MediumFont className="break-words">
                   {intro ? (
-                    intro
+                    <div data-color-mode="light">
+                      <MarkdownEditor.Markdown source={intro} />
+                    </div>
                   ) : (
                     <span className="text-sub-text">
                       입력한 내용이 없습니다.
@@ -209,8 +212,8 @@ function CreateFunding() {
               <Category
                 title={filters[1].title}
                 options={filters[1].options}
-                selected={family}
-                onSelect={setFamily}
+                selected={gender}
+                onSelect={setGender}
               />
               <Category
                 title={filters[2].title}
