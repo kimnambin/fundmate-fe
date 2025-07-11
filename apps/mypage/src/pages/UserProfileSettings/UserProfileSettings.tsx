@@ -1,6 +1,7 @@
-import { useState, useRef, ChangeEvent } from "react";
-import { Header } from "../../../../../packages/ui/components/Header";
+import { useState, useRef, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { MediumFont, Title } from "@repo/ui/styles";
+import { InputText, MainButton } from "@repo/ui/components";
 
 const categories = [
   "예술", "의류", "디자인", "테크/가전",
@@ -61,10 +62,9 @@ const UserProfileSetting = () => {
   };
 
   return (
-    <div className="flex flex-col w-full min-h-screen">
-      <Header />
-      <main className="flex flex-col items-center mt-[60px]">
-        <h2 className="text-2xl font-semibold mr-[480px] mb-8">내 정보 설정</h2>
+    <div className="flex justify-center">
+      <div className="flex flex-col items-center w-[600px]">
+        <Title className="w-full mb-10">내 정보 설정</Title>
 
         {/* 프로필 이미지 */}
         <div className="flex flex-col items-center gap-3 mb-10">
@@ -87,8 +87,16 @@ const UserProfileSetting = () => {
           />
 
           <div className="flex gap-6 text-lg text-gray-500 underline cursor-pointer">
-            <button type="button" onClick={handleClickChange}>바꾸기</button>
-            <button type="button" onClick={() => setProfileImage(null)}>삭제</button>
+            <button type="button" onClick={handleClickChange}>
+              <MediumFont>
+                바꾸기
+              </MediumFont>
+            </button>
+            <button type="button" onClick={() => setProfileImage(null)}>
+              <MediumFont>
+                삭제
+              </MediumFont>
+            </button>
           </div>
         </div>
 
@@ -96,13 +104,12 @@ const UserProfileSetting = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full max-w-[600px]">
 
           {/* 닉네임 */}
-          <div>
+          <div className="flex flex-col gap-3">
             <label className="text-base font-medium">닉네임</label>
-            <input
+            <InputText
               type="text"
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
-              className="w-full mt-2 p-3 border border-slate-300 rounded-md focus:border-[#5FBDFF] focus:outline-none"
               placeholder="닉네임을 입력하세요"
             />
           </div>
@@ -153,17 +160,15 @@ const UserProfileSetting = () => {
           </div>
 
           {/* 이메일 */}
-          <div>
+          <div className="flex flex-col gap-3">
             <label className="text-base font-medium">이메일</label>
-            <input
+            <InputText
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full mt-2 p-3 border border-slate-300 rounded-md focus:border-[#5FBDFF] focus:outline-none"
               placeholder="이메일을 입력하세요"
             />
           </div>
-
           {/* 한줄 소개 */}
           <div>
             <label className="text-base font-medium">한줄 소개</label>
@@ -184,11 +189,10 @@ const UserProfileSetting = () => {
                   key={category}
                   type="button"
                   onClick={() => handleCategoryClick(category)}
-                  className={`px-4 py-2 rounded-full h-[50px] text-sm transition ${
-                    selectedCategory === category
-                      ? "bg-[#5FBDFF] text-white"
-                      : "bg-gray-200 text-gray-700"
-                  }`}
+                  className={`px-4 py-2 rounded-full h-[50px] text-sm transition ${selectedCategory === category
+                    ? "bg-[#5FBDFF] text-white"
+                    : "bg-gray-200 text-gray-700"
+                    }`}
                 >
                   {category}
                 </button>
@@ -198,31 +202,31 @@ const UserProfileSetting = () => {
 
           {/* 버튼 */}
           <div className="flex justify-between gap-4 mt-6">
-            <button
-              type="button"
+            <MainButton
+              label="취소"
+              width="w-full"
               onClick={handleCancel}
-              className="flex-1 py-3 bg-gray-100 text-gray-500 rounded-md border"
-            >
-              취소
-            </button>
-            <button
+              className="bg-gray-300 text-gray-500"
+            />
+            <MainButton
               type="submit"
-              className="flex-1 py-3 bg-[#5FBDFF] text-white rounded-md"
-            >
-              확인
-            </button>
+              label="확인"
+              width="w-full"
+            />
           </div>
 
           {/* 회원탈퇴 버튼 */}
           <button
             type="button"
-            className="mt-6 w-full h-[48px] flex justify-center items-center rounded-md text-[20px] font-medium underline text-[#7E7C7C] mb-[120px]"
-            onClick={() => navigate("/withdrawal")}
+            className="mt-6 w-full h-[48px] flex justify-center items-center rounded-md underline text-[#7E7C7C] mb-[120px]"
+            onClick={() => navigate("/user/withdrawal")}
           >
-            회원탈퇴
+            <MediumFont>
+              회원탈퇴
+            </MediumFont>
           </button>
         </form>
-      </main>
+      </div>
     </div>
   );
 };

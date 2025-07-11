@@ -1,5 +1,6 @@
-import { VerticalCard } from "../VerticalCard";
 import { useRecentViewedProjectsStore } from "../../../store/recentViewedProjects";
+import { SubTitle } from "@repo/ui/styles";
+import { VerticalCard } from "@repo/ui/components";
 
 const UserRecentProjects = () => {
   const recentViewedProjects = useRecentViewedProjectsStore(
@@ -11,19 +12,13 @@ const UserRecentProjects = () => {
   }
 
   return (
-    <div className="mt-[-24px] flex flex-col items-center">
-      <h2 className="mr-[390px] text-[20px] font-semibold mb-10">
+    <div className="flex flex-col gap-5 w-full">
+      <SubTitle>
         서포터 닉네임님이 최근 본 프로젝트
-      </h2>
-      <div className="ml-[510px] mt-[-25px] grid grid-cols-6 gap-y-[10px] gap-x-[20px] mb-[100px]">
-        {recentViewedProjects.slice(0, 12).map((project) => (
-          <VerticalCard
-            key={project.id}
-            thumbnailUrl={project.thumbnailUrl}
-            title={project.title}
-            description={project.description}
-            progress={project.progress}
-          />
+      </SubTitle>
+      <div className="grid grid-cols-6 gap-3">
+        {recentViewedProjects.slice(0, 12).map((_project) => (
+          <VerticalCard />
         ))}
       </div>
     </div>

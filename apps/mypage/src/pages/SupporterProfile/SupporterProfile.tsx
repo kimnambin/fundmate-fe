@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Header } from "../../../../../packages/ui/components/Header";
+import { Layout, MediumFont, SubTitle, Title } from '@repo/ui/styles';
 
 interface Supporter {
   nickname: string;
@@ -40,7 +40,6 @@ const SupporterProfile = () => {
   if (!supporter) {
     return (
       <>
-        <Header />
         <div className="flex flex-col items-center w-full mt-[60px]">
           <div>로딩중...</div>
         </div>
@@ -49,46 +48,47 @@ const SupporterProfile = () => {
   }
 
   return (
-    <>
-      <Header />
+    <Layout>
       <div className="flex flex-col items-center w-full">
         {/* 상단 프로필 박스 */}
-        <div className="flex items-center p-[10px] gap-[20px] w-[1300px] h-[159px] bg-white mt-[60px]">
+        <div className="flex items-center justify-between p-[10px] gap-[20px] bg-white w-full">
           {/* 프로필 이미지 */}
-          <div
-            className="w-[99px] h-[99px] rounded-full bg-gray-300"
-            style={{
-              backgroundImage: supporter.profileImage
-                ? `url(${supporter.profileImage})`
-                : undefined,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
+          <div className='flex flex-row gap-10'>
+            <div
+              className="w-[100px] h-[100px] rounded-full bg-gray-300"
+              style={{
+                backgroundImage: supporter.profileImage
+                  ? `url(${supporter.profileImage})`
+                  : undefined,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            />
 
-          {/* 닉네임 및 상태 박스 */}
-          <div className="flex flex-col justify-between h-full mt-[-40px] py-[40px] px-[10px] gap-[15px]">
-            {/* 닉네임 */}
-            <div className="text-[16px] mb-3 font-bold">{supporter.nickname}</div>
+            {/* 닉네임 및 상태 박스 */}
+            <div className="flex flex-col justify-between gap-[15px]">
+              {/* 닉네임 */}
+              <Title>{supporter.nickname}</Title>
 
-            {/* 상태 영역 */}
-            <div className="flex items-end gap-[55px]">
-              {/* 팔로잉 */}
-              <div className="flex flex-col gap-[5px]">
-                <span className="text-[12px] text-[#999A9A]">팔로잉 &gt;</span>
-                <span className="text-[16px] font-bold">{supporter.following}</span>
-              </div>
+              {/* 상태 영역 */}
+              <div className="flex items-end gap-[55px]">
+                {/* 팔로잉 */}
+                <div className="flex flex-col gap-[5px]">
+                  <MediumFont className="text-[#999A9A]">팔로잉 &gt;</MediumFont>
+                  <SubTitle>{supporter.following}</SubTitle>
+                </div>
 
-              {/* 팔로워 */}
-              <div className="flex flex-col gap-[5px]">
-                <span className="text-[12px] text-[#999A9A]">팔로워 &gt;</span>
-                <span className="text-[16px] font-bold">{supporter.follower}</span>
-              </div>
+                {/* 팔로워 */}
+                <div className="flex flex-col gap-[5px]">
+                  <MediumFont className="text-[#999A9A]">팔로워 &gt;</MediumFont>
+                  <SubTitle>{supporter.follower}</SubTitle>
+                </div>
 
-              {/* 후원횟수 */}
-              <div className="flex flex-col gap-[5px]">
-                <span className="text-[12px] text-[#999A9A]">후원횟수 &gt;</span>
-                <span className="text-[16px] font-bold">{supporter.sponsored}</span>
+                {/* 후원횟수 */}
+                <div className="flex flex-col gap-[5px]">
+                  <MediumFont className="text-[#999A9A]">후원횟수 &gt;</MediumFont>
+                  <SubTitle>{supporter.sponsored}</SubTitle>
+                </div>
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@ const SupporterProfile = () => {
           {/* 팔로우 / 팔로잉 버튼 */}
           <button
             onClick={handleFollowToggle}
-            className={`flex items-center px-[12px] py-[12px] border rounded-[5px] gap-[12px] text-[14px] ml-auto
+            className={`flex items-center px-[12px] py-[12px] border rounded-[5px] gap-[12px] text-[14px]
               ${supporter.isFollowing ? 'border-[#A7A7A7] text-[#A7A7A7]' : 'border-[#5FBDFF] text-[#5FBDFF]'}
             `}
           >
@@ -137,23 +137,23 @@ const SupporterProfile = () => {
         </div>
 
         {/* 하단 프로필 소개 영역 */}
-        <div className="w-[1300px] mt-[20px] p-[20px] bg-white">
+        <div className="w-full mt-[20px] p-[20px] bg-white">
           {/* 프로필 + 파란 밑줄 */}
-          <h3 className="text-[14px] font-bold mb-[10px] border-b-2 border-[#5FBDFF] inline-block pb-[2px]">
+          <SubTitle className="mb-[10px] border-b-2 border-[#5FBDFF] inline-block pb-[2px]">
             프로필
-          </h3>
+          </SubTitle>
 
           {/* 경계선 */}
           <div className="w-full border-b border-gray-200 mb-[10px]" />
 
-          <p className="text-[12px] text-gray-500">
+          <MediumFont className="text-gray-500">
             {supporter.introduction
               ? supporter.introduction
               : '한줄 소개 / 없다면 등록한 소개가 없습니다.'}
-          </p>
+          </MediumFont>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

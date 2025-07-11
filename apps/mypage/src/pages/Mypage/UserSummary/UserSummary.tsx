@@ -1,28 +1,22 @@
-import UserGreeting from "./UserGreeting";
 import UserStats from "./UserStats";
 import UserFollowStats from "./UserFollowStats";
 import UserRecentProjects from "./UserRecentProjects";
+import { Title } from "@repo/ui/styles";
 
 
 const UserSummary = () => {
   return (
-    <div className="w-full flex flex-col items-center max-w-[1830px] max-h-[1000px] px-[50px] gap-[60px]">
+    <div className="w-full flex flex-col items-center gap-16">
 
       {/* 상단: 인사말 + 통계 */}
-      <div className="flex w-full justify-between items-start">
-        <div className="flex flex-col mt-[20px] ml-[420px] pl-[100px] gap-[90px]">
-          <UserGreeting />
+      <div className="flex flex-col w-full gap-5">
+        <Title>서포터 닉네임님 안녕하세요.</Title>
+        <div className="flex flex-row gap-7">
           <UserStats />
+          <UserFollowStats />
         </div>
-
-        {/* 우측: 팔로우 통계 */}
-        <UserFollowStats />
       </div>
-
-      {/* 하단: 최근 본 프로젝트 */}
-      
       <UserRecentProjects />
-
     </div>
   );
 };

@@ -4,7 +4,7 @@ import naverIcon from '../../assets/icons/naverIcon.svg';
 import kakaoTalkIcon from '../../assets/icons/kakaotalkIcon.png';
 import { HorizonLine, UserContainer, UserLayout, UserNaigater } from "../../styles/User/UserPage.Styles";
 import { LoginContainer, SocialLoginContainer, SocialLoginIcon, SocialLoginIconContainer } from "../../styles/User/Login.style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from 'yup';
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,6 +19,7 @@ const schema = yup.object({
 type LoginProps = yup.InferType<typeof schema>;
 
 export const LoginComponent = () => {
+  const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginProps>({
     resolver: yupResolver(schema),
@@ -29,6 +30,8 @@ export const LoginComponent = () => {
 
   const onSubmit: SubmitHandler<LoginProps> = (data) => {
     console.log(data);
+    window.localStorage.setItem('isLogined', 'true');
+    navigate('/')
   }
   return (
     <UserLayout>

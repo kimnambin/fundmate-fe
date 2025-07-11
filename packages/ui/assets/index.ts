@@ -1,6 +1,9 @@
 import FundiIcon from "../assets/icons/ic_fundi.png";
 export { FundiIcon }
 
+import FundiMainImage from '../assets/images/Fundmate.png';
+export { FundiMainImage }
+
 type assetsProps = {
   src: string;
   menuName: string;
