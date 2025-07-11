@@ -3,7 +3,7 @@ import { HorizontalCardContainer } from "../../styles/Card.style";
 import { useNavigate } from "react-router-dom";
 import { HeartButton } from "../Likes/HeartButton";
 import { MediumFont, SubTitle } from "../../styles";
-import CardProps from "../../types/cardType";
+import type { CardProps } from "../../types/cardType";
 
 export const HorizontalCard = ({ number, isLoading }: CardProps) => {
   const navigate = useNavigate();

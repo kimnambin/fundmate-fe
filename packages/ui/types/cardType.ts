@@ -1,6 +1,5 @@
-interface CardProps {
-  isLoading: boolean;
+export interface CardProps {
+  isLoading?: boolean;
   number?: string;
 }
 
-export default CardProps;
