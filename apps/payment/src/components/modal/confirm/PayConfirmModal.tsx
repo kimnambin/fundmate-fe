@@ -1,6 +1,6 @@
 import { MainButton } from '@repo/ui/components';
 import { BoldBigText, BoldText } from '../../styles/text.style';
-import { formatNum } from '../../../utils/numbers';
+import { formatPrice } from '@repo/ui/utils';
 
 interface PayConfirmProps {
   addAmount: number;
@@ -22,14 +22,14 @@ const PayConfirmModal = ({
           <>
             <BoldBigText>카드 결제</BoldBigText>
             <BoldText>
-              {formatNum(addAmount)}원을 정말로 결제하시겠습니까??
+              {formatPrice(String(addAmount))}원을 정말로 결제하시겠습니까??
             </BoldText>
           </>
         ) : (
           <>
             <BoldBigText>계좌 이체</BoldBigText>
             <BoldText>
-              {formatNum(addAmount)}원을 정말로 이체하시겠습니까??
+              {formatPrice(String(addAmount))}원을 정말로 이체하시겠습니까??
             </BoldText>
           </>
         )}

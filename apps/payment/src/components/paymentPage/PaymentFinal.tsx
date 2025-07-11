@@ -5,7 +5,7 @@ import { BoxCol, BoxRow, FlexColsm } from '../styles/layout.style';
 import { Radio } from '../styles/paymentPage/Address.style';
 import { BaseText, BoldText, LightColor } from '../styles/text.style';
 import Address from './Address';
-import { formatNum } from '../../utils/numbers';
+import { formatPrice } from '@repo/ui/utils';
 import { MainButton } from '@repo/ui/components';
 
 interface PaymentFinalProps {
@@ -30,6 +30,10 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   };
 
   const handleBtn = () => {
+    if (!addAmount || addAmount < 1000) {
+      alert('후원금은 최소 1,000원 이상이어야 합니다.');
+      return;
+    }
     if (selectedPayment === 'transfer') {
       setModalType('transfer');
     } else if (selectedPayment === 'card') {
@@ -48,7 +52,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
       {selectedPayment && <Address setAddressData={setAddressData} />}
       <BoxRow className="justify-between p-5 my-4 sm:my-7">
         <LightColor className="bg-none">최종 후원 금액</LightColor>
-        <BoldText>{formatNum(addAmount)}원</BoldText>
+        <BoldText>{formatPrice(String(addAmount))}원</BoldText>
       </BoxRow>
       <BoxCol className="items-start border-2 border-dashed border-[#9747FF]">
         <Radio className="mt-3">

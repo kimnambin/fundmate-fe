@@ -19,7 +19,11 @@ const PaymentPage = () => {
         <FlexRow className="items-start justify-between px-[120px]">
           <FlexCol className="w-[55%] items-start gap-4">
             <Productinfos />
-            <PaymentMid subText={subText} setAddAmount={setAddAmount} />
+            <PaymentMid
+              subText={subText}
+              addAmount={addAmount}
+              setAddAmount={setAddAmount}
+            />
             <PaySelect setSelectedPayment={setSelectedPayment} />
             <Blank></Blank>
           </FlexCol>
@@ -34,7 +38,11 @@ const PaymentPage = () => {
         <FlexCol>
           <FlexCol className="w-full items-start gap-4 px-6">
             <Productinfos />
-            <PaymentMid subText={subText} setAddAmount={setAddAmount} />
+            <PaymentMid
+              subText={subText}
+              addAmount={addAmount}
+              setAddAmount={setAddAmount}
+            />
             <PaySelect setSelectedPayment={setSelectedPayment} />
             <Blank></Blank>
           </FlexCol>
