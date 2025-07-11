@@ -202,8 +202,12 @@ function CreateFunding() {
                 <Title>내가 입력한 내용</Title>
                 <MediumFont className="break-words">
                   {intro ? (
-                    <div data-color-mode="light">
+                    <div
+                      data-color-mode="light"
+                      className="max-h-[200px] overflow-hidden relative"
+                    >
                       <MarkdownEditor.Markdown source={intro} />
+                      <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white to-transparent pointer-events-none" />
                     </div>
                   ) : (
                     <span className="text-sub-text">
