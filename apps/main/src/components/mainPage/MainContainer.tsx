@@ -9,7 +9,7 @@ export const MainContainer = () => {
   return (
     <>
       <MainGrid>
-        <Banner />
+        <Banner isLoading={false} />
         <MainCategory />
         <InterestingItems />
         <PopularItems />

@@ -40,6 +40,7 @@ export const PopularItemsContainer = tw.div`
   flex
   flex-col
   gap-5
+  max-w-[400px]
 `
 
 export const PopularItemsHeader = tw.div`
@@ -52,7 +53,9 @@ export const PopularItemsHeader = tw.div`
 export const PopularItemsGrid = tw.div`
   grid
   [grid-template-rows:repeat(auto-fit,minmax(0, 1fr))]
+  grid-cols-auto-fit
   items-stretch
   gap-1.5
   h-full
+  min-w-[400px]
 `

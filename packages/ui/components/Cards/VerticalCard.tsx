@@ -3,11 +3,28 @@ import { VerticalCardContainer } from '../../styles/Card.style';
 import { useNavigate } from 'react-router-dom';
 import { HeartButton } from '../Likes/HeartButton';
 import { MediumFont, SubTitle } from '../../styles';
+import CardProps from '../../types/cardType';
 
-export const VerticalCard = () => {
+export const VerticalCard = ({ isLoading }: CardProps) => {
   const navigate = useNavigate();
+  if (isLoading) {
+    return (
+      <VerticalCardContainer className='shadow-lg'>
+        <div className='flex flex-col h-full justify-between animate-pulse @[1px]/vertical:gap-3 @[250px]/vertical:gap-5 @[270px]/vertical:gap-7'>
+          <div className='flex flex-col gap-3 h-full'>
+            <div className='@[1px]/vertical:h-[200px] @[270px]/vertical:h-[250px] @[310px]/vertical:h-[290px] rounded-xl bg-gray-100 '>
+            </div>
+            <div className='bg-gray-100 rounded-md h-[20px] w-[50%]'></div>
+            <div className='bg-gray-100 rounded-md h-[20px]'></div>
+          </div>
+          <div className='bg-gray-100 rounded-md h-[20px]'></div>
+        </div>
+      </VerticalCardContainer>
+    )
+  }
 
   return (
+
     <VerticalCardContainer onClick={() => navigate('/product')}>
       <div className="flex flex-col h-full justify-between @[1px]/vertical:gap-3 @[250px]/vertical:gap-5 @[270px]/vertical:gap-7">
         <div className="flex flex-col gap-3">
