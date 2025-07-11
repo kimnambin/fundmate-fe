@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import userImg from "../../assets/images/user.png";
-import { MediumFont, SubTitle, Title } from "../../../../../packages/ui/styles/typograhpy.style";
-import { MainButton } from "../../../../../packages/ui/components/Buttons/MainButton";
+import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
+import { MainButton } from "@repo/ui/components";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Sidebar = () => {
       <div className="flex flex-col items-center gap-[20px] w-full">
         <div
           className="w-[120px] h-[120px] rounded-full overflow-hidden border border-gray-300 cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/mypage")}
         >
           <img src={userImg} alt="avatar" className="w-full h-full object-cover" />
         </div>
@@ -21,7 +21,7 @@ const Sidebar = () => {
           <MediumFont className="text-[#7E7C7C]">abc@email.com</MediumFont>
           <MediumFont>한줄 소개</MediumFont>
         </div>
-        <MainButton label="내 정보 설정" width='w-full' onClick={() => navigate('/userprofile-settings')} />
+        <MainButton label="내 정보 설정" width='w-full' onClick={() => navigate('/user/settings')} />
       </div>
 
       {/* 나의 활동 (서포터) */}

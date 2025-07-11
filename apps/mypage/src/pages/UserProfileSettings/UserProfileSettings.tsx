@@ -219,7 +219,7 @@ const UserProfileSetting = () => {
           <button
             type="button"
             className="mt-6 w-full h-[48px] flex justify-center items-center rounded-md underline text-[#7E7C7C] mb-[120px]"
-            onClick={() => navigate("/withdrawal")}
+            onClick={() => navigate("/user/withdrawal")}
           >
             <MediumFont>
               회원탈퇴

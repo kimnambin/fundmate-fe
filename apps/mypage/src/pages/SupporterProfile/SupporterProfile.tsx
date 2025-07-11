@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MediumFont, SubTitle, Title } from '@repo/ui/styles';
+import { Layout, MediumFont, SubTitle, Title } from '@repo/ui/styles';
 
 interface Supporter {
   nickname: string;
@@ -48,110 +48,112 @@ const SupporterProfile = () => {
   }
 
   return (
-    <div className="flex flex-col items-center w-full">
-      {/* 상단 프로필 박스 */}
-      <div className="flex items-center justify-between p-[10px] gap-[20px] bg-white w-full">
-        {/* 프로필 이미지 */}
-        <div className='flex flex-row gap-10'>
-          <div
-            className="w-[100px] h-[100px] rounded-full bg-gray-300"
-            style={{
-              backgroundImage: supporter.profileImage
-                ? `url(${supporter.profileImage})`
-                : undefined,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
+    <Layout>
+      <div className="flex flex-col items-center w-full">
+        {/* 상단 프로필 박스 */}
+        <div className="flex items-center justify-between p-[10px] gap-[20px] bg-white w-full">
+          {/* 프로필 이미지 */}
+          <div className='flex flex-row gap-10'>
+            <div
+              className="w-[100px] h-[100px] rounded-full bg-gray-300"
+              style={{
+                backgroundImage: supporter.profileImage
+                  ? `url(${supporter.profileImage})`
+                  : undefined,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            />
 
-          {/* 닉네임 및 상태 박스 */}
-          <div className="flex flex-col justify-between gap-[15px]">
-            {/* 닉네임 */}
-            <Title>{supporter.nickname}</Title>
+            {/* 닉네임 및 상태 박스 */}
+            <div className="flex flex-col justify-between gap-[15px]">
+              {/* 닉네임 */}
+              <Title>{supporter.nickname}</Title>
 
-            {/* 상태 영역 */}
-            <div className="flex items-end gap-[55px]">
-              {/* 팔로잉 */}
-              <div className="flex flex-col gap-[5px]">
-                <MediumFont className="text-[#999A9A]">팔로잉 &gt;</MediumFont>
-                <SubTitle>{supporter.following}</SubTitle>
-              </div>
+              {/* 상태 영역 */}
+              <div className="flex items-end gap-[55px]">
+                {/* 팔로잉 */}
+                <div className="flex flex-col gap-[5px]">
+                  <MediumFont className="text-[#999A9A]">팔로잉 &gt;</MediumFont>
+                  <SubTitle>{supporter.following}</SubTitle>
+                </div>
 
-              {/* 팔로워 */}
-              <div className="flex flex-col gap-[5px]">
-                <MediumFont className="text-[#999A9A]">팔로워 &gt;</MediumFont>
-                <SubTitle>{supporter.follower}</SubTitle>
-              </div>
+                {/* 팔로워 */}
+                <div className="flex flex-col gap-[5px]">
+                  <MediumFont className="text-[#999A9A]">팔로워 &gt;</MediumFont>
+                  <SubTitle>{supporter.follower}</SubTitle>
+                </div>
 
-              {/* 후원횟수 */}
-              <div className="flex flex-col gap-[5px]">
-                <MediumFont className="text-[#999A9A]">후원횟수 &gt;</MediumFont>
-                <SubTitle>{supporter.sponsored}</SubTitle>
+                {/* 후원횟수 */}
+                <div className="flex flex-col gap-[5px]">
+                  <MediumFont className="text-[#999A9A]">후원횟수 &gt;</MediumFont>
+                  <SubTitle>{supporter.sponsored}</SubTitle>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* 팔로우 / 팔로잉 버튼 */}
-        <button
-          onClick={handleFollowToggle}
-          className={`flex items-center px-[12px] py-[12px] border rounded-[5px] gap-[12px] text-[14px]
+          {/* 팔로우 / 팔로잉 버튼 */}
+          <button
+            onClick={handleFollowToggle}
+            className={`flex items-center px-[12px] py-[12px] border rounded-[5px] gap-[12px] text-[14px]
               ${supporter.isFollowing ? 'border-[#A7A7A7] text-[#A7A7A7]' : 'border-[#5FBDFF] text-[#5FBDFF]'}
             `}
-        >
-          {supporter.isFollowing ? (
-            <>
-              {/* 체크 아이콘 */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="#A7A7A7"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              팔로잉
-            </>
-          ) : (
-            <>
-              {/* + 아이콘 */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="#5FBDFF"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-              </svg>
-              팔로우
-            </>
-          )}
-        </button>
+          >
+            {supporter.isFollowing ? (
+              <>
+                {/* 체크 아이콘 */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="#A7A7A7"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                팔로잉
+              </>
+            ) : (
+              <>
+                {/* + 아이콘 */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="#5FBDFF"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                팔로우
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* 하단 프로필 소개 영역 */}
+        <div className="w-full mt-[20px] p-[20px] bg-white">
+          {/* 프로필 + 파란 밑줄 */}
+          <SubTitle className="mb-[10px] border-b-2 border-[#5FBDFF] inline-block pb-[2px]">
+            프로필
+          </SubTitle>
+
+          {/* 경계선 */}
+          <div className="w-full border-b border-gray-200 mb-[10px]" />
+
+          <MediumFont className="text-gray-500">
+            {supporter.introduction
+              ? supporter.introduction
+              : '한줄 소개 / 없다면 등록한 소개가 없습니다.'}
+          </MediumFont>
+        </div>
       </div>
-
-      {/* 하단 프로필 소개 영역 */}
-      <div className="w-full mt-[20px] p-[20px] bg-white">
-        {/* 프로필 + 파란 밑줄 */}
-        <SubTitle className="mb-[10px] border-b-2 border-[#5FBDFF] inline-block pb-[2px]">
-          프로필
-        </SubTitle>
-
-        {/* 경계선 */}
-        <div className="w-full border-b border-gray-200 mb-[10px]" />
-
-        <MediumFont className="text-gray-500">
-          {supporter.introduction
-            ? supporter.introduction
-            : '한줄 소개 / 없다면 등록한 소개가 없습니다.'}
-        </MediumFont>
-      </div>
-    </div>
+    </Layout>
   );
 };
 

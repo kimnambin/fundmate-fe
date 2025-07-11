@@ -25,12 +25,12 @@ const App = () => (
           <Route path="following" element={<Following />} />
           <Route path="myreviews" element={<MyReviews />} />
         </Route>
-        <Route path="supporter/profile" element={<SupporterProfile />} />
       </Route>
       <Route path='/user/*' element={<CommonLayout />}>
         <Route path="settings" element={<UserProfileSettings />} />
         <Route path="withdrawal" element={<Withdrawal />} />
       </Route>
+      <Route path="supporter/profile" element={<SupporterProfile />} />
     </Routes>
   </BrowserRouter>
 );
