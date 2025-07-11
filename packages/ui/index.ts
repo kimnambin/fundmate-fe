@@ -1,5 +1,5 @@
 // utils
-export { ScrollToTop } from './utils';
+export { ScrollToTop, formatPrice } from './utils';
 
 // components
 export {
@@ -30,5 +30,8 @@ export {
   BigFont,
   MediumFont,
   SmallFont,
-  WarningText
-} from './styles'
+  WarningText,
+} from './styles';
+
+//mocks
+export { worker, handlers } from './mocks';

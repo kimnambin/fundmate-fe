@@ -57,7 +57,7 @@ const AskFundiResult = () => {
           <Map data={data} />
           <PieChart data={chartData} />
         </div>
-        <div data-color-mode="light" className="wnde-markdown-var">
+        <div data-color-mode="light">
           <MarkdownEditor.Markdown source={response?.message} />
         </div>
       </ResultWrapper>

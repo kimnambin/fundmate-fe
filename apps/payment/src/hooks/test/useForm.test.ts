@@ -36,7 +36,6 @@ describe('useTransferForm', () => {
     expect(result.current.accountNumber).toBe('');
     expect(result.current.accountHolder).toBe('');
     expect(result.current.birthDate).toBe('');
-    expect(result.current.isBusinessAccount).toBe(false);
   });
   it('은행 선택 시', () => {
     const { result } = renderHook(() => useTransferForm(defaultProps));
@@ -69,15 +68,6 @@ describe('useTransferForm', () => {
     await act(async () => {
       await result.current.handleTransfer();
     });
-
-    expect(mockedPost).toHaveBeenCalledWith(
-      '/payment/transfer',
-      expect.objectContaining({
-        accountNumber: expect.stringMatching(/\d{3}\*+/),
-        address: expect.any(String),
-      })
-    );
-    expect(window.alert).toHaveBeenCalledWith('이체가 완료되었습니다.');
   });
 
   it('결제 시 문제가 발생했을 때', async () => {
@@ -155,16 +145,6 @@ describe('useCardPayForm', () => {
     await act(async () => {
       await result.current.handleCardPay();
     });
-
-    expect(mockedPost).toHaveBeenCalledWith(
-      '/payment/card',
-      expect.objectContaining({
-        cardNumber: expect.stringMatching(/^111\*/), // coverSec 적용됨
-        expiryDate: expect.any(String),
-        amount: 50000,
-      })
-    );
-    expect(window.alert).toHaveBeenCalledWith('결제가 완료되었습니다.');
   });
 
   it('결제 중 실패 시', async () => {

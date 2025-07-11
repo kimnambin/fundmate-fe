@@ -13,7 +13,7 @@ export const DatePickerWrapper = tw.div`
     w-full
 `;
 
-export const DatePickerField = tw.input`
+export const DatePickerField = tw.input<{ isError?: boolean }>`
     w-full
     bg-white
     border border-line
@@ -23,4 +23,5 @@ export const DatePickerField = tw.input`
     text-text-active
     placeholder-input-text
     focus:outline-none focus:border-main
+    ${({ isError }) => (isError ? 'border-red' : 'border-line')}
 `;

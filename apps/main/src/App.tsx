@@ -2,12 +2,12 @@ import { Route, Routes } from 'react-router-dom';
 import './index.css';
 import { Main } from './pages/Main';
 import { SearchPage } from './pages/SearchDivider';
-import { Header } from '@repo/ui/components';
+import { Header, Loading } from '@repo/ui/components';
 import { LogIn } from './pages/LogIn';
 import { SignUp } from './pages/SignUp';
 import { PasswordReset } from './pages/PasswordReset';
 import { ScrollToTop } from '@repo/ui/utils';
-import { lazy } from 'react';
+import { Suspense, lazy } from 'react';
 
 const CreateFundingPage = lazy(() => import('funding/CreateFundingPage'));
 const AskFundiPage = lazy(() => import('funding/AskFundiPage'));
@@ -38,40 +38,42 @@ function App() {
     <>
       <ScrollToTop />
       <Header />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/reset" element={<PasswordReset />} />
-        <Route path="/funding/create" element={<CreateFundingPage />} />
-        <Route path="/fundi">
-          <Route path="request" element={<AskFundiPage />} />
-          <Route path="response" element={<AskFundiResultPage />} />
-        </Route>
-        <Route path="/product" element={<ProductPage />} />
-        <Route path="/payment/*">
-          <Route index element={<PaymentPage />} />
-          <Route path="completed" element={<PaymentCompleted />} />
-          <Route path="detail" element={<PaymentDetail />} />
-          <Route path="list" element={<PaymentListPage />} />
-        </Route>
-        <Route path='/statistics' element={<StatisticsPage />} />
-        <Route path='user/*' element={<MyPageCommonLayout />}>
-          <Route path='settings' element={<ProfileSetting />} />
-          <Route path='withdrawal' element={<Withdrawal />} />
-        </Route>
-        <Route path='/mypage/*' element={<MyPageLayout />}>
-          <Route index element={<Mypage />} />
-          <Route path='projects/*'>
-            <Route path='supported' element={<SupportedProjects />} />
-            <Route path='liked' element={<LikedProjects />} />
-            <Route path='following' element={<Following />} />
-            <Route path='myreviews' element={<MyReviews />} />
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/reset" element={<PasswordReset />} />
+          <Route path="/funding/create" element={<CreateFundingPage />} />
+          <Route path="/fundi">
+            <Route path="request" element={<AskFundiPage />} />
+            <Route path="response" element={<AskFundiResultPage />} />
           </Route>
-        </Route>
-        <Route path='supporter/profile' element={<SupporterProfile />} />
-      </Routes>
+          <Route path="/product" element={<ProductPage />} />
+          <Route path="/payment">
+            <Route index element={<PaymentPage />} />
+            <Route path="completed" element={<PaymentCompleted />} />
+            <Route path="detail" element={<PaymentDetail />} />
+            <Route path="list" element={<PaymentListPage />} />
+          </Route>
+          <Route path='/statistics' element={<StatisticsPage />} />
+          <Route path='user/*' element={<MyPageCommonLayout />}>
+            <Route path='settings' element={<ProfileSetting />} />
+            <Route path='withdrawal' element={<Withdrawal />} />
+          </Route>
+          <Route path='/mypage/*' element={<MyPageLayout />}>
+            <Route index element={<Mypage />} />
+            <Route path='projects/*'>
+              <Route path='supported' element={<SupportedProjects />} />
+              <Route path='liked' element={<LikedProjects />} />
+              <Route path='following' element={<Following />} />
+              <Route path='myreviews' element={<MyReviews />} />
+            </Route>
+          </Route>
+          <Route path='supporter/profile' element={<SupporterProfile />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }
