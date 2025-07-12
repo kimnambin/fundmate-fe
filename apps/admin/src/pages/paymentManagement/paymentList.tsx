@@ -1,119 +1,95 @@
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Title, MediumFont } from '@repo/ui/styles';
 
 const PaymentList = () => {
   return (
-    <div className="w-[1190px] h-[740px] mb-40 border border-gray-300 rounded-[5px] p-5 flex flex-col items-center gap-[20px] bg-white">
+    <div className="w-full bg-white border border-gray-300 rounded-md px-6 py-4 flex flex-col justify-between gap-6 min-h-[160px]">
 
       {/* 상단 타이틀 + 필터 */}
-      <div className="w-[1100px] flex justify-between items-center">
-        <h2 className="font-inter font-bold text-[20px] leading-[17px] mt-4 mb-5 text-black">
-          결제 내역 리스트
-        </h2>
-        <div className="flex gap-[10px]">
-          <button className="flex items-center gap-[5px] px-[6px] py-[4px] border border-gray-300 rounded-[3px] h-[30px]">
-            <span className="font-inter font-medium text-[10px] leading-[12px] text-[#0F172A]">상태</span>
+      <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <Title className="text-black">결제 내역 리스트</Title>
+        <div className="flex gap-2">
+          <button className="flex items-center gap-1 px-2 py-1 border border-gray-300 rounded text-xs h-[30px]">
+            <span className="text-slate-900">상태</span>
             <ChevronDown size={16} className="opacity-50" />
           </button>
-          <button className="flex items-center gap-[5px] px-[6px] py-[4px] border border-gray-300 rounded-[3px] h-[30px]">
-            <span className="font-inter font-medium text-[10px] leading-[12px] text-[#0F172A]">추천순</span>
+          <button className="flex items-center gap-1 px-2 py-1 border border-gray-300 rounded text-xs h-[30px]">
+            <span className="text-slate-900">추천순</span>
             <ChevronDown size={16} className="opacity-50" />
           </button>
         </div>
       </div>
 
       {/* 테이블 헤더 */}
-      <div className="w-[1100px] flex items-center px-[10px] py-[5px] border-b border-gray-300">
-        {['상품', '옵션', '날짜', '금액', '상태'].map((header, idx) => (
-          <div
-            key={idx}
-            className={`flex justify-center items-center text-center font-inter font-medium text-[16px] mb-4 leading-[17px] text-black
-            ${idx === 0 ? 'w-[500px]' : 'w-[150px]'}`}
-          >
-            {header}
-          </div>
-        ))}
+      <div className="w-full flex px-2 py-3 border-b border-gray-300 text-center text-base font-medium text-black">
+        <div className="basis-3/6">상품</div>
+        <div className="basis-1/6">옵션</div>
+        <div className="basis-1/6">날짜</div>
+        <div className="basis-1/6">금액</div>
+        <div className="basis-1/6">상태</div>
       </div>
 
-      {/* 테이블 데이터 */}
-      <div className="w-[1100px] flex flex-col">
+      {/* 테이블 본문 */}
+      <div className="w-full flex flex-col divide-y divide-gray-200">
         {Array.from({ length: 5 }).map((_, idx) => (
           <Link
-            to={`/products/${idx}`} // 추후 product.id로 교체
+            to={`/products/${idx}`}
             key={idx}
-            className="flex items-center px-[10px] h-[85px] border-b border-gray-300 hover:bg-gray-50 transition"
+            className="flex items-center px-2 py-4 hover:bg-gray-50 transition"
           >
             {/* 상품 */}
-            <div className="flex items-center gap-[15px] w-[500px]">
+            <div className="flex items-center gap-4 basis-3/6">
               <img
                 src={`https://picsum.photos/seed/${idx}/70/70`}
                 alt={`상품 이미지 ${idx + 1}`}
-                className="w-[70px] h-[70px] rounded-[10px] object-cover"
+                className="w-[70px] h-[70px] rounded object-cover"
               />
-              <span className="font-pretendard font-medium text-[16px] leading-[14px] text-black">
+              <MediumFont className="text-sm sm:text-base text-black">
                 이것은 상품 상세 정보인데요 완전 신기하지 않나요!?
-              </span>
+              </MediumFont>
             </div>
 
             {/* 옵션 */}
-            <div className="flex justify-center items-center w-[150px]">
-              <span className="font-pretendard font-medium text-[16px] leading-[14px] text-black">
-                옵션 1번
-              </span>
-            </div>
+            <MediumFont className="basis-1/6 text-center text-sm sm:text-base text-black">
+              옵션 1번
+            </MediumFont>
 
             {/* 날짜 */}
-            <div className="flex justify-center items-center w-[150px]">
-              <span className="font-pretendard font-medium text-[16px] leading-[14px] text-black">
-                2025.07.09
-              </span>
-            </div>
+            <MediumFont className="basis-1/6 text-center text-sm sm:text-base text-black">
+              2025.07.09
+            </MediumFont>
 
             {/* 금액 */}
-            <div className="flex justify-center items-center w-[150px]">
-              <span className="font-pretendard font-medium text-[16px] leading-[14px] text-black">
-                000,000,000원
-              </span>
-            </div>
+            <MediumFont className="basis-1/6 text-center text-sm sm:text-base text-black">
+              000,000,000원
+            </MediumFont>
 
             {/* 상태 */}
-            <div className="flex justify-center items-center w-[150px]">
-              <span
-                className={`font-pretendard font-medium text-[16px] leading-[14px] ${
-                  idx % 2 === 0 ? 'text-[#49DB00]' : 'text-[#FB6565]'
-                }`}
-              >
+            <MediumFont className="basis-1/6 text-center text-sm sm:text-base font-medium">
+              <span className={idx % 2 === 0 ? 'text-[#49DB00]' : 'text-[#FB6565]'}>
                 {idx % 2 === 0 ? '성공' : '실패'}
               </span>
-            </div>
+            </MediumFont>
           </Link>
         ))}
       </div>
 
       {/* 페이지네이션 */}
-      <div className="flex justify-center items-center gap-[10px] mt-12">
-        <button className="text-black text-[30px]">
-          &laquo;
-        </button>
-        <button className="text-black text-[30px]">
-          &lsaquo;
-        </button>
-        {['1', '2', '3', '4', '5'].map((page, idx) => (
-          <button
-            key={idx}
-            className={`w-[22.8px] h-[12px] font-inter font-medium text-[20px] leading-[12px] flex items-center justify-center ${
-              idx === 0 ? 'text-black' : 'text-[#7E7C7C]'
-            }`}
-          >
-            {page}
-          </button>
-        ))}
-        <button className="text-black text-[30px]">
-          &rsaquo;
-        </button>
-        <button className="text-black text-[30px]">
-          &raquo;
-        </button>
+      <div className="flex w-full justify-center">
+        <div className="flex justify-center items-center mt-[25px] gap-[10px]">
+          <button>{'<<'}</button>
+          <button>{'<'}</button>
+          <div className="flex gap-[15px] text-[23px]">
+            <span className="text-black">1</span>
+            <span className="text-[#7E7C7C]">2</span>
+            <span className="text-[#7E7C7C]">3</span>
+            <span className="text-[#7E7C7C]">4</span>
+            <span className="text-[#7E7C7C]">5</span>
+          </div>
+          <button>{'>'}</button>
+          <button>{'>>'}</button>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { VerticalCard } from '@repo/ui/components';
 import { AiOutlinePlus, AiOutlineCheck } from 'react-icons/ai';
+import { Title, SubTitle, MediumFont } from '@repo/ui/styles';
 
 interface Project {
   id: number;
@@ -29,43 +30,12 @@ const MakerProfile: React.FC<MakerProfileProps> = ({
 }) => {
   const [isFollowing, setIsFollowing] = useState(false);
 
-  // ✅ 임시 Mock 데이터 (projects가 undefined거나 빈 배열일 때 대체)
   const mockProjects: Project[] = [
-    {
-      id: 1,
-      thumbnailUrl: 'https://picsum.photos/300/300?random=1',
-      title: '프로젝트 1',
-      description: '설명 1',
-      progress: 70,
-    },
-    {
-      id: 2,
-      thumbnailUrl: 'https://picsum.photos/300/300?random=2',
-      title: '프로젝트 2',
-      description: '설명 2',
-      progress: 50,
-    },
-    {
-      id: 3,
-      thumbnailUrl: 'https://picsum.photos/300/300?random=3',
-      title: '프로젝트 3',
-      description: '설명 3',
-      progress: 30,
-    },
-    {
-      id: 4,
-      thumbnailUrl: 'https://picsum.photos/300/300?random=4',
-      title: '프로젝트 4',
-      description: '설명 4',
-      progress: 90,
-    },
-    {
-      id: 5,
-      thumbnailUrl: 'https://picsum.photos/300/300?random=5',
-      title: '프로젝트 5',
-      description: '설명 5',
-      progress: 80,
-    },
+    { id: 1, thumbnailUrl: 'https://picsum.photos/300/300?random=1', title: '프로젝트 1', description: '설명 1', progress: 70 },
+    { id: 2, thumbnailUrl: 'https://picsum.photos/300/300?random=2', title: '프로젝트 2', description: '설명 2', progress: 50 },
+    { id: 3, thumbnailUrl: 'https://picsum.photos/300/300?random=3', title: '프로젝트 3', description: '설명 3', progress: 30 },
+    { id: 4, thumbnailUrl: 'https://picsum.photos/300/300?random=4', title: '프로젝트 4', description: '설명 4', progress: 90 },
+    { id: 5, thumbnailUrl: 'https://picsum.photos/300/300?random=5', title: '프로젝트 5', description: '설명 5', progress: 80 },
   ];
 
   const displayProjects = projects && projects.length > 0 ? projects : mockProjects;
@@ -82,27 +52,20 @@ const MakerProfile: React.FC<MakerProfileProps> = ({
           <section className="w-full flex items-center justify-between mb-10">
             <div className="flex items-center gap-14">
               <div className="w-[130px] h-[130px] rounded-full bg-gray-300 shrink-0" />
-
               <div className="flex flex-col">
-                <p className="text-[24px] mb-10 font-semibold">{nickname}가게명1</p>
+                <Title className="mb-10">{nickname}가게명1</Title>
                 <div className="flex gap-16">
                   <div className="flex flex-col">
-                    <p className="text-[15px] text-gray-500">팔로잉 {'>'}</p>
-                    <p className="text-[20px] font-medium">
-                      {followingCount.toLocaleString()}
-                    </p>
+                    <MediumFont className="text-gray-500">팔로잉 {'>'}</MediumFont>
+                    <MediumFont>{followingCount.toLocaleString()}</MediumFont>
                   </div>
                   <div className="flex flex-col">
-                    <p className="text-[15px] text-gray-500">팔로워 {'>'}</p>
-                    <p className="text-[20px] font-medium">
-                      {followerCount.toLocaleString()}
-                    </p>
+                    <MediumFont className="text-gray-500">팔로워 {'>'}</MediumFont>
+                    <MediumFont>{followerCount.toLocaleString()}</MediumFont>
                   </div>
                   <div className="flex flex-col">
-                    <p className="text-[15px] text-gray-500">전체 프로젝트 {'>'}</p>
-                    <p className="text-[20px] font-medium">
-                      {totalProjects.toLocaleString()}개
-                    </p>
+                    <MediumFont className="text-gray-500">전체 프로젝트 {'>'}</MediumFont>
+                    <MediumFont>{totalProjects.toLocaleString()}개</MediumFont>
                   </div>
                 </div>
               </div>
@@ -134,17 +97,17 @@ const MakerProfile: React.FC<MakerProfileProps> = ({
           {/* 한줄 소개 */}
           <section className="w-full mb-32">
             <hr className="border-t border-gray-200 mb-6" />
-            <p className="text-gray-500 text-left">
+            <MediumFont className="text-gray-500 text-left">
               {introduction || '한줄 소개 / 현재 등록한 소개가 없습니다.'}
-            </p>
+            </MediumFont>
           </section>
 
           {/* 올린 프로젝트 영역 */}
           <section className="w-full">
             <hr className="border-t border-gray-200 mt-20 mb-10" />
-            <h2 className="text-[20px] font-semibold ml-4 mb-4">
+            <SubTitle className="ml-4 mb-4">
               올린 프로젝트 <span className="text-blue-500">{displayProjects.length}</span>
-            </h2>
+            </SubTitle>
             <div className="grid grid-cols-5 gap-4 mb-40">
               {displayProjects.slice(0, 5).map((project) => (
                 <VerticalCard

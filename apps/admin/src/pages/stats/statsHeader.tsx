@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { RotateCcw } from 'lucide-react';
+import { Title, MediumFont } from '@repo/ui/styles';
 
 interface StatsSummaryData {
   totalSupportCount: number;
@@ -14,7 +15,7 @@ const fetchStatsSummary = (): Promise<StatsSummaryData> => {
       resolve({
         totalSupportCount: Math.floor(Math.random() * 100),
         totalSupporters: Math.floor(Math.random() * 5000),
-        totalFunding: (Math.floor(Math.random() * 5000000)).toLocaleString(),
+        totalFunding: Math.floor(Math.random() * 5000000).toLocaleString(),
         averageSuccessRate: Math.floor(Math.random() * 100),
       });
     }, 500);
@@ -50,13 +51,11 @@ const StatsHeader: React.FC = () => {
   };
 
   return (
-    <div className="w-[1190px] h-[170px] border border-gray-300 rounded-[5px] p-5 flex flex-col justify-end items-end gap-[65px] relative bg-white">
+    <div className="w-full bg-white border border-gray-300 rounded-md px-6 py-4 flex flex-col justify-between gap-6 min-h-[160px]">
       {/* 상단: 제목 + 새로고침 + 날짜 */}
-      <div className="w-full flex justify-between items-start">
-        <div className="flex gap-[15px] items-center">
-          <span className="font-inter font-bold text-[20px] leading-[17px] text-black ml-7">
-            주요 지표
-          </span>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div className="flex items-center gap-3">
+          <Title className="text-black text-xl">주요 지표</Title>
           <RotateCcw
             size={20}
             color="#999292"
@@ -65,71 +64,28 @@ const StatsHeader: React.FC = () => {
             className={`cursor-pointer transition-transform ${isLoading ? 'animate-spin' : ''}`}
           />
         </div>
-        <span className="font-pretendard font-light text-[20px] leading-[20px] text-[#7E7C7C]">
-          {currentDate}
-        </span>
+        <MediumFont className="text-[#7E7C7C]">{currentDate}</MediumFont>
       </div>
 
-      {/* 하단: 주요 지표 */}
-      <div className="flex items-center gap-[70px]">
-        {/* 총 프로젝트 수 */}
-        <div className="flex items-start px-5 gap-[10px] h-[34px] border-r border-black">
-          <div className="flex flex-col justify-center items-end gap-[5px] h-full">
-            <span className="font-inter font-medium text-[18px] text-[#7E7C7C]">
-              총 프로젝트 수
-            </span>
-            <div className="flex justify-end items-center gap-[2px]">
-              <span className="font-inter font-medium text-[20px] text-black">
-                {summary.totalSupportCount.toLocaleString()}
-              </span>
-              <span className="font-inter font-medium text-[20px] text-black">개</span>
+      {/* 하단: 통계 항목 오른쪽 하단 정렬 */}
+      <div className="flex justify-end">
+        <div className="flex gap-4 flex-wrap justify-end items-end text-right">
+          {[
+            { label: '총 프로젝트 수', value: `${summary.totalSupportCount.toLocaleString()}개` },
+            { label: '평균 성공률', value: `${summary.averageSuccessRate}%` },
+            { label: '총 모금액', value: `${summary.totalFunding}원` },
+            { label: '총 후원자', value: `${summary.totalSupporters.toLocaleString()}명` },
+          ].map(({ label, value }, idx, arr) => (
+            <div key={label} className="flex items-end gap-4">
+              <div className="flex flex-col items-end min-w-[120px]">
+                <MediumFont className="text-[#7E7C7C]">{label}</MediumFont>
+                <MediumFont className="text-black text-lg">{value}</MediumFont>
+              </div>
+              {idx !== arr.length - 1 && (
+                <div className="h-6 w-px bg-gray-300 self-center" />
+              )}
             </div>
-          </div>
-        </div>
-
-        {/* 평균 성공률 */}
-        <div className="flex items-start px-5 gap-[10px] h-[34px] border-r border-black">
-          <div className="flex flex-col justify-center items-end gap-[5px] h-full">
-            <span className="font-inter font-medium text-[18px] text-[#7E7C7C]">
-              평균 성공률
-            </span>
-            <div className="flex justify-end items-center gap-[2px]">
-              <span className="font-inter font-medium text-[20px] text-black">
-                {summary.averageSuccessRate}
-              </span>
-              <span className="font-inter font-medium text-[20px] text-black">%</span>
-            </div>
-          </div>
-        </div>
-
-        {/* 총 모금액 */}
-        <div className="flex items-start px-5 gap-[10px] h-[34px] border-r border-black">
-          <div className="flex flex-col justify-center items-end gap-[5px] h-full">
-            <span className="font-inter font-medium text-[18px] text-[#7E7C7C]">
-              총 모금액
-            </span>
-            <div className="flex justify-end items-center gap-[2px]">
-              <span className="font-inter font-medium text-[20px] text-black">
-                {summary.totalFunding}
-              </span>
-              <span className="font-inter font-medium text-[20px] text-black">원</span>
-            </div>
-          </div>
-        </div>
-
-        {/* 총 후원자 */}
-        <div className="flex items-start px-5 gap-[10px] h-[34px] border-r border-black">
-          <div className="flex flex-col justify-center items-end gap-[5px] h-full">
-            <span className="font-inter font-medium text-[18px] text-[#7E7C7C]">
-              총 후원자
-            </span>
-            <div className="flex justify-end items-center gap-[2px]">
-              <span className="font-inter font-medium text-[20px] text-black">
-                {summary.totalSupporters.toLocaleString()}
-              </span>
-              <span className="font-inter font-medium text-[20px] text-black">명</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

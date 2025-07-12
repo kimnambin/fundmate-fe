@@ -1,14 +1,15 @@
 import PaymentSummary from './paymentSummary';
 import PaymentList from './paymentList';
+import { Title } from '@repo/ui/styles';
 
-const paymentManagement = () => {
+const PaymentManagement = () => {
   return (
-    <section className="max-w-[1000px] w-full flex flex-col gap-6">
-    <h2 className="mt-[40px] text-[24px] font-semibold ">결제 관리</h2>
+    <div className="flex max-w-[95%] flex-col gap-6 px-4 py-10">
+      <Title className="mt-[22px]">결제 관리</Title>
       <PaymentSummary />
       <PaymentList />
-    </section>
+    </div>
   );
 };
 
-export default paymentManagement;
+export default PaymentManagement;

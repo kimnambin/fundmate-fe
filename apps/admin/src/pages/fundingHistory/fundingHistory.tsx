@@ -1,20 +1,22 @@
+import React from 'react';
 import CompletedFundingcard from './completedFundingcard';
 import FundingList from './fundingList';
+import { Title } from '@repo/ui/styles';
 
 const FundingHistory = () => {
   return (
-    <div className="max-w-[1190px] w-full flex flex-col gap-8">
-      <h2 className="mt-[40px] text-[24px] font-semibold ">펀딩 내역</h2>
-      {/* 완료된 펀딩 박스 */}
-      <div className="bg-white border border-gray-300 rounded-md p-5">
+    <div className="flex max-w-[95%] flex-col gap-6 px-4 py-10">
+      <Title className="mt-8">펀딩 내역</Title>
+
+      {/* 완료된 펀딩 */}
+      <div className="bg-white border border-gray-300 rounded-md p-4">
         <CompletedFundingcard />
       </div>
 
-      {/* 펀딩 리스트 박스 */}
-      <div className="bg-white border border-gray-300 rounded-md p-5">
+      {/* 펀딩 리스트 */}
+      <div className="bg-white border border-gray-300 rounded-md p-4">
         <FundingList />
       </div>
-      
     </div>
   );
 };

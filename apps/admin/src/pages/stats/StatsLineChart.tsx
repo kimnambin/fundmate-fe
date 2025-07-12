@@ -83,7 +83,7 @@ const StatsLineChart: React.FC = () => {
               border: "1px solid #ccc",
               borderRadius: "4px",
               display: "flex",
-              flexDirection: "row", // 가로 정렬
+              flexDirection: "row",
               alignItems: "center",
               gap: "16px",
               whiteSpace: "nowrap",
@@ -107,8 +107,12 @@ const StatsLineChart: React.FC = () => {
                     borderRadius: "2px",
                   }}
                 />
-                <span style={{ color: "#333", fontWeight: 500 }}>{point.serieId}:</span>
-                <span style={{ color: "#333", fontWeight: 600 }}>{point.data.yFormatted}</span>
+                <span style={{ color: "#333", fontWeight: 500 }}>
+                  {point.serieId}:
+                </span>
+                <span style={{ color: "#333", fontWeight: 600 }}>
+                  {point.data.yFormatted}
+                </span>
               </div>
             ))}
           </div>

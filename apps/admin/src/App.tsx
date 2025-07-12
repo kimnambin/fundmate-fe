@@ -11,14 +11,15 @@ function LayoutWithSidebarAndHeader() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex flex-grow">
-        <aside className="w-[560px] shrink-0">
-          <Sidebar />
-        </aside>
-        <main className="flex-grow p-8">
-          <Outlet />
-        </main>
-      </div>
+     <div className="flex w-full px-10 gap-3">
+  <aside className="w-[520px] shrink-0">
+    <Sidebar />
+  </aside>
+
+  <main className="flex-grow">
+    <Outlet />
+  </main>
+</div>
     </div>
   );
 }
