@@ -1,10 +1,22 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import userImg from "../../assets/images/user.png";
 import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 import { MainButton } from "@repo/ui/components";
 
 const Sidebar = () => {
-  const navigate = useNavigate();
+  const supporterMenu = [
+    { label: "후원한 프로젝트", path: "/mypage/projects/supported" },
+    { label: "찜한 프로젝트", path: "/mypage/projects/liked" },
+    { label: "팔로잉", path: "/mypage/projects/following" },
+    { label: "내 후기", path: "/mypage/projects/myreviews" },
+  ];
+
+  const makerMenu = [
+    { label: "펀딩 내역", path: "/fundinghistory" },
+    { label: "통계 관리", path: "/stats" },
+    { label: "결제 관리", path: "/paymentmanagement" },
+    { label: "프로젝트 만들기", path: "/" },
+  ];
 
   return (
     <div className="flex justify-end pr-10">
@@ -13,7 +25,7 @@ const Sidebar = () => {
         <div className="flex flex-col items-center gap-[20px] w-full">
           <div
             className="w-[120px] h-[120px] rounded-full overflow-hidden border border-gray-300 cursor-pointer"
-            onClick={() => navigate("/mypage")}
+            onClick={() => (window.location.href = "/mypage")}
           >
             <img src={userImg} alt="avatar" className="w-full h-full object-cover" />
           </div>
@@ -25,7 +37,7 @@ const Sidebar = () => {
           <MainButton
             label="내 정보 설정"
             width="w-full"
-            onClick={() => navigate("/user/settings")}
+            onClick={() => (window.location.href = "/user/settings")}
           />
         </div>
 
@@ -33,30 +45,18 @@ const Sidebar = () => {
         <div className="w-full flex flex-col gap-[14px] p-2">
           <SubTitle className="text-gray-400">나의 활동 (서포터)</SubTitle>
           <div className="flex flex-col gap-[10px]">
-            <button
-              className="text-left text-[22px] text-black font-medium pl-[10px] hover:text-[#5FBDFF] transition-colors"
-              onClick={() => navigate("/mypage/projects/supported")}
-            >
-              후원한 프로젝트
-            </button>
-            <button
-              className="text-left text-[22px] text-black font-medium pl-[10px] hover:text-[#5FBDFF] transition-colors"
-              onClick={() => navigate("/mypage/projects/liked")}
-            >
-              찜한 프로젝트
-            </button>
-            <button
-              className="text-left text-[22px] text-black font-medium pl-[10px] hover:text-[#5FBDFF] transition-colors"
-              onClick={() => navigate("/mypage/projects/following")}
-            >
-              팔로잉
-            </button>
-            <button
-              className="text-left text-[22px] text-black font-medium pl-[10px] hover:text-[#5FBDFF] transition-colors"
-              onClick={() => navigate("/mypage/projects/myreviews")}
-            >
-              내 후기
-            </button>
+            {supporterMenu.map(({ label, path }) => (
+              <NavLink
+                key={label}
+                to={path}
+                className={({ isActive }) =>
+                  `text-left text-[22px] font-medium pl-[10px] transition-colors ${
+                    isActive ? "text-[#5FBDFF]" : "text-black hover:text-[#5FBDFF]"}`
+                }
+              >
+                {label}
+              </NavLink>
+            ))}
           </div>
         </div>
 
@@ -64,31 +64,17 @@ const Sidebar = () => {
         <div className="w-full flex flex-col gap-[14px] p-2">
           <SubTitle className="text-gray-400">나의 활동 (메이커)</SubTitle>
           <div className="flex flex-col gap-[10px]">
-            {["펀딩 내역", "통계 관리", "결제 관리", "프로젝트 만들기"].map((label, idx) => (
-              <button
-                key={idx}
-                className="text-left text-[22px] text-black font-medium pl-[10px] hover:text-[#5FBDFF] transition-colors"
-                onClick={() => {
-                  switch (label) {
-                    case "펀딩 내역":
-                      navigate("/fundinghistory");
-                      break;
-                    case "통계 관리":
-                      navigate("/stats");
-                      break;
-                    case "결제 관리":
-                      navigate("/paymentManagement");
-                      break;
-                    case "프로젝트 만들기":
-                      navigate("/");
-                      break;
-                    default:
-                      break;
-                  }
-                }}
+            {makerMenu.map(({ label, path }) => (
+              <NavLink
+                key={label}
+                to={path}
+                className={({ isActive }) =>
+                  `text-left text-[22px] font-medium pl-[10px] transition-colors ${
+                    isActive ? "text-[#5FBDFF]" : "text-black hover:text-[#5FBDFF]"}`
+                }
               >
                 {label}
-              </button>
+              </NavLink>
             ))}
           </div>
         </div>

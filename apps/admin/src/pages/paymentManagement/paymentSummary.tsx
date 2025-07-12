@@ -4,16 +4,17 @@ import { Title, MediumFont } from '@repo/ui/styles';
 
 interface PaymentSummaryData {
   totalPayments: number;
-  totalRevenue: string;
+  totalRevenue: number;
   failedPayments: number;
 }
 
+// 더미 fetch 함수에서 number로 반환
 const fetchPaymentSummary = (): Promise<PaymentSummaryData> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
         totalPayments: Math.floor(Math.random() * 100),
-        totalRevenue: (Math.floor(Math.random() * 5000000)).toLocaleString(),
+        totalRevenue: Math.floor(Math.random() * 5000000), 
         failedPayments: Math.floor(Math.random() * 10),
       });
     }, 500);
@@ -33,7 +34,7 @@ const getCurrentDateString = (): string => {
 const PaymentSummary: React.FC = () => {
   const [summary, setSummary] = useState<PaymentSummaryData>({
     totalPayments: 12,
-    totalRevenue: '2,750,000',
+    totalRevenue: 2750000, 
     failedPayments: 3,
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -68,9 +69,9 @@ const PaymentSummary: React.FC = () => {
       <div className="flex justify-end">
         <div className="flex gap-4 flex-wrap justify-end items-end text-right">
           {[
-            { label: '총 결제 건수', value: `${summary.totalPayments}개` },
-            { label: '총 수익', value: `${summary.totalRevenue}원` },
-            { label: '미결제 실패', value: `${summary.failedPayments}회` },
+            { label: '총 결제 건수', value: `${summary.totalPayments.toLocaleString()}개` },
+            { label: '총 수익', value: `${summary.totalRevenue.toLocaleString()}원` }, 
+            { label: '미결제 실패', value: `${summary.failedPayments.toLocaleString()}회` },
           ].map(({ label, value }, idx, arr) => (
             <div key={label} className="flex items-end gap-4">
               <div className="flex flex-col items-end min-w-[120px]">

@@ -50,7 +50,9 @@ const StatsCalendar: React.FC = () => {
     let day = startDate;
 
     while (day <= endDate) {
-      const weekNumber = getISOWeek(day);
+      const weekStart = new Date(day); // 현재 주 시작일 (불변)
+      const weekNumber = getISOWeek(weekStart);
+
       const weekRow = [
         <div
           key={`week-${weekNumber}`}
@@ -61,20 +63,20 @@ const StatsCalendar: React.FC = () => {
       ];
 
       for (let i = 0; i < 7; i++) {
-        const formattedDate = format(day, 'd');
-        const cloneDay = day;
-        const isToday = isSameDay(day, selectedDate ?? new Date());
+        const cloneDay = new Date(day); // 불변 복사
+        const formattedDate = format(cloneDay, 'd');
+        const isSelectedDay = isSameDay(cloneDay, selectedDate ?? new Date());
 
         weekRow.push(
           <div
-            key={day.toString()}
+            key={cloneDay.toString()}
             className={classNames(
-              "h-10 md:h-[43px] flex items-center justify-center rounded cursor-pointer text-sm",
+              'h-10 md:h-[43px] flex items-center justify-center rounded cursor-pointer text-sm',
               {
-                "text-gray-400": !isSameMonth(day, monthStart),
-                "bg-[#333] text-white": isToday,
-                "text-[#DC3E3E]": !isToday && day.getDay() === 0,
-                "text-[#00406C]": !isToday && day.getDay() === 6,
+                'text-gray-400': !isSameMonth(cloneDay, monthStart),
+                'bg-[#333] text-white': isSelectedDay,
+                'text-[#DC3E3E]': !isSelectedDay && cloneDay.getDay() === 0,
+                'text-[#00406C]': !isSelectedDay && cloneDay.getDay() === 6,
               }
             )}
             onClick={() => setSelectedDate(cloneDay)}
@@ -86,7 +88,10 @@ const StatsCalendar: React.FC = () => {
       }
 
       rows.push(
-        <div key={day.toString()} className="grid grid-cols-8 gap-[6px] mt-1 w-full">
+        <div
+          key={`week-row-${format(weekStart, 'yyyy-MM-dd')}`}
+          className="grid grid-cols-8 gap-[6px] mt-1 w-full"
+        >
           {weekRow}
         </div>
       );

@@ -5,7 +5,7 @@ import { Title, MediumFont } from '@repo/ui/styles';
 interface StatsSummaryData {
   totalSupportCount: number;
   totalSupporters: number;
-  totalFunding: string;
+  totalFunding: number;
   averageSuccessRate: number;
 }
 
@@ -15,7 +15,7 @@ const fetchStatsSummary = (): Promise<StatsSummaryData> => {
       resolve({
         totalSupportCount: Math.floor(Math.random() * 100),
         totalSupporters: Math.floor(Math.random() * 5000),
-        totalFunding: Math.floor(Math.random() * 5000000).toLocaleString(),
+        totalFunding: Math.floor(Math.random() * 5000000),
         averageSuccessRate: Math.floor(Math.random() * 100),
       });
     }, 500);
@@ -36,7 +36,7 @@ const StatsHeader: React.FC = () => {
   const [summary, setSummary] = useState<StatsSummaryData>({
     totalSupportCount: 12,
     totalSupporters: 3450,
-    totalFunding: '2,750,000',
+    totalFunding: 2750000,
     averageSuccessRate: 98,
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +73,7 @@ const StatsHeader: React.FC = () => {
           {[
             { label: '총 프로젝트 수', value: `${summary.totalSupportCount.toLocaleString()}개` },
             { label: '평균 성공률', value: `${summary.averageSuccessRate}%` },
-            { label: '총 모금액', value: `${summary.totalFunding}원` },
+            { label: '총 모금액', value: `${summary.totalFunding.toLocaleString()}원` },
             { label: '총 후원자', value: `${summary.totalSupporters.toLocaleString()}명` },
           ].map(({ label, value }, idx, arr) => (
             <div key={label} className="flex items-end gap-4">

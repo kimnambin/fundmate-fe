@@ -12,7 +12,7 @@ export default defineConfig({
       exposes: {
         './FundingList': './src/pages/fundingHistory/fundingList.tsx',
         './FundingHistory': './src/pages/fundingHistory/fundingHistory.tsx',
-        './CompletedFunding': './src/pages/fundingHistory/completedFunding.tsx',
+        './CompletedFunding': './src/pages/fundingHistory/completedFundingcard.tsx',
         './MakerProfile': './src/pages/makerProfile/makerProfile.tsx',
         './PaymentList': './src/pages/paymentManagement/paymentList.tsx',
         './PaymentManagement': './src/pages/paymentManagement/paymentManagement.tsx',
