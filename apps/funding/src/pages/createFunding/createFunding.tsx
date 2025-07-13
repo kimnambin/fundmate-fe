@@ -20,8 +20,11 @@ import {
   InputWrapper,
 } from './createFunding.styles';
 import { formatPrice } from '@repo/ui/utils';
+import { useNavigate } from 'react-router-dom';
 
 function CreateFunding() {
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState('');
   const [targetAmount, setTargetAmount] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -102,6 +105,12 @@ function CreateFunding() {
       setSummary(text);
       setTimeout(() => setCopied(false), 3000);
     });
+  };
+
+  const handleCreate = () => {
+    setIsSubmitOpen(false);
+    // API 연동
+    navigate('/product');
   };
 
   return (
@@ -365,7 +374,7 @@ function CreateFunding() {
                 <MainButton
                   label="예"
                   width="w-[200px]"
-                  onClick={() => setIsSubmitOpen(false)}
+                  onClick={handleCreate}
                 />
               </div>
             </div>
