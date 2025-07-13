@@ -30,10 +30,6 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   };
 
   const handleBtn = () => {
-    if (!addAmount || addAmount < 1000) {
-      alert('후원금은 최소 1,000원 이상이어야 합니다.');
-      return;
-    }
     if (selectedPayment === 'transfer') {
       setModalType('transfer');
     } else if (selectedPayment === 'card') {
@@ -47,12 +43,20 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
     setModalType(null);
   };
 
+  console.log('값', addAmount);
+  console.log(typeof addAmount);
+
   return (
     <>
       {selectedPayment && <Address setAddressData={setAddressData} />}
       <BoxRow className="justify-between p-5 my-4 sm:my-7">
         <LightColor className="bg-none">최종 후원 금액</LightColor>
         <BoldText>{formatPrice(String(addAmount))}원</BoldText>
+        {addAmount < 1000 && (
+          <span className="text-red-500 text-sm">
+            최소 1,000원 이상 후원해주세요.
+          </span>
+        )}
       </BoxRow>
       <BoxCol className="items-start border-2 border-dashed border-[#9747FF]">
         <Radio className="mt-3">
@@ -83,8 +87,8 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
       </BoxCol>
       <MainButton
         label="후원하기"
-        className={`ml-0 mt-4 w-full px-6 py-3 ${!addressData || modalType || !checks[0] || !checks[1] ? 'bg-gray-400' : ''} hover:opacity-100`}
-        disabled={!addressData || !checks[0] || !checks[1]}
+        className={`ml-0 mt-4 w-full px-6 py-3 ${addAmount < 1000 || !addressData || modalType || !checks[0] || !checks[1] ? 'bg-gray-400 cursor-not-allowed' : ''} hover:opacity-100`}
+        disabled={addAmount < 1000 || !addressData || !checks[0] || !checks[1]}
         textSize={'text-base'}
         textWeight={'font-bold'}
         onClick={handleBtn}

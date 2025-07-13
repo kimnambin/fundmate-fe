@@ -40,10 +40,6 @@ const PaymentDetailBottom = () => {
       </BoxRow>
 
       <div className="flex justify-center w-full mt-4">
-        {/* <Link
-          to="/payment/list"
-          className="flex items-center justify-center w-[50%] sm:w-[30%] p-2 mb-8"
-        > */}
         <div className="flex items-center justify-center w-[50%] sm:w-[30%] p-2 mb-8">
           <MainButton
             label="후원 목록 보기"
@@ -55,7 +51,6 @@ const PaymentDetailBottom = () => {
             }}
           />
         </div>
-        {/* </Link> */}
       </div>
     </FlexCol>
   );
