@@ -50,6 +50,11 @@ function CreateFunding() {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const isInvalidDate = (startDate: string, endDate: string) => {
+    if (!startDate || !endDate) return false;
+    return new Date(endDate) < new Date(startDate);
+  };
+
   const isValidItem = () =>
     [itemTitle, itemContent, itemPrice].every((value) => value.trim());
 
@@ -161,8 +166,14 @@ function CreateFunding() {
               placeholder="펀딩 종료일을 입력하세요."
               value={endDate}
               onChange={setEndDate}
-              isError={isSubmit && endDate.trim().length === 0}
+              isError={
+                (isSubmit && endDate.trim().length === 0) ||
+                isInvalidDate(startDate, endDate)
+              }
             />
+            {isInvalidDate(startDate, endDate) && (
+              <WarningText>종료일은 시작일보다 이후여야 합니다.</WarningText>
+            )}
           </div>
 
           <InputDate
