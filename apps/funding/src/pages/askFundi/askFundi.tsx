@@ -1,21 +1,20 @@
-import { Wrapper } from './askFundi.styles';
-import HelpIcon from '../../assets/icons/ic_help.svg';
-import InputTextArea from '../../components/input-text-area/inputTextArea';
+import { FundiIcon } from '@repo/ui/assets';
+import { Loading, MainButton, Modal } from '@repo/ui/components';
 import {
+  Layout,
   MediumFont,
   SubTitle,
   Title,
   WarningText,
-  Layout,
 } from '@repo/ui/styles';
-import Category from '../../components/category/category';
-import { filters } from '../createFunding/createFunding';
-import { MainButton } from '@repo/ui/components';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
-import { Loading, Modal } from '@repo/ui/components';
 import { useNavigate } from 'react-router-dom';
-import { FundiIcon } from '@repo/ui/assets';
+import HelpIcon from '../../assets/icons/ic_help.svg';
+import CategoryGroup from '../../components/category/categoryGroup';
+import InputTextArea from '../../components/input-text-area/inputTextArea';
+import { filters } from '../../constants/categories';
+import { Wrapper } from './askFundi.styles';
 
 const AskFundi = () => {
   const [isHelopOpen, setIsHelpOpen] = useState(false);
@@ -111,26 +110,15 @@ const AskFundi = () => {
 
         <div className="flex flex-col gap-[20px]">
           <SubTitle>카테고리와 타겟층을 선택하세요</SubTitle>
-          <div className="flex gap-[20px]">
-            <Category
-              title={filters[0].title}
-              options={filters[0].options}
-              selected={category}
-              onSelect={setCategory}
-            />
-            <Category
-              title={filters[1].title}
-              options={filters[1].options}
-              selected={gender}
-              onSelect={setGender}
-            />
-            <Category
-              title={filters[2].title}
-              options={filters[2].options}
-              selected={age}
-              onSelect={setAge}
-            />
-          </div>
+          <CategoryGroup
+            filters={filters}
+            category={category}
+            setCategory={setCategory}
+            gender={gender}
+            setGender={setGender}
+            age={age}
+            setAge={setAge}
+          />
           {isSubmit && (!category || !gender || !age) && (
             <WarningText>카테고리와 타켓층을 선택하세요.</WarningText>
           )}

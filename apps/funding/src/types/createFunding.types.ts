@@ -17,3 +17,8 @@ export type CreateForm = {
   age: string;
   items: Item[];
 };
+
+export interface Filter {
+  title: string;
+  options: string[];
+}
