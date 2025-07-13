@@ -9,4 +9,8 @@ export const Wrapper = styled(MapWrapper)`
   .svg-map {
     height: 300px !important;
   }
+
+  .svg-map + div {
+    display: none;
+  }
 `;
