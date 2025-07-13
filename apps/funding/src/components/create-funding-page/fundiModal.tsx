@@ -1,10 +1,10 @@
+import { FundiIcon } from '@repo/ui/assets';
 import { Modal } from '@repo/ui/components';
-import { IoClose } from 'react-icons/io5';
 import { MediumFont, Title } from '@repo/ui/styles';
 import MarkdownEditor from '@uiw/react-markdown-editor';
-import { HorizontalLine } from '../../pages/createFunding/createFunding.styles';
-import { FundiIcon } from '@repo/ui/assets';
 import { FiCheck, FiCopy } from 'react-icons/fi';
+import { IoClose } from 'react-icons/io5';
+import { HorizontalLine } from '../../pages/createFunding/createFunding.styles';
 
 interface Props {
   isFundiOpen: boolean;
@@ -35,19 +35,18 @@ const FundiModal = ({
       <div className="flex flex-col gap-5 min-w-[400px] max-w-[80vw]">
         <div className="flex flex-col gap-[10px]">
           <Title>내가 입력한 내용</Title>
-          <MediumFont className="break-words">
-            {intro ? (
-              <div
-                data-color-mode="light"
-                className="max-h-[200px] overflow-hidden relative"
-              >
-                <MarkdownEditor.Markdown source={intro} />
-                <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white to-transparent pointer-events-none" />
-              </div>
-            ) : (
-              <span className="text-sub-text">입력한 내용이 없습니다.</span>
-            )}
-          </MediumFont>
+          {intro ? (
+            <div
+              data-color-mode="light"
+              className="max-h-[200px] overflow-y-scroll relative custom-scroll"
+            >
+              <MarkdownEditor.Markdown source={intro} />
+            </div>
+          ) : (
+            <MediumFont className="text-sub-text">
+              입력한 내용이 없습니다.
+            </MediumFont>
+          )}
         </div>
         <HorizontalLine />
         <div className="flex flex-col gap-[10px]">

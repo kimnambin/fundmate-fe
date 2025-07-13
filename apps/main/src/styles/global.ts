@@ -17,10 +17,20 @@ const GlobalStyle = createGlobalStyle`
     padding-left: 1rem;
     list-style-type: disc;
     }
-
     .wmde-markdown ol {
     list-style-type: decimal;
-}
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+    width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 6px;
+    }
 `;
 
 export default GlobalStyle;
