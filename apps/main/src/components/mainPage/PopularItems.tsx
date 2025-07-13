@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import { MediumFont, Title } from "@repo/ui/styles"
 
 export const PopularItems = () => {
-  const isLoading = true;
+  const isLoading = false;
   return (
     <PopularItemsContainer>
       <PopularItemsHeader>
@@ -21,7 +21,7 @@ export const PopularItems = () => {
       </PopularItemsHeader>
       <PopularItemsGrid>
         {
-          range(9).map(i => (
+          range(8).map(i => (
             <HorizontalCard number={(i + 1).toString()} isLoading={isLoading} />
           ))
         }

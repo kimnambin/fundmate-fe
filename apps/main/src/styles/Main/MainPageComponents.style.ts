@@ -1,15 +1,16 @@
 import tw from "tailwind-styled-components";
 
-//Banner
-export const BannerContainer = tw.div`
-  col-span-4
+export const MainFlex = tw.div`
+  flex
+  flex-row
+  justify-stretch
+  gap-10
+  w-full
 `
 
 //InterestingItems
 export const InterestingItemsContainer = tw.div`
-  col-start-1
-  col-span-4
-  h-full
+  h-[55%]
 `
 
 export const InterestingItemsGrid = tw.div`
@@ -22,9 +23,6 @@ export const InterestingItemsGrid = tw.div`
 
 //MainCategory
 export const MainCategoryContainer = tw.div`
-  col-start-1
-  col-span-4
-  h-full
   flex
   flex-row
   justify-around
@@ -33,14 +31,10 @@ export const MainCategoryContainer = tw.div`
 
 //PopularItems
 export const PopularItemsContainer = tw.div`
-  row-span-3
-  row-start-1
-  col-start-5
-  col-span-2
   flex
   flex-col
   gap-5
-  max-w-[400px]
+  w-full
 `
 
 export const PopularItemsHeader = tw.div`
@@ -51,11 +45,9 @@ export const PopularItemsHeader = tw.div`
 `
 
 export const PopularItemsGrid = tw.div`
-  grid
-  [grid-template-rows:repeat(auto-fit,minmax(0, 1fr))]
-  grid-cols-auto-fit
+  flex
+  flex-col
   items-stretch
   gap-1.5
   h-full
-  min-w-[400px]
 `

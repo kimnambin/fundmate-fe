@@ -1,5 +1,4 @@
 import bannerImage from '../../assets/images/banner.png';
-import { BannerContainer } from '../../styles/Main/MainPageComponents.style';
 
 interface BannerProps {
   isLoading: boolean
@@ -8,12 +7,12 @@ interface BannerProps {
 export const Banner = ({ isLoading }: BannerProps) => {
   if (isLoading) {
     return (
-      <BannerContainer className='h-[490px] w-[1232px] rounded-xl animate-pulse bg-gray-100' />
+      <div className='h-[430px] w-full rounded-xl animate-pulse bg-gray-100' />
     )
   }
   return (
-    <BannerContainer>
+    <div>
       <img src={bannerImage} alt="banner" className="w-full h-full object-cover rounded-xl" />
-    </BannerContainer>
+    </div>
   )
 }
