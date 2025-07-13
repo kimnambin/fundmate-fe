@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface FollowingCardProps {
   name: string; // 닉네임
@@ -31,12 +31,13 @@ export const FollowingCard = ({
       <button
         onClick={toggleFollow}
         className={`px-6 py-4 rounded border flex items-center gap-1
-          ${isFollowing
-            ? "bg-gray-100 text-gray-600 border-gray-300"
-            : "bg-white text-[#5FBDFF] border-[#5FBDFF]"
+          ${
+            isFollowing
+              ? 'bg-gray-100 text-gray-600 border-gray-300'
+              : 'bg-white text-[#5FBDFF] border-[#5FBDFF]'
           }`}
       >
-        {isFollowing ? "✔ 팔로잉" : "+ 팔로우"}
+        {isFollowing ? '✔ 팔로잉' : '+ 팔로우'}
       </button>
     </div>
   );

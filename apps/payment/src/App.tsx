@@ -8,7 +8,6 @@ const ProductPage = lazy(() => import('./pages/ProductPage'));
 const PaymentPage = lazy(() => import('./pages/PaymentPage'));
 const PaymentcompletedPage = lazy(() => import('./pages/PaymentcompletedPage'));
 const PaymentDetail = lazy(() => import('./pages/PaymentDetail'));
-const PaymentListPage = lazy(() => import('./pages/PaymentListPage'));
 
 function App() {
   const isMobile = useIsMobile();
@@ -24,7 +23,6 @@ function App() {
             <Route index element={<PaymentPage />} />
             <Route path="completed" element={<PaymentcompletedPage />} />
             <Route path="detail" element={<PaymentDetail />} />
-            <Route path="list" element={<PaymentListPage />} />
           </Route>
         </Routes>
       </Suspense>
