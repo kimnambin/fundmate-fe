@@ -75,7 +75,8 @@ export const ProfileImg = tw.img`
 `;
 
 export const ProfileInfo = tw.div`
-  flex flex-col
+  flex 
+  flex-col
 `;
 
 export const ProfileInfos = tw.h3`

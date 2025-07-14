@@ -1,12 +1,15 @@
 import { BaseText, BoldBigText, LightColor } from '../styles/text.style';
 import { Box, BoxRow, FlexColsm, FlexRowsm } from '../styles/layout.style';
 import { Input, MoneyBox, Span } from '../styles/paymentPage/PaymentMid.style';
+import { formatPrice } from '@repo/ui/utils';
 
 const PaymentMid = ({
   subText,
+  addAmount,
   setAddAmount,
 }: {
   subText: string[];
+  addAmount: number;
   setAddAmount: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   return (
@@ -18,12 +21,15 @@ const PaymentMid = ({
         <BaseText>후원금</BaseText>
         <MoneyBox>
           <Input
-            type="number"
-            placeholder="1,000원"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setAddAmount(Number(e.target.value))
-            }
+            type="text"
+            placeholder="기본 1,000원"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              const onlyNumbers = e.target.value.replace(/[^0-9]/g, '');
+              setAddAmount(Number(onlyNumbers));
+            }}
+            value={formatPrice(String(addAmount))}
           />
+
           <Span>원</Span>
         </MoneyBox>
       </Box>

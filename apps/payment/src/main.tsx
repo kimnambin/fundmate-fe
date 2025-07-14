@@ -1,16 +1,18 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { worker } from '@repo/ui/mocks';
 import App from './App.tsx';
 import './index.css';
 
 async function enableMocking() {
-  if (import.meta.env.MODE !== 'development' || typeof window === 'undefined') {
-    return;
-  }
+  // if (import.meta.env.MODE !== 'development' || typeof window === 'undefined') {
+  //   return;
+  // }
 
-  return worker.start();
+  // return worker.start();
+
+  const { worker } = await import('@repo/ui/mocks');
+  worker.start();
 }
 
 enableMocking().then(() => {
