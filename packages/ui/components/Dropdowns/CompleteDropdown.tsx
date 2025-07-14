@@ -5,7 +5,7 @@ import type { DropdownProps } from "./Dropdown";
 import { useSearchParams } from "react-router-dom";
 import { SmallFont } from "../../styles";
 
-export const CompleteDropdown = ({ query }: DropdownProps) => {
+export const CompleteDropdown = ({ query, onClick }: DropdownProps) => {
   const complete = ['75% 이상', '75% ~ 100%', '100% 이상'];
   const [title, setTitle] = useState('달성률');
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,11 +14,20 @@ export const CompleteDropdown = ({ query }: DropdownProps) => {
     setTitle('달성률');
   }, [query])
 
-  const handleQueryChange = (i: string, v: string) => {
+  const handleQueryChange = (i: string) => {
     const currentQuery = new URLSearchParams(searchParams);
-    currentQuery.set('complete', i);
-    setSearchParams(currentQuery)
-    setTitle(v)
+    currentQuery.set('status', i);
+    setSearchParams(currentQuery);
+  }
+
+  const handleClick = (i: number, v: string) => {
+    if (query !== null) {
+      handleQueryChange(i.toString());
+    } else if (onClick) {
+      onClick(i);
+    }
+
+    setTitle(v);
   }
 
   //complete의 쿼리값에 따라서 데이터 정렬 필요
@@ -42,9 +51,10 @@ export const CompleteDropdown = ({ query }: DropdownProps) => {
               <MenuItem>
                 <div
                   role="button"
-                  key={i}
+                  key={v}
+                  data-id={v}
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
-                  onClick={() => handleQueryChange(i.toString(), v)}
+                  onClick={() => handleClick(i, v)}
                 >
                   <SmallFont key={i}>
                     {v}

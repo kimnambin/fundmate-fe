@@ -1,6 +1,6 @@
-import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Title, MediumFont } from '@repo/ui/styles';
+import { Dropdown } from '@repo/ui/components';
 
 const PaymentList = () => {
   return (
@@ -10,14 +10,8 @@ const PaymentList = () => {
       <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <Title className="text-black">결제 내역 리스트</Title>
         <div className="flex gap-2">
-          <button className="flex items-center gap-1 px-2 py-1 border border-gray-300 rounded text-xs h-[30px]">
-            <span className="text-slate-900">상태</span>
-            <ChevronDown size={16} className="opacity-50" />
-          </button>
-          <button className="flex items-center gap-1 px-2 py-1 border border-gray-300 rounded text-xs h-[30px]">
-            <span className="text-slate-900">추천순</span>
-            <ChevronDown size={16} className="opacity-50" />
-          </button>
+          <Dropdown kind='status' usage='click' onClick={(e) => console.log(e)} />
+          <Dropdown kind='recommand' usage='click' onClick={(e) => console.log(e)} />
         </div>
       </div>
 

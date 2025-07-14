@@ -13,7 +13,9 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
     "@originjs/vite-plugin-federation": "^1.4.1",
+    "@ramonak/react-progress-bar": "^5.4.0",
     "axios": "^1.10.0",
     "classnames": "^2.5.1",
     "lucide-react": "^0.525.0",
