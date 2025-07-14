@@ -26,6 +26,7 @@ const CardPaymentModal = ({
   addressData,
   method,
   setIsModalOpen,
+  setShowLoading,
 }: PaymentProps) => {
   const placeholders = randomPlaceholder();
   const {
@@ -43,7 +44,13 @@ const CardPaymentModal = ({
     isConfirmModalOpen,
     setIsConfirmModalOpen,
     confirmPayment,
-  } = useCardPayForm({ addAmount, addressData, method, setIsModalOpen });
+  } = useCardPayForm({
+    addAmount,
+    addressData,
+    method,
+    setIsModalOpen,
+    setShowLoading,
+  });
 
   return (
     <Modal isOpen={true} onClose={() => setIsModalOpen(false)}>

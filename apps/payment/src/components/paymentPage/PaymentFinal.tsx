@@ -6,7 +6,8 @@ import { Radio } from '../styles/paymentPage/Address.style';
 import { BaseText, BoldText, LightColor } from '../styles/text.style';
 import Address from './Address';
 import { formatPrice } from '@repo/ui/utils';
-import { MainButton } from '@repo/ui/components';
+import { Loading, MainButton } from '@repo/ui/components';
+import { ModalContainer } from '../styles/modal/modal.style';
 
 interface PaymentFinalProps {
   selectedPayment: string;
@@ -18,10 +19,10 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   addAmount,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState<'bank' | 'card' | null>(null);
+  const [modalType, setModalType] = useState<string | null>('');
   const [addressData, setAddressData] = useState('');
-
   const [checks, setChecks] = useState([false, false]);
+  const [showLoading, setShowLoading] = useState(false);
 
   const handleCheck = (index: number) => {
     const newChecks = [...checks];
@@ -31,9 +32,9 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
 
   const handleBtn = () => {
     if (selectedPayment === 'BANK') {
-      setModalType('bank');
+      setModalType('BANK');
     } else if (selectedPayment === 'CARD') {
-      setModalType('card');
+      setModalType('CARD');
     }
     setIsModalOpen(true);
   };
@@ -45,6 +46,12 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
 
   return (
     <>
+      {showLoading && (
+        <ModalContainer>
+          <Loading />
+        </ModalContainer>
+      )}
+
       {selectedPayment && <Address setAddressData={setAddressData} />}
       <BoxRow className="justify-between p-5 my-4 sm:my-7">
         <LightColor className="bg-none">최종 후원 금액</LightColor>
@@ -90,13 +97,15 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
         textWeight={'font-bold'}
         onClick={handleBtn}
       />
+
       {isModalOpen &&
-        (modalType === 'bank' ? (
+        (modalType === 'BANK' ? (
           <TransferModal
             addAmount={addAmount}
             addressData={addressData}
             method="BANK"
             setIsModalOpen={handleCloseModal}
+            setShowLoading={setShowLoading}
           />
         ) : (
           <CardPaymentModal
@@ -104,6 +113,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
             addressData={addressData}
             method="CARD"
             setIsModalOpen={handleCloseModal}
+            setShowLoading={setShowLoading}
           />
         ))}
     </>

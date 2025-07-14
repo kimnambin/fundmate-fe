@@ -7,6 +7,7 @@ interface PayConfirmProps {
   setIsConfirmModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   confirmPayment: () => void;
   title: string;
+  isLoading: boolean;
 }
 
 const PayConfirmModal = ({
@@ -14,7 +15,7 @@ const PayConfirmModal = ({
   setIsConfirmModalOpen,
   confirmPayment,
   title,
-}: PayConfirmProps) => {
+}: Omit<PayConfirmProps, 'isLoading'>) => {
   return (
     <div className="flex flex-col p-5 gap-5">
       <div className="text-center flex flex-col gap-[10px]">
@@ -34,7 +35,6 @@ const PayConfirmModal = ({
           </>
         )}
       </div>
-
       <div className="flex gap-[20px] justify-center">
         <MainButton
           label="아니오"

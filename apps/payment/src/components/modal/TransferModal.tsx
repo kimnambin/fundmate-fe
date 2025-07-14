@@ -18,6 +18,7 @@ export default function TransferModal({
   addressData,
   method,
   setIsModalOpen,
+  setShowLoading,
 }: PaymentProps) {
   const bankList = ['KB국민은행', '농협', '신한', 'IBK', '토스'];
 
@@ -36,7 +37,13 @@ export default function TransferModal({
     isConfirmModalOpen,
     setIsConfirmModalOpen,
     confirmPayment,
-  } = useTransferForm({ addAmount, addressData, method, setIsModalOpen });
+  } = useTransferForm({
+    addAmount,
+    addressData,
+    method,
+    setIsModalOpen,
+    setShowLoading,
+  });
 
   return (
     <Modal isOpen={true} onClose={() => setIsModalOpen(false)}>
@@ -76,8 +83,7 @@ export default function TransferModal({
               inputMode="numeric"
               pattern="[0-9]*"
               required
-              className="appearance-none [&::-webkit-inner-spin-button]:appearance-none 
-            [&::-webkit-outer-spin-button]:appearance-none"
+              className="appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
               value={number}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const onlyNums = e.target.value.replace(/\D/g, '');
@@ -101,8 +107,7 @@ export default function TransferModal({
                 <input
                   type="text"
                   placeholder="예) 920101"
-                  className="w-full border rounded-md p-2 appearance-none [&::-webkit-inner-spin-button]:appearance-none 
-                [&::-webkit-outer-spin-button]:appearance-none"
+                  className="w-full border rounded-md p-2 appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   inputMode="numeric"
                   pattern="[0-9]*"
                   maxLength={6}
