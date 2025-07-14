@@ -13,7 +13,7 @@ export const MainContainer = () => {
         <MainCategory />
         <InterestingItems />
       </div>
-      <div className="flex shrink-0 grow-0 basis-[400px]">
+      <div className="flex shrink-0 grow-0 basis-[450px]">
         <PopularItems />
       </div>
     </MainFlex>

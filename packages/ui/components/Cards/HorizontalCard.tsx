@@ -26,7 +26,7 @@ export const HorizontalCard = ({ number, isLoading }: CardProps) => {
   }
   return (
     <HorizontalCardContainer onClick={() => navigate('/product')}>
-      <div className="relative flex shrink-0 grow-0 basis-[120px]">
+      <div className="relative flex shrink-0 grow-0 basis-[30%]">
         <img src="https://picsum.photos/id/30/100/100" className="w-full h-full object-cover rounded-xl" />
         <HeartButton />
       </div>
