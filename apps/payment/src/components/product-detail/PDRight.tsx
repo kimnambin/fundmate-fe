@@ -1,4 +1,4 @@
-
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   GiftCard,
@@ -14,6 +14,7 @@ import {
   ProfileInfos,
   SelectButton,
 } from '../styles/product-detail/prdouctstyle.style';
+import { useState } from 'react';
 
 const PDBox = () => {
   // TODO : 임시 데이터
@@ -50,9 +51,21 @@ const PDBox = () => {
     },
   ];
 
+  const [isFollowing, setIsFollowing] = useState(false);
+  const toggleFollow = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setIsFollowing((prev: boolean) => !prev);
+  };
+
+  const nav = useNavigate();
+
   return (
     <Box>
-      <GiftCard className="w-full">
+      {/* TODO 여기 잘되는 지 살펴보기 */}
+      <GiftCard
+        className="w-full hover:shadow-md cursor-pointer"
+        onClick={() => nav('/supporter/profile')}
+      >
         <ProfileInfo>
           <ProfileInfos>창작자 소개</ProfileInfos>
           <ProfileCard>
@@ -60,12 +73,17 @@ const PDBox = () => {
               <ProfileImg src={creatorData.imageUrl} alt="prifile" />
               <GiftItemTitle>{creatorData.name}</GiftItemTitle>
             </div>
-
-            {creatorData.isFollowing ? (
-              <SelectButton className="bg-white">+ 팔로우</SelectButton>
-            ) : (
-              <SelectButton className="bg-white">팔로잉</SelectButton>
-            )}
+            <button
+              onClick={toggleFollow}
+              className={`px-4 py-2 rounded border gap-1
+          ${
+            isFollowing
+              ? 'bg-gray-100 text-gray-600 border-gray-300'
+              : 'bg-white text-[#5FBDFF] border-[#5FBDFF]'
+          }`}
+            >
+              {isFollowing ? '✔ 팔로잉' : '+ 팔로우'}
+            </button>
           </ProfileCard>
           <ProfileDesc>{creatorData.description}</ProfileDesc>
         </ProfileInfo>
@@ -77,7 +95,7 @@ const PDBox = () => {
           <GiftCard key={idx}>
             <ProfileCard className="my-0">
               <GiftPrice>{Gift.price}원</GiftPrice>
-              <SelectButton>~남음</SelectButton>
+              <SelectButton>12개 남음</SelectButton>
             </ProfileCard>
             <GiftItemTitle>{Gift.title}</GiftItemTitle>
             <GiftDesc>{Gift.desc}</GiftDesc>

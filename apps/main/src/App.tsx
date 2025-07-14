@@ -17,7 +17,6 @@ const ProductPage = lazy(() => import('payment/ProductPage'));
 const PaymentPage = lazy(() => import('payment/PaymentPage'));
 const PaymentCompleted = lazy(() => import('payment/PaymentCompleted'));
 const PaymentDetail = lazy(() => import('payment/PaymentDetail'));
-const PaymentListPage = lazy(() => import('payment/PaymentListPage'));
 
 const StatisticsPage = lazy(() => import('statistics/Statistics'));
 
@@ -55,23 +54,22 @@ function App() {
             <Route index element={<PaymentPage />} />
             <Route path="completed" element={<PaymentCompleted />} />
             <Route path="detail" element={<PaymentDetail />} />
-            <Route path="list" element={<PaymentListPage />} />
           </Route>
-          <Route path='/statistics' element={<StatisticsPage />} />
-          <Route path='user/*' element={<MyPageCommonLayout />}>
-            <Route path='settings' element={<ProfileSetting />} />
-            <Route path='withdrawal' element={<Withdrawal />} />
+          <Route path="/statistics" element={<StatisticsPage />} />
+          <Route path="user/*" element={<MyPageCommonLayout />}>
+            <Route path="settings" element={<ProfileSetting />} />
+            <Route path="withdrawal" element={<Withdrawal />} />
           </Route>
-          <Route path='/mypage/*' element={<MyPageLayout />}>
+          <Route path="/mypage/*" element={<MyPageLayout />}>
             <Route index element={<Mypage />} />
-            <Route path='projects/*'>
-              <Route path='supported' element={<SupportedProjects />} />
-              <Route path='liked' element={<LikedProjects />} />
-              <Route path='following' element={<Following />} />
-              <Route path='myreviews' element={<MyReviews />} />
+            <Route path="projects/*">
+              <Route path="supported" element={<SupportedProjects />} />
+              <Route path="liked" element={<LikedProjects />} />
+              <Route path="following" element={<Following />} />
+              <Route path="myreviews" element={<MyReviews />} />
             </Route>
           </Route>
-          <Route path='supporter/profile' element={<SupporterProfile />} />
+          <Route path="supporter/profile" element={<SupporterProfile />} />
         </Routes>
       </Suspense>
     </>

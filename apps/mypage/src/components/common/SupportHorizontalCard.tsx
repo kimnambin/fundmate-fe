@@ -1,17 +1,20 @@
-import { useNavigate } from "react-router-dom";
-import type { SupportedProject } from "../../api/supportedProjects";
-import { MediumFont } from "@repo/ui/styles";
+import { useNavigate } from 'react-router-dom';
+import type { SupportedProject } from '../../api/supportedProjects';
+import { MediumFont } from '@repo/ui/styles';
 
 type SupportedHorizontalCardProps = {
-  project: SupportedProject
-}
+  project: SupportedProject;
+};
 
-export const SupportedHorizontalCard = ({ project }: SupportedHorizontalCardProps) => {
+export const SupportedHorizontalCard = ({
+  project,
+}: SupportedHorizontalCardProps) => {
   const navigate = useNavigate();
   return (
     <div
       key={project.id}
-      onClick={() => navigate(`/product`)}
+      // TODO : 상품 상세 페이지로 갈 수 있게 수정했습니다(남빈)
+      onClick={() => navigate(`/payment/detail`)}
       className="cursor-pointer flex flex-row items-center gap-5 p-3 border border-[#E2E8F0] rounded-[10px] w-full hover:shadow-md transition"
     >
       {/* 썸네일 */}
@@ -31,9 +34,7 @@ export const SupportedHorizontalCard = ({ project }: SupportedHorizontalCardProp
 
         {/* 프로젝트명 + 옵션 */}
         <div className="flex flex-col gap-[10px]">
-          <MediumFont className="line-clamp-2">
-            {project.title}
-          </MediumFont>
+          <MediumFont className="line-clamp-2">{project.title}</MediumFont>
           <MediumFont className="leading-[4px] text-[#7E7C7C]">
             {project.option}
           </MediumFont>
@@ -41,15 +42,12 @@ export const SupportedHorizontalCard = ({ project }: SupportedHorizontalCardProp
 
         {/* 금액 + 결제 예정일 */}
         <div className="flex mt-[10px] flex-col gap-[12px]">
-          <MediumFont className="leading-[17px]">
-            {project.price}
-          </MediumFont>
+          <MediumFont className="leading-[17px]">{project.price}</MediumFont>
           <MediumFont className="leading-[12px] text-[#FF4343]">
             {project.paymentDate}
           </MediumFont>
         </div>
       </div>
     </div>
-
-  )
-}
+  );
+};

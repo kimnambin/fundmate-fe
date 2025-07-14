@@ -96,6 +96,7 @@ export const SignUpComponent = () => {
               <SignUpVerificationContainer>
                 <InputText
                   type="text"
+                  width="w-full"
                   placeholder="이메일을 입력해주세요."
                   {...register('email')}
                   isError={!!errors.email}
@@ -120,6 +121,7 @@ export const SignUpComponent = () => {
                       <SignUpVerificationContainer>
                         <InputText
                           type="text"
+                          width="w-full"
                           placeholder="인증 코드를 입력해주세요."
                           {...register('verificationCode')}
                           isError={!!errors.verificationCode}

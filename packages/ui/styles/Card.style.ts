@@ -22,6 +22,7 @@ export const HorizontalCardContainer = tw.div`
   flex-row
   gap-3
   w-full
+  min-w-0
   h-full
   cursor-pointer
   rounded-xl  

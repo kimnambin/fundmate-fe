@@ -1,6 +1,6 @@
 import ProductImg from '../components/productPage/ProductImg';
 import ProductInfo from '../components/productPage/ProductInfo';
-import ProductDetail from '../components/product-detail/ProductDetail';
+import ProductDetail from '../components/product-detail/PDLeft';
 import { FlexCol, FlexItem, FlexRow } from '../components/styles/layout.style';
 import ProductIconBox from '../components/productPage/ProductIconBox';
 import { useIsMobile } from '../hooks/useMobile';

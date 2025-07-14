@@ -35,3 +35,6 @@ export {
 
 //mocks
 export { worker, handlers } from './mocks';
+
+//hooks
+export { axiosInstance } from './hooks'

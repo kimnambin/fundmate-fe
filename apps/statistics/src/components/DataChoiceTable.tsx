@@ -2,15 +2,16 @@ import { MediumFont } from "@repo/ui/styles"
 import { TableDataStyle } from "../styles/TableData.style"
 import { CustomCheckbox } from "./CustomCheckbox"
 import { StatisticsTableData } from '@repo/ui/utils'
-import { useState } from "react"
+import type { DataChoiceTableProps } from "../types/Statistics.type"
 
-export const DataChoiceTable = () => {
-  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({})
-  const handleCheckboxChange = (id: string, checked: boolean) => {
-    setCheckedItems(prev => ({
-      ...prev,
-      [id]: checked,
-    }));
+
+export const DataChoiceTable = ({ selected, setSelected }: DataChoiceTableProps) => {
+  const handleSelected = (value: string) => {
+    setSelected(prev =>
+      prev.includes(value)
+        ? prev.filter((v) => v != value)
+        : [...prev, value]
+    )
   }
 
   return (
@@ -48,8 +49,8 @@ export const DataChoiceTable = () => {
                   <CustomCheckbox
                     id={v.name}
                     value={v.name}
-                    checked={!!checkedItems[v.name]}
-                    onChange={handleCheckboxChange}
+                    checked={selected.includes(v.name)}
+                    onChange={() => handleSelected(v.name)}
                   />
                 </div>
               </TableDataStyle>

@@ -18,7 +18,7 @@ interface TransferTypes {
 }
 
 export const handlers = [
-  http.post('/payment/card', async ({ request }) => {
+  http.post(`/payment/card`, async ({ request }) => {
     const data = await request.json();
     const { cardNumber, expiryDate, cvv, cardName } = data as CardRequestProps;
 

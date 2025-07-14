@@ -13,6 +13,7 @@ interface SwiperItemsProps {
 }
 
 export const SwiperItems = ({ componentId }: SwiperItemsProps) => {
+  const isLoading = false;
   return (
     <>
       <NavigationContainer $role='prev'>
@@ -39,7 +40,7 @@ export const SwiperItems = ({ componentId }: SwiperItemsProps) => {
       >
         {
           range(componentId * 7).map(i => (
-            <SwiperSlide key={i} ><VerticalCard /></SwiperSlide>
+            <SwiperSlide key={i} ><VerticalCard isLoading={isLoading} /></SwiperSlide>
           ))
         }
       </Swiper>
