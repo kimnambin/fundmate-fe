@@ -1,16 +1,14 @@
 import { TableDataStyle } from "../styles/TableData.style"
 import { StatisticsOptionData } from '@repo/ui/utils'
 import { CustomRadio } from "./CustomRadio"
-import { useState } from "react"
 import { MediumFont } from "@repo/ui/styles"
+import type { DataOptionChoiceProps, OptionSelectionProps } from "../types/Statistics.type"
 
-export const DataOptionChoiceTable = () => {
-  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({})
-
-  const handleChange = (name: string, value: string) => {
-    setSelectedOptions((prev) => ({
+export const DataOptionChoiceTable = ({ selected, setSelected }: DataOptionChoiceProps) => {
+  const handleOptionChange = (group: keyof OptionSelectionProps, value: string) => {
+    setSelected((prev) => ({
       ...prev,
-      [name]: value
+      [group]: value
     }))
   }
 
@@ -47,8 +45,9 @@ export const DataOptionChoiceTable = () => {
                         <CustomRadio
                           id={`${v.name}-${item}`}
                           name={v.name}
-                          selected={selectedOptions[v.name] || ""}
-                          onChange={(value) => handleChange(v.name, value)} />
+                          value={item}
+                          selected={`${v.name}-${selected[v.name as keyof OptionSelectionProps]}`}
+                          onChange={() => handleOptionChange(v.name as keyof OptionSelectionProps, item)} />
                         <MediumFont>
                           {item}
                         </MediumFont>

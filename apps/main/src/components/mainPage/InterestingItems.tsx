@@ -6,7 +6,7 @@ import {
 } from '../../styles/Main/MainPageComponents.style';
 
 export const InterestingItems = () => {
-  const isLoading = true;
+  const isLoading = false;
   return (
     <InterestingItemsContainer>
       <InterestingItemsGrid>

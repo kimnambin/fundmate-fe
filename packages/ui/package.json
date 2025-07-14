@@ -8,7 +8,8 @@
     "./CommonButton": "./styles/Button.styles.ts",
     "./utils": "./utils/index.ts",
     "./styles": "./styles/index.ts",
-    "./mocks": "./mocks/index.ts"
+    "./mocks": "./mocks/index.ts",
+    "./hooks": "./hooks/index.ts"
   },
   "license": "MIT",
   "scripts": {
@@ -26,6 +27,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.4",
     "@ramonak/react-progress-bar": "^5.4.0",
+    "axios": "^1.10.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.3",
     "styled-components": "^6.1.19",
