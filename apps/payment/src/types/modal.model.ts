@@ -1,5 +1,6 @@
-export interface TransferProps {
+export interface PaymentProps {
   addAmount: number;
   addressData: string;
+  method: 'CARD' | 'BANK';
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }

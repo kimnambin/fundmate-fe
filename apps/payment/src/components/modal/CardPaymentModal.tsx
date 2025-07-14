@@ -17,23 +17,24 @@ import { monthList, yearList } from '../../utils/date';
 import { BankBtn } from '../styles/modal/tansfetModal.style';
 import { FlexRowsm } from '../styles/layout.style';
 import { useCardPayForm } from '../../hooks/useForm';
-import { TransferProps } from '../../types/modal.model';
+import { PaymentProps } from '../../types/modal.model';
 import { MainButton, Modal } from '@repo/ui/components';
 import PayConfirmModal from './confirm/PayConfirmModal';
 
 const CardPaymentModal = ({
   addAmount,
   addressData,
+  method,
   setIsModalOpen,
-}: TransferProps) => {
+}: PaymentProps) => {
   const placeholders = randomPlaceholder();
   const {
-    cardNumber,
-    setCardNumber,
+    number,
+    setNumber,
     expiryDate,
     setExpiryDate,
-    cvv,
-    setCvv,
+    cvc,
+    setCvc,
     cardName,
     setCardName,
     handleClose,
@@ -42,7 +43,7 @@ const CardPaymentModal = ({
     isConfirmModalOpen,
     setIsConfirmModalOpen,
     confirmPayment,
-  } = useCardPayForm({ addAmount, addressData, setIsModalOpen });
+  } = useCardPayForm({ addAmount, addressData, method, setIsModalOpen });
 
   return (
     <Modal isOpen={true} onClose={() => setIsModalOpen(false)}>
@@ -86,13 +87,13 @@ const CardPaymentModal = ({
                 type="text"
                 inputMode="numeric"
                 maxLength={4}
-                value={cardNumber[index]}
+                value={number[index]}
                 placeholder={text}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   const onlyNums = e.target.value.replace(/\D/g, '');
-                  const inputNum = [...cardNumber];
+                  const inputNum = [...number];
                   inputNum[index] = onlyNums.slice(0, 4);
-                  setCardNumber(inputNum);
+                  setNumber(inputNum);
                 }}
               />
             ))}
@@ -166,14 +167,14 @@ const CardPaymentModal = ({
                 type="number"
                 inputMode="numeric"
                 placeholder="3자리"
-                value={cvv}
+                value={cvc}
                 required
                 pattern="[0-9]*"
                 maxLength={3}
                 className="pr-8 appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   const onlyNums = e.target.value.replace(/\D/g, '');
-                  setCvv(onlyNums.slice(0, 3));
+                  setCvc(onlyNums.slice(0, 3));
                 }}
               />
               <IoCardOutline className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 mt-2" />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { coverSec } from '../utils/security';
-import { TransferProps } from '../types/modal.model';
+import { PaymentProps } from '../types/modal.model';
 import { useNavigate } from 'react-router-dom';
 // import { useGetQueryString } from './useGetQueryString';
 // import { Loading } from '@repo/ui/components';
@@ -10,11 +10,12 @@ import { useNavigate } from 'react-router-dom';
 export const useTransferForm = ({
   addAmount,
   addressData,
+  method,
   setIsModalOpen,
-}: TransferProps) => {
-  const [selectedBank, setSelectedBank] = useState('');
-  const [accountNumber, setAccountNumber] = useState('');
-  const [accountHolder, setAccountHolder] = useState('');
+}: PaymentProps) => {
+  const [bank, setBank] = useState<string>('');
+  const [number, setNumber] = useState<string>('');
+  const [owner, setOwner] = useState<string>('');
   const [birthDate, setBirthDate] = useState('');
   const [, setIsLoading] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
@@ -23,7 +24,7 @@ export const useTransferForm = ({
   // const url = useGetQueryString();
 
   const handleBankChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedBank(event.target.value);
+    setBank(event.target.value);
   };
 
   const handleClose = () => {
@@ -32,8 +33,8 @@ export const useTransferForm = ({
 
   const isFormValid =
     addressData.trim() !== '' &&
-    accountNumber.trim() !== '' &&
-    accountHolder.trim() !== '' &&
+    number.trim() !== '' &&
+    owner.trim() !== '' &&
     birthDate.trim() !== '';
 
   const handleTransfer = async () => {
@@ -47,13 +48,16 @@ export const useTransferForm = ({
   const confirmPayment = async () => {
     setIsLoading(true);
     try {
+      // TODO : 실제 API 주소 payment-methods
       const res = await axios.post('/payment/transfer', {
-        selectedBank,
-        accountNumber: coverSec(accountNumber),
-        accountHolder: coverSec(accountHolder),
-        birthDate: coverSec(birthDate),
+        method,
+        bank,
+        token: coverSec(addressData),
+        masked: coverSec(number),
+        extra: {
+          owner,
+        },
         amount: addAmount,
-        address: coverSec(addressData),
       });
 
       console.log('응답 데이터', res.data);
@@ -67,13 +71,13 @@ export const useTransferForm = ({
   };
 
   return {
-    selectedBank,
-    accountNumber,
-    accountHolder,
+    bank,
+    number,
+    owner,
+    setOwner,
     birthDate,
     handleBankChange,
-    setAccountNumber,
-    setAccountHolder,
+    setNumber,
     setBirthDate,
     isFormValid,
     handleClose,
@@ -87,11 +91,13 @@ export const useTransferForm = ({
 export const useCardPayForm = ({
   addAmount,
   addressData,
+  method,
   setIsModalOpen,
-}: TransferProps) => {
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
+}: PaymentProps) => {
+  const [bank, _] = useState<string>('KB');
+  const [number, setNumber] = useState(['', '', '', '']);
   const [expiryDate, setExpiryDate] = useState('');
-  const [cvv, setCvv] = useState('');
+  const [cvc, setCvc] = useState('');
   const [cardName, setCardName] = useState('');
   const [, setIsLoading] = useState(false);
   const nav = useNavigate();
@@ -105,12 +111,12 @@ export const useCardPayForm = ({
 
   const isFormValid =
     addressData.trim() !== '' &&
-    cardNumber.some((num) => num.trim() === '') === false &&
+    number.some((num) => num.trim() === '') === false &&
     expiryDate.trim() !== '' &&
-    cvv.trim() !== '' &&
+    cvc.trim() !== '' &&
     cardName.trim() !== '';
 
-  const fullCardNumber = cardNumber.join('');
+  const fullCardNumber = number.join('');
 
   const handleCardPay = async () => {
     if (!isFormValid) {
@@ -124,13 +130,18 @@ export const useCardPayForm = ({
   const confirmPayment = async () => {
     setIsLoading(true);
     try {
+      // TODO : 실제 API 주소 payment-methods
       const res = await axios.post('/payment/card', {
-        cardNumber: coverSec(fullCardNumber),
-        expiryDate: coverSec(expiryDate),
-        cvv: coverSec(cvv),
-        cardName: coverSec(cardName),
+        method,
+        bank,
+        token: coverSec(addressData),
+        masked: coverSec(fullCardNumber),
+        extra: {
+          expMonth: expiryDate.slice(0, 2),
+          expYear: expiryDate.slice(2),
+        },
+        // cvc: coverSec(cvc),
         amount: addAmount,
-        address: coverSec(addressData),
       });
 
       console.log('응답 데이터', res.data);
@@ -144,12 +155,12 @@ export const useCardPayForm = ({
     }
   };
   return {
-    cardNumber,
-    setCardNumber,
+    number,
+    setNumber,
     expiryDate,
     setExpiryDate,
-    cvv,
-    setCvv,
+    cvc,
+    setCvc,
     cardName,
     setCardName,
     isFormValid,

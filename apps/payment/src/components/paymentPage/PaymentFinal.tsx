@@ -18,7 +18,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   addAmount,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState<'transfer' | 'pay' | null>(null);
+  const [modalType, setModalType] = useState<'bank' | 'card' | null>(null);
   const [addressData, setAddressData] = useState('');
 
   const [checks, setChecks] = useState([false, false]);
@@ -30,10 +30,10 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   };
 
   const handleBtn = () => {
-    if (selectedPayment === 'transfer') {
-      setModalType('transfer');
-    } else if (selectedPayment === 'card') {
-      setModalType('pay');
+    if (selectedPayment === 'BANK') {
+      setModalType('bank');
+    } else if (selectedPayment === 'CARD') {
+      setModalType('card');
     }
     setIsModalOpen(true);
   };
@@ -42,9 +42,6 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
     setIsModalOpen(false);
     setModalType(null);
   };
-
-  console.log('값', addAmount);
-  console.log(typeof addAmount);
 
   return (
     <>
@@ -94,16 +91,18 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
         onClick={handleBtn}
       />
       {isModalOpen &&
-        (modalType === 'transfer' ? (
+        (modalType === 'bank' ? (
           <TransferModal
             addAmount={addAmount}
             addressData={addressData}
+            method="BANK"
             setIsModalOpen={handleCloseModal}
           />
         ) : (
           <CardPaymentModal
             addAmount={addAmount}
             addressData={addressData}
+            method="CARD"
             setIsModalOpen={handleCloseModal}
           />
         ))}

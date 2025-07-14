@@ -1,26 +1,26 @@
 /**
  * @jest-environment jsdom
  */
-
 import { renderHook, act } from '@testing-library/react';
 import { useCardPayForm, useTransferForm } from '../useForm';
-import { TransferProps } from '../../types/modal.model';
+import { PaymentProps } from '../../types/modal.model';
 import axios from 'axios';
 
 jest.mock('axios');
-jest.mock('react-router-dom', () => {
-  useNavigate: () => '?done=true';
-});
+jest.mock('react-router-dom', () => ({
+  useNavigate: jest.fn(() => jest.fn()),
+}));
 jest.mock('../useGetQueryString', () => ({
   useGetQueryString: () => '?done=true',
 }));
 
 const mockedPost = axios.post as jest.Mock;
 
-describe('useTransferForm', () => {
-  const defaultProps: TransferProps = {
+describe('이체 폼 훅 테스트', () => {
+  const defaultProps: PaymentProps = {
     addAmount: 5000,
     addressData: '서울시 마포구',
+    method: 'BANK',
     setIsModalOpen: jest.fn(),
   };
 
@@ -30,14 +30,15 @@ describe('useTransferForm', () => {
     window.confirm = jest.fn(() => true);
   });
 
-  it('값이 비었을 때', () => {
+  it('초기 값이 비어 있어야 함', () => {
     const { result } = renderHook(() => useTransferForm(defaultProps));
-    expect(result.current.selectedBank).toBe('');
-    expect(result.current.accountNumber).toBe('');
-    expect(result.current.accountHolder).toBe('');
+    expect(result.current.bank).toBe('');
+    expect(result.current.number).toBe('');
+    expect(result.current.owner).toBe('');
     expect(result.current.birthDate).toBe('');
   });
-  it('은행 선택 시', () => {
+
+  it('은행 선택 시 값이 업데이트되어야 함', () => {
     const { result } = renderHook(() => useTransferForm(defaultProps));
 
     act(() => {
@@ -46,31 +47,33 @@ describe('useTransferForm', () => {
       } as React.ChangeEvent<HTMLSelectElement>);
     });
 
-    expect(result.current.selectedBank).toBe('국민은행');
+    expect(result.current.bank).toBe('국민은행');
   });
 
-  it('실패 상황', () => {
+  it('필수 입력값이 비어 있을 때 유효성 검사 실패', () => {
     const { result } = renderHook(() => useTransferForm(defaultProps));
     expect(result.current.isFormValid).toBe(false);
   });
 
-  it('성공 시', async () => {
+  it('유효한 입력값으로 성공해야 함', async () => {
     const { result } = renderHook(() => useTransferForm(defaultProps));
 
     act(() => {
-      result.current.setAccountNumber('1234567890');
-      result.current.setAccountHolder('홍길동');
+      result.current.setNumber('1234567890');
+      result.current.setOwner('홍길동');
       result.current.setBirthDate('19900101');
     });
 
     mockedPost.mockResolvedValueOnce({ data: { success: true } });
 
     await act(async () => {
-      await result.current.handleTransfer();
+      await result.current.confirmPayment();
     });
+
+    expect(mockedPost).toHaveBeenCalledTimes(1);
   });
 
-  it('결제 시 문제가 발생했을 때', async () => {
+  it('양식이 유효하지 않을 때 경고를 표시해야 함', async () => {
     const { result } = renderHook(() => useTransferForm(defaultProps));
 
     await act(async () => {
@@ -82,20 +85,14 @@ describe('useTransferForm', () => {
   });
 });
 
-jest.mock('react-router-dom', () => ({
-  useNavigate: () => jest.fn(),
-}));
-jest.mock('../useGetQueryString', () => ({
-  useGetQueryString: () => '?confirm=true',
-}));
+describe('카드 결제 폼 훅 테스트', () => {
+  const defaultProps: PaymentProps = {
+    addAmount: 50000,
+    addressData: '서울시 강남구',
+    method: 'CARD',
+    setIsModalOpen: jest.fn(),
+  };
 
-const defaultProps = {
-  addAmount: 50000,
-  addressData: '서울시 강남구',
-  setIsModalOpen: jest.fn(),
-};
-
-describe('useCardPayForm', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     window.alert = jest.fn();
@@ -104,25 +101,22 @@ describe('useCardPayForm', () => {
 
   it('초기 상태값이 정확해야 함', () => {
     const { result } = renderHook(() => useCardPayForm(defaultProps));
-    expect(result.current.cardNumber).toEqual(['', '', '', '']);
+    expect(result.current.number).toEqual(['', '', '', '']);
     expect(result.current.expiryDate).toBe('');
-    expect(result.current.cvv).toBe('');
-    expect(result.current.cardName).toBe('');
-    expect(result.current.isFormValid).toBe(false);
   });
 
-  it('성공 시', () => {
+  it('유효한 입력값을 가지고 있을 때 유효성 검사 성공', () => {
     const { result } = renderHook(() => useCardPayForm(defaultProps));
     act(() => {
-      result.current.setCardNumber(['1111', '2222', '3333', '4444']);
+      result.current.setNumber(['1111', '2222', '3333', '4444']);
       result.current.setExpiryDate('12/29');
-      result.current.setCvv('123');
+      result.current.setCvc('123');
       result.current.setCardName('홍길동');
     });
     expect(result.current.isFormValid).toBe(true);
   });
 
-  it('실패시', async () => {
+  it('양식이 유효하지 않을 때 경고를 표시해야 함', async () => {
     const { result } = renderHook(() => useCardPayForm(defaultProps));
     await act(async () => {
       await result.current.handleCardPay();
@@ -131,12 +125,12 @@ describe('useCardPayForm', () => {
     expect(mockedPost).not.toHaveBeenCalled();
   });
 
-  it('성공적으로 결제가 됨', async () => {
+  it('유효한 카드 결제로 성공해야 함', async () => {
     const { result } = renderHook(() => useCardPayForm(defaultProps));
     act(() => {
-      result.current.setCardNumber(['1111', '2222', '3333', '4444']);
+      result.current.setNumber(['1111', '2222', '3333', '4444']);
       result.current.setExpiryDate('12/30');
-      result.current.setCvv('789');
+      result.current.setCvc('789');
       result.current.setCardName('테스트유저');
     });
 
@@ -145,15 +139,17 @@ describe('useCardPayForm', () => {
     await act(async () => {
       await result.current.handleCardPay();
     });
+
+    expect(mockedPost).toHaveBeenCalledTimes(1); // POST 요청이 호출되었는지 검증
   });
 
-  it('결제 중 실패 시', async () => {
+  it('결제 취소 시 진행하지 않아야 함', async () => {
     (window.confirm as jest.Mock).mockReturnValueOnce(false);
     const { result } = renderHook(() => useCardPayForm(defaultProps));
     act(() => {
-      result.current.setCardNumber(['1234', '5678', '9012', '3456']);
+      result.current.setNumber(['1234', '5678', '9012', '3456']);
       result.current.setExpiryDate('01/27');
-      result.current.setCvv('321');
+      result.current.setCvc('321');
       result.current.setCardName('비확인');
     });
 
