@@ -14,7 +14,7 @@ interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const InputText = ({ label, type = 'text', width, textSize, isError, ...props }: InputTextProps) => {
   return (
-    <Wrapper width={width}>
+    <Wrapper $width={width}>
       {label && <Title>{label}</Title>}
       <InputStyle type={type} $textSize={textSize} $isError={isError} {...props} />
     </Wrapper>
