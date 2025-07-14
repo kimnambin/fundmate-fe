@@ -34,30 +34,33 @@ export const DataOptionChoiceTable = ({ selected, setSelected }: DataOptionChoic
       </thead>
       <tbody>
         {
-          StatisticsOptionData.map((v) => (
-            <tr className="text-lg" key={v.name}>
-              <TableDataStyle><MediumFont>{v.menuName}</MediumFont></TableDataStyle>
-              <TableDataStyle>
-                <div className="grid grid-cols-9 gap-1">
-                  {
-                    v.options.map((item) => (
-                      <div key={item} className="flex flex-row items-center gap-3">
-                        <CustomRadio
-                          id={`${v.name}-${item}`}
-                          name={v.name}
-                          value={item}
-                          selected={`${v.name}-${selected[v.name as keyof OptionSelectionProps]}`}
-                          onChange={() => handleOptionChange(v.name as keyof OptionSelectionProps, item)} />
-                        <MediumFont>
-                          {item}
-                        </MediumFont>
-                      </div>
-                    ))
-                  }
-                </div>
-              </TableDataStyle>
-            </tr>
-          ))
+          StatisticsOptionData.map((v) => {
+            const menuName = v.name as keyof OptionSelectionProps;
+            return (
+              <tr className="text-lg" key={menuName}>
+                <TableDataStyle><MediumFont>{v.menuName}</MediumFont></TableDataStyle>
+                <TableDataStyle>
+                  <div className="grid grid-cols-9 gap-1">
+                    {
+                      v.options.map((item) => (
+                        <div key={item} className="flex flex-row items-center gap-3">
+                          <CustomRadio
+                            id={`${v.name}-${item}`}
+                            name={v.name}
+                            value={item}
+                            selected={`${v.name}-${selected[menuName]}`}
+                            onChange={() => handleOptionChange(menuName, item)} />
+                          <MediumFont>
+                            {item}
+                          </MediumFont>
+                        </div>
+                      ))
+                    }
+                  </div>
+                </TableDataStyle>
+              </tr>
+            )
+          })
         }
       </tbody>
     </table>

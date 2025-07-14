@@ -69,7 +69,7 @@ export const StatisticsHeader = () => {
           width='w-[200px]'
           type='button'
           onClick={handleNext}
-          isError={!dataErrorCondition && !optionErrorCondition}
+          isError={!dataErrorCondition || !optionErrorCondition}
         />
       </div>
     </>
