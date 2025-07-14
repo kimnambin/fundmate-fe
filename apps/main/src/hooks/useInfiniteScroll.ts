@@ -6,6 +6,11 @@ type useInfinitePostQueryProps = {
   url: string;
 }
 
+interface ApiResponse {
+  data: string[],
+  nextCursor: number | null;
+}
+
 export const useInfinitePostQuery = ({ category, url }: useInfinitePostQueryProps) => {
   return useInfiniteQuery({
     queryKey: [category],
@@ -13,7 +18,7 @@ export const useInfinitePostQuery = ({ category, url }: useInfinitePostQueryProp
       const res = await axiosInstance.get(`${url}?page=${pageParam}`);
       return res.data;
     },
-    getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+    getNextPageParam: (lastPage: ApiResponse) => lastPage.nextCursor ?? undefined,
     initialPageParam: 1
   })
 }

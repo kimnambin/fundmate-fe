@@ -1,11 +1,11 @@
 import { axiosInstance } from '@repo/ui/hooks'
 
-export const useGetPosts = (page: number) => {
+export const getPosts = async (page: number) => {
   try {
-    axiosInstance.get('/text')
-      .then(response => response.data)
-      .catch(error => console.log(error))
+    const response = await axiosInstance.get(`/text?page=${page}`);
+    return response.data;
   } catch (err) {
-    console.log(err)
+    console.error('Error fetching posts:', err);
+    throw err;
   }
 }

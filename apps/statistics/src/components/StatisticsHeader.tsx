@@ -2,7 +2,7 @@ import { MediumFont, SmallFont, Title } from '@repo/ui/styles';
 import { DataChoiceTable } from './DataChoiceTable';
 import { DataOptionChoiceTable } from './DataOptionChoice';
 import { MainButton } from '@repo/ui/components'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IoTriangle } from 'react-icons/io5';
 import { statisticsStore } from '../stores/StatisticsStore';
 import type { OptionSelectionProps } from '../types/Statistics.type';
@@ -22,20 +22,12 @@ export const StatisticsHeader = () => {
   const dataErrorCondition = !!dataSelection.length
   const optionErrorCondition = !!optionSelection.age && !!optionSelection.gender && !!optionSelection.region
 
-  useEffect(() => {
-    console.log(dataErrorCondition);
-    console.log(optionErrorCondition);
-    console.log(dataErrorCondition && optionErrorCondition);
-
-
-  }, [dataSelection, optionSelection])
-
   const setIsLoading = statisticsStore((state) => state.setIsLoading);
   const setIsSubmit = statisticsStore((state) => state.setIsSubmit);
 
   const handleNext = () => {
     setSubmitPressed(true);
-    if (!dataErrorCondition && !optionErrorCondition) return;
+    if (!dataErrorCondition || !optionErrorCondition) return;
     setIsLoading(true);
     setTimeout(() => {
       setIsSubmit(true);
