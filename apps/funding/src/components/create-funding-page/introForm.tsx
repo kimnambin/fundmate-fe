@@ -34,9 +34,7 @@ const IntroForm = ({
           value={intro}
           height="400px"
           placeholder={'프로젝트(펀딩)에 대한 설명을 작성해주세요!'}
-          onChange={(value) => {
-            setIntro(value);
-          }}
+          onChange={setIntro}
         />
       </div>
       {isSubmit && intro.trim().length === 0 && (

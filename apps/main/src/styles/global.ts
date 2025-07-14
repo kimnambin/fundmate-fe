@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import 'react-datepicker/dist/react-datepicker.css';
+import { CustomScrollbar, MarkdownStyles } from '@repo/ui/styles';
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -11,25 +12,10 @@ const GlobalStyle = createGlobalStyle`
         font-size: 16px;
     }
 
-    .wmde-markdown ul,
-    .wmde-markdown ol {
-    margin-left: 1.25rem;
-    padding-left: 1rem;
-    list-style-type: disc;
-    }
-    .wmde-markdown ol {
-    list-style-type: decimal;
-    }
+    ${MarkdownStyles}
 
-    .custom-scroll::-webkit-scrollbar {
-    width: 6px;
-    }
-    .custom-scroll::-webkit-scrollbar-track {
-    background: transparent;
-    }
-    .custom-scroll::-webkit-scrollbar-thumb {
-    background-color: #999;
-    border-radius: 6px;
+    .custom-scroll {
+        ${CustomScrollbar}
     }
 `;
 

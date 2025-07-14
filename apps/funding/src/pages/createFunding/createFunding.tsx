@@ -12,9 +12,9 @@ import ItemAddModal from '../../components/create-funding-page/itemAddModal';
 import InputTextArea from '../../components/input-text-area/inputTextArea';
 import { Label } from '../../components/input-text/inputText.styles';
 import PointButton from '../../components/point-button/pointButton';
-import { CompWrapper, CreateFundingStyle } from './createFunding.styles';
-import { filters } from '../../constants/categories';
 import { DEFAULT_ITEM } from '../../constants/items';
+import { useCategoryConfigs } from '../../hooks/useCategoryConfigs';
+import { CompWrapper, CreateFundingStyle } from './createFunding.styles';
 
 function CreateFunding() {
   const navigate = useNavigate();
@@ -26,9 +26,6 @@ function CreateFunding() {
   const [deliveryDate, setDeliveryDate] = useState('');
   const [intro, setIntro] = useState('');
   const [summary, setSummary] = useState('');
-  const [category, setCategory] = useState<string | null>(null);
-  const [gender, setGender] = useState<string | null>(null);
-  const [age, setAge] = useState<string | null>(null);
   const [addedItems, setAddedItems] = useState<(typeof DEFAULT_ITEM)[]>([
     DEFAULT_ITEM,
   ]);
@@ -43,6 +40,8 @@ function CreateFunding() {
   const [isAdd, setIsAdd] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  const { configs, category, gender, age } = useCategoryConfigs();
 
   const isInvalidDate = (startDate: string, endDate: string) => {
     if (!startDate || !endDate) return false;
@@ -157,15 +156,7 @@ function CreateFunding() {
 
         <CompWrapper>
           <Label>분류</Label>
-          <CategoryGroup
-            filters={filters}
-            category={category}
-            setCategory={setCategory}
-            gender={gender}
-            setGender={setGender}
-            age={age}
-            setAge={setAge}
-          />
+          <CategoryGroup configs={configs} />
           {isSubmit && (!category || !gender || !age) && (
             <WarningText>카테고리와 타켓층을 선택하세요.</WarningText>
           )}

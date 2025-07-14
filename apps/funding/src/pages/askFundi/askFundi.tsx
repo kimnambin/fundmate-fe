@@ -13,17 +13,16 @@ import { useNavigate } from 'react-router-dom';
 import HelpIcon from '../../assets/icons/ic_help.svg';
 import CategoryGroup from '../../components/category/categoryGroup';
 import InputTextArea from '../../components/input-text-area/inputTextArea';
-import { filters } from '../../constants/categories';
+import { useCategoryConfigs } from '../../hooks/useCategoryConfigs';
 import { Wrapper } from './askFundi.styles';
 
 const AskFundi = () => {
   const [isHelopOpen, setIsHelpOpen] = useState(false);
   const [content, setContent] = useState('');
-  const [category, setCategory] = useState<string | null>(null);
-  const [gender, setGender] = useState<string | null>(null);
-  const [age, setAge] = useState<string | null>(null);
   const [isSubmit, setIsSubmit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { configs, category, gender, age } = useCategoryConfigs();
 
   const isValid = category && gender && age && content.trim().length > 0;
 
@@ -110,15 +109,7 @@ const AskFundi = () => {
 
         <div className="flex flex-col gap-[20px]">
           <SubTitle>카테고리와 타겟층을 선택하세요</SubTitle>
-          <CategoryGroup
-            filters={filters}
-            category={category}
-            setCategory={setCategory}
-            gender={gender}
-            setGender={setGender}
-            age={age}
-            setAge={setAge}
-          />
+          <CategoryGroup configs={configs} />
           {isSubmit && (!category || !gender || !age) && (
             <WarningText>카테고리와 타켓층을 선택하세요.</WarningText>
           )}
