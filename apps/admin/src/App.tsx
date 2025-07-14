@@ -11,15 +11,15 @@ function LayoutWithSidebarAndHeader() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-     <div className="flex w-full px-10 gap-3">
-  <aside className="w-[520px] shrink-0">
-    <Sidebar />
-  </aside>
+      <div className="flex w-full px-10 gap-3">
+        <aside className="w-[520px] shrink-0">
+          <Sidebar />
+        </aside>
 
-  <main className="flex-grow">
-    <Outlet />
-  </main>
-</div>
+        <main className="flex-grow">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }
@@ -50,7 +50,7 @@ const App = () => (
       <Route element={<LayoutWithHeader />}>
         <Route path="/userprofile-settings" element={<div>유저 프로필 설정 페이지</div>} />
         <Route path="/withdrawal" element={<div>회원 탈퇴 페이지</div>} />
-        <Route path="/makerprofile" element={<MakerProfile />} />
+        <Route path="/makerprofile" element={<MakerProfile nickname='tempData' />} />
       </Route>
     </Routes>
   </BrowserRouter>

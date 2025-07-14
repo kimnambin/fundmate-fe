@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { VerticalCard } from '@repo/ui/components';
 import { SubTitle, MediumFont } from '@repo/ui/styles';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import CompletedFundingcard from './completedFundingcard';
 import FundingList from './fundingList';
 import { Title } from '@repo/ui/styles';

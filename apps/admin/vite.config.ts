@@ -17,7 +17,7 @@ export default defineConfig({
         './PaymentList': './src/pages/paymentManagement/paymentList.tsx',
         './PaymentManagement': './src/pages/paymentManagement/paymentManagement.tsx',
         './PaymentSummary': './src/pages/paymentManagement/paymentSummary.tsx',
-        './StatsPage': './src/pages/stats/StatsPage.tsx',
+        './StatsPage': './src/pages/stats/statsPage.tsx',
         './StatsHeader': './src/pages/stats/statsHeader.tsx',
         './StatsContent': './src/pages/stats/statsContent.tsx',
         './StatsLineChart': './src/pages/stats/StatsLineChart.tsx',

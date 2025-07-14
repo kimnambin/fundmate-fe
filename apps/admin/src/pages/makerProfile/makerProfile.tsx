@@ -112,7 +112,7 @@ const MakerProfile: React.FC<MakerProfileProps> = ({
               {displayProjects.slice(0, 5).map((project) => (
                 <VerticalCard
                   key={project.id}
-                  thumbnailUrl={project.thumbnailUrl}
+                  imageUrl={project.thumbnailUrl}
                   title={project.title}
                   description={project.description}
                   progress={project.progress}
