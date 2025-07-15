@@ -5,7 +5,7 @@ import type { DropdownProps } from "./Dropdown";
 import { useSearchParams } from "react-router-dom";
 import { SmallFont } from "../../styles";
 
-export const RecommendDropdown = ({ query }: DropdownProps) => {
+export const RecommendDropdown = ({ query, onClick }: DropdownProps) => {
   const [title, setTitle] = useState('정렬');
   const recommend = ['추천순', '인기순', '최신순', '마감임박순'];
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,10 +14,19 @@ export const RecommendDropdown = ({ query }: DropdownProps) => {
     setTitle('정렬')
   }, [query]);
 
-  const handleQueryChange = (i: string, v: string) => {
+  const handleQueryChange = (i: string) => {
     const currentQuery = new URLSearchParams(searchParams);
     currentQuery.set('recommend', i);
     setSearchParams(currentQuery);
+  }
+
+  const handleClick = (i: number, v: string) => {
+    if (query !== null) {
+      handleQueryChange(i.toString());
+    } else if (onClick) {
+      onClick(i);
+    }
+
     setTitle(v);
   }
 
@@ -41,8 +50,9 @@ export const RecommendDropdown = ({ query }: DropdownProps) => {
                 <div
                   role="button"
                   key={i}
+                  data-id={v}
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
-                  onClick={() => handleQueryChange(i.toString(), v)}
+                  onClick={() => handleClick(i, v)}
                 >
                   <SmallFont key={i}>
                     {v}

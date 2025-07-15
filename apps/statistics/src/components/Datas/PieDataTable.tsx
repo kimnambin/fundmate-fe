@@ -7,7 +7,7 @@ export const PieDataTable = () => {
   const result = tempData.reduce((acc, curr) => acc + curr.value, 0);
 
   return (
-    <table className="w-full p-4">
+    <table className="w-full p-4 h-full">
       <colgroup>
         <col />
         <col className="max-w-[300px] w-[300px]" />

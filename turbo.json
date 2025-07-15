@@ -23,6 +23,10 @@
     },
     "format:check": {
       "outputs": []
+    },
+    "preview": {
+      "cache": false,
+      "persistent": true
     }
   }
 }

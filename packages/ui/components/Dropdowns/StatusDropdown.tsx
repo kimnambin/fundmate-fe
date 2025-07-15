@@ -5,7 +5,7 @@ import type { DropdownProps } from './Dropdown';
 import { useSearchParams } from 'react-router-dom'
 import { SmallFont } from '../../styles';
 
-export const StatusDropdown = ({ query }: DropdownProps) => {
+export const StatusDropdown = ({ query, onClick }: DropdownProps) => {
   const status = ['전체 프로젝트', '진행 중인 프로젝트', '완료된 프로젝트'];
   const [title, setTitle] = useState('상태');
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,10 +14,19 @@ export const StatusDropdown = ({ query }: DropdownProps) => {
     setTitle('상태')
   }, [query])
 
-  const handleQueryChange = (i: string, v: string) => {
+  const handleQueryChange = (i: string) => {
     const currentQuery = new URLSearchParams(searchParams);
     currentQuery.set('status', i);
     setSearchParams(currentQuery);
+  }
+
+  const handleClick = (i: number, v: string) => {
+    if (query !== null) {
+      handleQueryChange(i.toString());
+    } else if (onClick) {
+      onClick(i);
+    }
+
     setTitle(v);
   }
 
@@ -41,8 +50,9 @@ export const StatusDropdown = ({ query }: DropdownProps) => {
                 <div
                   role='button'
                   key={i}
+                  data-id={v}
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
-                  onClick={() => handleQueryChange(i.toString(), v)}
+                  onClick={() => handleClick(i, v)}
                 >
                   <SmallFont key={i}>
                     {v}
