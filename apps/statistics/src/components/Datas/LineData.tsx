@@ -1,6 +1,20 @@
 import { ResponsiveLine } from "@nivo/line"
 
-export const LineData = ({ data }: { data: Array<{ id: string; data: Array<{ x: string | number; y: string | number; }> }> }) => {
+interface LineDataProps {
+  data: DataArrayProps[]
+}
+
+interface DataArrayProps {
+  id: string;
+  data: dataProps[];
+}
+
+interface dataProps {
+  x: string | number;
+  y: string | number;
+}
+
+export const LineData = ({ data }: LineDataProps) => {
   return (
     <ResponsiveLine
       data={data}

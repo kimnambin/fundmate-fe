@@ -23,7 +23,7 @@ const FundingList = () => {
 
         {/* 정렬 버튼 */}
         <div className="flex justify-start md:justify-end">
-          <Dropdown kind='recommand' usage='click' onClick={(e: any) => console.log(e)} />
+          <Dropdown kind='recommand' usage='click' onClick={(e) => console.log(e)} />
         </div>
       </div>
 
