@@ -1,5 +1,6 @@
-import { Dropdown, VerticalCard } from '@repo/ui/components';
+import { VerticalCard } from '@repo/ui/components';
 import { SubTitle, MediumFont } from '@repo/ui/styles';
+import { Dropdown } from '@repo/ui/components'
 
 const FundingList = () => {
   return (
@@ -22,7 +23,7 @@ const FundingList = () => {
 
         {/* 정렬 버튼 */}
         <div className="flex justify-start md:justify-end">
-          <Dropdown kind='recommand' usage='click' onClick={(e) => console.log(e)} />
+          <Dropdown kind='recommand' usage='click' onClick={(e: any) => console.log(e)} />
         </div>
       </div>
 

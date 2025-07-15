@@ -20,7 +20,6 @@ export default defineConfig({
         'react-dom',
         'react-router-dom',
         '@ramonak/react-progress-bar',
-        '@headlessui/react'
       ],
     }),
   ],
@@ -35,7 +34,7 @@ export default defineConfig({
       'react',
       'react-dom',
       'react-router-dom',
-      '@ramonak/react-progress-bar'
+      '@ramonak/react-progress-bar',
     ],
   },
 });

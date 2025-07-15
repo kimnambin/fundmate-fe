@@ -1,6 +1,6 @@
 import { ResponsiveLine } from "@nivo/line"
 
-export const LineData = ({ data }: any) => {
+export const LineData = ({ data }: { data: Array<{ id: string; data: Array<{ x: string | number; y: string | number; }> }> }) => {
   return (
     <ResponsiveLine
       data={data}

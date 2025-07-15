@@ -11,6 +11,7 @@ export { VerticalCard } from './Cards/VerticalCard';
 
 //buttons
 export { MainButton } from './Buttons/MainButton'
+export { FollowingButton } from './Buttons/FollowingButton'
 
 //inputs
 export { InputText } from './Inputs/Input'

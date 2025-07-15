@@ -15,6 +15,7 @@ import {
   SelectButton,
 } from '../styles/product-detail/prdouctstyle.style';
 import { useState } from 'react';
+import { FollowingButton } from '@repo/ui/components';
 
 const PDBox = () => {
   // TODO : 임시 데이터
@@ -52,10 +53,6 @@ const PDBox = () => {
   ];
 
   const [isFollowing, setIsFollowing] = useState(false);
-  const toggleFollow = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    setIsFollowing((prev: boolean) => !prev);
-  };
 
   const nav = useNavigate();
 
@@ -73,17 +70,7 @@ const PDBox = () => {
               <ProfileImg src={creatorData.imageUrl} alt="prifile" />
               <GiftItemTitle>{creatorData.name}</GiftItemTitle>
             </div>
-            <button
-              onClick={toggleFollow}
-              className={`px-4 py-2 rounded border gap-1
-          ${
-            isFollowing
-              ? 'bg-gray-100 text-gray-600 border-gray-300'
-              : 'bg-white text-[#5FBDFF] border-[#5FBDFF]'
-          }`}
-            >
-              {isFollowing ? '✔ 팔로잉' : '+ 팔로우'}
-            </button>
+            <FollowingButton following={isFollowing} setFollowing={setIsFollowing} />
           </ProfileCard>
           <ProfileDesc>{creatorData.description}</ProfileDesc>
         </ProfileInfo>

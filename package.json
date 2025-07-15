@@ -27,6 +27,8 @@
   "dependencies": {
     "concurrently": "^9.2.0",
     "tailwind-styled-components": "^2.2.0",
-    "msw": "^2.10.3"
+    "msw": "^2.10.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
