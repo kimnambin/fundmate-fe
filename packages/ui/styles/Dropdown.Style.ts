@@ -25,7 +25,7 @@ export const MenuButton = tw.button`
   hover:bg-gray-50
 `
 
-export const MenuItems = tw.div<{ $toggle: boolean }>`
+export const MenuItems = tw.div`
   absolute
   left-0
   z-[200]
@@ -38,8 +38,6 @@ export const MenuItems = tw.div<{ $toggle: boolean }>`
   ring-1
   ring-black/5
   focus:outline-none
-
-  ${({ $toggle }) => $toggle ? 'visible' : 'hidden'}
 `
 
 export const MenuItem = tw.button`

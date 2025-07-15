@@ -58,28 +58,31 @@ export const StatusDropdown = ({ query, onClick }: DropdownProps) => {
         </MenuButton>
       </div>
 
-      <MenuItems
-        aria-orientation="vertical"
-        aria-labelledby="menu-button"
-        tabIndex={-1}
-        $toggle={toggle}
-      >
-        <div className="py-1" role="none">
-          {
-            status.map((v, i) => (
-              <MenuItem
-                key={v}
-                data-id={v}
-                onClick={() => handleClick(i, v)}
-              >
-                <SmallFont key={i}>
-                  {v}
-                </SmallFont>
-              </MenuItem>
-            ))
-          }
-        </div>
-      </MenuItems>
+      {
+        toggle && (
+          <MenuItems
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
+            tabIndex={-1}
+          >
+            <div className="py-1" role="none">
+              {
+                status.map((v, i) => (
+                  <MenuItem
+                    key={v}
+                    data-id={v}
+                    onClick={() => handleClick(i, v)}
+                  >
+                    <SmallFont key={i}>
+                      {v}
+                    </SmallFont>
+                  </MenuItem>
+                ))
+              }
+            </div>
+          </MenuItems>
+        )
+      }
     </Menu>
   )
 }

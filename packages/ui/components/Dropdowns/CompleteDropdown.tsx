@@ -65,7 +65,6 @@ export const CompleteDropdown = ({ query, onClick }: DropdownProps) => {
             aria-orientation="vertical"
             aria-labelledby="menu-button"
             tabIndex={-1}
-            $toggle={toggle}
           >
             <div className="py-1" role="none">
               {
@@ -75,7 +74,7 @@ export const CompleteDropdown = ({ query, onClick }: DropdownProps) => {
                     data-id={v}
                     onClick={() => handleClick(i, v)}
                   >
-                    <SmallFont key={i}>
+                    <SmallFont>
                       {v}
                     </SmallFont>
                   </MenuItem>

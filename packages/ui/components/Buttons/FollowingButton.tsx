@@ -1,12 +1,14 @@
+import React from "react";
+
 type FollowingButtonProps = {
   following: boolean;
-  setFollowing: (following: boolean) => void;
+  setFollowing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const FollowingButton = ({ following, setFollowing }: FollowingButtonProps) => {
   const toggleFollow = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    setFollowing(!following);
+    setFollowing(prev => !prev);
   };
 
   return (
