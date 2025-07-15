@@ -39,7 +39,6 @@ const MyReviews = () => {
 
   return (
     <div className="w-full bg-white border border-gray-300 rounded-md px-6 py-4 flex flex-col justify-between gap-6 min-h-[160px]">
-      
       {/* 타이틀 */}
       <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <Title className="text-black">작성한 후기 목록</Title>
@@ -83,18 +82,18 @@ const MyReviews = () => {
 
       {/* 페이지네이션 */}
       <div className="flex justify-center items-center mt-[25px] gap-[10px]">
-  <button className="cursor-pointer">{'<<'}</button>
-  <button className="cursor-pointer">{'<'}</button>
-  <div className="flex gap-[15px] text-[23px]">
-    <span className="cursor-pointer text-black">1</span>
-    <span className="cursor-pointer text-[#7E7C7C]">2</span>
-    <span className="cursor-pointer text-[#7E7C7C]">3</span>
-    <span className="cursor-pointer text-[#7E7C7C]">4</span>
-    <span className="cursor-pointer text-[#7E7C7C]">5</span>
-  </div>
-  <button className="cursor-pointer">{'>'}</button>
-  <button className="cursor-pointer">{'>>'}</button>
-</div>
+        <button className="cursor-pointer">{'<<'}</button>
+        <button className="cursor-pointer">{'<'}</button>
+        <div className="flex gap-[15px] text-[23px]">
+          <span className="cursor-pointer text-black">1</span>
+          <span className="cursor-pointer text-[#7E7C7C]">2</span>
+          <span className="cursor-pointer text-[#7E7C7C]">3</span>
+          <span className="cursor-pointer text-[#7E7C7C]">4</span>
+          <span className="cursor-pointer text-[#7E7C7C]">5</span>
+        </div>
+        <button className="cursor-pointer">{'>'}</button>
+        <button className="cursor-pointer">{'>>'}</button>
+      </div>
     </div>
   );
 };
