@@ -3,6 +3,7 @@ export { Footer } from './Footer';
 export { Dropdown } from './Dropdowns/Dropdown';
 export { Loading } from './Loading';
 export { Modal } from './Modal';
+export { Sidebar } from './Sidebar'
 
 //cards
 export { HorizontalCard } from './Cards/HorizontalCard';
@@ -13,3 +14,6 @@ export { MainButton } from './Buttons/MainButton'
 
 //inputs
 export { InputText } from './Inputs/Input'
+
+//layouts
+export { UserPageLayout } from './Layouts/UserPageLayout'

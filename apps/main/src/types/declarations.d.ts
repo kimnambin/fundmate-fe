@@ -23,3 +23,16 @@ declare module 'mypage/LikedProjects';
 declare module 'mypage/Following';
 declare module 'mypage/SupporterProfile';
 declare module 'mypage/MyReviews';
+
+declare module 'admin/MakerProfile';
+declare module 'admin/StatsPage';
+declare module 'admin/FundingHistory';
+declare module 'admin/PaymentManagement';
+
+declare module 'shared/Components';
+declare module 'shared/Assets';
+declare module 'shared/Hooks';
+declare module 'shared/Mocks';
+declare module 'shared/Styles';
+declare module 'shared/Utils';
+

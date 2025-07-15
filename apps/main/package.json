@@ -13,6 +13,7 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
     "@hookform/resolvers": "^5.1.1",
     "@nivo/line": "^0.99.0",
     "@nivo/pie": "^0.99.0",

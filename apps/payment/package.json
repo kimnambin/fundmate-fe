@@ -18,13 +18,13 @@
     "@tailwindcss/postcss": "^4.1.11",
     "axios": "^1.10.0",
     "jest-localstorage-mock": "^2.4.26",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.3",
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "@babel/preset-env": "^7.28.0",
     "@babel/preset-typescript": "^7.27.1",
     "@eslint/js": "^9.25.0",

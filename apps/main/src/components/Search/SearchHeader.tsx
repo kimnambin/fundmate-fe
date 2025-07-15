@@ -19,9 +19,9 @@ export const SearchHeader = ({ isCategory, isSearch, queryValue }: SearchHeaderP
       }
       <div className="flex flex-row gap-3">
         {
-          isCategory || isSearch ? <Dropdown kind="status" /> : <></>
+          isCategory || isSearch ? <Dropdown kind="status" usage="query" /> : <></>
         }
-        <Dropdown kind="complete" />
+        <Dropdown kind="complete" usage="query" />
       </div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row">
@@ -29,7 +29,7 @@ export const SearchHeader = ({ isCategory, isSearch, queryValue }: SearchHeaderP
           <MediumFont>개의 오브젝트가 있습니다.</MediumFont>
         </div>
         {
-          isCategory || isSearch ? <Dropdown kind="recommand" /> : <></>
+          isCategory || isSearch ? <Dropdown kind="recommand" usage="query" /> : <></>
         }
       </div>
     </div>

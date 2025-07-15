@@ -28,41 +28,11 @@ export const tempData = [
     "label": "php",
     "value": 151,
     "color": "#5aa7d7" // 72%
-  },
-  {
-    "id": "stylus1",
-    "label": "stylus1",
-    "value": 270,
-    "color": "#3d96cd" // 67%
-  },
-  {
-    "id": "erlang1",
-    "label": "erlang1",
-    "value": 434,
-    "color": "#2184c3" // 62%
-  },
-  {
-    "id": "c1",
-    "label": "c1",
-    "value": 326,
-    "color": "#0572b9" // 57%
-  },
-  {
-    "id": "scala1",
-    "label": "scala1",
-    "value": 240,
-    "color": "#005fa1" // 52%
-  },
-  {
-    "id": "php1",
-    "label": "php1",
-    "value": 151,
-    "color": "#004d88" // 47%
   }
 ];
 
 export const tempYearData = () => {
-  const start = 2015;
+  const start = 2019;
   const end = 2024;
   const years: number[] = [];
 

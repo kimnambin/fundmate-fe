@@ -1,4 +1,5 @@
 import { Images } from "@repo/ui/assets";
+
 import googleIcon from "../../assets/icons/googleIcon.png";
 import naverIcon from '../../assets/icons/naverIcon.svg';
 import kakaoTalkIcon from '../../assets/icons/kakaotalkIcon.png';

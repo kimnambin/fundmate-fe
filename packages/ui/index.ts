@@ -12,6 +12,8 @@ export {
   MainButton,
   InputText,
   Modal,
+  UserPageLayout,
+  Sidebar
 } from './components';
 
 //assets

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Title, SubTitle, MediumFont } from '@repo/ui/styles';
 
 const CompletedFunding = () => {
