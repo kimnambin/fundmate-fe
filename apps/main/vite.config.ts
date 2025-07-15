@@ -37,4 +37,15 @@ export default defineConfig({
       '@ramonak/react-progress-bar',
     ],
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://3.36.140.33:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false,
+        ws: true,
+      },
+    }
+  }
 });
