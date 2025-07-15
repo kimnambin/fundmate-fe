@@ -18,7 +18,7 @@ const PaySelect: React.FC<PaySelectProps> = ({ setSelectedPayment }) => {
           <input
             type="radio"
             name="payment"
-            value="BANK"
+            value="vBANK"
             onChange={handleChange}
             className="text-main"
           />

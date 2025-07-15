@@ -1,28 +1,50 @@
 import { http, HttpResponse } from 'msw';
 
-interface RequestProps {
-  method: 'CARD' | 'BANK';
-  bank: string;
+interface BankPayload {
+  // userId: string;
+  method: string;
+  code: string;
   token: string;
-  masked: string;
-  extra:
-    | {
-        expMonth: string;
-        expYear: string;
-      }
-    | {
-        owner: string;
-      };
+  displayInfo: string;
+  extra: {
+    type: 'vbank';
+    owner: string;
+  };
+}
+
+interface CardPayload {
+  // userId: string;
+  method: string;
+  code: string;
+  token: string;
+  displayInfo: string;
+  extra: {
+    type: 'card';
+    expMonth: string;
+    expYear: string;
+  };
+}
+
+interface PostPaymentRequest {
+  paymentInfoId: number;
+  rewardId: number;
+  projectId: number;
+  amount: number;
+  totalAmount: number;
+  scheduleDate: string;
+  address: string;
+  addressNumber: number;
+  addressInfo: string;
 }
 
 export const handlers = [
-  http.post(`/payment/card`, async ({ request }) => {
+  http.post(`/payments`, async ({ request }) => {
     const data = await request.json();
-    const { method, bank, token, masked, extra } = data as RequestProps;
+    const { method, code, token, displayInfo, extra } = data as CardPayload;
 
     console.log('입력한 내용들', data);
 
-    if (!masked || !bank || !method || !token || !extra) {
+    if (!displayInfo || !code || !method || !token || !extra) {
       return HttpResponse.json(
         {
           message: '모든 입력창이 입력되지 않았습니다.',
@@ -31,16 +53,19 @@ export const handlers = [
       );
     }
 
-    return HttpResponse.json({ message: '결제 완료', masked }, { status: 201 });
+    return HttpResponse.json(
+      { message: '결제 완료', displayInfo },
+      { status: 201 },
+    );
   }),
 
-  http.post('/payment/transfer', async ({ request }) => {
+  http.post('/payments', async ({ request }) => {
     const data = await request.json();
-    const { method, bank, token, masked, extra } = data as RequestProps;
+    const { method, code, token, displayInfo, extra } = data as BankPayload;
 
     console.log('입력한 내용들', data);
 
-    if (!masked || !bank || !method || !token || !extra) {
+    if (!displayInfo || !code || !method || !token || !extra) {
       return HttpResponse.json(
         {
           message: '모든 입력창이 입력되지 않았습니다.',
@@ -53,5 +78,31 @@ export const handlers = [
       { message: `${extra}님 결좌이체 완료` },
       { status: 201 },
     );
+  }),
+
+  http.post('/reservations', async ({ request }) => {
+    const data = await request.json();
+    const {
+      paymentInfoId,
+      rewardId,
+      projectId,
+      amount,
+      totalAmount,
+      scheduleDate,
+      address,
+      addressNumber,
+      addressInfo,
+    } = data as PostPaymentRequest;
+
+    console.log('입력한 내용들', data);
+
+    return HttpResponse.json(
+      { message: `${totalAmount}원 결좌이체 완료` },
+      { status: 201 },
+    );
+  }),
+
+  http.get(`/payments/`, async ({ request }) => {
+    return HttpResponse.json();
   }),
 ];

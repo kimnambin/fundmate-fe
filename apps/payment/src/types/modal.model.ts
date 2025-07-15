@@ -1,7 +1,7 @@
 export interface PaymentProps {
-  addAmount: number;
   addressData: string;
-  method: 'CARD' | 'BANK';
+  method: 'CARD' | 'vBANK';
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setShowLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+  setSavedPaymentId: (id: number) => void;
 }

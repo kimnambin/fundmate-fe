@@ -9,18 +9,18 @@ import {
   Input,
   BottomWrapper,
 } from '../styles/modal/tansfetModal.style';
-import { useTransferForm } from '../../hooks/useForm';
+import { useTransferForm } from '../../hooks/usePaymentSave';
 import { PaymentProps } from '../../types/modal.model';
 import PayConfirmModal from './confirm/PayConfirmModal';
 
 export default function TransferModal({
-  addAmount,
   addressData,
   method,
   setIsModalOpen,
   setShowLoading,
+  setSavedPaymentId,
 }: PaymentProps) {
-  const bankList = ['KB국민은행', '농협', '신한', 'IBK', '토스'];
+  const bankList = ['KB', 'NH', 'SH', 'IBK', 'TOSS'];
 
   const {
     bank,
@@ -38,18 +38,17 @@ export default function TransferModal({
     setIsConfirmModalOpen,
     confirmPayment,
   } = useTransferForm({
-    addAmount,
     addressData,
     method,
     setIsModalOpen,
     setShowLoading,
+    setSavedPaymentId,
   });
 
   return (
     <Modal isOpen={true} onClose={() => setIsModalOpen(false)}>
       {isConfirmModalOpen ? (
         <PayConfirmModal
-          addAmount={addAmount}
           setIsConfirmModalOpen={setIsConfirmModalOpen}
           confirmPayment={confirmPayment}
           title={'transfer'}

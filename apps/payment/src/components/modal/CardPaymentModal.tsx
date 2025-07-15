@@ -16,17 +16,17 @@ import {
 import { monthList, yearList } from '../../utils/date';
 import { BankBtn } from '../styles/modal/tansfetModal.style';
 import { FlexRowsm } from '../styles/layout.style';
-import { useCardPayForm } from '../../hooks/useForm';
+import { useCardPayForm } from '../../hooks/usePaymentSave';
 import { PaymentProps } from '../../types/modal.model';
 import { MainButton, Modal } from '@repo/ui/components';
 import PayConfirmModal from './confirm/PayConfirmModal';
 
 const CardPaymentModal = ({
-  addAmount,
   addressData,
   method,
   setIsModalOpen,
   setShowLoading,
+  setSavedPaymentId,
 }: PaymentProps) => {
   const placeholders = randomPlaceholder();
   const {
@@ -45,18 +45,17 @@ const CardPaymentModal = ({
     setIsConfirmModalOpen,
     confirmPayment,
   } = useCardPayForm({
-    addAmount,
     addressData,
     method,
     setIsModalOpen,
     setShowLoading,
+    setSavedPaymentId,
   });
 
   return (
     <Modal isOpen={true} onClose={() => setIsModalOpen(false)}>
       {isConfirmModalOpen ? (
         <PayConfirmModal
-          addAmount={addAmount}
           setIsConfirmModalOpen={setIsConfirmModalOpen}
           confirmPayment={confirmPayment}
           title={'card'}

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { coverSec } from '../utils/security';
 import { PaymentProps } from '../types/modal.model';
-import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
+import { bankPaymentSave, CardPaymentSave } from '../api/payment';
 // import { useGetQueryString } from './useGetQueryString';
 
 export const useTransferForm = ({
-  addAmount,
   addressData,
   method,
   setIsModalOpen,
   setShowLoading,
+  setSavedPaymentId,
 }: PaymentProps) => {
   const [bank, setBank] = useState<string>('');
   const [number, setNumber] = useState<string>('');
@@ -19,7 +19,6 @@ export const useTransferForm = ({
   const [birthDate, setBirthDate] = useState('');
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
-  const nav = useNavigate();
   // const url = useGetQueryString();
 
   const handleBankChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -46,26 +45,32 @@ export const useTransferForm = ({
 
   const bankForm = useMutation({
     mutationFn: () =>
-      axios.post('/payment/transfer', {
+      bankPaymentSave({
+        // userId,
         method,
-        bank,
+        code: bank,
         token: coverSec(addressData),
-        masked: coverSec(number),
+        displayInfo: coverSec(number),
         extra: {
+          type: 'vbank',
           owner,
         },
-        amount: addAmount,
       }),
     onSuccess: (res) => {
       console.log('응답 데이터', res.data);
+      const insertedId = res.data?.insertedId;
 
-      setTimeout(() => {
-        nav('/payment/completed');
-      }, 2000);
+      if (insertedId) {
+        setSavedPaymentId(insertedId);
+      }
+
+      setShowLoading?.(false);
     },
     onError: (err: AxiosError) => {
       console.log(err);
       alert(`입력한 내용을 다시 한번 확인해주세요`);
+      setShowLoading?.(false);
+      setIsConfirmModalOpen(false);
     },
   });
 
@@ -95,11 +100,11 @@ export const useTransferForm = ({
 };
 
 export const useCardPayForm = ({
-  addAmount,
   addressData,
   method,
   setIsModalOpen,
   setShowLoading,
+  setSavedPaymentId,
 }: PaymentProps) => {
   const [bank] = useState<string>('KB');
   const [number, setNumber] = useState(['', '', '', '']);
@@ -107,8 +112,6 @@ export const useCardPayForm = ({
   const [cvc, setCvc] = useState('');
   const [cardName, setCardName] = useState('');
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-
-  const nav = useNavigate();
 
   const fullCardNumber = number.join('');
 
@@ -133,28 +136,36 @@ export const useCardPayForm = ({
 
   const cardPaymentForm = useMutation({
     mutationFn: () =>
-      axios.post('/payment/card', {
+      CardPaymentSave({
+        // userid,
         method,
-        bank,
+        code: bank,
         token: coverSec(addressData),
-        masked: coverSec(fullCardNumber),
+        displayInfo: coverSec(fullCardNumber),
         extra: {
+          type: 'card',
           expMonth: expiryDate.slice(0, 2),
           expYear: expiryDate.slice(2),
         },
-        amount: addAmount,
       }),
     onSuccess: (res) => {
       console.log('응답 데이터', res.data);
-      setShowLoading?.(true);
-      setTimeout(() => {
-        nav('/payment/completed');
-      }, 2000);
+      alert('결제수단이 등록되었습니다.');
+
+      const insertedId = res.data?.insertedId;
+
+      if (insertedId) {
+        setSavedPaymentId(insertedId);
+      }
+
+      setShowLoading?.(false);
     },
 
     onError: (e: AxiosError) => {
       console.log(e);
       alert('입력한 내용을 다시 한번 확인해주세요');
+      setShowLoading?.(false);
+      setIsConfirmModalOpen(false);
     },
     onSettled: () => {
       setIsConfirmModalOpen(false);

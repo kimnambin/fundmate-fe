@@ -8,6 +8,9 @@ import Address from './Address';
 import { formatPrice } from '@repo/ui/utils';
 import { Loading, MainButton } from '@repo/ui/components';
 import { ModalContainer } from '../styles/modal/modal.style';
+import PaymentModal from '../modal/PaymentModal';
+import { usePaymentForm } from '../../hooks/usePayment';
+import { useCheckPayment } from '../../hooks/useCheckPayment';
 
 interface PaymentFinalProps {
   selectedPayment: string;
@@ -19,10 +22,22 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   addAmount,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState<string | null>('');
+  const [modalType, setModalType] = useState<string | null>(null);
   const [addressData, setAddressData] = useState('');
   const [checks, setChecks] = useState([false, false]);
   const [showLoading, setShowLoading] = useState(false);
+  const [savedPaymentId, setSavedPaymentId] = useState<number | null>(null);
+
+  const { data: has, refetch: checkPayment } = useCheckPayment(12, {
+    enabled: false,
+  });
+
+  const { reservePayment } = usePaymentForm({
+    addressData,
+    addAmount,
+    setShowLoading,
+    setIsModalOpen,
+  });
 
   const handleCheck = (index: number) => {
     const newChecks = [...checks];
@@ -30,19 +45,25 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
     setChecks(newChecks);
   };
 
-  const handleBtn = () => {
-    if (selectedPayment === 'BANK') {
-      setModalType('BANK');
+  const handleBtn = async () => {
+    if (selectedPayment === 'vBANK') {
+      setModalType('vBANK');
     } else if (selectedPayment === 'CARD') {
       setModalType('CARD');
     }
+
     setIsModalOpen(true);
+    await checkPayment();
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setModalType(null);
+    setSavedPaymentId(null);
   };
+
+  const shouldShowPaymentModal =
+    isModalOpen && (has || savedPaymentId !== null);
 
   return (
     <>
@@ -53,6 +74,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
       )}
 
       {selectedPayment && <Address setAddressData={setAddressData} />}
+
       <BoxRow className="justify-between p-5 my-4 sm:my-7">
         <LightColor className="bg-none">최종 후원 금액</LightColor>
         <BoldText>{formatPrice(String(addAmount))}원</BoldText>
@@ -62,12 +84,12 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
           </span>
         )}
       </BoxRow>
+
       <BoxCol className="items-start border-2 border-dashed border-[#9747FF]">
         <Radio className="mt-3">
           <input
             type="checkbox"
             value="check1"
-            className="text-main"
             checked={checks[0]}
             onChange={() => handleCheck(0)}
           />
@@ -77,7 +99,6 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
           <input
             type="checkbox"
             value="check2"
-            className="text-main"
             checked={checks[1]}
             onChange={() => handleCheck(1)}
           />
@@ -89,33 +110,53 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
           </FlexColsm>
         </Radio>
       </BoxCol>
+
       <MainButton
         label="후원하기"
-        className={`ml-0 mt-4 w-full px-6 py-3 ${addAmount < 1000 || !addressData || modalType || !checks[0] || !checks[1] ? 'bg-gray-400 cursor-not-allowed' : ''} hover:opacity-100`}
+        className={`ml-0 mt-4 w-full px-6 py-3 ${
+          addAmount < 1000 ||
+          !addressData ||
+          modalType ||
+          !checks[0] ||
+          !checks[1]
+            ? 'bg-gray-400 cursor-not-allowed'
+            : ''
+        } hover:opacity-100`}
         disabled={addAmount < 1000 || !addressData || !checks[0] || !checks[1]}
         textSize={'text-base'}
         textWeight={'font-bold'}
         onClick={handleBtn}
       />
 
-      {isModalOpen &&
-        (modalType === 'BANK' ? (
+      {shouldShowPaymentModal ? (
+        <PaymentModal
+          addressData={addressData}
+          addAmount={addAmount}
+          method={modalType === 'CARD' ? 'CARD' : 'vBANK'}
+          onConfirmPayment={() => reservePayment(savedPaymentId ?? 12)}
+          setIsModalOpen={handleCloseModal}
+          setShowLoading={setShowLoading}
+        />
+      ) : (
+        isModalOpen &&
+        (modalType === 'vBANK' ? (
           <TransferModal
-            addAmount={addAmount}
             addressData={addressData}
-            method="BANK"
+            method="vBANK"
             setIsModalOpen={handleCloseModal}
             setShowLoading={setShowLoading}
+            setSavedPaymentId={setSavedPaymentId} // ✅ 등록 후 전환 트리거
           />
         ) : (
           <CardPaymentModal
-            addAmount={addAmount}
             addressData={addressData}
             method="CARD"
             setIsModalOpen={handleCloseModal}
             setShowLoading={setShowLoading}
+            setSavedPaymentId={setSavedPaymentId} // ✅ 등록 후 전환 트리거
           />
-        ))}
+        ))
+      )}
     </>
   );
 };
