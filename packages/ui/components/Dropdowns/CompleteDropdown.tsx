@@ -16,7 +16,7 @@ export const CompleteDropdown = ({ query, onClick }: DropdownProps) => {
 
   const handleQueryChange = (i: string) => {
     const currentQuery = new URLSearchParams(searchParams);
-    currentQuery.set('status', i);
+    currentQuery.set('complete', i);
     setSearchParams(currentQuery);
   }
 

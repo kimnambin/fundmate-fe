@@ -18,11 +18,11 @@
     "@ramonak/react-progress-bar": "^5.4.0",
     "axios": "^1.10.0",
     "classnames": "^2.5.1",
-    "lucide-react": "^0.525.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "lucide-react": "^0.525.0"
   },
   "devDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "@eslint/js": "^9.25.0",
     "@tailwindcss/container-queries": "^0.1.1",
     "@types/react": "^19.1.2",

@@ -17,16 +17,27 @@ export default defineConfig({
         './PaymentSummary': './src/pages/paymentManagement/paymentSummary.tsx',
         './StatsPage': './src/pages/stats/statsPage.tsx',
       },
-      shared: ['react', 'react-dom', 'react-router-dom', '@ramonak/react-progress-bar'],
+      shared: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        '@ramonak/react-progress-bar',
+        '@headlessui/react'
+      ],
     }),
   ],
   build: {
     modulePreload: false,
     target: 'esnext',
     minify: false,
-    cssCodeSplit: false,
   },
   resolve: {
-    dedupe: ['react', 'react-dom', 'react-router-dom'],
+    dedupe: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      '@ramonak/react-progress-bar'
+    ],
+
   },
 });

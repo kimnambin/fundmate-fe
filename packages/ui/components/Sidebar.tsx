@@ -1,9 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import userImg from "../assets/images/user.png";
 import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 import { MainButton } from "@repo/ui/components";
 
 export const Sidebar = () => {
+  const navigate = useNavigate()
+
   const supporterMenu = [
     { label: "후원한 프로젝트", path: "/mypage/projects/supported" },
     { label: "찜한 프로젝트", path: "/mypage/projects/liked" },
@@ -24,7 +26,7 @@ export const Sidebar = () => {
       <div className="flex flex-col items-center gap-[20px] w-full">
         <div
           className="w-[120px] h-[120px] rounded-full overflow-hidden border border-gray-300 cursor-pointer"
-          onClick={() => (window.location.href = "/mypage")}
+          onClick={() => navigate("/mypage")}
         >
           <img src={userImg} alt="avatar" className="w-full h-full object-cover" />
         </div>
@@ -36,7 +38,7 @@ export const Sidebar = () => {
         <MainButton
           label="내 정보 설정"
           width="w-full"
-          onClick={() => (window.location.href = "/user/settings")}
+          onClick={() => navigate("/user/settings")}
         />
       </div>
 

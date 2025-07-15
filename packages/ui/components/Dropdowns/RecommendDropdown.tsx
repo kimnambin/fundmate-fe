@@ -16,7 +16,7 @@ export const RecommendDropdown = ({ query, onClick }: DropdownProps) => {
 
   const handleQueryChange = (i: string) => {
     const currentQuery = new URLSearchParams(searchParams);
-    currentQuery.set('status', i);
+    currentQuery.set('recommend', i);
     setSearchParams(currentQuery);
   }
 
