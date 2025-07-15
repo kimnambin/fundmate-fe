@@ -11,9 +11,9 @@ const App = () => (
     <Header />
     <Routes>
       <Route element={<UserPageLayout />}>
-        <Route path="/fundinghistory" element={<FundingHistory />} />
-        <Route path="/paymentmanagement" element={<PaymentManagement />} />
-        <Route path="/stats" element={<StatsPage />} />
+        <Route path="/mypage/history" element={<FundingHistory />} />
+        <Route path="/mypage/paymentproceed" element={<PaymentManagement />} />
+        <Route path="/mypage/sellstats" element={<StatsPage />} />
       </Route>
 
       <Route element={<Layout />}>

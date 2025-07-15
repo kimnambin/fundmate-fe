@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import ReviewListItem from './ReviewListItem';
-import { MediumFont, Title } from '@repo/ui/styles';
+import { Title, MediumFont } from '@repo/ui/styles';
 
 const MyReviews = () => {
   const navigate = useNavigate();
@@ -9,7 +8,7 @@ const MyReviews = () => {
     {
       id: 1,
       productName: '제로웨이스트 텀블러',
-      review: '깔끔하고 가볍고 매일 쓰기 좋아요.',
+      review: '깔끔하고 가볍고 매일 쓰기 좋아요',
       imageUrl: 'https://picsum.photos/300/300',
     },
     {
@@ -39,52 +38,63 @@ const MyReviews = () => {
   ];
 
   return (
-    <div className="flex flex-col items-start w-full">
-      <Title>작성한 후기 목록</Title>
-      <div className='flex flex-col gap-5 w-full'>
-        <div className="grid grid-cols-[200px_1fr_1fr] w-full">
-          <div></div>
-          <div className="flex justify-start items-center">
-            <MediumFont>
-              상품명
-            </MediumFont>
-          </div>
-          <div className="flex justify-start items-center">
-            <MediumFont>
-              후기
-            </MediumFont>
-          </div>
-        </div>
+    <div className="w-full bg-white border border-gray-300 rounded-md px-6 py-4 flex flex-col justify-between gap-6 min-h-[160px]">
+      
+      {/* 타이틀 */}
+      <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <Title className="text-black">작성한 후기 목록</Title>
+      </div>
 
-        <div className="flex flex-col items-start gap-4 w-full">
-          {reviews.map((item) => (
-            <ReviewListItem
-              key={item.id}
-              productName={item.productName}
-              review={item.review}
-              imageUrl={item.imageUrl}
-              onClick={() => navigate(`/product/${item.id}`)}
-            />
-          ))}
-        </div>
+      {/* 테이블 헤더 */}
+      <div className="w-full flex px-2 py-3 border-b border-gray-300 text-center text-base font-medium text-black">
+        <div className="basis-3/6">상품</div>
+        <div className="basis-3/6">후기</div>
+      </div>
+
+      {/* 후기 리스트 */}
+      <div className="w-full flex flex-col divide-y divide-gray-200">
+        {reviews.map((item) => (
+          <div
+            key={item.id}
+            onClick={() => navigate(`/product/${item.id}`)}
+            className="flex items-center px-2 py-4 hover:bg-gray-50 transition cursor-pointer"
+          >
+            {/* 상품 */}
+            <div className="flex items-center gap-6 basis-5/6">
+              <img
+                src={item.imageUrl}
+                alt={item.productName}
+                className="w-[70px] h-[70px] rounded object-cover"
+              />
+              <MediumFont className="text-sm sm:text-base text-black">
+                {item.productName}
+              </MediumFont>
+            </div>
+
+            {/* 후기 */}
+            <div className="flex items-center basis-3/6 px-4">
+              <MediumFont className="text-sm sm:text-base text-black">
+                {item.review}
+              </MediumFont>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* 페이지네이션 */}
-      <div className='flex w-full justify-center'>
-        <div className="flex justify-center items-center mt-[25px] gap-[10px]">
-          <button>{'<<'}</button>
-          <button>{'<'}</button>
-          <div className="flex gap-[15px] text-[23px]">
-            <span className="text-black">1</span>
-            <span className="text-[#7E7C7C]">2</span>
-            <span className="text-[#7E7C7C]">3</span>
-            <span className="text-[#7E7C7C]">4</span>
-            <span className="text-[#7E7C7C]">5</span>
-          </div>
-          <button>{'>'}</button>
-          <button>{'>>'}</button>
-        </div>
-      </div>
+      <div className="flex justify-center items-center mt-[25px] gap-[10px]">
+  <button className="cursor-pointer">{'<<'}</button>
+  <button className="cursor-pointer">{'<'}</button>
+  <div className="flex gap-[15px] text-[23px]">
+    <span className="cursor-pointer text-black">1</span>
+    <span className="cursor-pointer text-[#7E7C7C]">2</span>
+    <span className="cursor-pointer text-[#7E7C7C]">3</span>
+    <span className="cursor-pointer text-[#7E7C7C]">4</span>
+    <span className="cursor-pointer text-[#7E7C7C]">5</span>
+  </div>
+  <button className="cursor-pointer">{'>'}</button>
+  <button className="cursor-pointer">{'>>'}</button>
+</div>
     </div>
   );
 };
