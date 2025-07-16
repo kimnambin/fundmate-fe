@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { FundiMainImage } from "@repo/ui/assets";
 import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 import { InputText } from "@repo/ui/components";
@@ -9,26 +10,38 @@ const Withdrawal = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleWithdrawal = () => {
+  const handleWithdrawal = async () => {
     const confirmDelete = window.confirm("⚠️ 정말 회원 탈퇴하시겠습니까?");
-    if (confirmDelete) {
-      console.log("회원 탈퇴 진행");
+    if (!confirmDelete) return;
+
+    console.log("회원 탈퇴 진행");
+
+    try {
+      const res = await axios.delete("/api/users/account", {
+        withCredentials: true,
+      });
+
+      alert(res.data.message);
+      
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+
+      navigate("/login");
+    } catch (err: any) {
+      console.error("회원 탈퇴 실패:", err);
+      alert(err?.response?.data?.message || "회원 탈퇴 중 오류가 발생했습니다.");
     }
   };
 
   return (
     <div className="flex flex-col justify-center items-center flex-grow px-4">
-      {/* 컨텐츠 박스 */}
       <div className="flex flex-col justify-center items-center w-[90%] max-w-[500px] p-8 gap-8 mb-[50px]">
-
-        {/* 로고 */}
         <img
           src={FundiMainImage}
           alt="fundmate"
           className="w-[240px] h-[65px] mb-[10px]"
         />
 
-        {/* 내용 */}
         <div className="flex flex-col items-start w-full gap-5">
           <Title>회원 탈퇴</Title>
 

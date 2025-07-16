@@ -1,7 +1,8 @@
-import { useState, useRef, type ChangeEvent } from "react";
+import { useEffect, useState, useRef, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { MediumFont, Title } from "@repo/ui/styles";
 import { InputText, MainButton } from "@repo/ui/components";
+import axios from "axios"; // ✅ axios 직접 사용
 
 const categories = [
   "예술", "의류", "디자인", "테크/가전",
@@ -24,6 +25,32 @@ const UserProfileSetting = () => {
 
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // ✅ 유저 정보 초기 세팅
+  useEffect(() => {
+    const loadUserProfile = async () => {
+      try {
+        const res = await axios.get("/api/users/profile", {
+          params: { project_id: "1" }, // ✅ 필수 쿼리로 에러 방지
+          withCredentials: true,
+        });
+
+        const data = res.data;
+
+        setNickname(data.nickname || "");
+        setGender(data.gender || "");
+        setAge(data.ageId ? `${data.ageId}대` : "");
+        setEmail(data.email || "");
+        setIntro(data.contents || "");
+        setSelectedCategory(data.categoryName || null);
+        setProfileImage(data.imageUrl || null);
+      } catch (err) {
+        console.error("유저 정보 불러오기 실패", err);
+      }
+    };
+
+    loadUserProfile();
+  }, []);
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(prev => (prev === category ? null : category));
@@ -88,22 +115,16 @@ const UserProfileSetting = () => {
 
           <div className="flex gap-6 text-lg text-gray-500 underline cursor-pointer">
             <button type="button" onClick={handleClickChange}>
-              <MediumFont>
-                바꾸기
-              </MediumFont>
+              <MediumFont>바꾸기</MediumFont>
             </button>
             <button type="button" onClick={() => setProfileImage(null)}>
-              <MediumFont>
-                삭제
-              </MediumFont>
+              <MediumFont>삭제</MediumFont>
             </button>
           </div>
         </div>
 
         {/* 입력 폼 */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full max-w-[600px]">
-
-          {/* 닉네임 */}
           <div className="flex flex-col gap-3">
             <label className="text-base font-medium">닉네임</label>
             <InputText
@@ -119,28 +140,22 @@ const UserProfileSetting = () => {
             <div className="flex flex-col flex-1">
               <label className="text-base font-medium">성별</label>
               <div className="flex gap-4 mt-2">
-                <label className="flex items-center gap-3 text-base cursor-pointer py-2 px-3 rounded-md hover:bg-gray-100 transition">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="여자"
-                    checked={gender === "여자"}
-                    onChange={(e) => setGender(e.target.value)}
-                    className="w-5 h-5"
-                  />
-                  여자
-                </label>
-                <label className="flex items-center gap-3 text-base cursor-pointer py-2 px-3 rounded-md hover:bg-gray-100 transition">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="남자"
-                    checked={gender === "남자"}
-                    onChange={(e) => setGender(e.target.value)}
-                    className="w-5 h-5"
-                  />
-                  남자
-                </label>
+                {["여자", "남자"].map((g) => (
+                  <label
+                    key={g}
+                    className="flex items-center gap-3 text-base cursor-pointer py-2 px-3 rounded-md hover:bg-gray-100 transition"
+                  >
+                    <input
+                      type="radio"
+                      name="gender"
+                      value={g}
+                      checked={gender === g}
+                      onChange={(e) => setGender(e.target.value)}
+                      className="w-5 h-5"
+                    />
+                    {g}
+                  </label>
+                ))}
               </div>
             </div>
 
@@ -165,10 +180,10 @@ const UserProfileSetting = () => {
             <InputText
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="이메일을 입력하세요"
+              readOnly
             />
           </div>
+
           {/* 한줄 소개 */}
           <div>
             <label className="text-base font-medium">한줄 소개</label>
@@ -221,9 +236,7 @@ const UserProfileSetting = () => {
             className="mt-6 w-full h-[48px] flex justify-center items-center rounded-md underline text-[#7E7C7C] mb-[120px]"
             onClick={() => navigate("/user/withdrawal")}
           >
-            <MediumFont>
-              회원탈퇴
-            </MediumFont>
+            <MediumFont>회원탈퇴</MediumFont>
           </button>
         </form>
       </div>
