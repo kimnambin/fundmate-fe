@@ -1,7 +1,10 @@
 import { MainButton } from '@repo/ui/components';
 import { Layout, Title, WarningText } from '@repo/ui/styles';
+import { isAxiosError } from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { formatPriceToNumber } from '../../../../../packages/ui/utils/format';
+import { tempLogin } from '../../api/createFunding';
 import AddedItem from '../../components/added-item/addedItem';
 import CategoryGroup from '../../components/category/categoryGroup';
 import CreateModal from '../../components/create-funding-page/createModal';
@@ -12,21 +15,14 @@ import OptionAddModal from '../../components/create-funding-page/optionAddModal'
 import InputTextArea from '../../components/input-text-area/inputTextArea';
 import { Label } from '../../components/input-text/inputText.styles';
 import PointButton from '../../components/point-button/pointButton';
+import { DEFAULT_OPTION } from '../../constants/items';
 import { useCategoryConfigs } from '../../hooks/useCategoryConfigs';
-import { CompWrapper, CreateFundingStyle } from './createFunding.styles';
-import {
-  useCreateFunding,
-  useCreateOption,
-  useDeleteOption,
-} from '../../hooks/useCreateFunding';
+import { useCreateFunding } from '../../hooks/useCreateFunding';
 import type {
   CreateFundingData,
   Option,
 } from '../../types/createFunding.types';
-import { isAxiosError } from 'axios';
-import { formatPriceToNumber } from '../../../../../packages/ui/utils/format';
-import { DEFAULT_OPTION } from '../../constants/items';
-import { tempLogin } from '../../api/createFunding';
+import { CompWrapper, CreateFundingStyle } from './createFunding.styles';
 
 function CreateFunding() {
   const navigate = useNavigate();
@@ -42,7 +38,7 @@ function CreateFunding() {
   const [description, setDescription] = useState('');
   const [shortDescription, setShortDescription] = useState('');
 
-  const [addedOptions, setAddedOptions] = useState<Option[]>([]);
+  const [addedOptions, setAddedOptions] = useState<Option[]>([DEFAULT_OPTION]);
   const [optionTitle, setOptionTitle] = useState('');
   const [optionContent, setOptionContent] = useState('');
   const [optionPrice, setOptionPrice] = useState('');
@@ -56,8 +52,6 @@ function CreateFunding() {
 
   const { configs, category, gender, age } = useCategoryConfigs();
   const { mutate } = useCreateFunding();
-  const { mutate: createOption } = useCreateOption();
-  const { mutate: deleteOption } = useDeleteOption();
 
   useEffect(() => {
     // 로그인 임시 연동 코드
@@ -65,35 +59,11 @@ function CreateFunding() {
       try {
         await tempLogin('a@mail.com', 'zzz111');
         console.log('임시 로그인');
-
-        createOption(
-          {
-            title: DEFAULT_OPTION.title,
-            description: DEFAULT_OPTION.description,
-            price: DEFAULT_OPTION.price,
-          },
-          {
-            onSuccess: (res) => {
-              console.log('기본 옵션 생성 성공: ', res);
-              setAddedOptions([
-                {
-                  id: res.option_id,
-                  title: DEFAULT_OPTION.title,
-                  description: DEFAULT_OPTION.description,
-                  price: DEFAULT_OPTION.price,
-                },
-              ]);
-            },
-            onError: (err) => {
-              console.log('기본 옵션 생성 실패: ', err);
-            },
-          },
-        );
       } catch (err) {
         console.log('로그인 실패: ', err);
       }
     };
-    // autoLogin();
+    autoLogin();
   }, []);
 
   const handleImageUpload = () => {
@@ -125,50 +95,24 @@ function CreateFunding() {
     if (!isValidOption()) return;
     if (addedOptions.length >= 5) return;
 
-    createOption(
+    setAddedOptions((prev) => [
+      ...prev,
       {
         title: optionTitle,
         description: optionContent,
         price: formatPriceToNumber(optionPrice),
       },
-      {
-        onSuccess: (res) => {
-          console.log('옵션 생성 성공: ', res.option_id);
+    ]);
 
-          setAddedOptions((prev) => [
-            ...prev,
-            {
-              id: res.option_id,
-              title: optionTitle,
-              description: optionContent,
-              price: formatPriceToNumber(optionPrice),
-            },
-          ]);
-
-          setOptionTitle('');
-          setOptionContent('');
-          setOptionPrice('');
-          setIsAddOpen(false);
-          setIsAdd(false);
-        },
-        onError: (err) => {
-          console.log('옵션 생성 실패: ', err);
-        },
-      },
-    );
+    setOptionTitle('');
+    setOptionContent('');
+    setOptionPrice('');
+    setIsAddOpen(false);
+    setIsAdd(false);
   };
 
-  const handleDelete = (index: number, itemId: number) => {
+  const handleDelete = (index: number) => {
     setAddedOptions((prev) => prev.filter((_, i) => i !== index));
-
-    deleteOption(itemId, {
-      onSuccess: (res) => {
-        console.log('옵션 삭제 성공: ', res.message);
-      },
-      onError: (err) => {
-        console.log('옵션 삭제 실패: ', err);
-      },
-    });
   };
 
   const isValidFunding = () =>
@@ -206,10 +150,6 @@ function CreateFunding() {
   };
 
   const handleCreate = () => {
-    const optionIds = addedOptions
-      .filter((option) => option.id !== undefined)
-      .map((option) => option.id!);
-
     if (category === null || gender === null || age === null) return;
 
     const data: CreateFundingData = {
@@ -222,7 +162,7 @@ function CreateFunding() {
       short_description: shortDescription,
       description: description,
       category_id: category,
-      option_ids: optionIds,
+      options: addedOptions,
       gender: gender,
       age_group: age,
     };
@@ -334,9 +274,7 @@ function CreateFunding() {
                 title={option.title}
                 content={option.description}
                 onRemove={() => {
-                  if (option.id !== undefined) {
-                    handleDelete(index, option.id);
-                  }
+                  handleDelete(index);
                 }}
               />
             ))}

@@ -8,13 +8,12 @@ export type CreateFundingData = {
   short_description: string;
   description: string;
   category_id: number;
-  option_ids: number[];
+  options: Option[];
   gender: number;
   age_group: number;
 };
 
 export type Option = {
-  id?: number;
   title: string;
   description: string;
   price: number;
