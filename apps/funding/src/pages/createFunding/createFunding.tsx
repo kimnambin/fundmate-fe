@@ -252,6 +252,7 @@ function CreateFunding() {
         <IntroForm
           description={description}
           setDescription={setDescription}
+          setShortDescription={setShortDescription}
           isSubmit={isSubmit}
           isFundiOpen={isFundiOpen}
           setIsFundiOpen={setIsFundiOpen}

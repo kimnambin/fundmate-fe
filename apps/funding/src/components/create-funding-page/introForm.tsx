@@ -4,10 +4,12 @@ import { Wrapper } from './createFunding.styles';
 import { WarningText } from '@repo/ui/styles';
 import { MainButton } from '@repo/ui/components';
 import FundiModal from './fundiModal';
+import { useAiSummarize } from '../../hooks/useCreateFunding';
 
 interface Props {
   description: string;
   setDescription: (value: string) => void;
+  setShortDescription: (value: string) => void;
   isSubmit: boolean;
   isFundiOpen: boolean;
   setIsFundiOpen: (value: boolean) => void;
@@ -19,6 +21,7 @@ interface Props {
 const IntroForm = ({
   description,
   setDescription,
+  setShortDescription,
   isSubmit,
   isFundiOpen,
   setIsFundiOpen,
@@ -26,6 +29,24 @@ const IntroForm = ({
   copied,
   handleCopy,
 }: Props) => {
+  const { mutate: aiSummarize } = useAiSummarize();
+
+  const handleAISummarize = () => {
+    aiSummarize(
+      { message: description },
+      {
+        onSuccess: (res) => {
+          console.log('ai요약 성공: ', res);
+          setShortDescription(res.summary);
+        },
+        onError: (err) => {
+          console.log('ai요약 실패: ', err);
+        },
+      },
+    );
+    setIsFundiOpen(true);
+  };
+
   return (
     <Wrapper>
       <Label>프로젝트 소개</Label>
@@ -45,7 +66,7 @@ const IntroForm = ({
         <MainButton
           width="w-[200px]"
           label="AI 요약"
-          onClick={() => setIsFundiOpen(true)}
+          onClick={handleAISummarize}
         />
       </div>
 

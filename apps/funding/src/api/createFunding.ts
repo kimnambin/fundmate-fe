@@ -21,6 +21,13 @@ export const deleteOption = async (
   return response.data;
 };
 
+export const aiSummarize = async (data: {
+  message: string;
+}): Promise<{ summary: string }> => {
+  const response = await commonApiInstance.post('/ai/summarize', data);
+  return response.data;
+};
+
 // 로그인 임시 연동 코드
 export const tempLogin = async (email: string, password: string) => {
   const response = await commonApiInstance.post('/auth/login', {

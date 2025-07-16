@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import type { CreateFundingData } from '../types/createFunding.types';
 import {
+  aiSummarize,
   createFunding,
   createOption,
   deleteOption,
@@ -21,5 +22,11 @@ export const useCreateOption = () => {
 export const useDeleteOption = () => {
   return useMutation({
     mutationFn: deleteOption,
+  });
+};
+
+export const useAiSummarize = () => {
+  return useMutation({
+    mutationFn: aiSummarize,
   });
 };
