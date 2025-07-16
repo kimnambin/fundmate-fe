@@ -1,24 +1,37 @@
-export type Item = {
-  itemTitle: string;
-  itemContent: string;
-  itemPrice: string;
+export type CreateFundingData = {
+  image_id: number;
+  title: string;
+  goal_amount: number;
+  start_date: string;
+  end_date: string;
+  delivery_date: string;
+  short_description: string;
+  description: string;
+  category_id: number;
+  option_ids: number[];
+  gender: number;
+  age_group: number;
 };
 
-export type CreateForm = {
+export type Option = {
+  id?: number;
   title: string;
-  targetAmount: string;
-  startDate: string;
-  endDate: string;
-  deliveryDate: string;
-  intro: string;
-  summary: string;
-  category: string;
-  gender: string;
-  age: string;
-  items: Item[];
+  description: string;
+  price: number;
 };
+
+export type CreateOptionData = {
+  title: string;
+  description: string;
+  price: number;
+};
+
+export interface FilterOption {
+  label: string;
+  id: number;
+}
 
 export interface Filter {
   title: string;
-  options: string[];
+  options: FilterOption[];
 }

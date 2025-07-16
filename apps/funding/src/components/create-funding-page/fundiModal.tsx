@@ -9,7 +9,7 @@ import { HorizontalLine } from '../../pages/createFunding/createFunding.styles';
 interface Props {
   isFundiOpen: boolean;
   setIsFundiOpen: (value: boolean) => void;
-  intro: string;
+  description: string;
   summaryRef: React.RefObject<HTMLParagraphElement | null>;
   copied: boolean;
   handleCopy: () => void;
@@ -18,7 +18,7 @@ interface Props {
 const FundiModal = ({
   isFundiOpen,
   setIsFundiOpen,
-  intro,
+  description,
   summaryRef,
   copied,
   handleCopy,
@@ -35,12 +35,12 @@ const FundiModal = ({
       <div className="flex flex-col gap-5 min-w-[400px] max-w-[80vw]">
         <div className="flex flex-col gap-[10px]">
           <Title>내가 입력한 내용</Title>
-          {intro ? (
+          {description ? (
             <div
               data-color-mode="light"
               className="max-h-[200px] overflow-y-scroll relative custom-scroll"
             >
-              <MarkdownEditor.Markdown source={intro} />
+              <MarkdownEditor.Markdown source={description} />
             </div>
           ) : (
             <MediumFont className="text-sub-text">

@@ -5,4 +5,4 @@ export { ScrollToTop } from './ScrollToTop';
 export { StatisticsTableData };
 export { StatisticsOptionData };
 
-export { formatPrice } from './format';
+export { formatPrice, formatPriceToNumber } from './format';

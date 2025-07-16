@@ -1,11 +1,9 @@
-import axios from "axios"
-
-const TEMP_ADDRESS = 'http://localhost:5000'
+import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: TEMP_ADDRESS,
   timeout: 5000,
+  withCredentials: true,
   headers: {
-    "Content-Type": "application/json"
-  }
-})
+    'Content-Type': 'application/json',
+  },
+});

@@ -15,7 +15,14 @@ export default defineConfig({
         payment: 'http://localhost:5004/assets/remoteEntry.js',
         statistics: 'http://localhost:5005/assets/remoteEntry.js',
       },
-      shared: ['react', 'react-dom', 'react-router-dom', '@ramonak/react-progress-bar'],
+      shared: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        '@ramonak/react-progress-bar',
+        '@tanstack/react-query',
+        'axios',
+      ],
     }),
   ],
   build: {
@@ -25,6 +32,12 @@ export default defineConfig({
     cssCodeSplit: false,
   },
   resolve: {
-    dedupe: ['react', 'react-dom', 'react-router-dom'],
+    dedupe: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      '@tanstack/react-query',
+      'axios',
+    ],
   },
 });

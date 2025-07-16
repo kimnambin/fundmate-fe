@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
-import svgr from 'vite-plugin-svgr'
+import svgr from 'vite-plugin-svgr';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -24,5 +24,16 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://3.36.140.33:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false,
+        cookieDomainRewrite: '',
+      },
+    },
   },
 });
