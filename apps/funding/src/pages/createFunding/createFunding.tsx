@@ -63,35 +63,59 @@ function CreateFunding() {
       try {
         await tempLogin('a@mail.com', 'zzz111');
         console.log('임시 로그인');
+
+        createOption(
+          {
+            title: DEFAULT_OPTION.title,
+            description: DEFAULT_OPTION.description,
+            price: DEFAULT_OPTION.price,
+          },
+          {
+            onSuccess: (res) => {
+              console.log('기본 옵션 생성 성공: ', res);
+              setAddedOptions([
+                {
+                  id: res.option_id,
+                  title: DEFAULT_OPTION.title,
+                  description: DEFAULT_OPTION.description,
+                  price: DEFAULT_OPTION.price,
+                },
+              ]);
+            },
+            onError: (err) => {
+              console.log('기본 옵션 생성 실패: ', err);
+            },
+          },
+        );
       } catch (err) {
         console.log('로그인 실패: ', err);
       }
     };
-    // autoLogin();
+    autoLogin();
 
-    createOption(
-      {
-        title: DEFAULT_OPTION.title,
-        description: DEFAULT_OPTION.description,
-        price: DEFAULT_OPTION.price,
-      },
-      {
-        onSuccess: (res) => {
-          console.log('기본 옵션 생성 성공: ', res);
-          setAddedOptions([
-            {
-              id: res.option_id,
-              title: DEFAULT_OPTION.title,
-              description: DEFAULT_OPTION.description,
-              price: DEFAULT_OPTION.price,
-            },
-          ]);
-        },
-        onError: (err) => {
-          console.log('기본 옵션 생성 실패: ', err);
-        },
-      },
-    );
+    // createOption(
+    //   {
+    //     title: DEFAULT_OPTION.title,
+    //     description: DEFAULT_OPTION.description,
+    //     price: DEFAULT_OPTION.price,
+    //   },
+    //   {
+    //     onSuccess: (res) => {
+    //       console.log('기본 옵션 생성 성공: ', res);
+    //       setAddedOptions([
+    //         {
+    //           id: res.option_id,
+    //           title: DEFAULT_OPTION.title,
+    //           description: DEFAULT_OPTION.description,
+    //           price: DEFAULT_OPTION.price,
+    //         },
+    //       ]);
+    //     },
+    //     onError: (err) => {
+    //       console.log('기본 옵션 생성 실패: ', err);
+    //     },
+    //   },
+    // );
   }, []);
 
   const isInvalidDate = (startDate: string, endDate: string) => {

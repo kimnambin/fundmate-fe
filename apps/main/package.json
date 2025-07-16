@@ -22,8 +22,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "@tanstack/react-query": "^5.81.5",
     "axios": "^1.10.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "dotenv": "^10.0.0",
     "react-hook-form": "^7.59.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.3",
@@ -33,11 +32,16 @@
     "yup": "^1.6.1",
     "zustand": "^5.0.6"
   },
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
     "@eslint/plugin-kit": "^0.3.3",
     "@originjs/vite-plugin-federation": "^1.4.1",
     "@tailwindcss/container-queries": "^0.1.1",
+    "@types/dotenv": "^6.1.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",

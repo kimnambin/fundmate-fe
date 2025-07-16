@@ -8,16 +8,15 @@ import UserProfileSettings from './pages/UserProfileSettings/UserProfileSettings
 import Withdrawal from './pages/withdrawal/withdrawal';
 import MyReviews from './pages/MyReviews/MyReviews';
 import SupporterProfile from './pages/SupporterProfile/SupporterProfile';
-import MyPageLayout from './components/common/MyPageLayout';
-import CommonLayout from './components/common/CommonLayout';
-import { Header } from '@repo/ui/components';
+import { Header, UserPageLayout } from '@repo/ui/components';
+import { Layout } from '@repo/ui/styles';
 
 const App = () => (
   <BrowserRouter>
     <Header />
     <Routes>
       {/* 사이드바가 포함된 마이페이지 관련 경로 */}
-      <Route path='/mypage/*' element={<MyPageLayout />}>
+      <Route path='/mypage/*' element={<UserPageLayout />}>
         <Route index element={<Mypage />} />
         <Route path='projects'>
           <Route path="supported" element={<SupportedProjects />} />
@@ -26,7 +25,7 @@ const App = () => (
           <Route path="myreviews" element={<MyReviews />} />
         </Route>
       </Route>
-      <Route path='/user/*' element={<CommonLayout />}>
+      <Route path='/user/*' element={<Layout />}>
         <Route path="settings" element={<UserProfileSettings />} />
         <Route path="withdrawal" element={<Withdrawal />} />
       </Route>

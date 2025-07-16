@@ -52,7 +52,6 @@ const StatsLineChart: React.FC = () => {
         axisTop={null}
         axisRight={null}
         axisBottom={{
-          orient: "bottom",
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
@@ -60,7 +59,6 @@ const StatsLineChart: React.FC = () => {
           legendPosition: "middle",
         }}
         axisLeft={{
-          orient: "left",
           tickSize: 10,
           tickPadding: 5,
           tickRotation: 0,
@@ -75,7 +73,7 @@ const StatsLineChart: React.FC = () => {
         useMesh={true}
         enableSlices="x"
         colors={["#4FADF7", "#71C3F5"]}
-        tooltip={({ slice }) => (
+        sliceTooltip={({ slice }) => (
           <div
             style={{
               background: "white",
@@ -103,12 +101,12 @@ const StatsLineChart: React.FC = () => {
                   style={{
                     width: "10px",
                     height: "10px",
-                    background: point.serieColor,
+                    background: point.seriesColor,
                     borderRadius: "2px",
                   }}
                 />
                 <span style={{ color: "#333", fontWeight: 500 }}>
-                  {point.serieId}:
+                  {point.seriesId}:
                 </span>
                 <span style={{ color: "#333", fontWeight: 600 }}>
                   {point.data.yFormatted}

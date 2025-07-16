@@ -1,6 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
+import dotenv from 'dotenv';
+import { resolve } from 'path';
+
+dotenv.config({ path: resolve(__dirname, '../../.env') });
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -20,8 +24,6 @@ export default defineConfig({
         'react-dom',
         'react-router-dom',
         '@ramonak/react-progress-bar',
-        '@tanstack/react-query',
-        'axios',
       ],
     }),
   ],
@@ -36,8 +38,18 @@ export default defineConfig({
       'react',
       'react-dom',
       'react-router-dom',
-      '@tanstack/react-query',
-      'axios',
+      '@ramonak/react-progress-bar',
     ],
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: process.env.BACKEND_ADDRESS,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false,
+        cookieDomainRewrite: '',
+      },
+    },
   },
 });

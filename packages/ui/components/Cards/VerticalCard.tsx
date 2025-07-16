@@ -5,7 +5,12 @@ import { HeartButton } from '../Likes/HeartButton';
 import { MediumFont, SubTitle } from '../../styles';
 import type { CardProps } from '../../types/cardType';
 
-export const VerticalCard = ({ isLoading }: CardProps) => {
+export const VerticalCard = ({ isLoading, imageUrl, title, description, progress }: CardProps) => {
+  const imgSrc = imageUrl ?? 'https://picsum.photos/id/40/300/300'
+  const cardTitle = title ?? '이것은 상품의 제목입니다.'
+  const cardDescription = description ?? '이것은 상품의 상세설명입니다.'
+  const cardProgress = progress ?? 100;
+
   const navigate = useNavigate();
   if (isLoading) {
     return (
@@ -30,20 +35,24 @@ export const VerticalCard = ({ isLoading }: CardProps) => {
         <div className="flex flex-col gap-3">
           <div className="relative">
             <img
-              src="https://picsum.photos/id/40/300/300"
+              src={imgSrc}
               className="w-full h-auto rounded-xl object-cover"
             />
             <HeartButton />
           </div>
           <div className="w-full min-w-200 overflow-hidden">
             <MediumFont className='@[1px]/vertical:text-sm @[200px]/vertical:text-[16px] truncate'>
-              이것은 상품의 이름입니다.
+              {cardTitle}
             </MediumFont>
-            <MediumFont className='text-gray-500 @[1px]/vertical:text-sm @[200px]/vertical:text-[16px] truncate'>이것은 상품의 상세설명입니다.</MediumFont>
+            <MediumFont className='text-gray-500 @[1px]/vertical:text-sm @[200px]/vertical:text-[16px] truncate'>
+              {cardDescription}
+            </MediumFont>
           </div>
         </div>
         <div className="flex flex-col justify-end">
-          <SubTitle className="text-[#26AAFF]">100% 달성</SubTitle>
+          <SubTitle className="text-[#26AAFF]">
+            {cardProgress}% 달성
+          </SubTitle>
           <ProgressBar
             completed={100}
             height="5px"

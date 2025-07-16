@@ -1,6 +1,7 @@
 declare module 'swiper/css';
 declare module 'swiper/css/navigation';
 
+//remotes
 declare module 'funding/CreateFundingPage';
 declare module 'funding/AskFundiPage';
 declare module 'funding/AskFundiResultPage';
@@ -23,3 +24,9 @@ declare module 'mypage/LikedProjects';
 declare module 'mypage/Following';
 declare module 'mypage/SupporterProfile';
 declare module 'mypage/MyReviews';
+
+declare module 'admin/MakerProfile';
+declare module 'admin/StatsPage';
+declare module 'admin/FundingHistory';
+declare module 'admin/PaymentManagement';
+
