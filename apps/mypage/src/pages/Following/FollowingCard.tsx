@@ -1,20 +1,39 @@
 import { useState } from 'react';
+import { followUser, unfollowUser } from '../../api/follow';
 
 interface FollowingCardProps {
-  name: string; // 닉네임
+  userId: number;
+  name: string;
   initial: string;
   isFollowing: boolean;
 }
 
 export const FollowingCard = ({
+  userId,
   name,
   initial,
   isFollowing: initialFollowing,
 }: FollowingCardProps) => {
   const [isFollowing, setIsFollowing] = useState(initialFollowing);
+  const [loading, setLoading] = useState(false);
 
-  const toggleFollow = () => {
-    setIsFollowing((prev) => !prev);
+  const toggleFollow = async () => {
+    if (loading) return;
+    setLoading(true);
+
+    try {
+      if (isFollowing) {
+        await unfollowUser(userId);
+      } else {
+        await followUser(userId);
+      }
+      setIsFollowing((prev) => !prev);
+    } catch (err) {
+      console.error("팔로우/언팔로우 실패", err);
+      alert("요청 처리 중 오류가 발생했습니다.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -30,6 +49,7 @@ export const FollowingCard = ({
       {/* 팔로우/팔로잉 버튼 */}
       <button
         onClick={toggleFollow}
+        disabled={loading}
         className={`px-6 py-4 rounded border flex items-center gap-1
           ${
             isFollowing

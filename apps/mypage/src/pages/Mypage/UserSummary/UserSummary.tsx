@@ -11,7 +11,7 @@ const UserSummary = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await axios.get("/api/users/profile", {
+        const response = await axios.get("/users/mypage/profile", {
           withCredentials: true,
         });
         setNickname(response.data.nickname);

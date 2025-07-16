@@ -19,10 +19,27 @@ export default defineConfig({
         './ProfileSetting': './src/pages/UserProfileSettings/UserProfileSettings.tsx',
         './Withdrawal': './src/pages/withdrawal/withdrawal.tsx'
       },
-      shared: ['react', 'react-dom', 'react-router-dom', '@ramonak/react-progress-bar', '@headlessui/react'],
+      shared: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        '@ramonak/react-progress-bar',
+        '@headlessui/react'
+      ],
     }),
   ],
   build: {
     target: 'esnext',
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://3.36.140.33:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false,
+        cookieDomainRewrite: '',
+      },
+    },
   },
 });

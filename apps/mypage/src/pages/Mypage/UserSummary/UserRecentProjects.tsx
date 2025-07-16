@@ -6,6 +6,7 @@ const UserRecentProjects = () => {
   const recentViewedProjects = useRecentViewedProjectsStore(
     (state) => state.recentViewedProjects
   );
+  const nickname = useRecentViewedProjectsStore((state) => state.nickname);
 
   if (!recentViewedProjects || recentViewedProjects.length === 0) {
     return null;
@@ -14,11 +15,17 @@ const UserRecentProjects = () => {
   return (
     <div className="flex flex-col gap-5 w-full">
       <SubTitle>
-        서포터 닉네임님이 최근 본 프로젝트
+        {nickname}님이 최근 본 프로젝트
       </SubTitle>
       <div className="grid grid-cols-6 gap-3">
-        {recentViewedProjects.slice(0, 12).map((_project) => (
-          <VerticalCard />
+        {recentViewedProjects.slice(0, 12).map((project) => (
+          <VerticalCard
+            key={project.image_id}
+            imageUrl={`/images/${project.image_id}.jpg`}
+            title={project.title}
+            description={project.short_description}
+            progress={project.achievement}
+          />
         ))}
       </div>
     </div>

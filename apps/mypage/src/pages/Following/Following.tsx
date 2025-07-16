@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FollowingCard } from "./FollowingCard";
+import { getFollowingUsers, getFollowerUsers } from "../../api/follow"; 
 import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 
 interface FollowingUser {
@@ -16,22 +17,37 @@ const Following = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 임시 더미 데이터 (백엔드 연동 시 교체)
-    const mockFollowings: FollowingUser[] = [
-      { id: 1, name: "닉네임1", initial: "CN", isFollowing: true },
-      { id: 2, name: "닉네임2", initial: "CN", isFollowing: true },
-      { id: 3, name: "닉네임3", initial: "CN", isFollowing: false },
-      { id: 4, name: "닉네임4", initial: "CN", isFollowing: false },
-      { id: 5, name: "닉네임5", initial: "CN", isFollowing: false },
-    ];
-    const mockFollowers: FollowingUser[] = [
-      { id: 6, name: "팔로워1", initial: "CN", isFollowing: true },
-      { id: 7, name: "팔로워2", initial: "CN", isFollowing: false },
-    ];
+    const fetchFollowData = async () => {
+      try {
+        const [followingsRes, followersRes] = await Promise.all([
+          getFollowingUsers(),
+          getFollowerUsers(),
+        ]);
+        
+        const formattedFollowings = followingsRes.map((user: any) => ({
+          id: user.userId,
+          name: user.nickname,
+          initial: user.nickname?.slice(0, 2).toUpperCase() ?? "??",
+          isFollowing: true,
+        }));
 
-    setFollowings(mockFollowings);
-    setFollowers(mockFollowers);
-    setLoading(false);
+        const formattedFollowers = followersRes.map((user: any) => ({
+          id: user.userId,
+          name: user.nickname,
+          initial: user.nickname?.slice(0, 2).toUpperCase() ?? "??",
+          isFollowing: true,
+        }));
+
+        setFollowings(formattedFollowings);
+        setFollowers(formattedFollowers);
+      } catch (err) {
+        console.error("팔로잉/팔로워 목록 조회 실패", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFollowData();
   }, []);
 
   const currentList = showFollowings ? followings : followers;
@@ -43,27 +59,28 @@ const Following = () => {
         <div className="flex gap-8 border-b">
           <button
             onClick={() => setShowFollowings(true)}
-            className={`flex items-center gap-1 py-2 ${showFollowings
-              ? "font-semibold shadow-[inset_0_-2px_0_0_#000000]"
-              : "text-[#343F59]"
-              }`}
+            className={`flex items-center gap-1 py-2 ${
+              showFollowings
+                ? "font-semibold shadow-[inset_0_-2px_0_0_#000000]"
+                : "text-[#343F59]"
+            }`}
           >
             <MediumFont>팔로잉</MediumFont>
             <span className="text-[#5FBDFF]">{followings.length}</span>
           </button>
           <button
             onClick={() => setShowFollowings(false)}
-            className={`flex flex-row items-center gap-2 ${!showFollowings
-              ? "font-semibold shadow-[inset_0_-2px_0_0_#000000]"
-              : "text-[#343F59]"
-              }`}
+            className={`flex flex-row items-center gap-2 ${
+              !showFollowings
+                ? "font-semibold shadow-[inset_0_-2px_0_0_#000000]"
+                : "text-[#343F59]"
+            }`}
           >
             <MediumFont>팔로워</MediumFont>
             <SubTitle className="text-main">{followers.length}</SubTitle>
           </button>
         </div>
 
-        {/* 리스트 */}
         {loading ? (
           <div>Loading...</div>
         ) : currentList.length > 0 ? (
@@ -71,6 +88,7 @@ const Following = () => {
             {currentList.map((user) => (
               <FollowingCard
                 key={user.id}
+                userId={user.id}
                 name={user.name}
                 initial={user.initial}
                 isFollowing={user.isFollowing}
@@ -83,7 +101,6 @@ const Following = () => {
           </div>
         )}
       </div>
-
     </div>
   );
 };
