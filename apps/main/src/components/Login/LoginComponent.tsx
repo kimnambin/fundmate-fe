@@ -11,7 +11,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputText, MainButton } from '@repo/ui/components'
 import { MediumFont } from "@repo/ui/styles";
-import { commonApiInstance } from "../../../../../packages/ui/hooks/axiosInstance";
+import { commonApiInstance } from "@repo/ui/hooks";
 
 const schema = yup.object({
   email: yup.string().email().required(),
