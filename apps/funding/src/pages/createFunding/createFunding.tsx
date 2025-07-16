@@ -30,8 +30,10 @@ import { tempLogin } from '../../api/createFunding';
 
 function CreateFunding() {
   const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // const [imageId, setImageId] = useState(null);
+  const [preview, setPreview] = useState('');
   const [title, setTitle] = useState('');
   const [goalAmount, setGoalAmount] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -91,8 +93,23 @@ function CreateFunding() {
         console.log('로그인 실패: ', err);
       }
     };
-    autoLogin();
+    // autoLogin();
   }, []);
+
+  const handleImageUpload = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
 
   const isInvalidDate = (startDate: string, endDate: string) => {
     if (!startDate || !endDate) return false;
@@ -232,7 +249,14 @@ function CreateFunding() {
       <CreateFundingStyle>
         <Title>프로젝트(펀딩) 개설</Title>
 
-        <ImageUpload />
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+        />
+        <ImageUpload preview={preview} onClick={handleImageUpload} />
 
         <InfoForm
           title={title}
