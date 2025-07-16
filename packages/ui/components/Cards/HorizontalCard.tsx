@@ -5,7 +5,12 @@ import { HeartButton } from "../Likes/HeartButton";
 import { MediumFont, SubTitle } from "../../styles";
 import type { CardProps } from "../../types/cardType";
 
-export const HorizontalCard = ({ number, isLoading }: CardProps) => {
+export const HorizontalCard = ({ number, isLoading, imageUrl, title, description, progress }: CardProps) => {
+  const imgSrc = imageUrl ?? 'https://picsum.photos/id/40/300/300'
+  const cardTitle = title ?? '이것은 상품의 제목입니다.'
+  const cardDescription = description ?? '이것은 상품의 상세설명입니다.'
+  const cardProgress = progress ?? 100;
+
   const navigate = useNavigate();
   if (isLoading) {
     return (
@@ -27,7 +32,7 @@ export const HorizontalCard = ({ number, isLoading }: CardProps) => {
   return (
     <HorizontalCardContainer onClick={() => navigate('/product')}>
       <div className="relative flex shrink-0 grow-0 basis-[30%]">
-        <img src="https://picsum.photos/id/30/100/100" className="w-full h-full object-cover rounded-xl" />
+        <img src={imgSrc} className="w-full h-full object-cover rounded-xl" />
         <HeartButton />
       </div>
       <div className="flex justify-center py-2 shrink-0 grow-0 basis-[10px]">
@@ -35,11 +40,17 @@ export const HorizontalCard = ({ number, isLoading }: CardProps) => {
       </div>
       <div className="flex flex-col shrink-1 grow-1 items-start justify-between py-2 min-w-0 w-full">
         <div className="flex flex-col w-full">
-          <MediumFont className='truncate whitespace-nowrap'>이것은 상품의 제목입니다.</MediumFont>
-          <MediumFont className="text-gray-500">이것은 상품의 상세설명입니다.</MediumFont>
+          <MediumFont className='truncate whitespace-nowrap'>
+            {cardTitle}
+          </MediumFont>
+          <MediumFont className="text-gray-500">
+            {cardDescription}
+          </MediumFont>
         </div>
         <div className="w-full">
-          <SubTitle className="text-[#26AAFF]">100% 달성</SubTitle>
+          <SubTitle className="text-[#26AAFF]">
+            {cardProgress}% 달성
+          </SubTitle>
           <ProgressBar completed={100} height="5px" isLabelVisible={false} bgColor="#26AAFF" />
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { Images } from "@repo/ui/assets";
+
 import googleIcon from "../../assets/icons/googleIcon.png";
 import naverIcon from '../../assets/icons/naverIcon.svg';
 import kakaoTalkIcon from '../../assets/icons/kakaotalkIcon.png';
@@ -10,6 +11,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputText, MainButton } from '@repo/ui/components'
 import { MediumFont } from "@repo/ui/styles";
+import { commonApiInstance } from "@repo/ui/hooks";
 
 const schema = yup.object({
   email: yup.string().email().required(),
@@ -28,9 +30,11 @@ export const LoginComponent = () => {
     reValidateMode: 'onChange',
   })
 
-  const onSubmit: SubmitHandler<LoginProps> = (data) => {
+  const onSubmit: SubmitHandler<LoginProps> = async (data) => {
     console.log(data);
-    window.localStorage.setItem('isLogined', 'true');
+    await commonApiInstance.post('/auth/login', data)
+      .then(response => console.log(response))
+      .catch(error => console.error(error))
     navigate('/')
   }
   return (

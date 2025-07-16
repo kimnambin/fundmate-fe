@@ -10,8 +10,11 @@ export {
   Dropdown,
   Loading,
   MainButton,
+  FollowingButton,
   InputText,
   Modal,
+  UserPageLayout,
+  Sidebar
 } from './components';
 
 //assets
@@ -37,4 +40,4 @@ export {
 export { worker, handlers } from './mocks';
 
 //hooks
-export { axiosInstance } from './hooks'
+export { commonApiInstance } from './hooks'

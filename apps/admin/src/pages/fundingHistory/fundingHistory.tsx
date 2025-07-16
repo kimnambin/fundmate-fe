@@ -1,11 +1,10 @@
-import React from 'react';
 import CompletedFundingcard from './completedFundingcard';
 import FundingList from './fundingList';
 import { Title } from '@repo/ui/styles';
 
 const FundingHistory = () => {
   return (
-    <div className="flex max-w-[95%] flex-col gap-6 px-4 py-10">
+    <div className="flex w-full flex-col gap-6">
       <Title className="mt-8">펀딩 내역</Title>
 
       {/* 완료된 펀딩 */}

@@ -1,3 +1,4 @@
+import { FollowingButton } from '@repo/ui/components';
 import { useState } from 'react';
 
 interface FollowingCardProps {
@@ -13,10 +14,6 @@ export const FollowingCard = ({
 }: FollowingCardProps) => {
   const [isFollowing, setIsFollowing] = useState(initialFollowing);
 
-  const toggleFollow = () => {
-    setIsFollowing((prev) => !prev);
-  };
-
   return (
     <div className="flex justify-between items-center w-full p-4 bg-white rounded shadow">
       <div className="flex items-center gap-4">
@@ -28,17 +25,7 @@ export const FollowingCard = ({
       </div>
 
       {/* 팔로우/팔로잉 버튼 */}
-      <button
-        onClick={toggleFollow}
-        className={`px-6 py-4 rounded border flex items-center gap-1
-          ${
-            isFollowing
-              ? 'bg-gray-100 text-gray-600 border-gray-300'
-              : 'bg-white text-[#5FBDFF] border-[#5FBDFF]'
-          }`}
-      >
-        {isFollowing ? '✔ 팔로잉' : '+ 팔로우'}
-      </button>
+      <FollowingButton following={isFollowing} setFollowing={setIsFollowing} />
     </div>
   );
 };

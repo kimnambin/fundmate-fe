@@ -28,8 +28,8 @@ export const StatisticsBody = () => {
       <HorizonLine />
       <div className="flex flex-col gap-3">
         <SubTitle>연도별 인구 비율</SubTitle>
-        <div className="flex flex-row">
-          <div className="flex flex-row basis-[600px] shrink-1 order-0">
+        <div className="flex flex-row h-full min-h-[500px]">
+          <div className="flex flex-row basis-[600px] shrink order-0">
             <StatisticsPie data={tempData} />
           </div>
           <div className="m-5 p-5 shadow-lg rounded-[10px] flex flex-row grow shrink">
