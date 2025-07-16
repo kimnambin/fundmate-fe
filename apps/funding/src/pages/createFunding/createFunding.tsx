@@ -92,39 +92,12 @@ function CreateFunding() {
       }
     };
     autoLogin();
-
-    // createOption(
-    //   {
-    //     title: DEFAULT_OPTION.title,
-    //     description: DEFAULT_OPTION.description,
-    //     price: DEFAULT_OPTION.price,
-    //   },
-    //   {
-    //     onSuccess: (res) => {
-    //       console.log('기본 옵션 생성 성공: ', res);
-    //       setAddedOptions([
-    //         {
-    //           id: res.option_id,
-    //           title: DEFAULT_OPTION.title,
-    //           description: DEFAULT_OPTION.description,
-    //           price: DEFAULT_OPTION.price,
-    //         },
-    //       ]);
-    //     },
-    //     onError: (err) => {
-    //       console.log('기본 옵션 생성 실패: ', err);
-    //     },
-    //   },
-    // );
   }, []);
 
   const isInvalidDate = (startDate: string, endDate: string) => {
     if (!startDate || !endDate) return false;
     return new Date(endDate) < new Date(startDate);
   };
-
-  const isValidFilter = () =>
-    [category, gender, age].every((value) => value !== null);
 
   const isValidOption = () =>
     [optionTitle, optionContent, optionPrice].every((value) => value.trim());
