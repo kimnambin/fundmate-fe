@@ -65,7 +65,7 @@ const LikedProjects = () => {
         <div>Loading...</div>
       ) : projects.length > 0 ? (
         <div className="grid grid-cols-5 gap-3">
-          {projects.map((_project) => {
+          {projects.map(() => {
             return (
               <VerticalCard />
             );

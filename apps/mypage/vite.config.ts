@@ -19,13 +19,7 @@ export default defineConfig({
         './ProfileSetting': './src/pages/UserProfileSettings/UserProfileSettings.tsx',
         './Withdrawal': './src/pages/withdrawal/withdrawal.tsx'
       },
-      shared: [
-        'react',
-        'react-dom',
-        'react-router-dom',
-        '@ramonak/react-progress-bar',
-        '@headlessui/react'
-      ],
+      shared: ['react', 'react-dom', 'react-router-dom', '@ramonak/react-progress-bar'],
     }),
   ],
   build: {

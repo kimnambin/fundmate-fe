@@ -18,14 +18,8 @@ const UserRecentProjects = () => {
         {nickname}님이 최근 본 프로젝트
       </SubTitle>
       <div className="grid grid-cols-6 gap-3">
-        {recentViewedProjects.slice(0, 12).map((project) => (
-          <VerticalCard
-            key={project.image_id}
-            imageUrl={`/images/${project.image_id}.jpg`}
-            title={project.title}
-            description={project.short_description}
-            progress={project.achievement}
-          />
+        {recentViewedProjects.slice(0, 12).map(() => (
+          <VerticalCard />
         ))}
       </div>
     </div>

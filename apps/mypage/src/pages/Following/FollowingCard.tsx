@@ -1,3 +1,4 @@
+import { FollowingButton } from '@repo/ui/components';
 import { useState } from 'react';
 import { followUser, unfollowUser } from '../../api/follow';
 
@@ -17,25 +18,6 @@ export const FollowingCard = ({
   const [isFollowing, setIsFollowing] = useState(initialFollowing);
   const [loading, setLoading] = useState(false);
 
-  const toggleFollow = async () => {
-    if (loading) return;
-    setLoading(true);
-
-    try {
-      if (isFollowing) {
-        await unfollowUser(userId);
-      } else {
-        await followUser(userId);
-      }
-      setIsFollowing((prev) => !prev);
-    } catch (err) {
-      console.error("팔로우/언팔로우 실패", err);
-      alert("요청 처리 중 오류가 발생했습니다.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="flex justify-between items-center w-full p-4 bg-white rounded shadow">
       <div className="flex items-center gap-4">
@@ -47,18 +29,7 @@ export const FollowingCard = ({
       </div>
 
       {/* 팔로우/팔로잉 버튼 */}
-      <button
-        onClick={toggleFollow}
-        disabled={loading}
-        className={`px-6 py-4 rounded border flex items-center gap-1
-          ${
-            isFollowing
-              ? 'bg-gray-100 text-gray-600 border-gray-300'
-              : 'bg-white text-[#5FBDFF] border-[#5FBDFF]'
-          }`}
-      >
-        {isFollowing ? '✔ 팔로잉' : '+ 팔로우'}
-      </button>
+      <FollowingButton following={isFollowing} setFollowing={setIsFollowing} />
     </div>
   );
 };

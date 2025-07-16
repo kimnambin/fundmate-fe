@@ -27,8 +27,9 @@
   "dependencies": {
     "classnames": "^2.5.1",
     "concurrently": "^9.2.0",
-    "lucide-react": "^0.525.0",
+    "tailwind-styled-components": "^2.2.0",
     "msw": "^2.10.3",
-    "tailwind-styled-components": "^2.2.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
