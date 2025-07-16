@@ -10,8 +10,9 @@ import * as yup from 'yup';
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputText, MainButton } from '@repo/ui/components'
-import { MediumFont } from "@repo/ui/styles";
+import { MediumFont, SmallFont } from "@repo/ui/styles";
 import { commonApiInstance } from "@repo/ui/hooks";
+import { useState } from "react";
 
 const schema = yup.object({
   email: yup.string().email().required(),
@@ -22,6 +23,7 @@ type LoginProps = yup.InferType<typeof schema>;
 
 export const LoginComponent = () => {
   const navigate = useNavigate();
+  const [isError, setError] = useState(false);
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginProps>({
     resolver: yupResolver(schema),
@@ -33,9 +35,15 @@ export const LoginComponent = () => {
   const onSubmit: SubmitHandler<LoginProps> = async (data) => {
     console.log(data);
     await commonApiInstance.post('/auth/login', data)
-      .then(response => console.log(response))
-      .catch(error => console.error(error))
-    navigate('/')
+      .then(response => {
+        console.log(response)
+        navigate('/')
+      })
+      .catch(error => {
+        console.error(error)
+        setError(true)
+      }
+      )
   }
   return (
     <UserLayout>
@@ -63,6 +71,11 @@ export const LoginComponent = () => {
               width="w-full"
               label="로그인"
             ></MainButton>
+            {
+              isError && (
+                <SmallFont className='text-red'>아이디와 비밀번호를 확인해주세요!</SmallFont>
+              )
+            }
           </form>
           <UserNaigater>
             <Link to='/signup'>

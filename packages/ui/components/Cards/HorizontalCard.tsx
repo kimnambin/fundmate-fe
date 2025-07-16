@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { HeartButton } from "../Likes/HeartButton";
 import { MediumFont, SubTitle } from "../../styles";
 import type { CardProps } from "../../types/cardType";
+import { useState } from "react";
 
 export const HorizontalCard = ({ number, isLoading, imageUrl, title, description, progress }: CardProps) => {
   const imgSrc = imageUrl ?? 'https://picsum.photos/id/40/300/300'
+  const [imageLoaded, setImageLoaded] = useState(false);
   const cardTitle = title ?? '이것은 상품의 제목입니다.'
   const cardDescription = description ?? '이것은 상품의 상세설명입니다.'
   const cardProgress = progress ?? 100;
@@ -31,8 +33,13 @@ export const HorizontalCard = ({ number, isLoading, imageUrl, title, description
   }
   return (
     <HorizontalCardContainer onClick={() => navigate('/product')}>
-      <div className="relative flex shrink-0 grow-0 basis-[30%]">
-        <img src={imgSrc} className="w-full h-full object-cover rounded-xl" />
+      <div className={
+        imageLoaded
+          ? "relative flex shrink-0 grow-0 basis-[30%]"
+          : 'relative flex shrink-0 grow-0 basis-[30%] bg-gray-100 rounded-xl'
+      }>
+        <img src={imgSrc}
+          className={"w-full h-full object-cover rounded-xl"} />
         <HeartButton />
       </div>
       <div className="flex justify-center py-2 shrink-0 grow-0 basis-[10px]">

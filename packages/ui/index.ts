@@ -41,3 +41,6 @@ export { worker, handlers } from './mocks';
 
 //hooks
 export { commonApiInstance } from './hooks'
+
+//stores
+export { loadingStore } from './stores/loadingStore'

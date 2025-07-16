@@ -8,7 +8,8 @@
     "./utils": "./utils/index.ts",
     "./styles": "./styles/index.ts",
     "./mocks": "./mocks/index.ts",
-    "./hooks": "./hooks/index.ts"
+    "./hooks": "./hooks/index.ts",
+    "./loadingStore": "./stores/loadingStore.ts"
   },
   "license": "MIT",
   "scripts": {
