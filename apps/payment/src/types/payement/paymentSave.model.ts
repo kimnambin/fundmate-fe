@@ -1,5 +1,5 @@
 export interface BankPayload {
-  // userId: string;
+  userId: string;
   method: string;
   code: string;
   token: string;
@@ -11,7 +11,7 @@ export interface BankPayload {
 }
 
 export interface CardPayload {
-  // userId: string;
+  userId: string;
   method: string;
   code: string;
   token: string;

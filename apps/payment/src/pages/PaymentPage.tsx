@@ -6,13 +6,14 @@ import PaySelect from '../components/paymentPage/PaySelect';
 import PaymentFinal from '../components/paymentPage/PaymentFinal';
 import { useState } from 'react';
 import { useIsMobile } from '../hooks/useMobile';
+import { useTmpLogin } from '../hooks/useTmp';
 
 const PaymentPage = () => {
   const subText = ['선물 정보', '추가 후원금', '후원자 정보', '결제 수단'];
   const [selectedPayment, setSelectedPayment] = useState<string>('');
   const [addAmount, setAddAmount] = useState<number>(1000);
   const isMobile = useIsMobile();
-
+  useTmpLogin();
   return (
     <>
       {!isMobile ? (

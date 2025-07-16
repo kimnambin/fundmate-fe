@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { AxiosError } from 'axios';
-import { coverSec } from '../utils/security';
-import { PaymentProps } from '../types/modal.model';
+import { coverSec } from '../../utils/security';
+import { PaymentProps } from '../../types/payement/modal.model';
 import { useMutation } from '@tanstack/react-query';
-import { bankPaymentSave, CardPaymentSave } from '../api/payment';
+import { bankPaymentSave, CardPaymentSave } from '../../api/payment';
 // import { useGetQueryString } from './useGetQueryString';
 
 export const useTransferForm = ({
@@ -46,7 +46,8 @@ export const useTransferForm = ({
   const bankForm = useMutation({
     mutationFn: () =>
       bankPaymentSave({
-        // userId,
+        // TODO : 임시 값
+        userId: '1',
         method,
         code: bank,
         token: coverSec(addressData),
@@ -137,7 +138,7 @@ export const useCardPayForm = ({
   const cardPaymentForm = useMutation({
     mutationFn: () =>
       CardPaymentSave({
-        // userid,
+        userId: '1',
         method,
         code: bank,
         token: coverSec(addressData),

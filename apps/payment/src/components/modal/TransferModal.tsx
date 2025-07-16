@@ -9,9 +9,9 @@ import {
   Input,
   BottomWrapper,
 } from '../styles/modal/tansfetModal.style';
-import { useTransferForm } from '../../hooks/usePaymentSave';
-import { PaymentProps } from '../../types/modal.model';
+import { PaymentProps } from '../../types/payement/modal.model';
 import PayConfirmModal from './confirm/PayConfirmModal';
+import { useTransferForm } from '../../hooks/payment/usePaymentSave';
 
 export default function TransferModal({
   addressData,
@@ -120,7 +120,7 @@ export default function TransferModal({
             </BottomWrapper>
 
             <MainButton
-              label="결제하기"
+              label="저장"
               className="ml-0 w-full"
               textSize={'text-base'}
               textWeight={'font-bold'}

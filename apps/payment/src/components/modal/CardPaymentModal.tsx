@@ -16,10 +16,10 @@ import {
 import { monthList, yearList } from '../../utils/date';
 import { BankBtn } from '../styles/modal/tansfetModal.style';
 import { FlexRowsm } from '../styles/layout.style';
-import { useCardPayForm } from '../../hooks/usePaymentSave';
-import { PaymentProps } from '../../types/modal.model';
+import { PaymentProps } from '../../types/payement/modal.model';
 import { MainButton, Modal } from '@repo/ui/components';
 import PayConfirmModal from './confirm/PayConfirmModal';
+import { useCardPayForm } from '../../hooks/payment/usePaymentSave';
 
 const CardPaymentModal = ({
   addressData,
@@ -199,7 +199,7 @@ const CardPaymentModal = ({
             }
           />
           <MainButton
-            label="결제하기"
+            label="저장"
             className="ml-0 w-full"
             textSize={'text-base'}
             textWeight={'font-bold'}

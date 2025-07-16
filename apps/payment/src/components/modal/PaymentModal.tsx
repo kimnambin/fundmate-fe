@@ -2,12 +2,12 @@ import { MainButton, Modal } from '@repo/ui/components';
 import { BoldBigText, BoldText } from '../styles/text.style';
 import { formatPrice } from '@repo/ui/utils';
 import { SmallFont } from '@repo/ui/styles';
-import { usePaymentForm } from '../../hooks/usePayment';
+import { usePaymentForm } from '../../hooks/payment/usePayment';
 
 interface PayConfirmProps {
   addressData: string;
   addAmount: number;
-  method: 'CARD' | 'vBANK';
+  method: 'CARD' | 'VBANK';
   onConfirmPayment: () => void;
   isLoading: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

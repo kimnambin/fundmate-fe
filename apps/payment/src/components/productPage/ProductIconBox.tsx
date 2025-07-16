@@ -7,14 +7,14 @@ import {
 } from '../styles/product-detail/productInfo.style';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import useQueryString from '../../hooks/useQueryString';
-import { productData } from './ProductInfo';
 import { MainButton } from '@repo/ui/components';
 
-const ProductIconBox = () => {
-  const [click, setClick] = useState<boolean>(false);
+interface ProductInfoProps {
+  projectId?: string;
+}
 
-  useQueryString(productData.title);
+const ProductIconBox: React.FC<ProductInfoProps> = ({ projectId }) => {
+  const [click, setClick] = useState<boolean>(false);
 
   const copyClip = () => {
     const currentUrl = window.location.href;
@@ -47,7 +47,7 @@ const ProductIconBox = () => {
           <IoShareSocialOutline className="w-8 h-8" />
         </IconButton>
       </IconGroup>
-      <Link to={`/payment?title=${productData.title}`} className="w-full">
+      <Link to={`/payment/${projectId}`} className="w-full">
         <MainButton
           label={'후원하기'}
           textSize={'text-base'}

@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import { postPayment } from '../api/payment';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { postReservations } from '../../api/reservations';
 
 // TODO : 실제 결제 시 전달해야 할 것들이 많음
 
@@ -20,7 +20,7 @@ export const usePaymentForm = ({
 
   const { mutate: reservePayment, isPending: isReserving } = useMutation({
     mutationFn: (paymentInfoId: number) =>
-      postPayment({
+      postReservations({
         paymentInfoId,
         rewardId: 3,
         projectId: 2,

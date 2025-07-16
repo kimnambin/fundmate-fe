@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getPaymentSave } from '../api/payment';
+import { getPaymentSave } from '../../api/payment';
 
 export const useCheckPayment = (userId: number, _p: { enabled: boolean }) => {
   return useQuery({

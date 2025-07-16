@@ -1,8 +1,6 @@
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export const useGetQueryString = () => {
-  const location = useLocation();
-  const currentSearch = location.search;
-
-  return decodeURIComponent(currentSearch);
+  const { projectId } = useParams();
+  return projectId;
 };

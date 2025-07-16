@@ -9,8 +9,8 @@ import { formatPrice } from '@repo/ui/utils';
 import { Loading, MainButton } from '@repo/ui/components';
 import { ModalContainer } from '../styles/modal/modal.style';
 import PaymentModal from '../modal/PaymentModal';
-import { usePaymentForm } from '../../hooks/usePayment';
-import { useCheckPayment } from '../../hooks/useCheckPayment';
+import { useCheckPayment } from '../../hooks/payment/useCheckPayment';
+import { usePaymentForm } from '../../hooks/payment/usePayment';
 
 interface PaymentFinalProps {
   selectedPayment: string;
@@ -28,7 +28,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   const [showLoading, setShowLoading] = useState(false);
   const [savedPaymentId, setSavedPaymentId] = useState<number | null>(null);
 
-  const { data: has, refetch: checkPayment } = useCheckPayment(12, {
+  const { data: has, refetch: checkPayment } = useCheckPayment(1, {
     enabled: false,
   });
 
@@ -46,8 +46,8 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   };
 
   const handleBtn = async () => {
-    if (selectedPayment === 'vBANK') {
-      setModalType('vBANK');
+    if (selectedPayment === 'VBANK') {
+      setModalType('VBANK');
     } else if (selectedPayment === 'CARD') {
       setModalType('CARD');
     }
@@ -132,17 +132,17 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
         <PaymentModal
           addressData={addressData}
           addAmount={addAmount}
-          method={modalType === 'CARD' ? 'CARD' : 'vBANK'}
+          method={modalType === 'CARD' ? 'CARD' : 'VBANK'}
           onConfirmPayment={() => reservePayment(savedPaymentId ?? 12)}
           setIsModalOpen={handleCloseModal}
           setShowLoading={setShowLoading}
         />
       ) : (
         isModalOpen &&
-        (modalType === 'vBANK' ? (
+        (modalType === 'VBANK' ? (
           <TransferModal
             addressData={addressData}
-            method="vBANK"
+            method="VBANK"
             setIsModalOpen={handleCloseModal}
             setShowLoading={setShowLoading}
             setSavedPaymentId={setSavedPaymentId} // ✅ 등록 후 전환 트리거

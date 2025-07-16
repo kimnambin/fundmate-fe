@@ -11,6 +11,7 @@ const PaymentDetail = lazy(() => import('./pages/PaymentDetail'));
 
 function App() {
   const isMobile = useIsMobile();
+
   return (
     <>
       {/* TODO : 임시로 모바일 환경 시 헤더 가림 */}
@@ -18,8 +19,8 @@ function App() {
 
       <Suspense fallback={<Loading />}>
         <Routes>
-          <Route path="/product" element={<ProductPage />} />
-          <Route path="/payment">
+          <Route path="/product/:projectId" element={<ProductPage />} />
+          <Route path="/payment/:projectId">
             <Route index element={<PaymentPage />} />
             <Route path="completed" element={<PaymentcompletedPage />} />
             <Route path="detail" element={<PaymentDetail />} />
