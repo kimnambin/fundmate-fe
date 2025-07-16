@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Title, MediumFont } from '@repo/ui/styles';
-import { Dropdown } from '@repo/ui/components';
+import { Dropdown } from '@repo/ui/components'
 
 const PaymentList = () => {
   return (

@@ -8,9 +8,7 @@ import { TransferProps } from '../../types/modal.model';
 import axios from 'axios';
 
 jest.mock('axios');
-jest.mock('react-router-dom', () => {
-  useNavigate: () => '?done=true';
-});
+
 jest.mock('../useGetQueryString', () => ({
   useGetQueryString: () => '?done=true',
 }));

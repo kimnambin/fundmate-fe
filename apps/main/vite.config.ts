@@ -20,7 +20,6 @@ export default defineConfig({
         'react-dom',
         'react-router-dom',
         '@ramonak/react-progress-bar',
-        '@headlessui/react'
       ],
     }),
   ],
@@ -35,7 +34,18 @@ export default defineConfig({
       'react',
       'react-dom',
       'react-router-dom',
-      '@ramonak/react-progress-bar'
+      '@ramonak/react-progress-bar',
     ],
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: import.meta.env.VITE_BACKEND_API_URL,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false,
+        ws: true,
+      },
+    }
+  }
 });

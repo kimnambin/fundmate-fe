@@ -17,7 +17,7 @@ const UserRecentProjects = () => {
         서포터 닉네임님이 최근 본 프로젝트
       </SubTitle>
       <div className="grid grid-cols-6 gap-3">
-        {recentViewedProjects.slice(0, 12).map((_project) => (
+        {recentViewedProjects.slice(0, 12).map(() => (
           <VerticalCard />
         ))}
       </div>

@@ -10,6 +10,7 @@ export {
   Dropdown,
   Loading,
   MainButton,
+  FollowingButton,
   InputText,
   Modal,
   UserPageLayout,

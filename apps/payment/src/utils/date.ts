@@ -17,13 +17,13 @@ interface todayDateProps {
 }
 
 export const todayDate = ({ y, m, d }: todayDateProps) => {
-  let today = new Date();
+  const today = new Date();
 
-  let todaycurrent = new Date(y, m - 1, d);
+  const todaycurrent = new Date(y, m - 1, d);
 
-  let differenceInTime = today.getTime() - todaycurrent.getTime();
+  const differenceInTime = today.getTime() - todaycurrent.getTime();
 
-  let RemainingDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+  const RemainingDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
 
   return RemainingDays;
 };
