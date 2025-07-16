@@ -2,14 +2,14 @@ export const filters = [
   {
     title: '카테고리',
     options: [
-      { label: '게임', id: 1 },
-      { label: '홈/리빙', id: 2 },
-      { label: '테크/가전', id: 3 },
-      { label: '향수/뷰티', id: 4 },
-      { label: '의류', id: 5 },
-      { label: '잡화', id: 6 },
-      { label: '디자인', id: 7 },
-      { label: '예술', id: 8 },
+      { label: '예술', id: 1 },
+      { label: '의류', id: 2 },
+      { label: '디자인', id: 3 },
+      { label: '테크/가전', id: 4 },
+      { label: '게임', id: 5 },
+      { label: '홈/리빙', id: 6 },
+      { label: '향수/뷰티', id: 7 },
+      { label: '잡화', id: 8 },
     ],
   },
   {
@@ -28,7 +28,7 @@ export const filters = [
       { label: '30대', id: 3 },
       { label: '40대', id: 4 },
       { label: '50대 이상', id: 5 },
-      { label: '모든 연령', id: 0 },
+      { label: '모든 연령', id: 7 },
     ],
   },
 ];
