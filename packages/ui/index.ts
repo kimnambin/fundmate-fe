@@ -40,4 +40,4 @@ export {
 export { worker, handlers } from './mocks';
 
 //hooks
-export { axiosInstance } from './hooks'
+export { commonApiInstance } from './hooks'
