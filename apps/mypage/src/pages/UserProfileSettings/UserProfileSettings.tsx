@@ -2,12 +2,30 @@ import { useEffect, useState, useRef, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { MediumFont, Title } from "@repo/ui/styles";
 import { InputText, MainButton } from "@repo/ui/components";
-import axios from "axios"; // ✅ axios 직접 사용
+import { useTmpLogin, useSettings } from "../../hook/login";
+import axios from "axios";
 
+// 프론트에서 사용할 카테고리
 const categories = [
   "예술", "의류", "디자인", "테크/가전",
   "게임", "홈/리빙", "향수/뷰티", "잡화"
 ];
+
+// 서버 → 프론트 매핑 테이블
+const categoryMap: Record<string, string> = {
+  "예술": "예술",
+  "의류": "의류",
+  "디자인": "디자인",
+  "테크": "테크/가전",
+  "테크/가전": "테크/가전",
+  "가전": "테크/가전",
+  "게임": "게임",
+  "홈리빙": "홈/리빙",
+  "홈/리빙": "홈/리빙",
+  "뷰티": "향수/뷰티",
+  "향수/뷰티": "향수/뷰티",
+  "잡화": "잡화",
+};
 
 const ageOptions = [
   "10대", "20대", "30대", "40대", "50대",
@@ -22,28 +40,45 @@ const UserProfileSetting = () => {
   const [intro, setIntro] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // ✅ 유저 정보 초기 세팅
+  //useTmpLogin();
+  //useSettings();
+
   useEffect(() => {
     const loadUserProfile = async () => {
+      console.log("유저 프로필 불러오기 실행됨");
+
       try {
-        const res = await axios.get("/api/users/profile", {
-          params: { project_id: "1" }, // ✅ 필수 쿼리로 에러 방지
+        const res = await axios.get(`/api/users/mypage/profile?ts=${Date.now()}`, {
           withCredentials: true,
         });
 
         const data = res.data;
+        console.log("응답 받은 유저 데이터:", data);
 
         setNickname(data.nickname || "");
         setGender(data.gender || "");
-        setAge(data.ageId ? `${data.ageId}대` : "");
+
+        const ageString = `${data.ageId * 10}대`;
+        setAge(ageOptions.includes(ageString) ? ageString : "");
+
         setEmail(data.email || "");
         setIntro(data.contents || "");
-        setSelectedCategory(data.categoryName || null);
+
+        const mappedCategory = categoryMap[data.categoryName];
+        if (mappedCategory && categories.includes(mappedCategory)) {
+          setSelectedCategory(mappedCategory);
+        } else {
+          console.warn("알 수 없는 카테고리 이름:", data.categoryName);
+          setSelectedCategory(categories[0]);
+        }
+
         setProfileImage(data.imageUrl || null);
+        setIsLoaded(true);
       } catch (err) {
         console.error("유저 정보 불러오기 실패", err);
       }
@@ -57,20 +92,46 @@ const UserProfileSetting = () => {
   };
 
   const handleCancel = () => {
-    navigate("/");
+    navigate("/mypage");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({
+
+    const confirmUpdate = window.confirm("프로필을 변경하시겠습니까?");
+    if (!confirmUpdate) return;
+
+    const ageId = parseInt(age.replace("대", ""), 10) / 10;
+    const categoryIndex = categories.findIndex(c => c === selectedCategory);
+    if (categoryIndex === -1) {
+      alert("카테고리를 선택해주세요.");
+      return;
+    }
+    const categoryId = categoryIndex + 1;
+
+    const payload = {
+      image_url: profileImage,
       nickname,
       gender,
-      age,
-      email,
-      intro,
-      selectedCategory,
-      profileImage,
-    });
+      age_id: ageId,
+      contents: intro,
+      category_id: categoryId,
+    };
+
+    console.log("📤 보낼 데이터", payload);
+
+    try {
+      const res = await axios.put("/api/users/mypage/profile", payload, {
+        withCredentials: true,
+      });
+
+      console.log("프로필 수정 성공:", res.data);
+      alert("프로필이 저장되었습니다!");
+      window.location.href = "/mypage";
+    } catch (err) {
+      console.error("프로필 수정 실패:", err);
+      alert("저장에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -204,10 +265,11 @@ const UserProfileSetting = () => {
                   key={category}
                   type="button"
                   onClick={() => handleCategoryClick(category)}
-                  className={`px-4 py-2 rounded-full h-[50px] text-sm transition ${selectedCategory === category
-                    ? "bg-[#5FBDFF] text-white"
-                    : "bg-gray-200 text-gray-700"
-                    }`}
+                  className={`px-4 py-2 rounded-full h-[50px] text-sm transition ${
+                    selectedCategory === category
+                      ? "bg-[#5FBDFF] text-white"
+                      : "bg-gray-200 text-gray-700"
+                  }`}
                 >
                   {category}
                 </button>
@@ -217,12 +279,13 @@ const UserProfileSetting = () => {
 
           {/* 버튼 */}
           <div className="flex justify-between gap-4 mt-6">
-            <MainButton
-              label="취소"
-              width="w-full"
+            <button
+              type="button"
               onClick={handleCancel}
-              className="bg-gray-300 text-gray-500"
-            />
+              className="w-full h-[48px] bg-gray-300 text-gray-500 rounded-md"
+            >
+              취소
+            </button>
             <MainButton
               type="submit"
               label="확인"

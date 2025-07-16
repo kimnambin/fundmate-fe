@@ -22,7 +22,6 @@ const Withdrawal = () => {
       });
 
       alert(res.data.message);
-      
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
 

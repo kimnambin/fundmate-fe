@@ -4,9 +4,9 @@ import { FaGift, FaHeart, FaCommentDots } from "react-icons/fa";
 import { SubTitle } from "@repo/ui/styles";
 
 const UserStats = () => {
-  const [paymentCount, setPaymentCount] = useState<number | null>(0);
-  const [likeCount, setLikeCount] = useState<number | null>(0);
-  const [commentCount, setCommentCount] = useState<number | null>(0);
+  const [paymentCount, setPaymentCount] = useState<number | null>(null);
+  const [likeCount, setLikeCount] = useState<number | null>(null);
+  const [commentCount, setCommentCount] = useState<number | null>(null);
 
   const loading = paymentCount === null || likeCount === null || commentCount === null;
 
@@ -14,8 +14,10 @@ const UserStats = () => {
     const fetchStats = async () => {
       try {
         const res = await axios.get("/api/users/mypage", {
+          params: { project_id: 1 }, // ← 여기에 실제 값 넣었는지 확인
           withCredentials: true,
         });
+
         setPaymentCount(res.data.paymentCount);
         setLikeCount(res.data.likeCount);
         setCommentCount(res.data.commentCount);
@@ -28,24 +30,9 @@ const UserStats = () => {
   }, []);
 
   const stats = [
-    {
-      icon: <FaGift size={30} />,
-      label: "펀딩",
-      value: paymentCount,
-      unit: "건",
-    },
-    {
-      icon: <FaHeart size={30} />,
-      label: "찜",
-      value: likeCount,
-      unit: "개",
-    },
-    {
-      icon: <FaCommentDots size={30} />,
-      label: "후기",
-      value: commentCount,
-      unit: "개",
-    },
+    { icon: <FaGift size={30} />, label: "펀딩", value: paymentCount, unit: "건" },
+    { icon: <FaHeart size={30} />, label: "찜", value: likeCount, unit: "개" },
+    { icon: <FaCommentDots size={30} />, label: "후기", value: commentCount, unit: "개" },
   ];
 
   return (
