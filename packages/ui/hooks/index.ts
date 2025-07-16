@@ -1,1 +1,1 @@
-export { axiosInstance } from './axiosInstance'
+export { commonApiInstance } from './axiosInstance'
