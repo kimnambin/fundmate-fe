@@ -53,7 +53,8 @@ export const PopularItems = () => {
                 number={(i + 1).toString()}
                 isLoading={isLoading}
                 title={item.title}
-                description={item.shortDescription}
+                description={item.short_description}
+                id={item.project_id}
               />
             ))}
           </>

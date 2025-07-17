@@ -21,6 +21,8 @@ export const InterestingItems = () => {
     staleTime: 1000 * 60,
   });
 
+  console.log(data);
+
   return (
     <InterestingItemsContainer>
       <InterestingItemsGrid>
@@ -28,9 +30,10 @@ export const InterestingItems = () => {
           <>
             {data?.map((item: ProductType) => (
               <VerticalCard
-                key={item.imageId}
+                id={item.project_id}
+                key={item.image_url}
                 title={item.title}
-                description={item.shortDescription}
+                description={item.short_description}
                 isLoading={isLoading}
               />
             ))}
