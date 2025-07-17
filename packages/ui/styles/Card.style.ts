@@ -1,4 +1,4 @@
-import tw from "tailwind-styled-components";
+import tw from 'tailwind-styled-components';
 
 export const VerticalCardContainer = tw.div`
   flex
@@ -15,7 +15,7 @@ export const VerticalCardContainer = tw.div`
   @container/vertical
 
   hover:shadow-md
-`
+`;
 
 export const HorizontalCardContainer = tw.div`
   flex
@@ -31,4 +31,4 @@ export const HorizontalCardContainer = tw.div`
   bg-white
 
   hover:shadow-md
-`
+`;

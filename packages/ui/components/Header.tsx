@@ -108,9 +108,11 @@ export const Header = () => {
               alt="default user icon"
               className="w-10 h-10"
             />
-            {
-              islogined ? <MediumFont>나는야 서포터</MediumFont> : <MediumFont>로그인/회원가입</MediumFont>
-            }
+            {islogined ? (
+              <MediumFont>나는야 서포터</MediumFont>
+            ) : (
+              <MediumFont>로그인/회원가입</MediumFont>
+            )}
           </LoginButton>
         </div>
       </Container>
@@ -125,11 +127,12 @@ export const Header = () => {
             <SubTitle>카테고리</SubTitle>
             <CateogoryContainer $isOpen={isOpen}>
               {Object.entries(CategoryIcons).map(
-                ([name, { src, menuName }], _i) => (
+                ([name, { src, menuName }], i) => (
                   <Link
-                    to={`/search?category=${menuName}`}
+                    to={`/search?category=${i}`}
                     key={name}
                     className="flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2"
+                    state={{ menuName: menuName }}
                   >
                     <img src={src} className="w-6" />
                     <MediumFont>{menuName}</MediumFont>
