@@ -27,3 +27,16 @@ export const todayDate = ({ y, m, d }: todayDateProps) => {
 
   return RemainingDays;
 };
+
+export const formatDate = (dateString: string | number, addDays = 0) => {
+  const baseDate = new Date(dateString);
+  const adjustedDate = new Date(
+    baseDate.getTime() + 9 * 60 * 60 * 1000 + addDays * 86400000
+  );
+
+  const year = adjustedDate.getFullYear();
+  const month = adjustedDate.getMonth() + 1;
+  const day = adjustedDate.getDate();
+
+  return `${year}. ${month}. ${day}`;
+};

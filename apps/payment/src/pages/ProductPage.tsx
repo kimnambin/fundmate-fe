@@ -1,13 +1,22 @@
+import { useSearchParams } from 'react-router-dom';
+import FundDetailMobile from '../components/mobile/MbProduct';
+import ProductDetail from '../components/product-detail/PDLeft';
+import ProductIconBox from '../components/productPage/ProductIconBox';
 import ProductImg from '../components/productPage/ProductImg';
 import ProductInfo from '../components/productPage/ProductInfo';
-import ProductDetail from '../components/product-detail/PDLeft';
 import { FlexCol, FlexItem, FlexRow } from '../components/styles/layout.style';
-import ProductIconBox from '../components/productPage/ProductIconBox';
 import { useIsMobile } from '../hooks/useMobile';
-import FundDetailMobile from '../components/mobile/MbProduct';
+import { useGetProductDetail } from '../hooks/useProduct';
 
 function ProductPage() {
   const isMobile = useIsMobile();
+
+  const [searchParams] = useSearchParams();
+  const projectId = searchParams.get('projectId');
+
+  const { data } = useGetProductDetail(projectId!);
+
+  if (!projectId) return;
   return (
     <FlexCol className="px-auto sm:px-[120px]">
       {!isMobile ? (
@@ -17,16 +26,16 @@ function ProductPage() {
               <ProductImg />
             </FlexItem>
             <FlexItem>
-              <ProductInfo />
+              <ProductInfo data={data} projectId={projectId} />
             </FlexItem>
           </FlexRow>
           <ProductDetail />
         </>
       ) : (
         <>
-          <FundDetailMobile />
+          <FundDetailMobile data={data} />
           <ProductDetail />
-          <ProductIconBox />
+          <ProductIconBox projectId={projectId} />
         </>
       )}
     </FlexCol>

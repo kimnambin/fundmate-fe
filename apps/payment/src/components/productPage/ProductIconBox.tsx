@@ -1,20 +1,20 @@
-import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import { MainButton } from '@repo/ui/components';
+import { useState } from 'react';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { IoShareSocialOutline } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 import {
   IconBox,
   IconButton,
   IconGroup,
 } from '../styles/product-detail/productInfo.style';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import useQueryString from '../../hooks/useQueryString';
-import { productData } from './ProductInfo';
-import { MainButton } from '@repo/ui/components';
 
-const ProductIconBox = () => {
+interface Props {
+  projectId: string;
+}
+
+const ProductIconBox = ({ projectId }: Props) => {
   const [click, setClick] = useState<boolean>(false);
-
-  useQueryString(productData.title);
 
   const copyClip = () => {
     const currentUrl = window.location.href;
@@ -47,7 +47,7 @@ const ProductIconBox = () => {
           <IoShareSocialOutline className="w-8 h-8" />
         </IconButton>
       </IconGroup>
-      <Link to={`/payment?title=${productData.title}`} className="w-full">
+      <Link to={`/payment?projectId=${projectId}`} className="w-full">
         <MainButton
           label={'후원하기'}
           textSize={'text-base'}
