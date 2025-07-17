@@ -1,10 +1,42 @@
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios"; // 공용 인스턴스 사용하는 경우 교체 가능
 import userImg from "../assets/images/user.png";
 import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 import { MainButton } from "@repo/ui/components";
+import { useTmpLogin } from "../../../../fundmate-fe/apps/mypage/src/hook/login";
 
 export const Sidebar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  
+  // 로그인 임시 훅 실행
+  useTmpLogin();
+ 
+  // 사용자 프로필 상태
+  const [profile, setProfile] = useState({
+    nickname: "",
+    email: "",
+    contents: "",
+  });
+
+  // 프로필 정보 호출
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get("/api/users/mypage/profile");
+         console.log("프로필 응답 데이터:", res.data); 
+        setProfile({
+          nickname: res.data.nickname,
+          email: res.data.email,
+          contents: res.data.contents,
+        });
+      } catch (error) {
+        console.error("프로필 정보 불러오기 실패", error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const supporterMenu = [
     { label: "후원한 프로젝트", path: "/mypage/projects/supported" },
@@ -28,12 +60,15 @@ export const Sidebar = () => {
           className="w-[120px] h-[120px] rounded-full overflow-hidden border border-gray-300 cursor-pointer"
           onClick={() => navigate("/mypage")}
         >
+          {/* 나중에 프로필 이미지 적용할 경우 src={profile.imageUrl ?? userImg} */}
           <img src={userImg} alt="avatar" className="w-full h-full object-cover" />
         </div>
         <div className="flex flex-col items-center gap-[10px]">
-          <Title>나는야 서포터 님</Title>
-          <MediumFont className="text-[#7E7C7C]">abc@email.com</MediumFont>
-          <MediumFont>한줄 소개</MediumFont>
+          <Title>{profile.nickname ? `${profile.nickname} 님` : "닉네임 없음"}</Title>
+          <MediumFont className="text-[#7E7C7C]">{profile.email}</MediumFont>
+          <MediumFont>
+            {profile.contents ? profile.contents : "한줄 소개가 없습니다."}
+          </MediumFont>
         </div>
         <MainButton
           label="내 정보 설정"
@@ -51,7 +86,8 @@ export const Sidebar = () => {
               key={label}
               to={path}
               className={({ isActive }) =>
-                `text-left text-[22px] font-medium pl-[10px] transition-colors ${isActive ? "text-[#5FBDFF]" : "text-black hover:text-[#5FBDFF]"}`
+                `text-left text-[22px] font-medium pl-[10px] transition-colors ${
+                  isActive ? "text-[#5FBDFF]" : "text-black hover:text-[#5FBDFF]"}`
               }
             >
               {label}
@@ -69,7 +105,8 @@ export const Sidebar = () => {
               key={label}
               to={path}
               className={({ isActive }) =>
-                `text-left text-[22px] font-medium pl-[10px] transition-colors ${isActive ? "text-[#5FBDFF]" : "text-black hover:text-[#5FBDFF]"}`
+                `text-left text-[22px] font-medium pl-[10px] transition-colors ${
+                  isActive ? "text-[#5FBDFF]" : "text-black hover:text-[#5FBDFF]"}`
               }
             >
               {label}
@@ -80,5 +117,3 @@ export const Sidebar = () => {
     </aside>
   );
 };
-
-
