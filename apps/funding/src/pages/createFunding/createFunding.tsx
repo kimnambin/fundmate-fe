@@ -56,17 +56,17 @@ function CreateFunding() {
   const { mutate } = useCreateFunding();
 
   // 로그인 임시 연동 코드
-  // useEffect(() => {
-  //   const autoLogin = async () => {
-  //     try {
-  //       await tempLogin('a@mail.com', 'zzz111');
-  //       console.log('임시 로그인');
-  //     } catch (err) {
-  //       console.log('로그인 실패: ', err);
-  //     }
-  //   };
-  //   autoLogin();
-  // }, []);
+  useEffect(() => {
+    const autoLogin = async () => {
+      try {
+        await tempLogin('g@mail.com', 'zzz111');
+        console.log('임시 로그인');
+      } catch (err) {
+        console.log('로그인 실패: ', err);
+      }
+    };
+    autoLogin();
+  }, []);
 
   const handleImageUpload = () => {
     fileInputRef.current?.click();
@@ -126,10 +126,11 @@ function CreateFunding() {
       deliveryDate.trim(),
       description.trim(),
       shortDescription.trim(),
-      category,
-      gender,
-      age,
-    ].every(Boolean) && addedOptions.length > 0;
+    ].every(Boolean) &&
+    category !== null &&
+    gender !== null &&
+    age !== null &&
+    addedOptions.length > 0;
 
   const handleSubmit = () => {
     setIsSubmit(true);
@@ -175,7 +176,7 @@ function CreateFunding() {
       onSuccess: (data) => {
         console.log('펀딩 개설 성공');
         setProjectId(data.project_id);
-        navigate({ pathname: '/product', search: `?id=${projectId}` });
+        navigate(`/product/?id=${projectId}`);
       },
       onError: (error) => {
         if (isAxiosError<{ message: string }>(error)) {
@@ -242,9 +243,10 @@ function CreateFunding() {
         <CompWrapper>
           <Label>분류</Label>
           <CategoryGroup configs={configs} />
-          {isSubmit && (!category || !gender || !age) && (
-            <WarningText>카테고리와 타켓층을 선택하세요.</WarningText>
-          )}
+          {isSubmit &&
+            (category === null || gender === null || age === null) && (
+              <WarningText>카테고리와 타겟층을 선택하세요.</WarningText>
+            )}
         </CompWrapper>
 
         <CompWrapper>
