@@ -49,8 +49,8 @@ export const SearchComponent = () => {
   };
 
   useEffect(() => {
-    console.log(queryKey);
     getSearchData();
+    console.log(data);
   }, [searchParams]);
 
   return (
