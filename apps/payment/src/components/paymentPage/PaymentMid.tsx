@@ -2,27 +2,46 @@ import { BaseText, BoldBigText, LightColor } from '../styles/text.style';
 import { Box, BoxRow, FlexColsm, FlexRowsm } from '../styles/layout.style';
 import { Input, MoneyBox, Span } from '../styles/paymentPage/PaymentMid.style';
 import { formatPrice } from '@repo/ui/utils';
+import {
+  useGetoptionid,
+  useGetQueryString,
+} from '../../hooks/useGetQueryString';
+import { useGetProductInfo } from '../../hooks/product/getProductInfo';
+
+interface PaymentMidProps {
+  subText: string[];
+  addAmount: number;
+  setAddAmount: React.Dispatch<React.SetStateAction<number>>;
+  nickname: string;
+  email: string;
+}
 
 const PaymentMid = ({
   subText,
   addAmount,
   setAddAmount,
-}: {
-  subText: string[];
-  addAmount: number;
-  setAddAmount: React.Dispatch<React.SetStateAction<number>>;
-}) => {
+  nickname,
+  email,
+}: PaymentMidProps) => {
+  const projectId = useGetQueryString();
+  const { data: productData } = useGetProductInfo(Number(projectId));
+
+  const optionid = useGetoptionid();
+
+  if (!optionid || !productData) return null;
+
+  const optionData = productData.options[Number(optionid)];
+
   return (
     <div className="w-full">
       <BoldBigText>{subText[0]}</BoldBigText>
-      <BoxRow>기본리워드</BoxRow>
+      <BoxRow>{optionData.title}</BoxRow>
       <BoldBigText className="mt-6">{subText[1]}</BoldBigText>
       <Box>
         <BaseText>후원금</BaseText>
         <MoneyBox>
           <Input
             type="text"
-            placeholder="기본 1,000원"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               const onlyNumbers = e.target.value.replace(/[^0-9]/g, '');
               setAddAmount(Number(onlyNumbers));
@@ -37,12 +56,12 @@ const PaymentMid = ({
       <BoxRow>
         <FlexColsm className="items-start">
           <FlexRowsm className="py-2 justify-between">
-            <LightColor className="text-sm mr-6">연락처</LightColor>
-            <BaseText>010-</BaseText>
+            <LightColor className="text-sm mr-6">닉네임</LightColor>
+            <BaseText>{nickname}</BaseText>
           </FlexRowsm>
           <FlexRowsm className="py-2">
             <LightColor className="text-sm mr-6">이메일</LightColor>
-            <BaseText>test@naver.com</BaseText>
+            <BaseText>{email}</BaseText>
           </FlexRowsm>
         </FlexColsm>
       </BoxRow>

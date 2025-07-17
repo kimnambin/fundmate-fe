@@ -9,8 +9,12 @@ export const CardPaymentSave = (payload: CardPayload) => {
   return axios.post(`/api/payments`, payload);
 };
 
-export const getPaymentSave = (id: number) => {
-  return axios.get(`/api/payments/${id}`);
+// export const getPaymentSave = (id: number) => {
+//   return axios.get(`/api/payments/${id}`);
+// };
+
+export const getPaymentSave = () => {
+  return axios.get(`/api/payments`);
 };
 
 export const delPaymentSave = (id: number) => {

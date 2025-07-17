@@ -27,7 +27,7 @@ const Address = ({
   const handleDetailed = (e: React.ChangeEvent<HTMLInputElement>) => {
     const detail = e.target.value;
     setDetailedAddress(detail);
-    setAddressData(address + ' ' + detail);
+    setAddressData(address + ' ' + postalCode + ' ' + detail);
   };
 
   return (

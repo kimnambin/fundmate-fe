@@ -6,14 +6,29 @@ import PaySelect from '../components/paymentPage/PaySelect';
 import PaymentFinal from '../components/paymentPage/PaymentFinal';
 import { useState } from 'react';
 import { useIsMobile } from '../hooks/useMobile';
-import { useTmpLogin } from '../hooks/useTmp';
+import { useTmpLogin } from '../hooks/user/useTmp';
+import { useGetUserInfo } from '../hooks/user/useGetUserInfo';
+import { useGetoptionid, useGetQueryString } from '../hooks/useGetQueryString';
+import { useGetProductInfo } from '../hooks/product/getProductInfo';
 
 const PaymentPage = () => {
   const subText = ['선물 정보', '추가 후원금', '후원자 정보', '결제 수단'];
+  const projectId = useGetQueryString();
+  const { data: productData } = useGetProductInfo(Number(projectId));
+
   const [selectedPayment, setSelectedPayment] = useState<string>('');
-  const [addAmount, setAddAmount] = useState<number>(1000);
+
   const isMobile = useIsMobile();
   useTmpLogin();
+
+  const { data } = useGetUserInfo();
+
+  const optionid = useGetoptionid();
+  const optionData =
+    optionid && productData ? productData.options[Number(optionid)] : null;
+  const [addAmount, setAddAmount] = useState<number>(optionData?.price ?? 1000);
+  if (!optionid || !productData || !optionData) return null;
+
   return (
     <>
       {!isMobile ? (
@@ -24,6 +39,8 @@ const PaymentPage = () => {
               subText={subText}
               addAmount={addAmount}
               setAddAmount={setAddAmount}
+              nickname={data?.nickname ?? ''}
+              email={data?.email ?? ''}
             />
             <PaySelect setSelectedPayment={setSelectedPayment} />
             <Blank></Blank>
@@ -43,6 +60,8 @@ const PaymentPage = () => {
               subText={subText}
               addAmount={addAmount}
               setAddAmount={setAddAmount}
+              nickname={data?.nickname ?? ''}
+              email={data?.email ?? ''}
             />
             <PaySelect setSelectedPayment={setSelectedPayment} />
             <Blank></Blank>

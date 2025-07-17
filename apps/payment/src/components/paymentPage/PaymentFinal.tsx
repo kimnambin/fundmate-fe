@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CardPaymentModal from '../modal/CardPaymentModal';
 import TransferModal from '../modal/TransferModal';
 import { BoxCol, BoxRow, FlexColsm } from '../styles/layout.style';
@@ -11,6 +11,12 @@ import { ModalContainer } from '../styles/modal/modal.style';
 import PaymentModal from '../modal/PaymentModal';
 import { useCheckPayment } from '../../hooks/payment/useCheckPayment';
 import { usePaymentForm } from '../../hooks/payment/usePayment';
+import {
+  useGetoptionid,
+  useGetQueryString,
+} from '../../hooks/useGetQueryString';
+import { useGetProductInfo } from '../../hooks/product/getProductInfo';
+import { useGetUserInfo } from '../../hooks/user/useGetUserInfo';
 
 interface PaymentFinalProps {
   selectedPayment: string;
@@ -28,16 +34,17 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   const [showLoading, setShowLoading] = useState(false);
   const [savedPaymentId, setSavedPaymentId] = useState<number | null>(null);
 
-  const { data: has, refetch: checkPayment } = useCheckPayment(1, {
-    enabled: false,
-  });
+  const { data: userInfo } = useGetUserInfo();
 
-  const { reservePayment } = usePaymentForm({
-    addressData,
-    addAmount,
-    setShowLoading,
-    setIsModalOpen,
-  });
+  const { data: paymentSaveId, refetch: checkPayment } = useCheckPayment(
+    Number(userInfo?.userId)
+  );
+
+  // const id = has?.[0]?.id;
+
+  useEffect(() => {
+    checkPayment();
+  }, []);
 
   const handleCheck = (index: number) => {
     const newChecks = [...checks];
@@ -63,7 +70,26 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   };
 
   const shouldShowPaymentModal =
-    isModalOpen && (has || savedPaymentId !== null);
+    isModalOpen && (paymentSaveId || savedPaymentId !== null);
+
+  const projectId = useGetQueryString();
+  const { data: productData } = useGetProductInfo(Number(projectId));
+
+  const optionid = useGetoptionid();
+  const optionData =
+    optionid && productData ? productData.options[Number(optionid)] : null;
+
+  const { reservePayment } = usePaymentForm({
+    paymentInfoId: paymentSaveId,
+    rewardId: Number(optionid) ?? null,
+    projectId: Number(projectId) ?? null,
+    amount: optionData?.price ?? 1000,
+    totalAmount: productData?.project?.goal_amount ?? 0,
+    scheduleDate: productData?.project?.end_date ?? '',
+    address: addressData,
+    setShowLoading,
+    setIsModalOpen,
+  });
 
   return (
     <>
@@ -145,7 +171,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
             method="VBANK"
             setIsModalOpen={handleCloseModal}
             setShowLoading={setShowLoading}
-            setSavedPaymentId={setSavedPaymentId} // ✅ 등록 후 전환 트리거
+            setSavedPaymentId={setSavedPaymentId}
           />
         ) : (
           <CardPaymentModal
@@ -153,7 +179,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
             method="CARD"
             setIsModalOpen={handleCloseModal}
             setShowLoading={setShowLoading}
-            setSavedPaymentId={setSavedPaymentId} // ✅ 등록 후 전환 트리거
+            setSavedPaymentId={setSavedPaymentId}
           />
         ))
       )}

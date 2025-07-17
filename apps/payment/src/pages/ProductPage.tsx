@@ -6,7 +6,7 @@ import ProductIconBox from '../components/productPage/ProductIconBox';
 import { useIsMobile } from '../hooks/useMobile';
 import FundDetailMobile from '../components/mobile/MbProduct';
 import { useGetProductInfo } from '../hooks/product/getProductInfo';
-import { useTmpLogin } from '../hooks/useTmp';
+import { useTmpLogin } from '../hooks/user/useTmp';
 import { useGetQueryString } from '../hooks/useGetQueryString';
 import { Layout } from '@repo/ui/styles';
 import { Loading } from '@repo/ui/components';

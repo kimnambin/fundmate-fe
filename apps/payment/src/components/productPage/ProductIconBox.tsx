@@ -8,6 +8,7 @@ import {
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MainButton } from '@repo/ui/components';
+import { useGetoptionid } from '../../hooks/useGetQueryString';
 
 interface ProductInfoProps {
   projectId?: string;
@@ -15,6 +16,7 @@ interface ProductInfoProps {
 
 const ProductIconBox: React.FC<ProductInfoProps> = ({ projectId }) => {
   const [click, setClick] = useState<boolean>(false);
+  const optionid = useGetoptionid();
 
   const copyClip = () => {
     const currentUrl = window.location.href;
@@ -47,7 +49,10 @@ const ProductIconBox: React.FC<ProductInfoProps> = ({ projectId }) => {
           <IoShareSocialOutline className="w-8 h-8" />
         </IconButton>
       </IconGroup>
-      <Link to={`/payment/${projectId}`} className="w-full">
+      <Link
+        to={`/payment/${projectId}?optionid=${optionid ? optionid : 0}`}
+        className="w-full"
+      >
         <MainButton
           label={'후원하기'}
           textSize={'text-base'}

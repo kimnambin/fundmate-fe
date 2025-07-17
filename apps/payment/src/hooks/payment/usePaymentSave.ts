@@ -46,13 +46,12 @@ export const useTransferForm = ({
   const bankForm = useMutation({
     mutationFn: () =>
       bankPaymentSave({
-        // TODO : 임시 값
-        userId: '1',
+        // userId: '1',
         method,
         code: bank,
-        token: coverSec(addressData),
+        token: 'fff',
         displayInfo: coverSec(number),
-        extra: {
+        details: {
           type: 'vbank',
           owner,
         },
@@ -60,6 +59,7 @@ export const useTransferForm = ({
     onSuccess: (res) => {
       console.log('응답 데이터', res.data);
       const insertedId = res.data?.insertedId;
+      alert('결제수단이 등록되었습니다.');
 
       if (insertedId) {
         setSavedPaymentId(insertedId);
@@ -138,12 +138,12 @@ export const useCardPayForm = ({
   const cardPaymentForm = useMutation({
     mutationFn: () =>
       CardPaymentSave({
-        userId: '1',
+        // userId: '1',
         method,
         code: bank,
-        token: coverSec(addressData),
+        token: 'fff',
         displayInfo: coverSec(fullCardNumber),
-        extra: {
+        details: {
           type: 'card',
           expMonth: expiryDate.slice(0, 2),
           expYear: expiryDate.slice(2),

@@ -6,6 +6,6 @@ export interface PaymentPayload {
   totalAmount: number;
   scheduleDate: string;
   address: string;
-  addressNumber: number;
-  addressInfo: string;
+  addressNumber?: number;
+  addressInfo?: string;
 }

@@ -1,22 +1,22 @@
 export interface BankPayload {
-  userId: string;
+  // userId: string;
   method: string;
   code: string;
-  token: string;
   displayInfo: string;
-  extra: {
+  token: string;
+  details: {
     type: 'vbank';
     owner: string;
   };
 }
 
 export interface CardPayload {
-  userId: string;
+  // userId: string;
   method: string;
   code: string;
-  token: string;
   displayInfo: string;
-  extra: {
+  token: string;
+  details: {
     type: 'card';
     expMonth: string;
     expYear: string;

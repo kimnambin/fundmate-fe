@@ -11,8 +11,6 @@ import {
 import ProductIconBox from './ProductIconBox';
 import { formatDate } from '../../utils/date';
 
-// TODO : 화면 구상용 더미 데이터
-
 export const productData = ['모인 금액', '남은 시간'];
 
 export const productPaymentData = [
