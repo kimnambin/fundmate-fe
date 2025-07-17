@@ -65,8 +65,8 @@ export const SwiperItems = ({ componentId }: SwiperItemsProps) => {
             }}
             modules={[Navigation]}
           >
-            {data?.map((item: ProductType) => (
-              <SwiperSlide key={item.title}>
+            {data?.map((item: ProductType, i: number) => (
+              <SwiperSlide key={i}>
                 <VerticalCard
                   isLoading={isLoading}
                   title={item.title}
