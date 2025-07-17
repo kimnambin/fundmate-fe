@@ -35,8 +35,7 @@ const ProductInfo = ({ data, projectId }: Props) => {
         </Top>
         <Top>
           <KeyP>후원자</KeyP>
-          {/* 후원자 수가 없으면 0 등으로 표시 */}
-          <ValueP>{/* 후원자 수를 넣어주세요 */}0명</ValueP>
+          <ValueP>{data.project.sponsor}명</ValueP>
         </Top>
       </Top>
       <Divide />
@@ -65,7 +64,7 @@ const ProductInfo = ({ data, projectId }: Props) => {
             <KeyP className="text-left">결제 예정일</KeyP>
           </div>
           <ValueP className="mb-0">
-            {formatDate(data.project.end_date, 1)}에 결제 진행
+            {formatDate(data.project.payment_date)}에 결제 진행
           </ValueP>
         </BottomItems>
 
@@ -78,7 +77,7 @@ const ProductInfo = ({ data, projectId }: Props) => {
           </ValueP>
         </BottomItems>
 
-        <ProductIconBox projectId={projectId} />
+        <ProductIconBox projectId={projectId} likes={data.project.likes} />
       </Bottom>
     </Wrapper>
   );

@@ -1,6 +1,6 @@
 export interface ProductDetail {
   project: {
-    image_id: number;
+    image_url: string;
     title: string;
     current_price: number;
     remaining_day: number;
@@ -9,9 +9,12 @@ export interface ProductDetail {
     end_date: string;
     delivery_date: string;
     description: string;
+    payment_date: string;
+    sponsor: number;
+    likes: number;
   };
   users: {
-    image_id: number | null;
+    image_url: string | null;
     nickname: string;
     content: string | null;
   };

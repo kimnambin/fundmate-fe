@@ -8,13 +8,32 @@ import {
   IconButton,
   IconGroup,
 } from '../styles/product-detail/productInfo.style';
+import { useAddLike, useDeleteLike } from '../../hooks/useLike';
 
 interface Props {
   projectId: string;
+  likes: number;
 }
 
-const ProductIconBox = ({ projectId }: Props) => {
-  const [click, setClick] = useState<boolean>(false);
+const ProductIconBox = ({ projectId, likes }: Props) => {
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+
+  const { mutate: addLike } = useAddLike();
+  const { mutate: deleteLike } = useDeleteLike();
+
+  const handleLike = () => {
+    if (isLiked) {
+      deleteLike(projectId, {
+        onSuccess: () => setIsLiked(false),
+        onError: () => console.log('좋아요 취소 실패'),
+      });
+    } else {
+      addLike(projectId, {
+        onSuccess: () => setIsLiked(true),
+        onError: () => console.log('좋아요 추가 실패'),
+      });
+    }
+  };
 
   const copyClip = () => {
     const currentUrl = window.location.href;
@@ -30,16 +49,16 @@ const ProductIconBox = ({ projectId }: Props) => {
   return (
     <IconBox className="px-3 sm:px-0">
       <IconGroup>
-        <IconButton onClick={() => setClick(!click)}>
-          {click ? (
+        <IconButton onClick={handleLike}>
+          {isLiked ? (
             <>
               <FaHeart className="w-7 h-7 text-red-600" />
-              <span>1</span>
+              <span>{likes + 1}</span>
             </>
           ) : (
             <>
               <FaRegHeart className="w-7 h-7" />
-              <span>0</span>
+              <span>{likes}</span>
             </>
           )}
         </IconButton>

@@ -7,8 +7,23 @@ import ProductInfo from '../components/productPage/ProductInfo';
 import { FlexCol, FlexItem, FlexRow } from '../components/styles/layout.style';
 import { useIsMobile } from '../hooks/useMobile';
 import { useGetProductDetail } from '../hooks/useProduct';
+import { useEffect } from 'react';
+import { tempLogin } from '../api/tempLogin.api';
 
 function ProductPage() {
+  // 로그인 임시 연동 코드
+  useEffect(() => {
+    const autoLogin = async () => {
+      try {
+        await tempLogin('g@mail.com', 'zzz111');
+        console.log('임시 로그인');
+      } catch (err) {
+        console.log('로그인 실패: ', err);
+      }
+    };
+    autoLogin();
+  }, []);
+
   const isMobile = useIsMobile();
 
   const [searchParams] = useSearchParams();
@@ -16,7 +31,7 @@ function ProductPage() {
 
   const { data } = useGetProductDetail(projectId!);
 
-  if (!projectId) return;
+  if (!projectId || !data) return;
   return (
     <FlexCol className="px-auto sm:px-[120px]">
       {!isMobile ? (
@@ -35,7 +50,7 @@ function ProductPage() {
         <>
           <FundDetailMobile data={data} />
           <ProductDetail />
-          <ProductIconBox projectId={projectId} />
+          <ProductIconBox projectId={projectId} likes={data.project.likes} />
         </>
       )}
     </FlexCol>
