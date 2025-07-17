@@ -6,7 +6,6 @@ export const Container = tw.div`
   w-full
   items-center
   px-[120px]
-  overflow-hidden
 `;
 
 export const SpaceContainer = tw.div`
@@ -16,7 +15,7 @@ export const SpaceContainer = tw.div`
   items-center
   w-full
   px-[120px]
-`
+`;
 
 export const InputDiv = tw.div`
   relative
@@ -45,4 +44,4 @@ export const FundiButton = tw.button`
   px-5
   py-1
   rounded-lg
-`
+`;

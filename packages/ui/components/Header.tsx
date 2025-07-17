@@ -17,6 +17,7 @@ import React, { useState } from 'react';
 import fundi from '../assets/images/fundi.png';
 import { MediumFont, SubTitle } from '../styles';
 import { InputText } from './Inputs/Input';
+import { commonApiInstance } from '../hooks';
 
 const menuBar = [
   {
@@ -52,8 +53,8 @@ export const Header = () => {
   const [searchInput, setSearchInput] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
-  const islogined = window.localStorage.getItem('isLogined');
-
+  const nickname = window.localStorage.getItem('nickname');
+  const [adminToggle, setAdminToggle] = useState(false);
   const currentFullPath = location.pathname + location.search;
 
   const handleClick = () => {
@@ -67,11 +68,36 @@ export const Header = () => {
   };
 
   const handleNavigate = () => {
-    if (islogined) {
-      navigate('/mypage');
+    if (nickname !== null) {
+      setAdminToggle(!adminToggle);
     } else {
       navigate('/login');
     }
+  };
+
+  const handlePortal = () => {
+    try {
+      navigate('/mypage');
+    } catch (error) {
+      alert('세션이 만료되었습니다.\n다시 로그인해주세요');
+      window.localStorage.removeItem('nickname');
+      navigate('/login');
+    }
+  };
+
+  const handleLogout = async () => {
+    await commonApiInstance
+      .post('/auth/logout')
+      .then((response) => {
+        console.log(response);
+        window.localStorage.removeItem('nickname');
+        setAdminToggle(false);
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('다시 시도해주세요');
+      });
   };
 
   return (
@@ -102,16 +128,38 @@ export const Header = () => {
           <Link to="/funding/create" className="text-lg font-semibold">
             <SubTitle>프로젝트 올리기</SubTitle>
           </Link>
-          <LoginButton onClick={handleNavigate}>
-            <img
-              src={userDefaultImage}
-              alt="default user icon"
-              className="w-10 h-10"
-            />
-            {
-              islogined ? <MediumFont>나는야 서포터</MediumFont> : <MediumFont>로그인/회원가입</MediumFont>
-            }
-          </LoginButton>
+          <div className="inline-block relative">
+            <LoginButton onClick={handleNavigate}>
+              <img
+                src={userDefaultImage}
+                alt="default user icon"
+                className="w-10 h-10"
+              />
+              {nickname ? (
+                <MediumFont>{nickname}</MediumFont>
+              ) : (
+                <MediumFont>로그인/회원가입</MediumFont>
+              )}
+            </LoginButton>
+            {adminToggle && (
+              <div className="absolute w-40 flex flex-col items-center top-full justify-center bg-white rounded-lg py-3 shadow-md">
+                <button
+                  type="button"
+                  onClick={handlePortal}
+                  className="hover:bg-gray-100 w-full h-full p-2"
+                >
+                  <MediumFont className="h-full">마이페이지</MediumFont>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="hover:bg-gray-100 w-full h-full p-2"
+                >
+                  <MediumFont>로그아웃</MediumFont>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </Container>
       <SpaceContainer>
@@ -125,11 +173,12 @@ export const Header = () => {
             <SubTitle>카테고리</SubTitle>
             <CateogoryContainer $isOpen={isOpen}>
               {Object.entries(CategoryIcons).map(
-                ([name, { src, menuName }], _i) => (
+                ([name, { src, menuName }], i) => (
                   <Link
-                    to={`/search?category=${menuName}`}
+                    to={`/search?category=${i}`}
                     key={name}
                     className="flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2"
+                    state={{ menuName: menuName }}
                   >
                     <img src={src} className="w-6" />
                     <MediumFont>{menuName}</MediumFont>

@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { HeartButton } from '../Likes/HeartButton';
 import { MediumFont, SubTitle } from '../../styles';
 import type { CardProps } from '../../types/cardType';
+import { useState } from 'react';
 
 export const VerticalCard = ({ isLoading, imageUrl, title, description, progress }: CardProps) => {
   const imgSrc = imageUrl ?? 'https://picsum.photos/id/40/300/300'
+  const [imageLoaded, setImageLoaded] = useState(false);
   const cardTitle = title ?? '이것은 상품의 제목입니다.'
   const cardDescription = description ?? '이것은 상품의 상세설명입니다.'
   const cardProgress = progress ?? 100;
@@ -36,7 +38,13 @@ export const VerticalCard = ({ isLoading, imageUrl, title, description, progress
           <div className="relative">
             <img
               src={imgSrc}
-              className="w-full h-auto rounded-xl object-cover"
+              className={
+                imageLoaded
+                  ? `w-full h-auto rounded-xl object-cover`
+                  : 'w-full @[1px]/vertical:h-[200px] @[270px]/vertical:h-[250px] @[310px]/vertical:h-[290px] rounded-xl bg-gray-100'
+
+              }
+              onLoad={() => setImageLoaded(true)}
             />
             <HeartButton />
           </div>

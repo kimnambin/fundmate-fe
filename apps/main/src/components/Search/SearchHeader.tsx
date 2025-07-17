@@ -5,9 +5,10 @@ type SearchHeaderProps = {
   isCategory: boolean;
   isSearch: boolean;
   queryValue?: string | null;
+  length: number;
 }
 
-export const SearchHeader = ({ isCategory, isSearch, queryValue }: SearchHeaderProps) => {
+export const SearchHeader = ({ isCategory, isSearch, queryValue, length }: SearchHeaderProps) => {
 
   return (
     <div className="flex flex-col gap-7 my-7">
@@ -25,7 +26,7 @@ export const SearchHeader = ({ isCategory, isSearch, queryValue }: SearchHeaderP
       </div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row">
-          <SubTitle className='text-main'>10000</SubTitle>
+          <SubTitle className='text-main'>{length}</SubTitle>
           <MediumFont>개의 오브젝트가 있습니다.</MediumFont>
         </div>
         {
