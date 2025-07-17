@@ -33,7 +33,7 @@ export const SearchComponent = () => {
         pathname = `/api/projects/${queryValue}`;
       }
     } else if (isSearch) {
-      pathname = `/`;
+      pathname = `/api/projects/search?query=${queryValue}`;
     } else {
       pathname = `/api/projects/${queryKey[0]}`;
     }

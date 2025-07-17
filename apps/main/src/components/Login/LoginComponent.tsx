@@ -23,7 +23,6 @@ import { InputText, MainButton } from '@repo/ui/components';
 import { MediumFont, SmallFont } from '@repo/ui/styles';
 import { commonApiInstance } from '@repo/ui/hooks';
 import { useState } from 'react';
-import { loginStore } from '@repo/ui/loginStore';
 
 const schema = yup.object({
   email: yup.string().email().required(),
@@ -48,7 +47,6 @@ export const LoginComponent = () => {
   });
 
   const onSubmit: SubmitHandler<LoginProps> = async (data) => {
-    console.log(data);
     await commonApiInstance
       .post('/auth/login', data)
       .then((response) => {

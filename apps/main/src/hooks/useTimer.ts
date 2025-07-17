@@ -12,7 +12,9 @@ interface UseTimerReturn {
   formatTime: (totalSeconds: number) => string;
 }
 
-function useTimer(initialSeconds: number = FIVE_MINUTES_IN_SECONDS): UseTimerReturn {
+function useTimer(
+  initialSeconds: number = FIVE_MINUTES_IN_SECONDS,
+): UseTimerReturn {
   const [timeLeft, setTimeLeft] = useState<number>(initialSeconds);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [hasTimerEnded, setHasTimerEnded] = useState<boolean>(false);
@@ -27,9 +29,6 @@ function useTimer(initialSeconds: number = FIVE_MINUTES_IN_SECONDS): UseTimerRet
     } else if (timeLeft === 0 && isRunning) {
       setIsRunning(false);
       setHasTimerEnded(true);
-      if (timerId) {
-        clearInterval(timerId);
-      }
     }
 
     return () => {

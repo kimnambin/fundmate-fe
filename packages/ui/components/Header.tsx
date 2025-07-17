@@ -151,7 +151,7 @@ export const Header = () => {
                   <MediumFont className="h-full">마이페이지</MediumFont>
                 </button>
                 <button
-                  type="submit"
+                  type="button"
                   onClick={handleLogout}
                   className="hover:bg-gray-100 w-full h-full p-2"
                 >
