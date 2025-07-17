@@ -4,7 +4,7 @@ import { Wrapper } from './createFunding.styles';
 import { WarningText } from '@repo/ui/styles';
 import { MainButton } from '@repo/ui/components';
 import FundiModal from './fundiModal';
-import { useAiSummarize } from '../../hooks/useCreateFunding';
+import { useAiSummarize } from '../../hooks/useAiSummarize';
 
 interface Props {
   description: string;

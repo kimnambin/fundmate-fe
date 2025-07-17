@@ -1,5 +1,5 @@
 export type CreateFundingData = {
-  image_id: number;
+  image_url: string;
   title: string;
   goal_amount: number;
   start_date: string;

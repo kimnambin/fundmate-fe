@@ -1,10 +1,9 @@
 import { MainButton } from '@repo/ui/components';
 import { Layout, Title, WarningText } from '@repo/ui/styles';
-import { isAxiosError } from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formatPriceToNumber } from '../../../../../packages/ui/utils/format';
-import { tempLogin } from '../../api/createFunding';
+import { tempLogin } from '../../api/tempLogin.api';
 import AddedItem from '../../components/added-item/addedItem';
 import CategoryGroup from '../../components/category/categoryGroup';
 import CreateModal from '../../components/create-funding-page/createModal';
@@ -18,6 +17,7 @@ import PointButton from '../../components/point-button/pointButton';
 import { DEFAULT_OPTION } from '../../constants/items';
 import { useCategoryConfigs } from '../../hooks/useCategoryConfigs';
 import { useCreateFunding } from '../../hooks/useCreateFunding';
+import { useImageUpload } from '../../hooks/useImageUpload';
 import type {
   CreateFundingData,
   Option,
@@ -28,7 +28,7 @@ function CreateFunding() {
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // const [imageId, setImageId] = useState(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [preview, setPreview] = useState('');
   const [title, setTitle] = useState('');
   const [goalAmount, setGoalAmount] = useState('');
@@ -38,7 +38,6 @@ function CreateFunding() {
   const [description, setDescription] = useState('');
   const [shortDescription, setShortDescription] = useState('');
   const [aiSummary, setAiSummary] = useState('');
-  const [projectId, setProjectId] = useState(null);
 
   const [addedOptions, setAddedOptions] = useState<Option[]>([DEFAULT_OPTION]);
   const [optionTitle, setOptionTitle] = useState('');
@@ -53,7 +52,8 @@ function CreateFunding() {
   const [copied, setCopied] = useState(false);
 
   const { configs, category, gender, age } = useCategoryConfigs();
-  const { mutate } = useCreateFunding();
+  const { mutate: createFunding } = useCreateFunding();
+  const { mutateAsync: uploadImage } = useImageUpload();
 
   // 로그인 임시 연동 코드
   useEffect(() => {
@@ -73,14 +73,16 @@ function CreateFunding() {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const selectedFile = e.target.files?.[0];
+    if (!selectedFile) return;
+
+    setImageFile(selectedFile);
 
     const reader = new FileReader();
     reader.onloadend = () => {
       setPreview(reader.result as string);
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(selectedFile);
   };
 
   const isInvalidDate = (startDate: string, endDate: string) => {
@@ -152,40 +154,42 @@ function CreateFunding() {
     });
   };
 
-  const handleCreate = () => {
-    if (category === null || gender === null || age === null) return;
+  const handleCreate = async () => {
+    if (!imageFile || category === null || gender === null || age === null)
+      return;
 
-    const data: CreateFundingData = {
-      image_id: 1, // 임시 아이디 - 이미지 업로드 구현 후 수정 예정
-      title: title,
-      goal_amount: formatPriceToNumber(goalAmount),
-      start_date: startDate,
-      end_date: endDate,
-      delivery_date: deliveryDate,
-      short_description: shortDescription,
-      description: description,
-      category_id: category,
-      options: addedOptions,
-      gender: gender,
-      age_group: age,
-    };
+    try {
+      const imageUrl = await uploadImage(imageFile);
 
-    setIsSubmitOpen(false);
+      const data: CreateFundingData = {
+        image_url: imageUrl,
+        title: title,
+        goal_amount: formatPriceToNumber(goalAmount),
+        start_date: startDate,
+        end_date: endDate,
+        delivery_date: deliveryDate,
+        short_description: shortDescription,
+        description: description,
+        category_id: category,
+        options: addedOptions,
+        gender: gender,
+        age_group: age,
+      };
 
-    mutate(data, {
-      onSuccess: (data) => {
-        console.log('펀딩 개설 성공');
-        setProjectId(data.project_id);
-        navigate(`/product/?id=${projectId}`);
-      },
-      onError: (error) => {
-        if (isAxiosError<{ message: string }>(error)) {
-          console.error(error.response?.data?.message ?? '에러 발생');
-        } else {
-          console.error(error.message ?? '알 수 없는 에러가 발생했습니다');
-        }
-      },
-    });
+      setIsSubmitOpen(false);
+
+      createFunding(data, {
+        onSuccess: (data) => {
+          console.log('펀딩 개설 성공');
+          navigate(`/product/?id=${data.project_id}`);
+        },
+        onError: (error) => {
+          console.error('펀딩 개설 실패: ', error);
+        },
+      });
+    } catch (err) {
+      console.log('이미지 업로드 실패: ', err);
+    }
   };
 
   return (
