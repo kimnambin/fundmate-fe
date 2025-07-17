@@ -10,6 +10,7 @@ interface Props {
   isFundiOpen: boolean;
   setIsFundiOpen: (value: boolean) => void;
   description: string;
+  aiSummary: string;
   summaryRef: React.RefObject<HTMLParagraphElement | null>;
   copied: boolean;
   handleCopy: () => void;
@@ -19,6 +20,7 @@ const FundiModal = ({
   isFundiOpen,
   setIsFundiOpen,
   description,
+  aiSummary,
   summaryRef,
   copied,
   handleCopy,
@@ -55,7 +57,7 @@ const FundiModal = ({
             <img src={FundiIcon} width="20px" />
           </div>
           <MediumFont ref={summaryRef} className="break-words">
-            펀디가 요약한 내용
+            {aiSummary}
           </MediumFont>
         </div>
         <div className="flex justify-end">

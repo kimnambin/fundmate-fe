@@ -9,7 +9,8 @@ import { useAiSummarize } from '../../hooks/useCreateFunding';
 interface Props {
   description: string;
   setDescription: (value: string) => void;
-  setShortDescription: (value: string) => void;
+  aiSummary: string;
+  setAiSummary: (value: string) => void;
   isSubmit: boolean;
   isFundiOpen: boolean;
   setIsFundiOpen: (value: boolean) => void;
@@ -21,7 +22,8 @@ interface Props {
 const IntroForm = ({
   description,
   setDescription,
-  setShortDescription,
+  aiSummary,
+  setAiSummary,
   isSubmit,
   isFundiOpen,
   setIsFundiOpen,
@@ -37,7 +39,7 @@ const IntroForm = ({
       {
         onSuccess: (res) => {
           console.log('ai요약 성공: ', res);
-          setShortDescription(res.summary);
+          setAiSummary(res.summary);
         },
         onError: (err) => {
           console.log('ai요약 실패: ', err);
@@ -74,6 +76,7 @@ const IntroForm = ({
         isFundiOpen={isFundiOpen}
         setIsFundiOpen={setIsFundiOpen}
         description={description}
+        aiSummary={aiSummary}
         summaryRef={summaryRef}
         copied={copied}
         handleCopy={handleCopy}

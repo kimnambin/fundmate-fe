@@ -37,6 +37,7 @@ function CreateFunding() {
   const [deliveryDate, setDeliveryDate] = useState('');
   const [description, setDescription] = useState('');
   const [shortDescription, setShortDescription] = useState('');
+  const [aiSummary, setAiSummary] = useState('');
   const [projectId, setProjectId] = useState(null);
 
   const [addedOptions, setAddedOptions] = useState<Option[]>([DEFAULT_OPTION]);
@@ -218,7 +219,8 @@ function CreateFunding() {
         <IntroForm
           description={description}
           setDescription={setDescription}
-          setShortDescription={setShortDescription}
+          aiSummary={aiSummary}
+          setAiSummary={setAiSummary}
           isSubmit={isSubmit}
           isFundiOpen={isFundiOpen}
           setIsFundiOpen={setIsFundiOpen}
