@@ -1,17 +1,23 @@
-import type React from "react";
+import type React from 'react';
+
+export type DataSelectionProps = {
+  people: number | string;
+  household: number | string;
+  house: number | string;
+};
 
 export type OptionSelectionProps = {
-  age: string;
+  ageGroup: string;
   gender: string;
-  region: string;
-}
+  area: string;
+};
 
 export interface DataChoiceTableProps {
-  selected: string[];
-  setSelected: React.Dispatch<React.SetStateAction<string[]>>
+  selected: DataSelectionProps;
+  setSelected: React.Dispatch<React.SetStateAction<DataSelectionProps>>;
 }
 
 export interface DataOptionChoiceProps {
   selected: OptionSelectionProps;
-  setSelected: React.Dispatch<React.SetStateAction<OptionSelectionProps>>
+  setSelected: React.Dispatch<React.SetStateAction<OptionSelectionProps>>;
 }

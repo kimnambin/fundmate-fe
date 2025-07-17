@@ -8,7 +8,7 @@ import { statisticsStore } from '../stores/StatisticsStore';
 const StatisticsPage = () => {
   const isLoading = false;
   const [dataSelection, setDataSelection] = useState<any>();
-  const isDataSubmitted = statisticsStore(())
+  const isDataSubmitted = statisticsStore((state) => state.isDataSubmitted);
   useEffect(() => {
     console.log(dataSelection);
   }, [dataSelection]);
@@ -22,7 +22,7 @@ const StatisticsPage = () => {
             <Loading />
           </Layout>
         )}
-        {isSubmit && <StatisticsBody />}
+        {isDataSubmitted && <StatisticsBody rawData={dataSelection} />}
       </div>
     </Layout>
   );
