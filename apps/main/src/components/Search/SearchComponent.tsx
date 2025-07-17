@@ -27,7 +27,11 @@ export const SearchComponent = () => {
   const getSearchData = async () => {
     let pathname: string;
     if (isCategory) {
-      pathname = `/api/projects/${queryValue}`;
+      if (queryValue === '0') {
+        pathname = `/api/projects`;
+      } else {
+        pathname = `/api/projects/${queryValue}`;
+      }
     } else if (isSearch) {
       pathname = `/`;
     } else {
