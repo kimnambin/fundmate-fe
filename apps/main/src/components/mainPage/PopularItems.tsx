@@ -1,5 +1,4 @@
 import { HorizontalCard } from '@repo/ui/components';
-import { range } from '../../utils/tempRange';
 import {
   PopularItemsContainer,
   PopularItemsGrid,
