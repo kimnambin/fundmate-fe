@@ -6,9 +6,7 @@ export const createFunding = async (data: CreateFundingData) => {
   return response.data;
 };
 
-export const aiSummarize = async (data: {
-  message: string;
-}): Promise<{ summary: string }> => {
+export const aiSummarize = async (data: { message: string }) => {
   const response = await commonApiInstance.post('/ai/summarize', data);
   return response.data;
 };
@@ -22,6 +20,5 @@ export const tempLogin = async (email: string, password: string) => {
 
   const token = response.data.accessToken;
   document.cookie = `accessToken=${token}; path=/;`;
-  console.log('token : ', document.cookie);
   return token;
 };

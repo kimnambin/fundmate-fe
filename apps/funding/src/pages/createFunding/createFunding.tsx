@@ -37,6 +37,7 @@ function CreateFunding() {
   const [deliveryDate, setDeliveryDate] = useState('');
   const [description, setDescription] = useState('');
   const [shortDescription, setShortDescription] = useState('');
+  const [projectId, setProjectId] = useState(null);
 
   const [addedOptions, setAddedOptions] = useState<Option[]>([DEFAULT_OPTION]);
   const [optionTitle, setOptionTitle] = useState('');
@@ -53,18 +54,18 @@ function CreateFunding() {
   const { configs, category, gender, age } = useCategoryConfigs();
   const { mutate } = useCreateFunding();
 
-  useEffect(() => {
-    // 로그인 임시 연동 코드
-    const autoLogin = async () => {
-      try {
-        await tempLogin('a@mail.com', 'zzz111');
-        console.log('임시 로그인');
-      } catch (err) {
-        console.log('로그인 실패: ', err);
-      }
-    };
-    autoLogin();
-  }, []);
+  // 로그인 임시 연동 코드
+  // useEffect(() => {
+  //   const autoLogin = async () => {
+  //     try {
+  //       await tempLogin('a@mail.com', 'zzz111');
+  //       console.log('임시 로그인');
+  //     } catch (err) {
+  //       console.log('로그인 실패: ', err);
+  //     }
+  //   };
+  //   autoLogin();
+  // }, []);
 
   const handleImageUpload = () => {
     fileInputRef.current?.click();
@@ -171,8 +172,9 @@ function CreateFunding() {
 
     mutate(data, {
       onSuccess: (data) => {
-        console.log('펀딩 개설 성공: ', data.message);
-        navigate('/product');
+        console.log('펀딩 개설 성공');
+        setProjectId(data.project_id);
+        navigate({ pathname: '/product', search: `?id=${projectId}` });
       },
       onError: (error) => {
         if (isAxiosError<{ message: string }>(error)) {
