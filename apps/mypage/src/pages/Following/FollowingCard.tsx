@@ -1,44 +1,47 @@
-import { useState } from 'react';
+import { FollowingButton } from '@repo/ui/components';
+import { useNavigate } from 'react-router-dom';
 
 interface FollowingCardProps {
-  name: string; // 닉네임
+  userId: number;
+  name: string;
+  nickname: string; // 추가
   initial: string;
   isFollowing: boolean;
+  onToggleFollow: (userId: number, nextFollow: boolean) => void;
 }
 
 export const FollowingCard = ({
+  userId,
   name,
+  nickname,
   initial,
-  isFollowing: initialFollowing,
+  isFollowing,
+  onToggleFollow,
 }: FollowingCardProps) => {
-  const [isFollowing, setIsFollowing] = useState(initialFollowing);
+  const navigate = useNavigate();
 
-  const toggleFollow = () => {
-    setIsFollowing((prev) => !prev);
+  const handleProfileClick = () => {
+    navigate(`/supporter/${nickname}`);
   };
 
   return (
     <div className="flex justify-between items-center w-full p-4 bg-white rounded shadow">
-      <div className="flex items-center gap-4">
-        {/* 아바타 */}
+      {/* 프로필 클릭 영역 */}
+      <div
+        className="flex items-center gap-4 cursor-pointer"
+        onClick={handleProfileClick}
+      >
         <div className="w-14 h-14 rounded-full bg-slate-200 flex items-center justify-center text-[#5FBDFF] text-lg font-medium">
           {initial}
         </div>
         <div className="text-[18px] font-semibold">{name}</div>
       </div>
 
-      {/* 팔로우/팔로잉 버튼 */}
-      <button
-        onClick={toggleFollow}
-        className={`px-6 py-4 rounded border flex items-center gap-1
-          ${
-            isFollowing
-              ? 'bg-gray-100 text-gray-600 border-gray-300'
-              : 'bg-white text-[#5FBDFF] border-[#5FBDFF]'
-          }`}
-      >
-        {isFollowing ? '✔ 팔로잉' : '+ 팔로우'}
-      </button>
+      {/* 팔로우 / 언팔 버튼 */}
+      <FollowingButton
+        following={isFollowing}
+        setFollowing={(next) => onToggleFollow(userId, next)}
+      />
     </div>
   );
 };

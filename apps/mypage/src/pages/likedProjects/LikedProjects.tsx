@@ -1,16 +1,22 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Title } from '@repo/ui/styles';
 import { VerticalCard } from '@repo/ui/components';
 
+interface LikedProjectFromAPI {
+  project_id: number;
+  title: string;
+  current_amount: number;
+  goal_amount: number;
+  description: string;
+}
 
-interface Project { // 임시 타입
+interface Project {
   id: number;
   title: string;
   thumbnailUrl: string;
-  category: string;
   currentAmount: number;
   targetAmount: number;
-  endDate: string;
   description: string;
 }
 
@@ -19,42 +25,32 @@ const LikedProjects = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 임시 더미 데이터
-    const mockData: Project[] = [
-      {
-        id: 1,
-        title: "환경 보호 프로젝트",
-        thumbnailUrl: "https://picsum.photos/300/300",
-        category: "환경",
-        currentAmount: 500000,
-        targetAmount: 1000000,
-        endDate: "2025-08-01",
-        description: "지구를 위한 작은 시작",
-      },
-      {
-        id: 2,
-        title: "유기동물 후원 프로젝트",
-        thumbnailUrl: "https://picsum.photos/300/300",
-        category: "동물",
-        currentAmount: 200000,
-        targetAmount: 500000,
-        endDate: "2025-08-15",
-        description: "유기동물 보호소 지원",
-      },
-      {
-        id: 3,
-        title: "청년 창업 펀딩",
-        thumbnailUrl: "https://picsum.photos/300/300",
-        category: "창업",
-        currentAmount: 750000,
-        targetAmount: 1000000,
-        endDate: "2025-08-20",
-        description: "청년 창업가의 꿈을 응원합니다",
-      },
-    ];
+    const fetchLikedProjects = async () => {
+      try {
+        const res = await axios.get<LikedProjectFromAPI[]>('/api/users/likes', {
+          withCredentials: true,
+        });
 
-    setProjects(mockData);
-    setLoading(false);
+        console.log("찜한 프로젝트 조회:", res.data);
+
+        const formatted: Project[] = res.data.map((item) => ({
+          id: item.project_id,
+          title: item.title,
+          thumbnailUrl: 'https://picsum.photos/300/300',
+          currentAmount: item.current_amount,
+          targetAmount: item.goal_amount,
+          description: item.description || '설명이 없습니다.',
+        }));
+
+        setProjects(formatted);
+      } catch (err) {
+        console.error('찜한 프로젝트 조회 실패:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLikedProjects();
   }, []);
 
   return (
@@ -65,9 +61,19 @@ const LikedProjects = () => {
         <div>Loading...</div>
       ) : projects.length > 0 ? (
         <div className="grid grid-cols-5 gap-3">
-          {projects.map((_project) => {
+          {projects.map((project) => {
+            const progress = Math.round(
+              (project.currentAmount / project.targetAmount) * 100
+            );
+
             return (
-              <VerticalCard />
+              <VerticalCard
+                key={project.id}
+                imageUrl={project.thumbnailUrl}
+                title={project.title}
+                description={project.description}
+                progress={progress}
+              />
             );
           })}
         </div>

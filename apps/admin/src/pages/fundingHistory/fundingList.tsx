@@ -1,5 +1,6 @@
-import { Dropdown, VerticalCard } from '@repo/ui/components';
+import { VerticalCard } from '@repo/ui/components';
 import { SubTitle, MediumFont } from '@repo/ui/styles';
+import { Dropdown } from '@repo/ui/components'
 
 const FundingList = () => {
   return (

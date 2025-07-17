@@ -1,5 +1,5 @@
-import { Dropdown } from "@repo/ui/components"
 import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
+import { Dropdown } from "@repo/ui/components";
 
 type SearchHeaderProps = {
   isCategory: boolean;

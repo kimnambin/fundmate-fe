@@ -11,7 +11,7 @@ const UserSummary = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await axios.get("/api/users/profile", {
+        const response = await axios.get("/api/users/mypage/profile", {
           withCredentials: true,
         });
         setNickname(response.data.nickname);
@@ -35,7 +35,9 @@ const UserSummary = () => {
           <UserFollowStats />
         </div>
       </div>
-      <UserRecentProjects />
+
+      {/* 하단: 최근 본 프로젝트 (닉네임 전달) */}
+      <UserRecentProjects nickname={nickname} />
     </div>
   );
 };
