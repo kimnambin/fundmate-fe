@@ -2,16 +2,13 @@ import { useEffect, useState, useRef, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { MediumFont, Title } from "@repo/ui/styles";
 import { InputText, MainButton } from "@repo/ui/components";
-import { useTmpLogin, useSettings } from "../../hook/login";
 import axios from "axios";
 
-// 프론트에서 사용할 카테고리
 const categories = [
   "예술", "의류", "디자인", "테크/가전",
   "게임", "홈/리빙", "향수/뷰티", "잡화"
 ];
 
-// 서버 → 프론트 매핑 테이블
 const categoryMap: Record<string, string> = {
   "예술": "예술",
   "의류": "의류",
@@ -33,6 +30,7 @@ const ageOptions = [
 ];
 
 const UserProfileSetting = () => {
+
   const [nickname, setNickname] = useState("");
   const [gender, setGender] = useState("");
   const [age, setAge] = useState("");
@@ -44,9 +42,6 @@ const UserProfileSetting = () => {
 
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  //useTmpLogin();
-  //useSettings();
 
   useEffect(() => {
     const loadUserProfile = async () => {
@@ -117,8 +112,6 @@ const UserProfileSetting = () => {
       contents: intro,
       category_id: categoryId,
     };
-
-    console.log("📤 보낼 데이터", payload);
 
     try {
       const res = await axios.put("/api/users/mypage/profile", payload, {
@@ -196,7 +189,6 @@ const UserProfileSetting = () => {
             />
           </div>
 
-          {/* 성별 및 나이 */}
           <div className="flex justify-between gap-4">
             <div className="flex flex-col flex-1">
               <label className="text-base font-medium">성별</label>
@@ -235,7 +227,6 @@ const UserProfileSetting = () => {
             </div>
           </div>
 
-          {/* 이메일 */}
           <div className="flex flex-col gap-3">
             <label className="text-base font-medium">이메일</label>
             <InputText
@@ -245,7 +236,6 @@ const UserProfileSetting = () => {
             />
           </div>
 
-          {/* 한줄 소개 */}
           <div>
             <label className="text-base font-medium">한줄 소개</label>
             <textarea
@@ -256,7 +246,6 @@ const UserProfileSetting = () => {
             />
           </div>
 
-          {/* 카테고리 선택 */}
           <div>
             <label className="text-base font-medium">카테고리 선택</label>
             <div className="grid grid-cols-4 gap-3 mt-3">
@@ -277,7 +266,6 @@ const UserProfileSetting = () => {
             </div>
           </div>
 
-          {/* 버튼 */}
           <div className="flex justify-between gap-4 mt-6">
             <button
               type="button"
@@ -293,7 +281,6 @@ const UserProfileSetting = () => {
             />
           </div>
 
-          {/* 회원탈퇴 버튼 */}
           <button
             type="button"
             className="mt-6 w-full h-[48px] flex justify-center items-center rounded-md underline text-[#7E7C7C] mb-[120px]"

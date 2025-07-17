@@ -24,5 +24,5 @@ export const tempLogin = (payload: LoginPayload) => {
 };
 
 export const settings = (payload: SettingsPayload) => {
-  return axios.put(`/api/auth/login`, payload);
+  return axios.put(`/api/users/mypage/profile`, payload);
 };

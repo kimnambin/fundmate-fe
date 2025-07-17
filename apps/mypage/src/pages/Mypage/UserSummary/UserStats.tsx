@@ -13,14 +13,21 @@ const UserStats = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
+
         const res = await axios.get("/api/users/mypage", {
-          params: { project_id: 1 }, // ← 여기에 실제 값 넣었는지 확인
+          params: { project_id: [] }, //임시 전달값
           withCredentials: true,
         });
 
         setPaymentCount(res.data.paymentCount);
         setLikeCount(res.data.likeCount);
         setCommentCount(res.data.commentCount);
+
+        console.log("펀딩 찜 후기 데이터", {
+          paymentCount: res.data.paymentCount,
+          likeCount: res.data.likeCount,
+          commentCount: res.data.commentCount,
+        });
       } catch (err) {
         console.error("유저 통계 정보 조회 실패:", err);
       }

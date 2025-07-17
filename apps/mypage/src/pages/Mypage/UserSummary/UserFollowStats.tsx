@@ -13,16 +13,23 @@ const UserFollowStats = () => {
   useEffect(() => {
     const fetchFollowStats = async () => {
       try {
+
         const [followingRes, followerRes] = await Promise.all([
           axios.get("/api/users/mypage/following", { withCredentials: true }),
           axios.get("/api/users/mypage/follower", { withCredentials: true }),
         ]);
 
-        console.log("followingRes:", followingRes.data);
-        console.log("followerRes:", followerRes.data);
 
-        setFollowing(followingRes.data.total ?? 0);
-        setFollower(followerRes.data.total ?? 0);
+        const followingTotal = followingRes.data.total ?? 0;
+        const followerTotal = followerRes.data.total ?? 0;
+
+        setFollowing(followingTotal);
+        setFollower(followerTotal);
+
+        console.log("팔로잉 팔로워 데이터", {
+          following: followingTotal,
+          follower: followerTotal,
+        });
       } catch (err) {
         console.error("팔로우 정보 조회 실패:", err);
       }
