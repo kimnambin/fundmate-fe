@@ -1,11 +1,11 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface loadingStoreProps {
   isLoading: boolean;
-  setIsLoading: () => void;
+  setIsLoading: (value: boolean) => void;
 }
 
 export const loadingStore = create<loadingStoreProps>()((set) => ({
   isLoading: false,
-  setIsLoading: () => set((state) => ({ isLoading: !state.isLoading }))
-}))
+  setIsLoading: (value) => set({ isLoading: value }),
+}));
