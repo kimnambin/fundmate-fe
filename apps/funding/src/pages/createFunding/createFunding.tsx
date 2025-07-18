@@ -65,7 +65,7 @@ function CreateFunding() {
         console.log('로그인 실패: ', err);
       }
     };
-    autoLogin();
+    // autoLogin();
   }, []);
 
   const handleImageUpload = () => {
@@ -120,6 +120,7 @@ function CreateFunding() {
   };
 
   const isValidFunding = () =>
+    imageFile !== null &&
     [
       title.trim(),
       goalAmount.trim(),
@@ -160,6 +161,7 @@ function CreateFunding() {
 
     try {
       const imageUrl = await uploadImage(imageFile);
+      console.log(imageUrl);
 
       const data: CreateFundingData = {
         image_url: imageUrl,
@@ -197,14 +199,19 @@ function CreateFunding() {
       <CreateFundingStyle>
         <Title>프로젝트(펀딩) 개설</Title>
 
-        <input
-          type="file"
-          accept="image/*"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          style={{ display: 'none' }}
-        />
-        <ImageUpload preview={preview} onClick={handleImageUpload} />
+        <div className="flex flex-col gap-[20px]">
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
+          <ImageUpload preview={preview} onClick={handleImageUpload} />
+          {isSubmit && imageFile === null && (
+            <WarningText>이미지를 등록해주세요.</WarningText>
+          )}
+        </div>
 
         <InfoForm
           title={title}

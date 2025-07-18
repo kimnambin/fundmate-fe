@@ -12,9 +12,9 @@ export const useImageUpload = () => {
       console.log('presigned URL 발급\nurl: ', url, '\nkey: ', key);
       await uploadImageToS3(url, file);
       console.log('s3에 이미지 업로드 완료');
-      const { image_url } = await uploadComplete(key);
-      console.log('업로드 여부 전달 완료\nimageUrl :', image_url);
-      return image_url;
+      const { url: imageUrl } = await uploadComplete(key);
+      console.log('업로드 여부 전달 완료\nimageUrl :', imageUrl);
+      return imageUrl;
     },
   });
 };

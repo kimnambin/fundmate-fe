@@ -28,6 +28,7 @@
     "react-simple-south-korea-map-chart": "^1.1.1",
     "styled-components": "^6.1.19",
     "tailwind-styled-components": "^2.2.0",
+    "uuid": "^11.1.0",
     "vite-plugin-svgr": "^4.3.0"
   },
   "devDependencies": {

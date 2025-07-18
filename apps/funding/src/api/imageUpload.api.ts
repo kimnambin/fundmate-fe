@@ -1,10 +1,15 @@
 import { commonApiInstance } from '@repo/ui/hooks';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 export const getPresignedUrl = async (file: File) => {
+  const uuid = uuidv4();
+  const extension = file.name.split('.').pop();
+  const newFileName = `${uuid}.${extension}`;
+
   const response = await commonApiInstance.get('/upload/presign', {
     params: {
-      filename: file.name,
+      filename: newFileName,
       contentType: file.type,
     },
   });
