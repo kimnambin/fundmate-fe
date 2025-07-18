@@ -8,6 +8,5 @@ export const tempLogin = async (email: string, password: string) => {
   });
 
   const token = response.data.accessToken;
-  document.cookie = `accessToken=${token}; path=/;`;
   return token;
 };

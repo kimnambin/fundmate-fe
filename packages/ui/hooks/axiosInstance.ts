@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { navigateToLogin } from '../utils/navigateToLogin';
 
 export const commonApiInstance = axios.create({
   baseURL: '/api',
@@ -31,9 +32,8 @@ commonApiInstance.interceptors.response.use(
         url: error.response.url,
       });
 
-      if (error.response.data.message === '로그인 필요') {
-        alert('로그인이 필요합니다.');
-        window.location.href = '/login';
+      if (error.response.status === 401) {
+        navigateToLogin();
       }
     } else if (error.request) {
       console.error('Request is excuted but no response', error.request);

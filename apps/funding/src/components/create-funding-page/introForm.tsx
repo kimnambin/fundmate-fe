@@ -42,6 +42,7 @@ const IntroForm = ({
           setAiSummary(res.summary);
         },
         onError: (err) => {
+          alert('ai 요약 실패');
           console.log('ai요약 실패: ', err);
         },
       },

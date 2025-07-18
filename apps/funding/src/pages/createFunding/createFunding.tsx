@@ -56,17 +56,17 @@ function CreateFunding() {
   const { mutateAsync: uploadImage } = useImageUpload();
 
   // 로그인 임시 연동 코드
-  useEffect(() => {
-    const autoLogin = async () => {
-      try {
-        await tempLogin('g@mail.com', 'zzz111');
-        console.log('임시 로그인');
-      } catch (err) {
-        console.log('로그인 실패: ', err);
-      }
-    };
-    // autoLogin();
-  }, []);
+  // useEffect(() => {
+  //   const autoLogin = async () => {
+  //     try {
+  //       await tempLogin('g@mail.com', 'zzz111');
+  //       console.log('임시 로그인');
+  //     } catch (err) {
+  //       console.log('로그인 실패: ', err);
+  //     }
+  //   };
+  //   autoLogin();
+  // }, []);
 
   const handleImageUpload = () => {
     fileInputRef.current?.click();
@@ -186,10 +186,12 @@ function CreateFunding() {
           navigate(`/product/?id=${data.project_id}`);
         },
         onError: (error) => {
+          alert('펀딩 개설 실패');
           console.error('펀딩 개설 실패: ', error);
         },
       });
     } catch (err) {
+      alert('이미지 업로드 실패');
       console.log('이미지 업로드 실패: ', err);
     }
   };
