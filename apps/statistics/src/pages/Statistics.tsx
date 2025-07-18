@@ -4,14 +4,16 @@ import { Layout } from '@repo/ui/styles';
 import { Loading } from '@repo/ui/components';
 import { useEffect, useState } from 'react';
 import { statisticsStore } from '../stores/StatisticsStore';
+import { loadingStore } from '@repo/ui/loadingStore';
 
 const StatisticsPage = () => {
-  const isLoading = false;
+  const isLoading = loadingStore((state) => state.isLoading);
   const [dataSelection, setDataSelection] = useState<any>();
   const isDataSubmitted = statisticsStore((state) => state.isDataSubmitted);
   useEffect(() => {
     console.log(dataSelection);
-  }, [dataSelection]);
+    console.log(isLoading);
+  }, [dataSelection, isLoading]);
 
   return (
     <Layout>
@@ -22,7 +24,9 @@ const StatisticsPage = () => {
             <Loading />
           </Layout>
         )}
-        {isDataSubmitted && <StatisticsBody rawData={dataSelection} />}
+        {isDataSubmitted && !isLoading && (
+          <StatisticsBody rawData={dataSelection} />
+        )}
       </div>
     </Layout>
   );

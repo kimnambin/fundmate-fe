@@ -7,6 +7,8 @@ import { MapData } from './Datas/MapData';
 import { LineData } from './Datas/LineData';
 import { commonApiInstance } from '@repo/ui/hooks';
 import { useQuery } from '@tanstack/react-query';
+import { loadingStore } from '@repo/ui/loadingStore';
+import { useEffect } from 'react';
 
 const data = tempYearData().reduce<{ x: number; y: number }[]>((acc, y, i) => {
   const item = tempData[i];
@@ -24,20 +26,30 @@ const lineData = [
 ];
 
 const getPublicData = async (data: any, selected: any) => {
-  const response = await commonApiInstance.post(`/datas/${selected}`, data);
-  return response.data;
+  try {
+    const response = await commonApiInstance.post(`/datas/${selected}`, data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
 
 export const StatisticsBody = (rawData: any) => {
+  const setIsLoading = loadingStore((state) => state.setIsLoading);
   const { filteredData, selected } = rawData.rawData;
-  const { data, isLoading } = useQuery({
-    queryKey: ['statistics', selected, filteredData],
+  const { data, isLoading, isError, error, status } = useQuery({
+    queryKey: ['statistics'],
     queryFn: () => getPublicData(filteredData, selected),
     staleTime: 1000 * 60,
   });
-  console.log(filteredData, selected);
 
+  useEffect(() => {
+    setIsLoading(isLoading);
+    console.log({ isError, error, status });
+  }, [isLoading]);
   console.log(data);
+  console.log(filteredData, selected);
 
   return (
     <div className="flex flex-col gap-5">
