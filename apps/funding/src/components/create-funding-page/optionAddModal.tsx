@@ -9,25 +9,25 @@ interface Props {
   isAddOpen: boolean;
   setIsAddOpen: (value: boolean) => void;
   isAdd: boolean;
-  itemTitle: string;
-  setItemTitle: (value: string) => void;
-  itemContent: string;
-  setItemContent: (value: string) => void;
-  itemPrice: string;
-  setItemPrice: (value: string) => void;
+  optionTitle: string;
+  setOptionTitle: (value: string) => void;
+  optionContent: string;
+  setOptionContent: (value: string) => void;
+  optionPrice: string;
+  setOptionPrice: (value: string) => void;
   handleAdd: () => void;
 }
 
-const ItemAddModal = ({
+const OptionAddModal = ({
   isAddOpen,
   setIsAddOpen,
   isAdd,
-  itemTitle,
-  setItemTitle,
-  itemContent,
-  setItemContent,
-  itemPrice,
-  setItemPrice,
+  optionTitle,
+  setOptionTitle,
+  optionContent,
+  setOptionContent,
+  optionPrice,
+  setOptionPrice,
   handleAdd,
 }: Props) => {
   return (
@@ -43,22 +43,22 @@ const ItemAddModal = ({
         <Title>상품 추가</Title>
         <InputText
           placeholder="상품명을 입력하세요."
-          value={itemTitle}
-          onChange={(e) => setItemTitle(e.target.value)}
-          isError={isAdd && itemTitle.trim().length === 0}
+          value={optionTitle}
+          onChange={(e) => setOptionTitle(e.target.value)}
+          isError={isAdd && optionTitle.trim().length === 0}
         />
         <InputTextArea
           placeholder="상품 내용을 입력하세요."
           rows={5}
-          value={itemContent}
-          onChange={(e) => setItemContent(e.target.value)}
-          isError={isAdd && itemContent.trim().length === 0}
+          value={optionContent}
+          onChange={(e) => setOptionContent(e.target.value)}
+          isError={isAdd && optionContent.trim().length === 0}
         />
         <InputText
           placeholder="상품 금액을 입력하세요."
-          value={itemPrice}
-          onChange={(e) => setItemPrice(formatPrice(e.target.value))}
-          isError={isAdd && itemPrice.trim().length === 0}
+          value={optionPrice}
+          onChange={(e) => setOptionPrice(formatPrice(e.target.value))}
+          isError={isAdd && optionPrice.trim().length === 0}
         />
         <div className="flex justify-end">
           <MainButton
@@ -73,4 +73,4 @@ const ItemAddModal = ({
   );
 };
 
-export default ItemAddModal;
+export default OptionAddModal;

@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { MediumFont, Title } from "@repo/ui/styles";
 import { InputText, MainButton } from "@repo/ui/components";
+import { useImageUpload } from "../../hook/useImageUpload";
 import axios from "axios";
 
 const categories = [
@@ -30,7 +31,6 @@ const ageOptions = [
 ];
 
 const UserProfileSetting = () => {
-
   const [nickname, setNickname] = useState("");
   const [gender, setGender] = useState("");
   const [age, setAge] = useState("");
@@ -42,18 +42,15 @@ const UserProfileSetting = () => {
 
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { mutateAsync: uploadImage } = useImageUpload();
 
   useEffect(() => {
     const loadUserProfile = async () => {
-      console.log("유저 프로필 불러오기 실행됨");
-
       try {
         const res = await axios.get(`/api/users/mypage/profile?ts=${Date.now()}`, {
           withCredentials: true,
         });
-
         const data = res.data;
-        console.log("응답 받은 유저 데이터:", data);
 
         setNickname(data.nickname || "");
         setGender(data.gender || "");
@@ -68,7 +65,6 @@ const UserProfileSetting = () => {
         if (mappedCategory && categories.includes(mappedCategory)) {
           setSelectedCategory(mappedCategory);
         } else {
-          console.warn("알 수 없는 카테고리 이름:", data.categoryName);
           setSelectedCategory(categories[0]);
         }
 
@@ -118,7 +114,6 @@ const UserProfileSetting = () => {
         withCredentials: true,
       });
 
-      console.log("프로필 수정 성공:", res.data);
       alert("프로필이 저장되었습니다!");
       window.location.href = "/mypage";
     } catch (err) {
@@ -127,14 +122,15 @@ const UserProfileSetting = () => {
     }
   };
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    try {
+      const imageUrl = await uploadImage(file);
+      setProfileImage(imageUrl);
+    } catch (err) {
+      console.error("이미지 업로드 실패:", err);
     }
   };
 
@@ -147,7 +143,6 @@ const UserProfileSetting = () => {
       <div className="flex flex-col items-center w-[600px]">
         <Title className="w-full mb-10">내 정보 설정</Title>
 
-        {/* 프로필 이미지 */}
         <div className="flex flex-col items-center gap-3 mb-10">
           {profileImage ? (
             <img
@@ -177,7 +172,6 @@ const UserProfileSetting = () => {
           </div>
         </div>
 
-        {/* 입력 폼 */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full max-w-[600px]">
           <div className="flex flex-col gap-3">
             <label className="text-base font-medium">닉네임</label>
@@ -229,11 +223,7 @@ const UserProfileSetting = () => {
 
           <div className="flex flex-col gap-3">
             <label className="text-base font-medium">이메일</label>
-            <InputText
-              type="email"
-              value={email}
-              readOnly
-            />
+            <InputText type="email" value={email} readOnly />
           </div>
 
           <div>
@@ -274,11 +264,7 @@ const UserProfileSetting = () => {
             >
               취소
             </button>
-            <MainButton
-              type="submit"
-              label="확인"
-              width="w-full"
-            />
+            <MainButton type="submit" label="확인" width="w-full" />
           </div>
 
           <button

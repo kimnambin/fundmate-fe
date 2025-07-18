@@ -1,4 +1,4 @@
-import tw from "tailwind-styled-components";
+import tw from 'tailwind-styled-components';
 
 export const SignUpContainer = tw.div`
 flex
@@ -7,7 +7,7 @@ gap-5
 justify-center
 items-start
 w-full
-`
+`;
 
 export const InputContainer = tw.div`
 flex
@@ -16,13 +16,13 @@ justify-center
 items-stretch
 w-full
 gap-3
-`
+`;
 
 export const SignUpVerificationContainer = tw.div`
 flex
 flex-row
 gap-3
-`
+`;
 
 export const UserCategoryButton = tw.button<{ $selected: boolean }>`
   rounded-full
@@ -31,5 +31,5 @@ export const UserCategoryButton = tw.button<{ $selected: boolean }>`
   flex-row
   justify-center
   items-center
-  ${(p) => p.$selected ? 'bg-cyan-400 font-semibold text-white' : 'bg-slate-200'}
-`
+  ${(p) => (p.$selected ? 'bg-main font-semibold text-white' : 'bg-slate-200')}
+`;
