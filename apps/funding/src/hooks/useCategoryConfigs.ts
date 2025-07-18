@@ -12,5 +12,21 @@ export const useCategoryConfigs = () => {
     { filter: filters[2], value: age, onSelect: setAge },
   ];
 
-  return { configs, category, setCategory, gender, setGender, age, setAge };
+  const findLabel = (filterIndex: number, id: number | null) => {
+    const option = filters[filterIndex].options.find((opt) => opt.id === id);
+    return option?.label ?? '';
+  };
+
+  return {
+    configs,
+    category,
+    setCategory,
+    gender,
+    setGender,
+    age,
+    setAge,
+    categoryLabel: findLabel(0, category),
+    genderLabel: findLabel(1, gender),
+    ageLabel: findLabel(2, age),
+  };
 };
