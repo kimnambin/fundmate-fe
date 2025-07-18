@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
-import svgr from 'vite-plugin-svgr'
+import svgr from 'vite-plugin-svgr';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,9 +11,6 @@ export default defineConfig({
     federation({
       name: 'funding',
       filename: 'remoteEntry.js',
-      remotes: {
-        admin: 'http://localhost:5001/assets/remoteEntry.js',
-      },
       exposes: {
         './CreateFundingPage': './src/pages/createFunding/createFunding.tsx',
         './AskFundiPage': './src/pages/askFundi/askFundi.tsx',

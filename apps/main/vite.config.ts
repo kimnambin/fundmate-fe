@@ -1,10 +1,18 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
-import dotenv from 'dotenv'
-import { resolve } from 'path'
+import dotenv from 'dotenv';
+import { resolve } from 'path';
+import {
+  ADMIN_PAGE,
+  FUNDING_PAGE,
+  MYPAGE,
+  PAYMENT_PAGE,
+  STATISTICS_PAGE,
+} from '@repo/ui/utils';
 
-dotenv.config({ path: resolve(__dirname, '../../.env') })
+dotenv.config({ path: resolve(__dirname, '../../.env') });
+const deploymentState = import.meta.env.MODE === 'production';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -13,11 +21,21 @@ export default defineConfig({
     federation({
       name: 'main',
       remotes: {
-        admin: 'http://localhost:5001/assets/remoteEntry.js',
-        funding: 'http://localhost:5002/assets/remoteEntry.js',
-        mypage: 'http://localhost:5003/assets/remoteEntry.js',
-        payment: 'http://localhost:5004/assets/remoteEntry.js',
-        statistics: 'http://localhost:5005/assets/remoteEntry.js',
+        admin: deploymentState
+          ? `${ADMIN_PAGE}/assets/remoteEntry.js`
+          : 'http://localhost:5001/assets/remoteEntry.js',
+        funding: deploymentState
+          ? `${FUNDING_PAGE}/assets/remoteEntry.js`
+          : 'http://localhost:5002/assets/remoteEntry.js',
+        mypage: deploymentState
+          ? `${MYPAGE}/assets/remoteEntry.js`
+          : 'http://localhost:5003/assets/remoteEntry.js',
+        payment: deploymentState
+          ? `${PAYMENT_PAGE}/assets/remoteEntry.js`
+          : 'http://localhost:5004/assets/remoteEntry.js',
+        statistics: deploymentState
+          ? `${STATISTICS_PAGE}/assets/remoteEntry.js`
+          : 'http://localhost:5005/assets/remoteEntry.js',
       },
       shared: [
         'react',
@@ -48,8 +66,8 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,
-        cookieDomainRewrite: "",
+        cookieDomainRewrite: '',
       },
-    }
-  }
+    },
+  },
 });

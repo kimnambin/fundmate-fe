@@ -1,5 +1,14 @@
 // utils
-export { ScrollToTop, formatPrice } from './utils';
+export {
+  ScrollToTop,
+  formatPrice,
+  MAIN_PAGE,
+  ADMIN_PAGE,
+  PAYMENT_PAGE,
+  STATISTICS_PAGE,
+  MYPAGE,
+  FUNDING_PAGE,
+} from './utils';
 
 // components
 export {
