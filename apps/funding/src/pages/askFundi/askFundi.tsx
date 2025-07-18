@@ -47,9 +47,9 @@ const AskFundi = () => {
 
   const handleNext = async () => {
     setIsSubmit(true);
+    setIsError(false);
     if (!isValid) return;
     setIsLoading(true);
-    if (isError) setIsError(false);
 
     try {
       const requestData: aiRequestData = {
