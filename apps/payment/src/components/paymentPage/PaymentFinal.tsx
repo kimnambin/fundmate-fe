@@ -21,6 +21,7 @@ import { useGetUserInfo } from '../../hooks/user/useGetUserInfo';
 interface PaymentFinalProps {
   selectedPayment: string;
   addAmount: number;
+  setAddAmount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const PaymentFinal: React.FC<PaymentFinalProps> = ({
@@ -76,14 +77,12 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   const { data: productData } = useGetProductInfo(Number(projectId));
 
   const optionid = useGetoptionid();
-  const optionData =
-    optionid && productData ? productData.options[Number(optionid)] : null;
 
   const { reservePayment } = usePaymentForm({
     paymentInfoId: paymentSaveId,
     rewardId: Number(optionid) ?? null,
     projectId: Number(projectId) ?? null,
-    amount: optionData?.price ?? 1000,
+    amount: addAmount,
     totalAmount: productData?.project?.goal_amount ?? 0,
     scheduleDate: productData?.project?.end_date ?? '',
     address: addressData,
@@ -159,7 +158,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
           addressData={addressData}
           addAmount={addAmount}
           method={modalType === 'CARD' ? 'CARD' : 'VBANK'}
-          onConfirmPayment={() => reservePayment(savedPaymentId ?? 12)}
+          onConfirmPayment={() => reservePayment()}
           setIsModalOpen={handleCloseModal}
           setShowLoading={setShowLoading}
         />

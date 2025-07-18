@@ -8,6 +8,7 @@ import {
   GiftSection,
   GiftTitle,
   ProfileCard,
+  ProfileDesc,
   ProfileImg,
   ProfileInfo,
   ProfileInfos,
@@ -37,7 +38,7 @@ const PDBox: React.FC<ProductDetailProps> = ({
           <ProfileCard>
             <div className="flex flex-row items-center">
               <ProfileImg
-                src={`https://picsum.photos/id/${user.image_id == null ? 10 : user.image_id}/300/200`}
+                src={`https://picsum.photos/id/${user.image_url == null ? 10 : user.image_url}/300/200`}
                 alt="prifile"
               />
               <GiftItemTitle>{user.nickname}</GiftItemTitle>
@@ -47,6 +48,7 @@ const PDBox: React.FC<ProductDetailProps> = ({
               setFollowing={setIsFollowing}
             />
           </ProfileCard>
+          <ProfileDesc>{user.content}</ProfileDesc>
         </ProfileInfo>
       </GiftCard>
 

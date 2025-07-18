@@ -22,3 +22,19 @@ export interface CardPayload {
     expYear: string;
   };
 }
+
+export interface PaymentSavePayment {
+  id: number;
+  userId: number;
+  method: string;
+  code: string;
+  token: string;
+  displayInfo: string;
+  details: {
+    type: string;
+    expMonth: string;
+    expYear: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}

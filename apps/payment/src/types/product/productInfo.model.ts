@@ -1,6 +1,6 @@
 export interface ProductInfoProps {
   project: {
-    image_id: number;
+    image_url: number;
     title: string;
     current_price: number;
     remaining_day: number;
@@ -10,9 +10,11 @@ export interface ProductInfoProps {
     end_date: string;
     delivery_date: string;
     description: string;
+    sponsor: number;
+    likes: number;
   };
   users: {
-    image_id: number;
+    image_url: number;
     nickname: string;
     content: string;
   };

@@ -17,7 +17,11 @@ const ProductMiniInfo = () => {
   return (
     <ProductInfo>
       <ProductImg
-        src={`https://picsum.photos/id/${productData?.project.image_id}/300/200`}
+        src={
+          typeof productData?.project.image_url === 'string'
+            ? `https://picsum.photos/id/10/300/200`
+            : `https://picsum.photos/id/${productData?.project.image_url}/300/200`
+        }
         alt="대표 이미지"
       />
       <FlexColsm className="items-start justify-start">

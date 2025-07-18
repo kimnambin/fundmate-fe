@@ -42,7 +42,7 @@ function ProductPage() {
         <>
           <FlexRow className="items-start">
             <FlexItem>
-              <ProductImg imgId={productData.project.image_id} />
+              <ProductImg imgId={productData.project.image_url} />
             </FlexItem>
             <FlexItem>
               <ProductInfo

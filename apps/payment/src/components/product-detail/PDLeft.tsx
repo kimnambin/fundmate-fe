@@ -15,7 +15,7 @@ import PDdetail from './PDdetail';
 import PDReview from './PDReview';
 
 export interface User {
-  image_id: number;
+  image_url: number;
   nickname: string;
   content: string | null;
 }

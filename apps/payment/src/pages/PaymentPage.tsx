@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useIsMobile } from '../hooks/useMobile';
 import { useTmpLogin } from '../hooks/user/useTmp';
 import { useGetUserInfo } from '../hooks/user/useGetUserInfo';
-import { useGetoptionid, useGetQueryString } from '../hooks/useGetQueryString';
+import { useGetQueryString } from '../hooks/useGetQueryString';
 import { useGetProductInfo } from '../hooks/product/getProductInfo';
 
 const PaymentPage = () => {
@@ -23,11 +23,9 @@ const PaymentPage = () => {
 
   const { data } = useGetUserInfo();
 
-  const optionid = useGetoptionid();
-  const optionData =
-    optionid && productData ? productData.options[Number(optionid)] : null;
+  const optionData = productData?.options[0];
+
   const [addAmount, setAddAmount] = useState<number>(optionData?.price ?? 1000);
-  if (!optionid || !productData || !optionData) return null;
 
   return (
     <>
@@ -35,6 +33,7 @@ const PaymentPage = () => {
         <FlexRow className="items-start justify-between px-[120px]">
           <FlexCol className="w-[55%] items-start gap-4">
             <Productinfos />
+
             <PaymentMid
               subText={subText}
               addAmount={addAmount}
@@ -49,6 +48,7 @@ const PaymentPage = () => {
             <PaymentFinal
               selectedPayment={selectedPayment}
               addAmount={addAmount}
+              setAddAmount={setAddAmount}
             />
           </FlexCol>
         </FlexRow>
@@ -70,6 +70,7 @@ const PaymentPage = () => {
             <PaymentFinal
               selectedPayment={selectedPayment}
               addAmount={addAmount}
+              setAddAmount={setAddAmount}
             />
           </FlexCol>
         </FlexCol>

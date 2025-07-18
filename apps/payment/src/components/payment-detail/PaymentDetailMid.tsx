@@ -1,11 +1,12 @@
 import { MainButton } from '@repo/ui/components';
 import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/layout.style';
 import { BoldBigText, BoldText } from '../styles/text.style';
+import { formatNum } from '../../utils/numbers';
 
-const PaymentDetailMid = () => {
+const PaymentDetailMid = ({ price }: { price: number }) => {
   const title = ['선물 정보', '추가 후원 정보'];
   const subTitle = ['선물 금액', '추가 후원금'];
-  const content = ['1,000원', '0원'];
+  const content = [`${formatNum(price)}원`, '0원'];
 
   return (
     <>

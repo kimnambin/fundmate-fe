@@ -1,6 +1,6 @@
 export interface PaymentPayload {
   paymentInfoId: number;
-  rewardId: number;
+  rewardId: number | null;
   projectId: number;
   amount: number;
   totalAmount: number;

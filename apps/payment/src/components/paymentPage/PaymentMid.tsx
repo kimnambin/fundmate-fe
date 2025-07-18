@@ -2,10 +2,7 @@ import { BaseText, BoldBigText, LightColor } from '../styles/text.style';
 import { Box, BoxRow, FlexColsm, FlexRowsm } from '../styles/layout.style';
 import { Input, MoneyBox, Span } from '../styles/paymentPage/PaymentMid.style';
 import { formatPrice } from '@repo/ui/utils';
-import {
-  useGetoptionid,
-  useGetQueryString,
-} from '../../hooks/useGetQueryString';
+import { useGetQueryString } from '../../hooks/useGetQueryString';
 import { useGetProductInfo } from '../../hooks/product/getProductInfo';
 
 interface PaymentMidProps {
@@ -26,11 +23,9 @@ const PaymentMid = ({
   const projectId = useGetQueryString();
   const { data: productData } = useGetProductInfo(Number(projectId));
 
-  const optionid = useGetoptionid();
+  if (!productData) return null;
 
-  if (!optionid || !productData) return null;
-
-  const optionData = productData.options[Number(optionid)];
+  const optionData = productData.options[0];
 
   return (
     <div className="w-full">

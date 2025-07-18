@@ -1,19 +1,20 @@
 import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { postReservations } from '../../api/reservations';
 import { PaymentPayload } from '../../types/payement/payment.model';
-
-// TODO : 실제 결제 시 전달해야 할 것들이 많음
 
 type PaymentProps = PaymentPayload & {
   setShowLoading?: (v: boolean) => void;
   setIsModalOpen: (v: boolean) => void;
 };
 
+interface ErrorResponse {
+  message: string;
+}
+
 export const usePaymentForm = ({
   paymentInfoId,
-  rewardId,
   projectId,
   amount,
   totalAmount,
@@ -24,30 +25,35 @@ export const usePaymentForm = ({
 }: PaymentProps) => {
   const nav = useNavigate();
 
+  const remainPrice = totalAmount - amount;
+
   const { mutate: reservePayment, isPending: isReserving } = useMutation({
-    mutationFn: (paymentInfoId: number) =>
+    mutationFn: () =>
       postReservations({
         paymentInfoId,
-        rewardId,
+        rewardId: null,
         projectId,
-        amount,
+        amount: remainPrice + amount,
         totalAmount,
         scheduleDate,
         address,
         addressNumber: 6212,
         addressInfo: '',
       }),
-    onSuccess: () => {
+    onSuccess: (response: AxiosResponse<{ insertedId: number }>) => {
+      const insertedId = response.data.insertedId;
       setShowLoading?.(true);
       setIsModalOpen(false);
+      alert('기한이 되면 자동 결제됩니다.');
       setTimeout(() => {
         setShowLoading?.(false);
-        nav('/payment/completed');
+        nav(`/payment/${projectId}/completed?id=${insertedId}`);
       }, 2000);
     },
-    onError: (err: AxiosError) => {
-      console.error(err);
-      alert('결제 예약에 실패했습니다.');
+    onError: (err: AxiosError<ErrorResponse>) => {
+      const errorMessage = err.response?.data.message;
+      alert(errorMessage);
+      setIsModalOpen(false);
     },
   });
 
