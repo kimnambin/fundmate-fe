@@ -1,50 +1,32 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
-const StatsLineChart: React.FC = () => {
-  const data = [
-    {
-      id: "모금액",
-      data: [
-        { x: 0, y: 15 },
-        { x: 1, y: 28 },
-        { x: 2, y: 2 },
-        { x: 3, y: 27 },
-        { x: 4, y: 23 },
-        { x: 5, y: 24 },
-        { x: 6, y: 29 },
-        { x: 7, y: 31 },
-        { x: 8, y: 14 },
-        { x: 9, y: 7 },
-      ],
-    },
-    {
-      id: "후원자수",
-      data: [
-        { x: 0, y: 24 },
-        { x: 1, y: 31 },
-        { x: 2, y: 10 },
-        { x: 3, y: 14 },
-        { x: 4, y: 9 },
-        { x: 5, y: 6 },
-        { x: 6, y: 12 },
-        { x: 7, y: 5 },
-        { x: 8, y: 10 },
-        { x: 9, y: 6 },
-      ],
-    },
-  ];
+interface LineChartDataPoint {
+  x: number | string;
+  y: number;
+}
+
+interface LineChartSeries {
+  id: string;
+  data: LineChartDataPoint[];
+}
+
+interface StatsLineChartProps {
+  data?: LineChartSeries[]; // ❗ 선택적 + undefined 허용
+}
+
+const StatsLineChart: React.FC<StatsLineChartProps> = ({ data }) => {
+  const safeData = Array.isArray(data) ? data : [];
 
   return (
     <div className="w-full h-[300px]">
       <ResponsiveLine
-        data={data}
+        data={safeData}
         margin={{ top: 20, right: 30, bottom: 50, left: 40 }}
         xScale={{ type: "point" }}
         yScale={{
           type: "linear",
           min: 0,
-          max: 32,
           stacked: false,
           reverse: false,
         }}
