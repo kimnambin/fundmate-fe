@@ -5,6 +5,7 @@ import { Loading } from '@repo/ui/components';
 import { useEffect, useState } from 'react';
 import { statisticsStore } from '../stores/StatisticsStore';
 import { loadingStore } from '@repo/ui/loadingStore';
+import { tempData } from '../data/tempData';
 
 const StatisticsPage = () => {
   const isLoading = loadingStore((state) => state.isLoading);
@@ -14,6 +15,8 @@ const StatisticsPage = () => {
     console.log(dataSelection);
     console.log(isLoading);
   }, [dataSelection, isLoading]);
+  const testData = tempData;
+  console.log(testData);
 
   return (
     <Layout>

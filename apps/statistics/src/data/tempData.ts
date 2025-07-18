@@ -1,64 +1,98 @@
-export const tempData = [
+export const tempResult = [
   {
-    "id": "stylus",
-    "label": "stylus",
-    "value": 270,
-    "color": "#d1edff" // 92%
+    adm_cd: '11',
+    adm_nm: '서울특별시',
+    population: '9417469',
   },
   {
-    "id": "erlang",
-    "label": "erlang",
-    "value": 434,
-    "color": "#b3dcf5" // 87%
+    adm_cd: '21',
+    adm_nm: '부산광역시',
+    population: '3295760',
   },
   {
-    "id": "c",
-    "label": "c",
-    "value": 326,
-    "color": "#96caeb" // 82%
+    adm_cd: '22',
+    adm_nm: '대구광역시',
+    population: '2388649',
   },
   {
-    "id": "scala",
-    "label": "scala",
-    "value": 240,
-    "color": "#78b9e1" // 77%
+    adm_cd: '23',
+    adm_nm: '인천광역시',
+    population: '2989125',
   },
   {
-    "id": "php",
-    "label": "php",
-    "value": 151,
-    "color": "#5aa7d7" // 72%
-  }
+    adm_cd: '24',
+    adm_nm: '광주광역시',
+    population: '1468972',
+  },
+  {
+    adm_cd: '25',
+    adm_nm: '대전광역시',
+    population: '1473662',
+  },
+  {
+    adm_cd: '26',
+    adm_nm: '울산광역시',
+    population: '1110516',
+  },
+  {
+    adm_cd: '29',
+    adm_nm: '세종특별자치시',
+    population: '382589',
+  },
+  {
+    adm_cd: '31',
+    adm_nm: '경기도',
+    population: '13717827',
+  },
+  {
+    adm_cd: '32',
+    adm_nm: '강원특별자치도',
+    population: '1528037',
+  },
+  {
+    adm_cd: '33',
+    adm_nm: '충청북도',
+    population: '1624993',
+  },
+  {
+    adm_cd: '34',
+    adm_nm: '충청남도',
+    population: '2193214',
+  },
+  {
+    adm_cd: '35',
+    adm_nm: '전북특별자치도',
+    population: '1774248',
+  },
+  {
+    adm_cd: '36',
+    adm_nm: '전라남도',
+    population: '1771431',
+  },
+  {
+    adm_cd: '37',
+    adm_nm: '경상북도',
+    population: '2598576',
+  },
+  {
+    adm_cd: '38',
+    adm_nm: '경상남도',
+    population: '3280829',
+  },
+  {
+    adm_cd: '39',
+    adm_nm: '제주특별자치도',
+    population: '676375',
+  },
 ];
 
-export const tempYearData = () => {
-  const start = 2019;
-  const end = 2024;
-  const years: number[] = [];
+const tempYear = ['2019', '2020', '2021', '2022', '2023'];
 
-  for (let i = start; i <= end; i++) {
-    years.push(i);
-  }
+export const tempData = tempYear.map((year) => {
+  const data = {
+    year: year,
+    result: tempResult,
+  };
 
-  return years;
-}
-
-export const localeData = [
-  { locale: "부산광역시", count: 1500 },
-  { locale: "대구광역시", count: 3000 },
-  { locale: "대전광역시", count: 400 },
-  { locale: "강원도", count: 2500 },
-  { locale: "광주광역시", count: 1000 },
-  { locale: "경기도", count: 4000 },
-  { locale: "인천광역시", count: 2200 },
-  { locale: "제주특별자치도", count: 100 },
-  { locale: "충청북도", count: 49 },
-  { locale: "경상북도", count: 2000 },
-  { locale: "전라북도", count: 3300 },
-  { locale: "세종특별자치시", count: 110 },
-  { locale: "충청남도", count: 10 },
-  { locale: "경상남도", count: 0 },
-  { locale: "전라남도", count: 250 },
-  { locale: "울산광역시", count: 100 },
-  { locale: "서울특별시", count: 10000 },
-];
+  return data;
+});
