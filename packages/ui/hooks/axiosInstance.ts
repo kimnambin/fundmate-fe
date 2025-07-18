@@ -1,12 +1,13 @@
 import axios from 'axios';
+import { navigateToLogin } from '../utils/navigateToLogin';
 
 export const commonApiInstance = axios.create({
   baseURL: '/api',
   timeout: 5000,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,
 });
 
 commonApiInstance.interceptors.request.use(
@@ -30,6 +31,10 @@ commonApiInstance.interceptors.response.use(
         data: error.response.data,
         url: error.response.url,
       });
+
+      if (error.response.status === 401) {
+        navigateToLogin();
+      }
     } else if (error.request) {
       console.error('Request is excuted but no response', error.request);
     } else {
