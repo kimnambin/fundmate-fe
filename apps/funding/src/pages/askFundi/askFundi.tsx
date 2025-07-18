@@ -129,7 +129,7 @@ const AskFundi = () => {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
-          {isSubmit && content.trim().length === 0 && (
+          {!isError && isSubmit && content.trim().length === 0 && (
             <WarningText>내용을 입력하세요.</WarningText>
           )}
           {isError && (
@@ -140,9 +140,10 @@ const AskFundi = () => {
         <div className="flex flex-col gap-[20px]">
           <SubTitle>카테고리와 타겟층을 선택하세요</SubTitle>
           <CategoryGroup configs={configs} />
-          {isSubmit && (!category || !gender || !age) && (
-            <WarningText>카테고리와 타켓층을 선택하세요.</WarningText>
-          )}
+          {isSubmit &&
+            (category === null || gender === null || age === null) && (
+              <WarningText>카테고리와 타겟층을 선택하세요.</WarningText>
+            )}
         </div>
 
         <div className="flex justify-end">
