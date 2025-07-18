@@ -1,17 +1,11 @@
 {
   "$schema": "https://turborepo.com/schema.json",
+  "globalEnv": ["VITE_BACKEND_ADDRESS"],
   "tasks": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env*"
-      ],
-      "outputs": [
-        "dist/**"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**"]
     },
     "lint": {},
     "dev": {

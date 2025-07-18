@@ -1,6 +1,6 @@
 [
   {
-    "name": "ageGroup",
+    "name": "age_group",
     "menuName": "연령타입",
     "options": [
       {
