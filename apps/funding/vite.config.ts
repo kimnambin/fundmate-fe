@@ -1,7 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
-import svgr from 'vite-plugin-svgr'
+import svgr from 'vite-plugin-svgr';
+import dotenv from 'dotenv';
+import { resolve } from 'path';
+
+dotenv.config({ path: resolve(__dirname, '../../.env') });
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -24,5 +28,16 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: process.env.BACKEND_ADDRESS,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false,
+        cookieDomainRewrite: '',
+      },
+    },
   },
 });

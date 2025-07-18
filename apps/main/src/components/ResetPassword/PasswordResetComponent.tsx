@@ -8,8 +8,9 @@ import { MediumFont } from "@repo/ui/styles"
 
 export const PasswordResetComponent = () => {
   const [searchParams] = useSearchParams();
-  const [authState, setAuthState] = useState<string | null>(null)
+  const [authState, setAuthState] = useState<string | null>(null);
   const isAuthorized = authState === 'done';
+
   useEffect(() => {
     setAuthState(searchParams.get('auth'))
   }, [searchParams])

@@ -6,11 +6,12 @@ interface SingleCategoryProps {
   imgPath: string;
   name: string;
   location: 'main' | 'bar';
+  id: number;
 }
 
-export const SingleCategory = ({ imgPath, name, location }: SingleCategoryProps) => {
+export const SingleCategory = ({ imgPath, name, location, id }: SingleCategoryProps) => {
   return (
-    <Link to={`/search?category=${name}`}>
+    <Link to={`/search?category=${id}`} state={{ menuName: name }}>
       <SingleCategoryContainer>
         <CategoryImage src={imgPath} $location={location} />
         <SubTitle>{name}</SubTitle>
