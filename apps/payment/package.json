@@ -3,31 +3,63 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "prettier": "@repo/prettier-config",
   "scripts": {
     "dev": "vite --port 5004",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview --port 5004",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test": "jest"
   },
   "dependencies": {
+    "@repo/ui": "*",
     "@originjs/vite-plugin-federation": "^1.4.1",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@ramonak/react-progress-bar": "^5.4.0",
+    "@tailwindcss/postcss": "^4.1.11",
+    "axios": "^1.10.0",
+    "jest-localstorage-mock": "^2.4.26",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.6.3",
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-typescript": "^7.27.1",
     "@eslint/js": "^9.25.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^29.5.11",
+    "@types/node-fetch": "^2.6.12",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "@types/testing-library__react": "^10.2.0",
     "@vitejs/plugin-react": "^4.4.1",
+    "babel-jest": "^29.7.0",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.0.4",
+    "jest-fixed-jsdom": "^0.0.9",
+    "jsdom": "^21.1.2",
+    "msw": "^2.10.3",
+    "postcss": "^8.5.6",
+    "tailwind-styled-components": "^2.2.0",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.2",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

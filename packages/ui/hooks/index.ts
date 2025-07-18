@@ -1,0 +1,1 @@
+export { commonApiInstance } from './axiosInstance'

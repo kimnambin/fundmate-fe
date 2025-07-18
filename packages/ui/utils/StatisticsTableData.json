@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "population",
+    "menuName": "인구 통계",
+    "description": "지역별 총 인구, 성별, 연령별 인구 비율"
+  },
+  {
+    "id": 2,
+    "name": "family",
+    "menuName": "가구 통계",
+    "description": "가구 유형 및 가구원 수 정보"
+  },
+  {
+    "id": 3,
+    "name": "house",
+    "menuName": "주택 통계",
+    "description": "거주 형태(아파트, 단독주택 등), 거주 가구 수"
+  }
+]

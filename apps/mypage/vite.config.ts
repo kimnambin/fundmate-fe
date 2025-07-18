@@ -9,8 +9,17 @@ export default defineConfig({
     federation({
       name: 'mypage',
       filename: 'remoteEntry.js',
-      exposes: {},
-      shared: ['react', 'react-dom'],
+      exposes: {
+        './Mypage': "./src/pages/Mypage/Mypage.tsx",
+        './SupportedProjects': './src/pages/supportedProject/supportedProjects.tsx',
+        './LikedProjects': './src/pages/likedProjects/LikedProjects.tsx',
+        './Following': './src/pages/Following/Following.tsx',
+        './MyReviews': './src/pages/MyReviews/MyReviews.tsx',
+        './SupporterProfile': './src/pages/SupporterProfile/SupporterProfile.tsx',
+        './ProfileSetting': './src/pages/UserProfileSettings/UserProfileSettings.tsx',
+        './Withdrawal': './src/pages/withdrawal/withdrawal.tsx'
+      },
+      shared: ['react', 'react-dom', 'react-router-dom', '@ramonak/react-progress-bar'],
     }),
   ],
   build: {

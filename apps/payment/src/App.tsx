@@ -1,33 +1,31 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { Header } from '@repo/ui/components';
+import { Loading } from '@repo/ui/components';
+import { Suspense, lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useIsMobile } from './hooks/useMobile';
+
+const ProductPage = lazy(() => import('./pages/ProductPage'));
+const PaymentPage = lazy(() => import('./pages/PaymentPage'));
+const PaymentcompletedPage = lazy(() => import('./pages/PaymentcompletedPage'));
+const PaymentDetail = lazy(() => import('./pages/PaymentDetail'));
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const isMobile = useIsMobile();
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* TODO : 임시로 모바일 환경 시 헤더 가림 */}
+      {!isMobile && <Header />}
+
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/product" element={<ProductPage />} />
+          <Route path="/payment">
+            <Route index element={<PaymentPage />} />
+            <Route path="completed" element={<PaymentcompletedPage />} />
+            <Route path="detail" element={<PaymentDetail />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   );
 }

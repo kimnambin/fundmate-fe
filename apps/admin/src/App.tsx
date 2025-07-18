@@ -1,35 +1,28 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Header, UserPageLayout } from '@repo/ui/components';
+import FundingHistory from './pages/fundingHistory/fundingHistory';
+import PaymentManagement from './pages/paymentManagement/paymentManagement';
+import MakerProfile from './pages/makerProfile/makerProfile';
+import StatsPage from './pages/stats/statsPage';
+import { Layout } from '@repo/ui/styles';
 
-function App() {
-  const [count, setCount] = useState(0);
+const App = () => (
+  <BrowserRouter>
+    <Header />
+    <Routes>
+      <Route element={<UserPageLayout />}>
+        <Route path="/fundinghistory" element={<FundingHistory />} />
+        <Route path="/paymentmanagement" element={<PaymentManagement />} />
+        <Route path="/stats" element={<StatsPage />} />
+      </Route>
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
-}
+      <Route element={<Layout />}>
+        <Route path="/userprofile-settings" element={<div>유저 프로필 설정 페이지</div>} />
+        <Route path="/withdrawal" element={<div>회원 탈퇴 페이지</div>} />
+        <Route path="/makerprofile" element={<MakerProfile nickname='tempData' />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;

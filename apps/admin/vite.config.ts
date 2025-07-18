@@ -10,12 +10,33 @@ export default defineConfig({
       name: 'admin',
       filename: 'remoteEntry.js',
       exposes: {
-        './Button': './src/components/ExampleButton.tsx',
+        './FundingHistory': './src/pages/fundingHistory/fundingHistory.tsx',
+        './MakerProfile': './src/pages/makerProfile/makerProfile.tsx',
+        './PaymentList': './src/pages/paymentManagement/paymentList.tsx',
+        './PaymentManagement': './src/pages/paymentManagement/paymentManagement.tsx',
+        './PaymentSummary': './src/pages/paymentManagement/paymentSummary.tsx',
+        './StatsPage': './src/pages/stats/statsPage.tsx',
       },
-      shared: ['react', 'react-dom'],
+      shared: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        '@ramonak/react-progress-bar',
+      ],
     }),
   ],
   build: {
+    modulePreload: false,
     target: 'esnext',
+    minify: false,
+  },
+  resolve: {
+    dedupe: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      '@ramonak/react-progress-bar'
+    ],
+
   },
 });
