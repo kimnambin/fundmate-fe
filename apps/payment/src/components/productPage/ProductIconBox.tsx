@@ -1,39 +1,20 @@
-import { MainButton } from '@repo/ui/components';
-import { useState } from 'react';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { IoShareSocialOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
 import {
   IconBox,
   IconButton,
   IconGroup,
 } from '../styles/product-detail/productInfo.style';
-import { useAddLike, useDeleteLike } from '../../hooks/useLike';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import useQueryString from '../../hooks/useQueryString';
+import { productData } from './ProductInfo';
+import { MainButton } from '@repo/ui/components';
 
-interface Props {
-  projectId: string;
-  likes: number;
-}
+const ProductIconBox = () => {
+  const [click, setClick] = useState<boolean>(false);
 
-const ProductIconBox = ({ projectId, likes }: Props) => {
-  const [isLiked, setIsLiked] = useState<boolean>(false);
-
-  const { mutate: addLike } = useAddLike();
-  const { mutate: deleteLike } = useDeleteLike();
-
-  const handleLike = () => {
-    if (isLiked) {
-      deleteLike(projectId, {
-        onSuccess: () => setIsLiked(false),
-        onError: () => console.log('좋아요 취소 실패'),
-      });
-    } else {
-      addLike(projectId, {
-        onSuccess: () => setIsLiked(true),
-        onError: () => console.log('좋아요 추가 실패'),
-      });
-    }
-  };
+  useQueryString(productData.title);
 
   const copyClip = () => {
     const currentUrl = window.location.href;
@@ -49,16 +30,16 @@ const ProductIconBox = ({ projectId, likes }: Props) => {
   return (
     <IconBox className="px-3 sm:px-0">
       <IconGroup>
-        <IconButton onClick={handleLike}>
-          {isLiked ? (
+        <IconButton onClick={() => setClick(!click)}>
+          {click ? (
             <>
               <FaHeart className="w-7 h-7 text-red-600" />
-              <span>{likes + 1}</span>
+              <span>1</span>
             </>
           ) : (
             <>
               <FaRegHeart className="w-7 h-7" />
-              <span>{likes}</span>
+              <span>0</span>
             </>
           )}
         </IconButton>
@@ -66,7 +47,7 @@ const ProductIconBox = ({ projectId, likes }: Props) => {
           <IoShareSocialOutline className="w-8 h-8" />
         </IconButton>
       </IconGroup>
-      <Link to={`/payment?projectId=${projectId}`} className="w-full">
+      <Link to={`/payment?title=${productData.title}`} className="w-full">
         <MainButton
           label={'후원하기'}
           textSize={'text-base'}
