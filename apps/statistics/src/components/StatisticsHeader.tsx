@@ -2,62 +2,80 @@ import { SmallFont, SubTitle, Title } from '@repo/ui/styles';
 import { DataChoiceTable } from './DataChoiceTable';
 import { DataOptionChoiceTable } from './DataOptionChoice';
 import { MainButton } from '@repo/ui/components';
-import { useState } from 'react';
-import { statisticsStore } from '../stores/StatisticsStore';
+import { useEffect, useState } from 'react';
+
 import type {
   DataSelectionProps,
   OptionSelectionProps,
 } from '../types/Statistics.type';
+import { commonApiInstance } from '@repo/ui/hooks';
+import { useQuery } from '@tanstack/react-query';
 
 interface StatisticsProps {
   setData: React.Dispatch<React.SetStateAction<any>>;
 }
 
+const getPublicData = async (data: any, selected: any) => {
+  try {
+    const response = await commonApiInstance.post(`/datas/${selected}`, data);
+    console.log(data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const StatisticsHeader = ({ setData }: StatisticsProps) => {
-  const [selected, setSeleted] = useState<'keyword' | 'option'>('keyword');
-  const setDataSubmitState = statisticsStore(
-    (state) => state.setDataSubmitState,
-  );
-  const isDataSubmitted = statisticsStore((state) => state.isDataSubmitted);
+  const [selected, setSelected] = useState<'keyword' | 'option'>('keyword');
+  const [isDataSubmitted, setIsDataSubmitted] = useState<boolean>(false);
+  const [inputData, setInputData] = useState<any>({});
+
+  const { refetch } = useQuery({
+    queryKey: ['statistics', selected],
+    queryFn: () => getPublicData(inputData.filteredData, inputData.selected),
+    enabled: false,
+  });
+
   const [dataSelection, setDataSelection] = useState<DataSelectionProps>({
     people: 0,
     household: 0,
     house: 0,
   });
   const [optionSelection, setOptionSelection] = useState<OptionSelectionProps>({
-    ageGroup: '',
+    age_group: '',
     gender: '',
     area: '',
   });
+
+  useEffect(() => {
+    if (selected === 'keyword') {
+      setInputData({ filteredData: dataSelection, selected: selected });
+    } else {
+      setInputData({ filteredData: optionSelection, selected: selected });
+    }
+  }, [dataSelection, optionSelection]);
 
   const dataErrorCondition =
     !!dataSelection.people ||
     !!dataSelection.household ||
     !!dataSelection.house;
   const optionErrorCondition =
-    !!optionSelection.ageGroup &&
+    !!optionSelection.age_group &&
     !!optionSelection.gender &&
     !!optionSelection.area;
 
-  const handleNext = () => {
-    if (isDataSubmitted) {
-      setDataSubmitState(false);
-    } else {
-      try {
-        if (selected === 'keyword') {
-          if (!dataErrorCondition) return;
-          setData({ filteredData: dataSelection, selected: selected });
-        } else {
-          if (!optionErrorCondition) return;
-          setData({ filteredData: optionSelection, selected: selected });
-        }
-        setDataSubmitState(true);
-      } catch (error) {
-        console.log(error);
-        alert('다시 시도해주세요');
-        return;
-      }
-    }
+  const handleDataRequest = async () => {
+    await refetch()
+      .then((response) => {
+        setIsDataSubmitted(true);
+        setData({ takenData: response.data, selected: selected });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleReset = () => {
+    setIsDataSubmitted(false);
   };
 
   return (
@@ -70,7 +88,7 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
             key="keyword"
             className={selected !== 'keyword' ? 'opacity-20' : ''}
             disabled={selected === 'keyword'}
-            onClick={() => setSeleted('keyword')}
+            onClick={() => setSelected('keyword')}
           >
             <SubTitle>키워드별 분석</SubTitle>
           </button>
@@ -79,7 +97,7 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
             key="option"
             className={selected !== 'option' ? 'opacity-20' : ''}
             disabled={selected === 'option'}
-            onClick={() => setSeleted('option')}
+            onClick={() => setSelected('option')}
           >
             <SubTitle>옵션별 분석</SubTitle>
           </button>
@@ -115,7 +133,7 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
           label={isDataSubmitted ? '닫기' : '통계 확인하기'}
           width="w-[200px]"
           type="button"
-          onClick={handleNext}
+          onClick={isDataSubmitted ? handleReset : handleDataRequest}
           isError={
             selected === 'keyword' ? !dataErrorCondition : !optionErrorCondition
           }
