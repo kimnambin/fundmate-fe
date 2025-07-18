@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import { Layout, MediumFont, SubTitle, Title } from '@repo/ui/styles';
+import { Loading } from '@repo/ui/components';
 
 interface Supporter {
   nickname: string;
@@ -14,45 +16,90 @@ interface Supporter {
 
 const SupporterProfile = () => {
   const [supporter, setSupporter] = useState<Supporter | null>(null);
+  const [notFound, setNotFound] = useState(false);
+  const { user_id } = useParams();
   const navigate = useNavigate();
-  const { nickname } = useParams(); // nickname 파라미터 사용
 
   useEffect(() => {
-    // 예시 mock 데이터
-    const fetchData = () => {
-      const mockData: Supporter = {
-        nickname: nickname ?? '서포터1',
-        following: 5,
-        follower: 12,
-        sponsored: 3,
-        introduction: '안녕하세요. 지속 가능한 펀딩에 관심이 많습니다.',
-        profileImage: '',
-        isFollowing: false,
-      };
-      setSupporter(mockData);
+    const fetchData = async () => {
+      if (!user_id) return;
+      console.log(`서포터 조회 요청: ${user_id}`);
+
+      try {
+        const response = await axios.get(`/api/users/supporter/${user_id}`);
+        const data = response.data;
+
+        console.log("프로필 이미지 URL:", data.imageUrl);
+
+        const supporterData: Supporter = {
+          nickname: data.nickname,
+          following: data.followingCount,
+          follower: data.followerCount,
+          sponsored: data.paymentCount,
+          introduction: data.contents,
+          profileImage: data.imageUrl,
+          isFollowing: data.isFollowing ?? false,
+        };
+
+        setSupporter(supporterData);
+      } catch (error) {
+        console.error('서포터 정보 불러오기 실패:', error);
+        setNotFound(true);
+      }
     };
 
     fetchData();
-  }, [nickname]);
+  }, [user_id]);
 
-  const handleFollowToggle = () => {
-    if (!supporter) return;
-    setSupporter({ ...supporter, isFollowing: !supporter.isFollowing });
-  };
+  const handleFollowToggle = async () => {
+  if (!supporter || !user_id) return;
 
-  const handleGoToMakerProfile = () => {
-  if (supporter) {
-    // 실제 MFE 배포 주소에 맞게 경로 수정
-    window.location.href = `https://maker.fundmate.com/makerprofile/${supporter.nickname}`;
+  try {
+    if (supporter.isFollowing) {
+      //언팔로우
+      await axios.delete('/api/users/following', {
+        data: { following_id: Number(user_id) },
+      });
+    } else {
+      //팔로우
+      await axios.post('/api/users/following', {
+        following_id: Number(user_id),
+      });
+    }
+
+    // 상태 반영
+    setSupporter({
+      ...supporter,
+      isFollowing: !supporter.isFollowing,
+    });
+  } catch (error) {
+    console.error('팔로우 상태 변경 실패:', error);
   }
 };
+  const handleGoToMakerProfile = () => {
+    if (supporter) {
+      window.location.href = `http://localhost:5001/user/maker/profile?nickname=${supporter.nickname}`;
+    }
+  };
+
+  if (notFound) {
+    return (
+      <Layout>
+        <div className="flex flex-col items-center w-full mt-[60px]">
+          <div className="text-gray-500">존재하지 않는 서포터입니다.</div>
+          <button
+            onClick={() => navigate(-1)}
+            className="text-[#5FBDFF] text-sm underline"
+          >
+            이전 페이지로 돌아가기
+          </button>
+        </div>
+      </Layout>
+    );
+  }
 
   if (!supporter) {
-    return (
-      <div className="flex flex-col items-center w-full mt-[60px]">
-        <div>로딩중...</div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
@@ -97,8 +144,11 @@ const SupporterProfile = () => {
           <div className="flex flex-col items-end gap-3">
             <button
               onClick={handleFollowToggle}
-              className={`flex items-center px-[12px] py-[12px] border rounded-[5px] gap-[12px] text-[14px]
-              ${supporter.isFollowing ? 'border-[#A7A7A7] text-[#A7A7A7]' : 'border-[#5FBDFF] text-[#5FBDFF]'}`}
+              className={`flex items-center px-[12px] py-[12px] border rounded-[5px] gap-[12px] text-[14px] ${
+                supporter.isFollowing
+                  ? 'border-[#A7A7A7] text-[#A7A7A7]'
+                  : 'border-[#5FBDFF] text-[#5FBDFF]'
+              }`}
             >
               {supporter.isFollowing ? (
                 <>

@@ -21,7 +21,7 @@ export const FollowingCard = ({
   const navigate = useNavigate();
 
   const handleProfileClick = () => {
-    navigate(`/supporter/${nickname}`);
+    navigate(`/user/supporter/profile/${userId}`);
   };
 
   return (

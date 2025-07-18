@@ -35,7 +35,7 @@ const App = () => (
       >
         <Route path="settings" element={<UserProfileSettings />} />
         <Route path="withdrawal" element={<Withdrawal />} />
-        <Route path="supporter/profile" element={<SupporterProfile />} />
+        <Route path="supporter/profile/:user_id" element={<SupporterProfile />} />
       </Route>
     </Routes>
   </BrowserRouter>

@@ -18,16 +18,16 @@ const Withdrawal = () => {
     const confirmDelete = window.confirm("정말 회원 탈퇴하시겠습니까?");
     if (!confirmDelete) return;
 
-    console.log("회원 탈퇴 진행");
-
     try {
+      // 회원 탈퇴 API 요청
       const res = await axios.delete("/api/users/account", {
         withCredentials: true,
-        data: { password }, // 백엔드에서 비밀번호 확인하는 경우 전달
+        data: { password }, // password를 req.body로 전달
       });
 
-      alert(res.data.message);
+      alert(res.data.message || "회원 탈퇴가 완료되었습니다.");
 
+      // 로그인 상태 확인 요청 → 401 or 404면 정상 탈퇴된 것으로 간주
       try {
         await axios.get("/api/users/mypage", {
           withCredentials: true,
@@ -37,19 +37,26 @@ const Withdrawal = () => {
           checkErr.response?.status === 401 ||
           checkErr.response?.status === 404
         ) {
-          console.log("탈퇴 성공이 확인되었습니다.");
-          alert("탈퇴 처리가 완료되었습니다.");
+          console.log("탈퇴 성공 확인됨");
         } else {
           console.error("유저 확인 중 알 수 없는 오류:", checkErr);
         }
       }
 
+      // 클라이언트 토큰 삭제
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
+
+      // 로그인 페이지로 이동
       navigate("/login");
     } catch (err: any) {
       console.error("회원 탈퇴 실패:", err);
-      alert(err?.response?.data?.message || "회원 탈퇴 중 오류가 발생했습니다.");
+
+      if (err.response?.status === 500) {
+        alert("❌비밀번호가 일치하지 않습니다.");
+      } else {
+        alert(err?.response?.data?.message || "회원 탈퇴 중 오류가 발생했습니다.");
+      }
     }
   };
 
