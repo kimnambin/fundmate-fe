@@ -42,7 +42,7 @@ export const VerticalCard = ({
         <div className="flex flex-col gap-3">
           <div className="relative">
             <img
-              src={imgSrc}
+              src={imgSrc.toString()}
               className={
                 imageLoaded
                   ? `w-full h-auto rounded-xl object-cover`

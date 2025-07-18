@@ -6,7 +6,6 @@ import { Header, Loading, UserPageLayout } from '@repo/ui/components';
 import { LogIn } from './pages/LogIn';
 import { SignUp } from './pages/SignUp';
 import { PasswordReset } from './pages/PasswordReset';
-import { ScrollToTop } from '@repo/ui/utils';
 import { Suspense, lazy } from 'react';
 import { Layout } from '@repo/ui/styles';
 
@@ -39,7 +38,6 @@ const PaymentManagement = lazy(() => import('admin/PaymentManagement'));
 function App() {
   return (
     <>
-      <ScrollToTop />
       <Header />
       <Suspense fallback={<Loading />}>
         <Routes>
@@ -66,9 +64,9 @@ function App() {
           </Route>
           <Route path="/mypage/*" element={<UserPageLayout />}>
             <Route index element={<Mypage />} />
-            <Route path='history' element={<FundingHistory />} />
-            <Route path='paymentproceed' element={<PaymentManagement />} />
-            <Route path='sellstats' element={<StatsPage />} />
+            <Route path="history" element={<FundingHistory />} />
+            <Route path="paymentproceed" element={<PaymentManagement />} />
+            <Route path="sellstats" element={<StatsPage />} />
             <Route path="projects/*">
               <Route path="supported" element={<SupportedProjects />} />
               <Route path="liked" element={<LikedProjects />} />
@@ -77,7 +75,10 @@ function App() {
             </Route>
           </Route>
           <Route path="/supporter/profile" element={<SupporterProfile />} />
-          <Route path='/maker/profile' element={<MakerProfile nickname='tempdata' />} />
+          <Route
+            path="/maker/profile"
+            element={<MakerProfile nickname="tempdata" />}
+          />
         </Routes>
       </Suspense>
     </>

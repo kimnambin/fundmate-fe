@@ -1,6 +1,5 @@
 // utils
 export {
-  ScrollToTop,
   formatPrice,
   MAIN_PAGE,
   ADMIN_PAGE,

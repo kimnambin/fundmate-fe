@@ -48,7 +48,7 @@ export const HorizontalCard = ({
         }
       >
         <img
-          src={imgSrc}
+          src={imgSrc.toString()}
           className={'w-full h-full object-cover rounded-xl'}
           onLoad={() => setImageLoaded(true)}
         />
