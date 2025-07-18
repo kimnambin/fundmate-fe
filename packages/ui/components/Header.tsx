@@ -100,6 +100,14 @@ export const Header = () => {
       });
   };
 
+  const handleCreateNavigate = () => {
+    if (nickname) {
+      navigate('/funding/create');
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <div className="flex flex-col shadow-md">
       <Container className="h-[100px] justify-between border-b border-gray-300">
@@ -125,9 +133,12 @@ export const Header = () => {
           />
         </InputDiv>
         <div className="flex flex-row gap-7 h-full items-center">
-          <Link to="/funding/create" className="text-lg font-semibold">
+          <button
+            onClick={handleCreateNavigate}
+            className="text-lg font-semibold"
+          >
             <SubTitle>프로젝트 올리기</SubTitle>
-          </Link>
+          </button>
           <div className="inline-block relative">
             <LoginButton onClick={handleNavigate}>
               <img
