@@ -1,25 +1,32 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Header, UserPageLayout } from '@repo/ui/components';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import FundingHistory from './pages/fundingHistory/fundingHistory';
 import PaymentManagement from './pages/paymentManagement/paymentManagement';
-import MakerProfile from './pages/makerProfile/makerProfile';
 import StatsPage from './pages/stats/statsPage';
+import MakerProfile from './pages/makerProfile/makerProfile';
+import { Header, UserPageLayout } from '@repo/ui/components';
 import { Layout } from '@repo/ui/styles';
 
 const App = () => (
   <BrowserRouter>
     <Header />
+
     <Routes>
-      <Route element={<UserPageLayout />}>
-        <Route path="/mypage/history" element={<FundingHistory />} />
-        <Route path="/mypage/paymentproceed" element={<PaymentManagement />} />
-        <Route path="/mypage/sellstats" element={<StatsPage />} />
+      {/* 마이페이지 영역 (사이드바 포함) */}
+      <Route path="/mypage/*" element={<UserPageLayout />}>
+        <Route path="history" element={<FundingHistory />} />
+        <Route path="paymentproceed" element={<PaymentManagement />} />
+        <Route path="sellstats" element={<StatsPage />} />
       </Route>
 
-      <Route element={<Layout />}>
-        <Route path="/userprofile-settings" element={<div>유저 프로필 설정 페이지</div>} />
-        <Route path="/withdrawal" element={<div>회원 탈퇴 페이지</div>} />
-        <Route path="/makerprofile" element={<MakerProfile nickname='tempData' />} />
+      {/* 일반 유저 영역 */}
+      <Route path="/user/*" element={
+        <div className="pt-5 px-16">
+          <Outlet />
+        </div>
+      }>
+        <Route path="settings" element={<div>유저 프로필 설정 페이지</div>} />
+        <Route path="withdrawal" element={<div>회원 탈퇴 페이지</div>} />
+        <Route path="maker/profile/:user_id" element={<MakerProfile />} />
       </Route>
     </Routes>
   </BrowserRouter>

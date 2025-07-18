@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
+import axios from "axios";
 
 interface LineChartDataPoint {
   x: number | string;
@@ -12,16 +13,67 @@ interface LineChartSeries {
 }
 
 interface StatsLineChartProps {
-  data?: LineChartSeries[]; // ❗ 선택적 + undefined 허용
+  targetMonth: string; // yyyy-mm 형태
 }
 
-const StatsLineChart: React.FC<StatsLineChartProps> = ({ data }) => {
-  const safeData = Array.isArray(data) ? data : [];
+const StatsLineChart: React.FC<StatsLineChartProps> = ({ targetMonth }) => {
+  const [data, setData] = useState<LineChartSeries[] | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!targetMonth) return;
+
+    const fetchGraphData = async () => {
+      try {
+        const res = await axios.get(`/api/statistics/graph?target=${targetMonth}`, {
+          withCredentials: true,
+        });
+
+        const graphData = res.data.data as LineChartSeries[];
+
+        // 👉 y 값이 유효한 경우만 필터링
+        const cleaned = graphData.map((series) => ({
+          ...series,
+          data: series.data.filter(
+            (point) => typeof point.y === "number" && !isNaN(point.y)
+          ),
+        }));
+
+        setData(cleaned);
+      } catch (error) {
+        console.error("📉 통계 그래프 데이터 로드 실패:", error);
+        setData([]); // 실패 시에도 처리
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGraphData();
+  }, [targetMonth]);
+
+  const hasValidData =
+    Array.isArray(data) && data.some((series) => series.data.length > 0);
+
+  if (loading) {
+    return (
+      <div className="h-[300px] flex items-center justify-center text-gray-400">
+        불러오는 중...
+      </div>
+    );
+  }
+
+  if (!hasValidData) {
+    return (
+      <div className="h-[300px] flex items-center justify-center text-gray-500">
+        데이터가 없습니다.
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-[300px]">
       <ResponsiveLine
-        data={safeData}
+        data={data}
         margin={{ top: 20, right: 30, bottom: 50, left: 40 }}
         xScale={{ type: "point" }}
         yScale={{

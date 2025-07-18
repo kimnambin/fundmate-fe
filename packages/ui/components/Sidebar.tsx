@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import axios from "axios"; // 공용 인스턴스 사용하는 경우 교체 가능
+import axios from "axios";
 import userImg from "../assets/images/user.png";
 import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 import { MainButton } from "@repo/ui/components";
@@ -8,27 +8,32 @@ import { useTmpLogin } from "../../../../fundmate-fe/apps/mypage/src/hook/login"
 
 export const Sidebar = () => {
   const navigate = useNavigate();
-  
+
   // 로그인 임시 훅 실행
   useTmpLogin();
- 
+
   // 사용자 프로필 상태
   const [profile, setProfile] = useState({
     nickname: "",
     email: "",
     contents: "",
+    imageUrl: "", 
   });
 
   // 프로필 정보 호출
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("/api/users/mypage/profile");
-         console.log("프로필 응답 데이터:", res.data); 
+        const res = await axios.get("/api/users/mypage/profile", {
+          withCredentials: true,
+        });
+        console.log("프로필 응답 데이터:", res.data);
+
         setProfile({
           nickname: res.data.nickname,
           email: res.data.email,
           contents: res.data.contents,
+          imageUrl: res.data.imageUrl, 
         });
       } catch (error) {
         console.error("프로필 정보 불러오기 실패", error);
@@ -60,8 +65,11 @@ export const Sidebar = () => {
           className="w-[120px] h-[120px] rounded-full overflow-hidden border border-gray-300 cursor-pointer"
           onClick={() => navigate("/mypage")}
         >
-          {/* 나중에 프로필 이미지 적용할 경우 src={profile.imageUrl ?? userImg} */}
-          <img src={userImg} alt="avatar" className="w-full h-full object-cover" />
+          <img
+            src={profile.imageUrl || userImg}
+            alt="avatar"
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="flex flex-col items-center gap-[10px]">
           <Title>{profile.nickname ? `${profile.nickname} 님` : "닉네임 없음"}</Title>
