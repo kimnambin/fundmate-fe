@@ -63,7 +63,7 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         '/api': {
-          target: process.env.BACKEND_ADDRESS,
+          target: process.env.VITE_BACKEND_ADDRESS,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
           secure: false,
