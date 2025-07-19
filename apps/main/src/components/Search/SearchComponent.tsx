@@ -65,7 +65,7 @@ export const SearchComponent = () => {
       <SearchContainer>
         {data?.length ? (
           data.map((item) => (
-            <div key={item.image_url}>
+            <div key={item.project_id}>
               <VerticalCard
                 id={item.project_id}
                 title={item.title}
