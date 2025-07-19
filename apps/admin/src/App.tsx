@@ -18,15 +18,9 @@ const App = () => (
         <Route path="sellstats" element={<StatsPage />} />
       </Route>
 
-      {/* 일반 유저 영역 */}
-      <Route path="/user/*" element={
-        <div className="pt-5 px-16">
-          <Outlet />
-        </div>
-      }>
-        <Route path="settings" element={<div>유저 프로필 설정 페이지</div>} />
-        <Route path="withdrawal" element={<div>회원 탈퇴 페이지</div>} />
-        <Route path="maker/profile/:user_id" element={<MakerProfile />} />
+      <Route element={<Layout />}>
+        <Route path="/userprofile-settings" element={<div>유저 프로필 설정 페이지</div>} />
+        <Route path="/withdrawal" element={<div>회원 탈퇴 페이지</div>} />
       </Route>
     </Routes>
   </BrowserRouter>

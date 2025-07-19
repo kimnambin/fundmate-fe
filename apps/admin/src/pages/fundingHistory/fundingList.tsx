@@ -55,7 +55,7 @@ const FundingList = () => {
 
     // 달성률 필터링
     if (completeFilter === 0) {
-      filtered = filtered.filter((item) => Number(item.achievement) >= 75);
+      filtered = filtered.filter((item) => Number(item.achievement) < 75);
     } else if (completeFilter === 1) {
       filtered = filtered.filter((item) => {
         const val = Number(item.achievement);

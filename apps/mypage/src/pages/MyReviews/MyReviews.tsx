@@ -4,9 +4,10 @@ import axios from 'axios';
 import { Title, MediumFont } from '@repo/ui/styles';
 
 interface ReviewItem {
-  image_id: number;
+  image_url: string;
   title: string;
   content: string;
+  project_id: number; // ✅ 프로젝트 상세 페이지 연결용 ID 추가
 }
 
 const MyReviews = () => {
@@ -21,9 +22,16 @@ const MyReviews = () => {
           withCredentials: true,
         });
         console.log('후기 전체 응답:', res);
-        setReviews(res.data);
+
+        if (Array.isArray(res.data?.data)) {
+          setReviews(res.data.data);
+        } else {
+          console.error('후기 응답 형식이 올바르지 않음:', res.data);
+          setReviews([]);
+        }
       } catch (error) {
         console.error('후기 조회 실패:', error);
+        setReviews([]);
       } finally {
         setLoading(false);
       }
@@ -59,13 +67,13 @@ const MyReviews = () => {
           reviews.slice(0, 5).map((item, idx) => (
             <div
               key={idx}
-              onClick={() => navigate(`/product/${item.image_id}`)}
+              onClick={() => navigate(`/projects/${item.project_id}`)} // ✅ 상세 페이지 이동
               className="flex items-center px-2 py-4 hover:bg-gray-50 transition cursor-pointer"
             >
               {/* 상품 */}
               <div className="flex items-center gap-6 basis-5/6">
                 <img
-                  src={`https://picsum.photos/300/300?random=${item.image_id}`}
+                  src={item.image_url}
                   alt={item.title}
                   className="w-[70px] h-[70px] rounded object-cover"
                 />

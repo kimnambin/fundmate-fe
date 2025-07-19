@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Title } from '@repo/ui/styles';
 import { VerticalCard } from '@repo/ui/components';
@@ -23,6 +24,7 @@ interface Project {
 const LikedProjects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLikedProjects = async () => {
@@ -67,13 +69,18 @@ const LikedProjects = () => {
             );
 
             return (
-              <VerticalCard
+              <div
                 key={project.id}
-                imageUrl={project.thumbnailUrl}
-                title={project.title}
-                description={project.description}
-                progress={progress}
-              />
+                onClick={() => navigate(`/projects/${project.id}`)}
+                className="cursor-pointer"
+              >
+                <VerticalCard
+                  imageUrl={project.thumbnailUrl}
+                  title={project.title}
+                  description={project.description}
+                  progress={progress}
+                />
+              </div>
             );
           })}
         </div>
