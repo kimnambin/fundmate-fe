@@ -23,7 +23,8 @@
     "jest-localstorage-mock": "^2.4.26",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.3",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.0",
