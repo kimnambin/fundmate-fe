@@ -7,6 +7,7 @@ export const useGetUserInfo = () => {
     queryKey: ['userInfo'],
     queryFn: async () => {
       const res = await userInfo();
+
       return res.data;
     },
   });

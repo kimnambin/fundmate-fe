@@ -19,7 +19,7 @@ import { FlexRowsm } from '../styles/layout.style';
 import { PaymentProps } from '../../types/payement/modal.model';
 import { MainButton, Modal } from '@repo/ui/components';
 import PayConfirmModal from './confirm/PayConfirmModal';
-import { useCardPayForm } from '../../hooks/payment/usePostPaymentSave';
+import { useCardPayForm } from '../../hooks/payment/save/usePostPaymentSave';
 
 const CardPaymentModal = ({
   addressData,

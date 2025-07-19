@@ -2,7 +2,6 @@ import { MainButton, Modal } from '@repo/ui/components';
 import { BoldBigText, BoldText } from '../styles/text.style';
 import { formatPrice } from '@repo/ui/utils';
 import { SmallFont } from '@repo/ui/styles';
-import { usePaymentForm } from '../../hooks/payment/usePayment';
 
 interface PayConfirmProps {
   addressData: string;
@@ -15,20 +14,11 @@ interface PayConfirmProps {
 }
 
 const PaymentModal = ({
-  addressData,
   addAmount,
   method,
   setIsModalOpen,
   onConfirmPayment,
-  setShowLoading,
 }: Omit<PayConfirmProps, 'isLoading'>) => {
-  const {} = usePaymentForm({
-    addressData,
-    addAmount,
-    setShowLoading,
-    setIsModalOpen,
-  });
-
   return (
     <Modal isOpen={true} onClose={() => setIsModalOpen(false)}>
       <div className="flex flex-col p-5 gap-5">

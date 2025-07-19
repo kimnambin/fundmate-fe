@@ -1,14 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
+import { delPaymentSave } from '../../../api/payment';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
-import { delReservations } from '../../api/reservations';
 
-export const useDelPayment = () => {
+export const useDelSavePayment = () => {
   const nav = useNavigate();
 
   return useMutation({
     mutationFn: async (id: number) => {
-      const res = await delReservations(id);
+      const res = await delPaymentSave(id);
       return res.data;
     },
     onSuccess: () => {
@@ -17,7 +17,7 @@ export const useDelPayment = () => {
       nav('/');
     },
     onError: (e: AxiosError) => {
-      alert(`삭제 실패`);
+      alert(`삭제 실패: ${e?.message || '알 수 없는 오류'}`);
       console.error('삭제 실패:', e);
     },
   });

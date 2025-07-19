@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { AxiosError } from 'axios';
-import { coverSec } from '../../utils/security';
-import { PaymentProps } from '../../types/payement/modal.model';
+
 import { useMutation } from '@tanstack/react-query';
-import { bankPaymentSave, CardPaymentSave } from '../../api/payment';
+import { PaymentProps } from '../../../types/payement/modal.model';
+import { bankPaymentSave, CardPaymentSave } from '../../../api/payment';
+import { coverSec } from '../../../utils/security';
+
 // import { useGetQueryString } from './useGetQueryString';
 
 export const useTransferForm = ({
@@ -151,13 +153,13 @@ export const useCardPayForm = ({
       }),
     onSuccess: (res) => {
       console.log('응답 데이터', res.data);
-      alert('결제수단이 등록되었습니다.');
 
       const insertedId = res.data?.insertedId;
 
       if (insertedId) {
         setSavedPaymentId(insertedId);
       }
+      alert('결제수단이 등록되었습니다.');
 
       setShowLoading?.(false);
     },

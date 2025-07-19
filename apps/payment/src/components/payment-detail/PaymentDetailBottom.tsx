@@ -5,7 +5,7 @@ import { BaseText, BoldBigText, BoldText } from '../styles/text.style';
 import { MainButton } from '@repo/ui/components';
 import { formatDate } from '../../utils/date';
 import { formatPrice } from '@repo/ui/utils';
-import { useDelPayment } from '../../hooks/payment/useDelPayment';
+import { useDelSavePayment } from '../../hooks/payment/save/useDelSavePayment';
 import { useGetiInsertedId } from '../../hooks/useGetiInsertedId';
 
 interface PdBottom {
@@ -25,7 +25,7 @@ const PaymentDetailBottom = ({ code, amount, scheduleDate }: PdBottom) => {
 
   const id = useGetiInsertedId();
 
-  const { mutate: deletePayment } = useDelPayment();
+  const { mutate: deletePayment } = useDelSavePayment();
 
   const handleDelete = () => {
     const confirmed = window.confirm('정말로 결제 정보를 삭제하시겠습니까?');
@@ -49,7 +49,7 @@ const PaymentDetailBottom = ({ code, amount, scheduleDate }: PdBottom) => {
               </BaseText>
 
               <BoldText
-                className={`flex-1 text-left ${idx === 2 ? 'text-[#FB6565]' : 'text-black'}`}
+                className={`flex text-left w-[240px] ${idx === 2 ? 'text-[#FB6565]' : 'text-black'}`}
               >
                 {content[idx]}
               </BoldText>

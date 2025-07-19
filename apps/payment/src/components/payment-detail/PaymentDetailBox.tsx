@@ -2,6 +2,8 @@ import { MainButton } from '@repo/ui/components';
 import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/layout.style';
 import { BoldBigText, BoldText, LightColor } from '../styles/text.style';
 import { formatDate } from '../../utils/date';
+import { useDelPayment } from '../../hooks/payment/useDelPayment';
+import { useGetiInsertedId } from '../../hooks/useGetiInsertedId';
 
 interface PdBoxProps {
   paymentInfoId: number;
@@ -30,6 +32,17 @@ const PaymentDetailBox = ({
     formatDate(scheduleDate),
   ];
 
+  const id = useGetiInsertedId();
+
+  const { mutate: deletePayment } = useDelPayment();
+
+  const handleDelete = () => {
+    const confirmed = window.confirm('정말로 후원을 취소하시겠습니까??');
+    if (confirmed) {
+      deletePayment(Number(id));
+    }
+  };
+
   return (
     <FlexCol className="items-start">
       <BoldBigText>후원정보</BoldBigText>
@@ -56,6 +69,7 @@ const PaymentDetailBox = ({
           className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black"
           textSize={'text-base'}
           textWeight={'font-bold'}
+          onClick={handleDelete}
         />
       </BoxRow>
     </FlexCol>

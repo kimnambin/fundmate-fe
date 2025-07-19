@@ -18,4 +18,5 @@ export interface Reservation {
   addressInfo: string;
   retryCount: number;
   lastErrorMessage: string | null;
+  message?: string;
 }

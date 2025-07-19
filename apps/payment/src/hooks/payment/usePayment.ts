@@ -42,6 +42,7 @@ export const usePaymentForm = ({
       }),
     onSuccess: (response: AxiosResponse<{ insertedId: number }>) => {
       const insertedId = response.data.insertedId;
+      console.log('ㅑㅇㅇ', insertedId);
       setShowLoading?.(true);
       setIsModalOpen(false);
       alert('기한이 되면 자동 결제됩니다.');

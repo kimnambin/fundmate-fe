@@ -9,14 +9,13 @@ import { formatPrice } from '@repo/ui/utils';
 import { Loading, MainButton } from '@repo/ui/components';
 import { ModalContainer } from '../styles/modal/modal.style';
 import PaymentModal from '../modal/PaymentModal';
-import { useCheckPayment } from '../../hooks/payment/useCheckPayment';
 import { usePaymentForm } from '../../hooks/payment/usePayment';
 import {
   useGetoptionid,
   useGetQueryString,
 } from '../../hooks/useGetQueryString';
 import { useGetProductInfo } from '../../hooks/product/getProductInfo';
-import { useGetUserInfo } from '../../hooks/user/useGetUserInfo';
+import { useSavePaymentStore } from '../../store/useSavepaymentStore';
 
 interface PaymentFinalProps {
   selectedPayment: string;
@@ -35,18 +34,6 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   const [showLoading, setShowLoading] = useState(false);
   const [savedPaymentId, setSavedPaymentId] = useState<number | null>(null);
 
-  const { data: userInfo } = useGetUserInfo();
-
-  const { data: paymentSaveId, refetch: checkPayment } = useCheckPayment(
-    Number(userInfo?.userId)
-  );
-
-  // const id = has?.[0]?.id;
-
-  useEffect(() => {
-    checkPayment();
-  }, []);
-
   const handleCheck = (index: number) => {
     const newChecks = [...checks];
     newChecks[index] = !newChecks[index];
@@ -54,6 +41,8 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   };
 
   const handleBtn = async () => {
+    if (addAmount < 1000 || !addressData || !checks[0] || !checks[1]) return;
+
     if (selectedPayment === 'VBANK') {
       setModalType('VBANK');
     } else if (selectedPayment === 'CARD') {
@@ -61,8 +50,9 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
     }
 
     setIsModalOpen(true);
-    await checkPayment();
   };
+
+  const insertedId = useSavePaymentStore((state) => state.insertedId);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -70,16 +60,21 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
     setSavedPaymentId(null);
   };
 
-  const shouldShowPaymentModal =
-    isModalOpen && (paymentSaveId || savedPaymentId !== null);
-
   const projectId = useGetQueryString();
   const { data: productData } = useGetProductInfo(Number(projectId));
 
   const optionid = useGetoptionid();
 
+  useEffect(() => {
+    if (insertedId !== null) {
+      console.log('정상적으로 insertedId 반영됨:', insertedId);
+
+      reservePayment();
+    }
+  }, [savedPaymentId]);
+
   const { reservePayment } = usePaymentForm({
-    paymentInfoId: paymentSaveId,
+    paymentInfoId: Number(savedPaymentId),
     rewardId: Number(optionid) ?? null,
     projectId: Number(projectId) ?? null,
     amount: addAmount,
@@ -89,6 +84,8 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
     setShowLoading,
     setIsModalOpen,
   });
+
+  console.log(savedPaymentId);
 
   return (
     <>
@@ -153,18 +150,18 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
         onClick={handleBtn}
       />
 
-      {shouldShowPaymentModal ? (
-        <PaymentModal
-          addressData={addressData}
-          addAmount={addAmount}
-          method={modalType === 'CARD' ? 'CARD' : 'VBANK'}
-          onConfirmPayment={() => reservePayment()}
-          setIsModalOpen={handleCloseModal}
-          setShowLoading={setShowLoading}
-        />
-      ) : (
-        isModalOpen &&
-        (modalType === 'VBANK' ? (
+      {isModalOpen &&
+        modalType &&
+        (savedPaymentId ? (
+          <PaymentModal
+            addressData={addressData}
+            addAmount={addAmount}
+            method={modalType === 'CARD' ? 'CARD' : 'VBANK'}
+            onConfirmPayment={() => reservePayment()}
+            setIsModalOpen={handleCloseModal}
+            setShowLoading={setShowLoading}
+          />
+        ) : modalType === 'VBANK' ? (
           <TransferModal
             addressData={addressData}
             method="VBANK"
@@ -180,8 +177,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
             setShowLoading={setShowLoading}
             setSavedPaymentId={setSavedPaymentId}
           />
-        ))
-      )}
+        ))}
     </>
   );
 };

@@ -15,8 +15,8 @@ export const getReservations = (id: number) => {
   return axios.get(`/api/reservations/${id}`);
 };
 
-export const delReservations = () => {
-  return axios.delete(`/api/reservations`);
+export const delReservations = (id: number) => {
+  return axios.delete(`/api/reservations/${id}`);
 };
 
 export const patchReservations = (id: number, payload: ReservationPayload) => {

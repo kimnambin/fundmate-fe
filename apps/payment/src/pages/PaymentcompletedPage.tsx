@@ -5,20 +5,19 @@ import {
   GridCol6,
 } from '../components/styles/layout.style';
 import { BaseText, BoldBigText } from '../components/styles/text.style';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import { useGetQueryString } from '../hooks/useGetQueryString';
 import { VerticalCard } from '@repo/ui/components';
 import { Blank } from '../components/styles/product-detail/prdouctstyle.style';
 import { useGetProductInfo } from '../hooks/product/getProductInfo';
 import { useGetQueryString } from '../hooks/useGetQueryString';
+import { useGetiInsertedId } from '../hooks/useGetiInsertedId';
 
 const PaymentcompletedPage = () => {
   const projectId = useGetQueryString();
   const { data: productData } = useGetProductInfo(Number(projectId));
 
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const id = queryParams.get('id');
+  const id = useGetiInsertedId();
 
   return (
     <Container className="mt-[10%] px-6 items-start sm:px-0">

@@ -11,7 +11,7 @@ import {
 } from '../styles/modal/tansfetModal.style';
 import { PaymentProps } from '../../types/payement/modal.model';
 import PayConfirmModal from './confirm/PayConfirmModal';
-import { useTransferForm } from '../../hooks/payment/usePostPaymentSave';
+import { useTransferForm } from '../../hooks/payment/save/usePostPaymentSave';
 
 export default function TransferModal({
   addressData,
