@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import type { SupportedProject } from "../../api/supportedProjects";
 import { Title } from "@repo/ui/styles";
 import { SupportedHorizontalCard } from "../../components/common/SupportHorizontalCard";
@@ -7,13 +8,13 @@ import { SupportedHorizontalCard } from "../../components/common/SupportHorizont
 const SupportedProjects = () => {
   const [projects, setProjects] = useState<SupportedProject[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
     const fetchSupportedProjects = async () => {
       try {
-
         const res = await axios.get("/api/users/mypage/payments", {
           withCredentials: true,
         });
@@ -24,6 +25,7 @@ const SupportedProjects = () => {
 
         const formatted: SupportedProject[] = rawData.map((item: any) => ({
           id: item.scheduleId,
+          projectId: item.projectId,
           supportDate: item.createdAt.slice(0, 10).replace(/-/g, "."),
           supportNumber: String(item.scheduleId).padStart(8, "0"),
           title: item.productName,
@@ -37,9 +39,6 @@ const SupportedProjects = () => {
             }) + " 결제 예정",
           thumbnailUrl: item.productImage,
         }));
-
-        
-        console.log("후원한 프로젝트 데이터:", formatted);
 
         setProjects(formatted);
       } catch (err) {
@@ -63,7 +62,13 @@ const SupportedProjects = () => {
       ) : (
         <div className="grid grid-cols-2 gap-5">
           {projects.map((project) => (
-            <SupportedHorizontalCard key={project.id} project={project} />
+            <div
+              key={project.id}
+              onClick={() => navigate(`/projects/${project.projectId}`)}
+              className="cursor-pointer"
+            >
+              <SupportedHorizontalCard project={project} />
+            </div>
           ))}
         </div>
       )}

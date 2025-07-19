@@ -7,6 +7,7 @@ interface ReviewItem {
   image_url: string;
   title: string;
   content: string;
+  project_id: number; // ✅ 프로젝트 상세 페이지 연결용 ID 추가
 }
 
 const MyReviews = () => {
@@ -66,7 +67,7 @@ const MyReviews = () => {
           reviews.slice(0, 5).map((item, idx) => (
             <div
               key={idx}
-              onClick={() => navigate(`/product/${idx}`)} // id가 없다면 index 임시 활용
+              onClick={() => navigate(`/projects/${item.project_id}`)} // ✅ 상세 페이지 이동
               className="flex items-center px-2 py-4 hover:bg-gray-50 transition cursor-pointer"
             >
               {/* 상품 */}
