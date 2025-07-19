@@ -15,24 +15,36 @@ export default defineConfig({
     federation({
       name: 'funding',
       filename: 'remoteEntry.js',
-      remotes: {
-        admin: 'http://localhost:5001/assets/remoteEntry.js',
-      },
       exposes: {
         './CreateFundingPage': './src/pages/createFunding/createFunding.tsx',
         './AskFundiPage': './src/pages/askFundi/askFundi.tsx',
         './AskFundiResultPage': './src/pages/askFundi/askFundiResult.tsx',
       },
-      shared: ['react', 'react-dom', 'react-router-dom'],
+      shared: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        '@tanstack/react-query',
+        'axios',
+      ],
     }),
   ],
   build: {
     target: 'esnext',
+    rollupOptions: {
+      external: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        '@tanstack/react-query',
+        'axios',
+      ],
+    },
   },
   server: {
     proxy: {
       '/api': {
-        target: process.env.BACKEND_ADDRESS,
+        target: process.env.VITE_BACKEND_ADDRESS,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,

@@ -1,5 +1,5 @@
 // utils
-export { ScrollToTop, formatPrice } from './utils';
+export { formatPrice } from './utils';
 
 // components
 export {

@@ -13,7 +13,6 @@ interface FollowingCardProps {
 export const FollowingCard = ({
   userId,
   name,
-  nickname,
   initial,
   isFollowing,
   onToggleFollow,
@@ -40,7 +39,7 @@ export const FollowingCard = ({
       {/* 팔로우 / 언팔 버튼 */}
       <FollowingButton
         following={isFollowing}
-        setFollowing={(next) => onToggleFollow(userId, next)}
+        setFollowing={() => onToggleFollow(userId, isFollowing)}
       />
     </div>
   );

@@ -25,6 +25,7 @@ export const SearchComponent = () => {
   }
 
   const getSearchData = async () => {
+    setData(undefined);
     let pathname: string;
     if (isCategory) {
       if (queryValue === '0') {
@@ -64,10 +65,11 @@ export const SearchComponent = () => {
       <SearchContainer>
         {data?.length ? (
           data.map((item) => (
-            <div key={item.imageId}>
+            <div key={item.project_id}>
               <VerticalCard
+                id={item.project_id}
                 title={item.title}
-                description={item.shortDescription}
+                description={item.short_description}
               />
             </div>
           ))

@@ -23,6 +23,15 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      // ✅ unused 변수 무시 설정
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          varsIgnorePattern: '^_', // 변수 무시: const _x = ...
+          argsIgnorePattern: '^_', // 매개변수 무시: function(x, _y) { ... }
+          caughtErrorsIgnorePattern: '^_', // try { ... } catch (_err) { ... }
+        },
+      ],
     },
   },
 );

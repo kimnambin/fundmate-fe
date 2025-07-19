@@ -1,6 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
+import dotenv from 'dotenv';
+import { resolve } from 'path';
+
+dotenv.config({ path: resolve(__dirname, '../../.env') });
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -10,25 +14,43 @@ export default defineConfig({
       name: 'mypage',
       filename: 'remoteEntry.js',
       exposes: {
-        './Mypage': "./src/pages/Mypage/Mypage.tsx",
-        './SupportedProjects': './src/pages/supportedProject/supportedProjects.tsx',
+        './Mypage': './src/pages/Mypage/Mypage.tsx',
+        './SupportedProjects':
+          './src/pages/supportedProject/supportedProjects.tsx',
         './LikedProjects': './src/pages/likedProjects/LikedProjects.tsx',
         './Following': './src/pages/Following/Following.tsx',
         './MyReviews': './src/pages/MyReviews/MyReviews.tsx',
-        './SupporterProfile': './src/pages/SupporterProfile/SupporterProfile.tsx',
-        './ProfileSetting': './src/pages/UserProfileSettings/UserProfileSettings.tsx',
-        './Withdrawal': './src/pages/withdrawal/withdrawal.tsx'
+        './SupporterProfile':
+          './src/pages/SupporterProfile/SupporterProfile.tsx',
+        './ProfileSetting':
+          './src/pages/UserProfileSettings/UserProfileSettings.tsx',
+        './Withdrawal': './src/pages/withdrawal/withdrawal.tsx',
       },
-      shared: ['react', 'react-dom', 'react-router-dom', '@ramonak/react-progress-bar'],
+      shared: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        'axios',
+        '@ramonak/react-progress-bar',
+      ],
     }),
   ],
   build: {
     target: 'esnext',
+    rollupOptions: {
+      external: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        'axios',
+        '@ramonak/react-progress-bar',
+      ],
+    },
   },
   server: {
     proxy: {
       '/api': {
-        target: 'http://3.36.140.33:3000',
+        target: process.env.VITE_BACKEND_ADDRESS,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,

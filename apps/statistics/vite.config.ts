@@ -16,11 +16,26 @@ export default defineConfig({
       exposes: {
         './Statistics': './src/pages/Statistics.tsx',
       },
-      shared: ['react', 'react-dom'],
+      shared: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        '@tanstack/react-query',
+        'axios',
+      ],
     }),
   ],
   build: {
     target: 'esnext',
+    rollupOptions: {
+      external: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        '@tanstack/react-query',
+        'axios',
+      ],
+    },
   },
   server: {
     proxy: {

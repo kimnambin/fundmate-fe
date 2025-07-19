@@ -60,7 +60,7 @@ const PaymentDetailMid: React.FC<OptionModalProps> = ({
     onUpdatePrice(price);
 
     const payload = {
-      rewardId: null,
+      rewardId: rewardId,
       donateAmount: price,
       scheduleDate,
       address,
