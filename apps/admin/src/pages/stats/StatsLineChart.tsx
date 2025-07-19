@@ -13,7 +13,7 @@ interface LineChartSeries {
 }
 
 interface StatsLineChartProps {
-  targetMonth: string; // yyyy-mm 형태
+  targetMonth: string;
 }
 
 const StatsLineChart: React.FC<StatsLineChartProps> = ({ targetMonth }) => {
@@ -31,7 +31,6 @@ const StatsLineChart: React.FC<StatsLineChartProps> = ({ targetMonth }) => {
 
         const graphData = res.data.data as LineChartSeries[];
 
-        // 👉 y 값이 유효한 경우만 필터링
         const cleaned = graphData.map((series) => ({
           ...series,
           data: series.data.filter(
@@ -41,8 +40,8 @@ const StatsLineChart: React.FC<StatsLineChartProps> = ({ targetMonth }) => {
 
         setData(cleaned);
       } catch (error) {
-        console.error("📉 통계 그래프 데이터 로드 실패:", error);
-        setData([]); // 실패 시에도 처리
+        console.error("통계 그래프 데이터 로드 실패:", error);
+        setData([]); 
       } finally {
         setLoading(false);
       }

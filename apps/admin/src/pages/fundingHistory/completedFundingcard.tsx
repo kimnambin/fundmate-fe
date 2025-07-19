@@ -6,132 +6,133 @@ import clsx from 'clsx';
 interface FundingItem {
   project_title: string;
   image_url: string;
-  start_date: string;
-  end_date: string;
+  short_description: string;
   current_amount: number;
-  achievement: number;
-  sponsor: number;
+  achievement: string;
+  remaining_day: number;
+  sponsor?: number;
+  start_date?: string;
+  end_date?: string;
 }
 
-const CompletedFunding = () => {
+const CompletedFundingComponent = () => {
+  const [completedFunding, setCompletedFunding] = useState<FundingItem | null>(null);
   const [fundingList, setFundingList] = useState<FundingItem[]>([]);
+  const [selectedFunding, setSelectedFunding] = useState<FundingItem | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const fetchCompletedFunding = async () => {
+    const fetchData = async () => {
       try {
-        const res = await axios.get('/api/profiles/recent-completed', {
-          withCredentials: true,
-        });
+        const res = await axios.get('/api/users/projects', { withCredentials: true });
 
-        console.log('최근 완료된 펀딩 데이터:', res.data);
-
-        if (!res.data || !res.data.project_title) {
-          setFundingList([]);
-          return;
-        }
-
-        const parsed: FundingItem = {
-          project_title: res.data.project_title,
-          image_url: res.data.image_url,
-          start_date: res.data.start_date,
-          end_date: res.data.end_date,
-          current_amount: Number(res.data.current_amount),
-          achievement: Number(res.data.achievement),
-          sponsor: Number(res.data.sponsor),
+        const data = res.data;
+        const parsedCompleted: FundingItem = {
+          ...data.completedFunding,
         };
 
-        setFundingList([parsed]);
-      } catch (err) {
+        setCompletedFunding(parsedCompleted);
+        setSelectedFunding(parsedCompleted);
+        setFundingList(data.fundingList || []);
+      } catch (error) {
+        console.error('펀딩 데이터 조회 실패:', error);
+        setCompletedFunding(null);
+        setSelectedFunding(null);
         setFundingList([]);
       }
     };
 
-    fetchCompletedFunding();
+    fetchData();
   }, []);
 
   const toggleOpen = () => setIsOpen((prev) => !prev);
-  const mainFunding = fundingList[0];
-  const restFunding = fundingList.slice(1);
 
-  const formatDate = (date: string) => {
+  const formatDate = (date?: string) => {
     if (!date) return '-';
     const d = new Date(date);
     return isNaN(d.getTime()) ? '-' : d.toLocaleDateString('ko-KR');
   };
 
+  const displayedList = fundingList.slice(0, 4);
+  const getProgressWidth = (achievement: string) => `${Math.min(Number(achievement), 100)}%`;
+
   return (
     <div className="w-full max-w-screen-xl bg-white rounded-md flex flex-col gap-4 px-12 md:px-4">
       <Title>최근 완료된 펀딩</Title>
 
-      {mainFunding ? (
+      {selectedFunding ? (
         <div className="flex flex-col md:flex-row gap-12 w-full">
           <div className="w-[420px] max-w-[420px] h-[240px] bg-gray-300 rounded-lg shrink-0 overflow-hidden">
-            {mainFunding.image_url ? (
+            {selectedFunding.image_url ? (
               <img
-                src={mainFunding.image_url}
-                alt={mainFunding.project_title}
+                src={selectedFunding.image_url}
+                alt={selectedFunding.project_title}
                 className="w-full h-full object-cover rounded-lg"
               />
             ) : null}
           </div>
 
-          <div className="flex flex-col flex-1 justify-between gap-4">
+          {/* gap 조정된 정보 영역 */}
+          <div className="flex flex-col flex-1 justify-between gap-2">
+            {/* 제목, 날짜 */}
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-2 flex-wrap">
                 <SubTitle className="text-black">
-                  {mainFunding.project_title || '제목 없음'}
+                  {selectedFunding.project_title || '제목 없음'}
                 </SubTitle>
                 <span className="bg-[#5FBDFF] text-white text-xs md:text-sm font-bold px-2 py-[2px] rounded-md">
                   완료
                 </span>
               </div>
-              <MediumFont className="text-[#7E7C7C]">
-                {formatDate(mainFunding.start_date)} ~ {formatDate(mainFunding.end_date)}
-              </MediumFont>
+              {(selectedFunding.start_date || selectedFunding.end_date) && (
+                <MediumFont className="text-[#7E7C7C]">
+                  {formatDate(selectedFunding.start_date)} ~ {formatDate(selectedFunding.end_date)}
+                </MediumFont>
+              )}
             </div>
 
-            <div className="flex flex-col gap-2">
+            {/* 진행률 */}
+            <div className="flex flex-col gap-1">
               <MediumFont className="text-black">진행률</MediumFont>
               <div className="relative w-full h-4 md:h-5 bg-gray-200 rounded-full">
                 <div
                   className="absolute top-0 left-0 h-4 md:h-5 bg-[#5FBDFF] rounded-full flex items-center justify-center"
-                  style={{ width: `${mainFunding.achievement}%` }}
+                  style={{ width: getProgressWidth(selectedFunding.achievement) }}
                 >
                   <span
                     className={clsx(
                       'text-[10px] md:text-sm font-medium',
-                      mainFunding.achievement === 0 ? 'text-black' : 'text-white'
+                      selectedFunding.achievement === '0' ? 'text-black' : 'text-white'
                     )}
                   >
-                    {mainFunding.achievement}%
+                    {selectedFunding.achievement}%
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <MediumFont className="text-black">모금액</MediumFont>
-              <MediumFont className="text-[#7E7C7C]">
-                {mainFunding.current_amount.toLocaleString()}원
-              </MediumFont>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <MediumFont className="text-black">참여인원</MediumFont>
-              <MediumFont className="text-black">{mainFunding.sponsor}명</MediumFont>
+            {/* 모금액 / 참여인원 간격 좁힘 */}
+            <div className="flex flex-col gap-[2px]">
+              <div className="flex items-center gap-2">
+                <MediumFont className="text-black">모금액</MediumFont>
+                <MediumFont className="text-[#7E7C7C]">
+                  {selectedFunding.current_amount.toLocaleString()}원
+                </MediumFont>
+              </div>
+              <div className="flex items-center gap-2">
+                <MediumFont className="text-black">참여인원</MediumFont>
+                <MediumFont className="text-[#7E7C7C]">
+                  {selectedFunding.sponsor ?? '0'}명
+                </MediumFont>
+              </div>
             </div>
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center w-full gap-4 py-12">
-          <p className="text-gray-500 text-sm md:text-base text-center">
-            아직 완료된 펀딩이 없습니다.
-          </p>
-        </div>
+        <div className="text-center text-gray-500">표시할 펀딩이 없습니다.</div>
       )}
 
-      {restFunding.length > 0 && (
+      {displayedList.length > 0 && (
         <div className="flex justify-center">
           <button
             type="button"
@@ -160,13 +161,17 @@ const CompletedFunding = () => {
           isOpen ? 'max-h-[1000px] mt-4' : 'max-h-0'
         )}
       >
-        {restFunding.length > 0 && (
+        {isOpen && displayedList.length > 0 && (
           <ul className="flex flex-col gap-3 mt-2">
-            {restFunding.map((item, idx) => (
-              <li key={idx} className="border px-4 py-2 rounded-md bg-gray-50">
+            {displayedList.map((item, idx) => (
+              <li
+                key={idx}
+                onClick={() => setSelectedFunding(item)}
+                className="border px-4 py-2 rounded-md bg-gray-50 cursor-pointer hover:bg-gray-100"
+              >
                 <div className="font-semibold text-black">{item.project_title}</div>
                 <div className="text-xs text-gray-400">
-                  성과율 {item.achievement}% | 현재 금액 {item.current_amount.toLocaleString()}원 | 참여인원 {item.sponsor}명
+                  성과율 {item.achievement}% | 현재 금액 {item.current_amount.toLocaleString()}원 | 남은일 {item.remaining_day}일
                 </div>
               </li>
             ))}
@@ -177,4 +182,4 @@ const CompletedFunding = () => {
   );
 };
 
-export default CompletedFunding;
+export default CompletedFundingComponent;

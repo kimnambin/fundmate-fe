@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import FundingHistory from './pages/fundingHistory/fundingHistory';
 import PaymentManagement from './pages/paymentManagement/paymentManagement';
 import StatsPage from './pages/stats/statsPage';
-import MakerProfile from './pages/makerProfile/makerProfile';
 import { Header, UserPageLayout } from '@repo/ui/components';
 import { Layout } from '@repo/ui/styles';
 

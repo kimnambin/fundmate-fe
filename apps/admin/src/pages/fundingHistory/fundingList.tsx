@@ -28,10 +28,8 @@ const FundingList = () => {
           withCredentials: true,
         });
 
-        const funding = res.data.fundingList.map((item: FundingItem, idx: number) => ({
+        const funding = res.data.fundingList.map((item: FundingItem) => ({
           ...item,
-          achievement: ((idx + 1) * 30).toString(), // 30, 60, 90, 120
-          remaining_day: idx % 2 === 0 ? 5 : 0,     // 5 or 0
         }));
 
         setFundingList(funding);
@@ -48,33 +46,33 @@ const FundingList = () => {
 
     // 상태 필터링
     if (statusFilter === 1) {
-      filtered = filtered.filter((item) => Number(item.remaining_day) > 0);
+      filtered = filtered.filter((item) => item.remaining_day > 0);
     } else if (statusFilter === 2) {
-      filtered = filtered.filter((item) => Number(item.remaining_day) === 0);
+      filtered = filtered.filter((item) => item.remaining_day === 0);
     }
 
-    // 달성률 필터링
     if (completeFilter === 0) {
-      filtered = filtered.filter((item) => Number(item.achievement) < 75);
+      // 75% 이상
+      filtered = filtered.filter((item) => Number(item.achievement) >= 75);
     } else if (completeFilter === 1) {
+      // 75 ~ 100%
       filtered = filtered.filter((item) => {
         const val = Number(item.achievement);
         return val >= 75 && val <= 100;
       });
     } else if (completeFilter === 2) {
-      filtered = filtered.filter((item) => Number(item.achievement) >= 100);
+      // 100% 이상
+      filtered = filtered.filter((item) => Number(item.achievement) > 100);
     }
 
     // 정렬
     if (sortType === 1) {
-      filtered.sort((a, b) => b.current_amount - a.current_amount);
+      filtered.sort((a, b) => b.current_amount - a.current_amount); // 인기순
     } else if (sortType === 2) {
-      filtered.sort((a, b) => a.remaining_day - b.remaining_day);
+      filtered.sort((a, b) => a.remaining_day - b.remaining_day);   // 최신순
     } else if (sortType === 3) {
-      filtered.sort((a, b) => b.remaining_day - a.remaining_day);
+      filtered.sort((a, b) => b.remaining_day - a.remaining_day);   // 마감임박순
     }
-
-    console.log('필터링된 리스트:', filtered);
 
     setFilteredList(filtered);
   }, [fundingList, statusFilter, completeFilter, sortType]);
