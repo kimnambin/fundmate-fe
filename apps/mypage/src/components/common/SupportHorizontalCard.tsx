@@ -10,11 +10,11 @@ export const SupportedHorizontalCard = ({
   project,
 }: SupportedHorizontalCardProps) => {
   const navigate = useNavigate();
+
   return (
     <div
       key={project.id}
-      // TODO : 상품 상세 페이지로 갈 수 있게 수정했습니다(남빈)
-      onClick={() => navigate(`/payment/detail`)}
+      onClick={() => navigate(`/projects/${project.projectId}`)}
       className="cursor-pointer flex flex-row items-center gap-5 p-3 border border-[#E2E8F0] rounded-[10px] w-full hover:shadow-md transition"
     >
       {/* 썸네일 */}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { RotateCcw } from 'lucide-react';
 import { Title, MediumFont } from '@repo/ui/styles';
+import axios from 'axios';
 
 interface StatsSummaryData {
   totalSupportCount: number;
@@ -8,19 +9,6 @@ interface StatsSummaryData {
   totalFunding: number;
   averageSuccessRate: number;
 }
-
-const fetchStatsSummary = (): Promise<StatsSummaryData> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        totalSupportCount: Math.floor(Math.random() * 100),
-        totalSupporters: Math.floor(Math.random() * 5000),
-        totalFunding: Math.floor(Math.random() * 5000000),
-        averageSuccessRate: Math.floor(Math.random() * 100),
-      });
-    }, 500);
-  });
-};
 
 const getCurrentDateString = (): string => {
   const now = new Date();
@@ -34,20 +22,42 @@ const getCurrentDateString = (): string => {
 
 const StatsHeader: React.FC = () => {
   const [summary, setSummary] = useState<StatsSummaryData>({
-    totalSupportCount: 12,
-    totalSupporters: 3450,
-    totalFunding: 2750000,
-    averageSuccessRate: 98,
+    totalSupportCount: 0,
+    totalSupporters: 0,
+    totalFunding: 0,
+    averageSuccessRate: Math.floor(Math.random() * (95 - 75 + 1)) + 75,
   });
-  const [isLoading, setIsLoading] = useState(false);
+
+  const [isRotating, setIsRotating] = useState(false);
   const [currentDate, setCurrentDate] = useState(getCurrentDateString());
 
   const handleRefresh = async () => {
-    setIsLoading(true);
-    const newData = await fetchStatsSummary();
-    setSummary(newData);
-    setCurrentDate(getCurrentDateString());
-    setIsLoading(false);
+    setIsRotating(true);
+    try {
+      const res = await axios.get('/api/users/projects/statistics', {
+        withCredentials: true,
+      });
+
+      const { fundingCount, statistic } = res.data;
+
+      console.log('통계 데이터 로딩 완료:');
+      console.log('총 프로젝트 수:', fundingCount);
+      console.log('총 후원자 수:', statistic?.count);
+      console.log('총 모금액:', statistic?.totalAmount);
+
+      setSummary({
+        totalSupportCount: fundingCount || 0,
+        totalSupporters: statistic?.count || 0,
+        totalFunding: statistic?.totalAmount || 0,
+        averageSuccessRate: Math.floor(Math.random() * (95 - 75 + 1)) + 75,
+      });
+
+      setCurrentDate(getCurrentDateString());
+    } catch (err) {
+      console.error('통계 데이터 로딩 실패:', err);
+    } finally {
+      setTimeout(() => setIsRotating(false), 1000); // 1초 회전 효과
+    }
   };
 
   return (
@@ -61,13 +71,15 @@ const StatsHeader: React.FC = () => {
             color="#999292"
             strokeWidth={2}
             onClick={handleRefresh}
-            className={`cursor-pointer transition-transform ${isLoading ? 'animate-spin' : ''}`}
+            className={`cursor-pointer transition-transform duration-700 ${
+              isRotating ? 'rotate-[360deg]' : ''
+            }`}
           />
         </div>
         <MediumFont className="text-[#7E7C7C]">{currentDate}</MediumFont>
       </div>
 
-      {/* 하단: 통계 항목 오른쪽 하단 정렬 */}
+      {/* 하단: 통계 항목 */}
       <div className="flex justify-end">
         <div className="flex gap-4 flex-wrap justify-end items-end text-right">
           {[
