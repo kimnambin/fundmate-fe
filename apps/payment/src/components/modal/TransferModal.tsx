@@ -9,25 +9,27 @@ import {
   Input,
   BottomWrapper,
 } from '../styles/modal/tansfetModal.style';
-import { useTransferForm } from '../../hooks/useForm';
-import { TransferProps } from '../../types/modal.model';
+import { PaymentProps } from '../../types/payement/modal.model';
 import PayConfirmModal from './confirm/PayConfirmModal';
+import { useTransferForm } from '../../hooks/payment/save/usePostPaymentSave';
 
 export default function TransferModal({
-  addAmount,
   addressData,
+  method,
   setIsModalOpen,
-}: TransferProps) {
-  const bankList = ['KB국민은행', '농협', '신한', 'IBK', '토스'];
+  setShowLoading,
+  setSavedPaymentId,
+}: PaymentProps) {
+  const bankList = ['KB', 'NH', 'SH', 'IBK', 'TOSS'];
 
   const {
-    selectedBank,
-    accountNumber,
-    accountHolder,
+    bank,
+    number,
+    setNumber,
+    owner,
+    setOwner,
     birthDate,
     handleBankChange,
-    setAccountNumber,
-    setAccountHolder,
     setBirthDate,
     isFormValid,
     handleClose,
@@ -35,13 +37,18 @@ export default function TransferModal({
     isConfirmModalOpen,
     setIsConfirmModalOpen,
     confirmPayment,
-  } = useTransferForm({ addAmount, addressData, setIsModalOpen });
+  } = useTransferForm({
+    addressData,
+    method,
+    setIsModalOpen,
+    setShowLoading,
+    setSavedPaymentId,
+  });
 
   return (
     <Modal isOpen={true} onClose={() => setIsModalOpen(false)}>
       {isConfirmModalOpen ? (
         <PayConfirmModal
-          addAmount={addAmount}
           setIsConfirmModalOpen={setIsConfirmModalOpen}
           confirmPayment={confirmPayment}
           title={'transfer'}
@@ -58,7 +65,7 @@ export default function TransferModal({
             <select
               className="w-full border rounded-md p-2 mb-4"
               onChange={handleBankChange}
-              value={selectedBank}
+              value={bank}
             >
               <option value="">은행을 선택하세요</option>
               {bankList.map((v, i) => (
@@ -75,12 +82,11 @@ export default function TransferModal({
               inputMode="numeric"
               pattern="[0-9]*"
               required
-              className="appearance-none [&::-webkit-inner-spin-button]:appearance-none 
-            [&::-webkit-outer-spin-button]:appearance-none"
-              value={accountNumber}
+              className="appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              value={number}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const onlyNums = e.target.value.replace(/\D/g, '');
-                setAccountNumber(onlyNums.slice(0, 12));
+                setNumber(onlyNums.slice(0, 12));
               }}
             />
 
@@ -91,8 +97,8 @@ export default function TransferModal({
                   type="text"
                   placeholder="예금주 명을 입력해주세요."
                   className="w-full border rounded-md p-2"
-                  value={accountHolder}
-                  onChange={(e) => setAccountHolder(e.target.value)}
+                  value={owner}
+                  onChange={(e) => setOwner(e.target.value)}
                 />
               </div>
               <div className="w-1/2">
@@ -100,8 +106,7 @@ export default function TransferModal({
                 <input
                   type="text"
                   placeholder="예) 920101"
-                  className="w-full border rounded-md p-2 appearance-none [&::-webkit-inner-spin-button]:appearance-none 
-                [&::-webkit-outer-spin-button]:appearance-none"
+                  className="w-full border rounded-md p-2 appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   inputMode="numeric"
                   pattern="[0-9]*"
                   maxLength={6}
@@ -115,7 +120,7 @@ export default function TransferModal({
             </BottomWrapper>
 
             <MainButton
-              label="결제하기"
+              label="저장"
               className="ml-0 w-full"
               textSize={'text-base'}
               textWeight={'font-bold'}

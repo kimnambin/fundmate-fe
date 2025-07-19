@@ -3,11 +3,36 @@ import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/layout.style';
 
 import { BaseText, BoldBigText, BoldText } from '../styles/text.style';
 import { MainButton } from '@repo/ui/components';
+import { formatDate } from '../../utils/date';
+import { formatPrice } from '@repo/ui/utils';
+import { useDelSavePayment } from '../../hooks/payment/save/useDelSavePayment';
+import { useGetiInsertedId } from '../../hooks/useGetiInsertedId';
 
-const PaymentDetailBottom = () => {
+interface PdBottom {
+  code: string;
+  amount: number;
+  scheduleDate: string;
+}
+
+const PaymentDetailBottom = ({ code, amount, scheduleDate }: PdBottom) => {
   const subTitle = ['결제 수단', '결제 금액', '결제 상태'];
-  const content = ['국민은행', '1,000원', '2025.06.20 결제 예정'];
+  const content = [
+    code,
+    `${formatPrice(String(amount))}원`,
+    `${formatDate(scheduleDate)} 결제 예정`,
+  ];
   const nav = useNavigate();
+
+  const id = useGetiInsertedId();
+
+  const { mutate: deletePayment } = useDelSavePayment();
+
+  const handleDelete = () => {
+    const confirmed = window.confirm('정말로 결제 정보를 삭제하시겠습니까?');
+    if (confirmed) {
+      deletePayment(Number(id));
+    }
+  };
 
   return (
     <FlexCol className="items-start">
@@ -24,7 +49,7 @@ const PaymentDetailBottom = () => {
               </BaseText>
 
               <BoldText
-                className={`flex-1 text-left ${idx === 2 ? 'text-[#FB6565]' : 'text-black'}`}
+                className={`flex text-left w-[240px] ${idx === 2 ? 'text-[#FB6565]' : 'text-black'}`}
               >
                 {content[idx]}
               </BoldText>
@@ -36,6 +61,7 @@ const PaymentDetailBottom = () => {
           className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black"
           textSize={'text-base'}
           textWeight={'font-bold'}
+          onClick={handleDelete}
         />
       </BoxRow>
 

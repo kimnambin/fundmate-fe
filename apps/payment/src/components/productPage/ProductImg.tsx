@@ -1,9 +1,16 @@
 import { MainImg, Wrapper } from '../styles/product-detail/ProductImg.style';
 
-const ProductImg = () => {
+const ProductImg = ({ imgId }: { imgId: number }) => {
   return (
     <Wrapper>
-      <MainImg src="https://imgnews.pstatic.net/image/094/2025/06/25/0000012740_001_20250625075019738.jpg?type=w860" />
+      <MainImg
+        src={
+          // TODO :임시로 넣었습니다
+          typeof imgId === 'string'
+            ? `https://picsum.photos/id/10/300/200`
+            : `https://picsum.photos/id/${imgId}/300/200`
+        }
+      />
     </Wrapper>
   );
 };

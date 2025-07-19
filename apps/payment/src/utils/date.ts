@@ -27,3 +27,7 @@ export const todayDate = ({ y, m, d }: todayDateProps) => {
 
   return RemainingDays;
 };
+
+export const formatDate = (date: string) => {
+  return date.slice(0, 10);
+};

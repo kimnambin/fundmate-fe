@@ -5,18 +5,28 @@ import {
   ProductImg,
   Title,
 } from '../styles/paymentPage/Productinfo.style';
-import { productData } from '../productPage/ProductInfo';
+import { useGetQueryString } from '../../hooks/useGetQueryString';
+import { useTmpLogin } from '../../hooks/user/useTmp';
+import { useGetProductInfo } from '../../hooks/product/getProductInfo';
 
 const ProductMiniInfo = () => {
+  const projectId = useGetQueryString();
+
+  useTmpLogin();
+  const { data: productData } = useGetProductInfo(Number(projectId));
   return (
     <ProductInfo>
       <ProductImg
-        src="https://imgnews.pstatic.net/image/094/2025/06/25/0000012740_001_20250625075019738.jpg?type=w860"
+        src={
+          typeof productData?.project.image_url === 'string'
+            ? `https://picsum.photos/id/10/300/200`
+            : `https://picsum.photos/id/${productData?.project.image_url}/300/200`
+        }
         alt="대표 이미지"
       />
       <FlexColsm className="items-start justify-start">
-        <Title>{productData.title}</Title>
-        <BoldBigText>{productData['모인 금액']}</BoldBigText>
+        <Title>{productData?.project.title}</Title>
+        <BoldBigText>후원 정보</BoldBigText>
       </FlexColsm>
     </ProductInfo>
   );
