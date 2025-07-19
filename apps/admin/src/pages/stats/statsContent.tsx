@@ -1,38 +1,76 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StatsCalendar from "../../components/stats/StatsCalendar";
 import StatsSummary from "./statsSummary";
 import SupporterPieChart from "./SupporterPieChart";
 import StatsLineChart from "./StatsLineChart";
 import { Title } from "@repo/ui/styles";
+import { format, startOfMonth, endOfMonth } from "date-fns";
+import axios from "axios";
 
 const StatsContent: React.FC = () => {
+  const today = new Date();
+  const defaultStart = format(startOfMonth(today), "yyyy-MM-dd");
+  const defaultEnd = format(endOfMonth(today), "yyyy-MM-dd");
+
+  const [startDate, setStartDate] = useState<string>(defaultStart);
+  const [endDate, setEndDate] = useState<string>(defaultEnd);
+  const [graphData, setGraphData] = useState([]); 
+
+  const handleDateChange = (start: string, end: string) => {
+    console.log("날짜 변경:", { start, end });
+    setStartDate(start);
+    setEndDate(end);
+  };
+
+  const targetMonth = startDate.slice(0, 7);
+
+  useEffect(() => {
+    const fetchGraphData = async () => {
+      try {
+        const res = await axios.get("/api/statistics/graph", {
+          params: { target: targetMonth },
+          withCredentials: true,
+        });
+
+        console.log("그래프 응답:", res.data);
+
+        const mapped = res.data.data.map((series: any) => ({
+          id: series.id === "amount" ? "모금액" : "후원자수",
+          data: series.data,
+        }));
+
+        setGraphData(mapped);
+      } catch (err) {
+        console.error("그래프 데이터 오류:", err);
+        setGraphData([]);
+      }
+    };
+
+    if (targetMonth) {
+      fetchGraphData();
+    }
+  }, [targetMonth]);
+
   return (
     <div className="w-full">
-      {/* 전체 박스 감싸기 */}
       <div className="w-full border border-gray-300 rounded-lg p-6 bg-white flex flex-col gap-6">
-        {/* 상단 제목 */}
         <Title className="text-gray-800">통계 내역</Title>
 
-        {/* 상단 3분할 + 하단 1분할 구조 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-          {/* 캘린더 */}
           <div className="bg-white rounded-md p-4">
-            <StatsCalendar />
+            <StatsCalendar onDateChange={handleDateChange} />
           </div>
 
-          {/* 월 통계 */}
           <div className="bg-white rounded-md p-4">
-            <StatsSummary />
+            <StatsSummary startDate={startDate} endDate={endDate} />
           </div>
 
-          {/* 파이차트 */}
           <div className="bg-white rounded-md p-4">
             <SupporterPieChart />
           </div>
 
-          {/* 라인차트 - 전체 span */}
           <div className="md:col-span-3 bg-white rounded-md p-6">
-            <StatsLineChart />
+            <StatsLineChart data={graphData} />
           </div>
         </div>
       </div>

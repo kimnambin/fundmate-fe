@@ -9,20 +9,31 @@ import { Link } from 'react-router-dom';
 // import { useGetQueryString } from '../hooks/useGetQueryString';
 import { VerticalCard } from '@repo/ui/components';
 import { Blank } from '../components/styles/product-detail/prdouctstyle.style';
+import { useGetProductInfo } from '../hooks/product/getProductInfo';
+import { useGetQueryString } from '../hooks/useGetQueryString';
+import { useGetiInsertedId } from '../hooks/useGetiInsertedId';
 
 const PaymentcompletedPage = () => {
-  // const url = useGetQueryString();
+  const projectId = useGetQueryString();
+  const { data: productData } = useGetProductInfo(Number(projectId));
+
+  const id = useGetiInsertedId();
 
   return (
     <Container className="mt-[10%] px-6 items-start sm:px-0">
       <FlexColsm className="w-full">
-        <BoldBigText className="text-main">축하합니다. 12번째</BoldBigText>
+        <BoldBigText className="text-main">
+          축하합니다. {productData?.project.sponsor}번째
+        </BoldBigText>
         <BoldBigText>공식 후원자가 되셨습니다!</BoldBigText>
         <FlexRowsm className="mt-6">
           <BaseText className="text-xs mr-1.5 sm:text-base">
             * 후원 내역 변경은
           </BaseText>
-          <Link to={`/payment/detail`} className="text-main underline">
+          <Link
+            to={`/payment/${projectId}/detail?id=${id}`}
+            className="text-main underline"
+          >
             후원상세
           </Link>
           <BaseText>에서 하실 수 있습니다.</BaseText>

@@ -1,22 +1,16 @@
-import { ResponsivePie } from "@nivo/pie";
+import { ResponsivePie } from '@nivo/pie';
+import type { ConvertedChartData } from '../../utils/pieChartConverter';
 
-type DataGroupProps = {
-  data: DataProps[]
-}
+type DataProps = {
+  data: ConvertedChartData[];
+};
 
-interface DataProps {
-  id: string;
-  label: string;
-  value: number;
-  color: string;
-}
-
-export const StatisticsPie = ({ data }: DataGroupProps) => {
+export const StatisticsPie = ({ data }: DataProps) => {
   return (
     <ResponsivePie
       data={data}
       margin={{ top: 80, right: 80, bottom: 80, left: 80 }}
-      colors={data.map(d => d.color)}
+      colors={data.map((d: ConvertedChartData) => d.color)}
       innerRadius={0.5}
       padAngle={0.6}
       cornerRadius={2}
@@ -28,6 +22,5 @@ export const StatisticsPie = ({ data }: DataGroupProps) => {
       arcLabelsSkipAngle={10}
       arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
     />
-
-  )
-}
+  );
+};
