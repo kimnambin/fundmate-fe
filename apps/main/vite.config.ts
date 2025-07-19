@@ -6,6 +6,14 @@ import { resolve } from 'path';
 
 dotenv.config({ path: resolve(__dirname, '../../.env') });
 
+const ADMIN = 'https://fundmate-fe-admin.vercel.app';
+const FUNDING = 'https://fundmate-fe-funding.vercel.app';
+const MYPAGE = 'https://fundmate-fe-mypage.vercel.app';
+const PAYMENT = 'https://fundmate-fe-payment.vercel.app';
+const STATISTICS = 'https://fundmate-fe-statistics.vercel.app';
+
+const isDeployed = import.meta.env.MODE === 'production';
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -13,11 +21,21 @@ export default defineConfig({
     federation({
       name: 'main',
       remotes: {
-        admin: 'http://localhost:5001/assets/remoteEntry.js',
-        funding: 'http://localhost:5002/assets/remoteEntry.js',
-        mypage: 'http://localhost:5003/assets/remoteEntry.js',
-        payment: 'http://localhost:5004/assets/remoteEntry.js',
-        statistics: 'http://localhost:5005/assets/remoteEntry.js',
+        admin: isDeployed
+          ? ADMIN
+          : 'http://localhost:5001/assets/remoteEntry.js',
+        funding: isDeployed
+          ? FUNDING
+          : 'http://localhost:5002/assets/remoteEntry.js',
+        mypage: isDeployed
+          ? MYPAGE
+          : 'http://localhost:5003/assets/remoteEntry.js',
+        payment: isDeployed
+          ? PAYMENT
+          : 'http://localhost:5004/assets/remoteEntry.js',
+        statistics: isDeployed
+          ? STATISTICS
+          : 'http://localhost:5005/assets/remoteEntry.js',
       },
       shared: [
         'react',
@@ -44,7 +62,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: process.env.BACKEND_ADDRESS,
+        target: process.env.VITE_BACKEND_ADDRESS,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,

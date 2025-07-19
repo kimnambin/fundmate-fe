@@ -7,6 +7,7 @@ import type { CardProps } from '../../types/cardType';
 import { useState } from 'react';
 
 export const HorizontalCard = ({
+  id,
   number,
   isLoading,
   imageUrl,
@@ -38,7 +39,7 @@ export const HorizontalCard = ({
     );
   }
   return (
-    <HorizontalCardContainer onClick={() => navigate('/product')}>
+    <HorizontalCardContainer onClick={() => navigate(`/product/${id}`)}>
       <div
         className={
           imageLoaded

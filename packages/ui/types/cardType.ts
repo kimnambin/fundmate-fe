@@ -1,4 +1,5 @@
 export interface CardProps {
+  id?: number;
   isLoading?: boolean;
   number?: string;
   imageUrl?: string;
@@ -6,4 +7,3 @@ export interface CardProps {
   description?: string;
   progress?: number;
 }
-

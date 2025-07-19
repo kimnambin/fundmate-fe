@@ -44,4 +44,3 @@ export { commonApiInstance } from './hooks';
 
 //stores
 export { loadingStore } from './stores/loadingStore';
-export { loginStore } from './stores/loginStore';

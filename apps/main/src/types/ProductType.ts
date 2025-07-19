@@ -1,9 +1,10 @@
 export type ProductType = {
-  imageId: number;
+  project_id: number;
+  image_url: string;
   title: string;
-  shortDescription: string;
-  goalAmount: number;
-  currentAmount: number;
+  short_description: string;
+  goal_amount: number;
+  current_amount: number;
   achievement: number;
-  remainingDay: number;
-}
+  remaining_day: number;
+};
