@@ -1,6 +1,6 @@
 export type ProductType = {
   project_id: number;
-  image_url: number;
+  image_url: string;
   title: string;
   short_description: string;
   goal_amount: number;
