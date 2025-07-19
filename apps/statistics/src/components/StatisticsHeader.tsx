@@ -19,7 +19,6 @@ interface StatisticsProps {
 const getPublicData = async (data: any, selected: any) => {
   try {
     const response = await commonApiInstance.post(`/datas/${selected}`, data);
-    console.log(data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -88,10 +87,9 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
           setKeywordDataSubmitted(true);
         } else {
           setOptionDataSubmitted(true);
-          console.log(response.data);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const handleReset = () => {
@@ -107,7 +105,7 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
       setOptionSelection({
         age_group: '',
         gender: '',
-        area: ',',
+        area: '',
       });
     }
   };

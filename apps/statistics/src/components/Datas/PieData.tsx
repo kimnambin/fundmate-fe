@@ -6,12 +6,11 @@ type DataProps = {
 };
 
 export const StatisticsPie = ({ data }: DataProps) => {
-  console.log(data);
   return (
     <ResponsivePie
       data={data}
       margin={{ top: 80, right: 80, bottom: 80, left: 80 }}
-      colors={data.map((d: any) => d.color)}
+      colors={data.map((d: ConvertedChartData) => d.color)}
       innerRadius={0.5}
       padAngle={0.6}
       cornerRadius={2}

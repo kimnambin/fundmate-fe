@@ -13,7 +13,7 @@ export const DataOptionChoiceTable = ({
 }: DataOptionChoiceProps) => {
   const handleOptionChange = (
     group: keyof OptionSelectionProps,
-    value: any,
+    value: string | number,
   ) => {
     setSelected((prev) => ({
       ...prev,

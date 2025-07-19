@@ -34,7 +34,6 @@ export function convert2024DataToChartFormat(
   const year = 2023;
   const yearlyArray = takenData[selected] as Array<YearlyData<any>>;
   if (!yearlyArray) return [];
-  console.log(yearlyArray);
   const yearData = yearlyArray.find((data) => data.year === year);
 
   if (!yearData) return [];

@@ -84,7 +84,6 @@ export const StatisticsBody = ({ rawData }: dataProps) => {
       keyword.forEach((k) => {
         const tempPie = convert2024DataToChartFormat(filteredData, k);
         updatedPieData[k] = tempPie;
-        console.log(tempPie);
 
         const tempLine = convertOptionRawDataToRegionLineChart(filteredData, k);
         updatedLineData[k] = tempLine;
@@ -112,7 +111,6 @@ export const StatisticsBody = ({ rawData }: dataProps) => {
       setOptionPieData(tempPie);
       const tempLine = convertOptionRawDataToLineChart(filteredData);
       setOptionLineData(tempLine);
-      console.log(tempPie);
     }
   }, [rawData]);
 
