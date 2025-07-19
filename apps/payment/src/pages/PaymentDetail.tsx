@@ -35,9 +35,11 @@ const PaymentDetail = () => {
   };
 
   if (error) {
-    <Layout>
-      <p>페이지를 찾을 수 없습니다</p>
-    </Layout>;
+    return (
+      <Layout>
+        <p>페이지를 찾을 수 없습니다</p>
+      </Layout>
+    );
   }
 
   return (
@@ -57,6 +59,7 @@ const PaymentDetail = () => {
         address={paymentData?.address || ''}
         addressNumber={paymentData?.addressNumber || 0}
         addressInfo={paymentData?.addressInfo || ''}
+        onUpdatePrice={() => {}}
       />
       <PaymentDetailBottom
         code={savePaymentData?.data?.code || '알수 없음'}

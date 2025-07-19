@@ -4,7 +4,7 @@ import { Reservation } from '../../types/payement/paymentDeatil.model';
 
 export const useGetPayment = (id: number) => {
   return useQuery<Reservation, Error>({
-    queryKey: ['paymentInfo'],
+    queryKey: ['paymentInfo', id],
     queryFn: async () => {
       const res = await getReservations(id);
       return res.data;
