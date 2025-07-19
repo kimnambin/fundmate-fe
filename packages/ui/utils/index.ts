@@ -4,4 +4,4 @@ import StatisticsOptionData from './StatisticsOptionData.json';
 export { StatisticsTableData };
 export { StatisticsOptionData };
 
-export { formatPrice } from './format';
+export { formatPrice, formatPriceToNumber } from './format';

@@ -8,8 +8,8 @@ interface Props {
   title: string;
   setTitle: (value: string) => void;
   isSubmit: boolean;
-  targetAmount: string;
-  setTargetAmount: (value: string) => void;
+  goalAmount: string;
+  setGoalAmount: (value: string) => void;
   startDate: string;
   setStartDate: (value: string) => void;
   endDate: string;
@@ -23,8 +23,8 @@ const InfoForm = ({
   title,
   setTitle,
   isSubmit,
-  targetAmount,
-  setTargetAmount,
+  goalAmount,
+  setGoalAmount,
   startDate,
   setStartDate,
   endDate,
@@ -48,9 +48,9 @@ const InfoForm = ({
         width="sm:w-[350px]"
         label="목표 금액"
         placeholder="목표 금액을 입력하세요."
-        value={targetAmount}
-        onChange={(e) => setTargetAmount(formatPrice(e.target.value))}
-        isError={isSubmit && targetAmount.trim().length === 0}
+        value={goalAmount}
+        onChange={(e) => setGoalAmount(formatPrice(e.target.value))}
+        isError={isSubmit && goalAmount.trim().length === 0}
       />
 
       <div className="flex flex-col gap-[10px]">

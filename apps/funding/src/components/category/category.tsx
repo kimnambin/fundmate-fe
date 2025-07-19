@@ -1,11 +1,12 @@
 import { FaChevronDown } from 'react-icons/fa';
 import { Option, CategoryTitle, Wrapper } from './category.styles';
+import type { FilterOption } from '../../types/createFunding.types';
 
 interface Props {
   title: string;
-  options: string[];
-  selected: string | null;
-  onSelect: (value: string) => void;
+  options: FilterOption[];
+  selected: number | null;
+  onSelect: (value: number) => void;
 }
 
 const Category = ({ title, options, selected, onSelect }: Props) => {
@@ -19,13 +20,15 @@ const Category = ({ title, options, selected, onSelect }: Props) => {
       <ul>
         {options.map((option) => (
           <Option
-            key={option}
-            onClick={() => onSelect(option)}
+            key={option.id}
+            onClick={() => onSelect(option.id)}
             className={
-              selected === option ? 'text-main font-bold' : 'text-text-active'
+              selected === option.id
+                ? 'text-main font-bold'
+                : 'text-text-active'
             }
           >
-            {option}
+            {option.label}
           </Option>
         ))}
       </ul>
