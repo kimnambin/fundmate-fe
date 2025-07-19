@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { FollowingCard } from "./FollowingCard";
+import { useEffect, useState } from 'react';
+import { FollowingCard } from './FollowingCard';
 import {
   getFollowingUsers,
   getFollowerUsers,
   followUser,
   unfollowUser,
-} from "../../api/follow";
-import { MediumFont, Title } from "@repo/ui/styles";
+} from '../../api/follow';
+import { MediumFont, Title } from '@repo/ui/styles';
 
 interface FollowingUser {
   id: number;
@@ -31,14 +31,14 @@ const Following = () => {
           getFollowerUsers(),
         ]);
 
-        console.log("팔로잉 목록:", followingsRes);
-        console.log("팔로워 목록:", followersRes);
+        console.log('팔로잉 목록:', followingsRes);
+        console.log('팔로워 목록:', followersRes);
 
         const formattedFollowings = followingsRes.map((user: any) => ({
           id: user.userId,
           name: user.nickname,
           nickname: user.nickname, // 서포터 페이지 라우팅용
-          initial: user.nickname?.slice(0, 2).toUpperCase() ?? "??",
+          initial: user.nickname?.slice(0, 2).toUpperCase() ?? '??',
           isFollowing: true,
           imageUrl: user.imageUrl ?? undefined,
         }));
@@ -47,7 +47,7 @@ const Following = () => {
           id: user.userId,
           name: user.nickname,
           nickname: user.nickname, // 서포터 페이지 라우팅용
-          initial: user.nickname?.slice(0, 2).toUpperCase() ?? "??",
+          initial: user.nickname?.slice(0, 2).toUpperCase() ?? '??',
           isFollowing: false,
           imageUrl: user.imageUrl ?? undefined,
         }));
@@ -55,7 +55,7 @@ const Following = () => {
         setFollowings(formattedFollowings);
         setFollowers(formattedFollowers);
       } catch (err) {
-        console.error("팔로잉/팔로워 목록 조회 실패", err);
+        console.error('팔로잉/팔로워 목록 조회 실패', err);
       } finally {
         setLoading(false);
       }
@@ -84,10 +84,10 @@ const Following = () => {
       });
 
       setFollowers((prev) =>
-        prev.map((u) => (u.id === userId ? { ...u, isFollowing: next } : u))
+        prev.map((u) => (u.id === userId ? { ...u, isFollowing: next } : u)),
       );
     } catch (err) {
-      console.error("팔로우 상태 변경 실패", err);
+      console.error('팔로우 상태 변경 실패', err);
     }
   };
 
@@ -102,8 +102,8 @@ const Following = () => {
             onClick={() => setShowFollowings(true)}
             className={`flex items-center gap-1 py-2 ${
               showFollowings
-                ? "font-semibold shadow-[inset_0_-2px_0_0_#000000]"
-                : "text-[#343F59]"
+                ? 'font-semibold shadow-[inset_0_-2px_0_0_#000000]'
+                : 'text-[#343F59]'
             }`}
           >
             <MediumFont>팔로잉</MediumFont>
@@ -113,8 +113,8 @@ const Following = () => {
             onClick={() => setShowFollowings(false)}
             className={`flex items-center gap-1 py-2 ${
               !showFollowings
-                ? "font-semibold shadow-[inset_0_-2px_0_0_#000000]"
-                : "text-[#343F59]"
+                ? 'font-semibold shadow-[inset_0_-2px_0_0_#000000]'
+                : 'text-[#343F59]'
             }`}
           >
             <MediumFont>팔로워</MediumFont>
@@ -134,14 +134,15 @@ const Following = () => {
                 nickname={user.nickname} // 전달
                 initial={user.initial}
                 isFollowing={user.isFollowing}
-                imageUrl={user.imageUrl}
                 onToggleFollow={handleToggleFollow}
               />
             ))}
           </div>
         ) : (
           <div className="text-gray-500">
-            {showFollowings ? "팔로잉한 사용자가 없습니다." : "팔로워가 없습니다."}
+            {showFollowings
+              ? '팔로잉한 사용자가 없습니다.'
+              : '팔로워가 없습니다.'}
           </div>
         )}
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { VerticalCard } from '@repo/ui/components';
@@ -102,7 +102,9 @@ const MakerProfile = () => {
               <div
                 className="w-[130px] h-[130px] rounded-full bg-gray-300 shrink-0"
                 style={{
-                  backgroundImage: maker.imageUrl ? `url(${maker.imageUrl})` : undefined,
+                  backgroundImage: maker.imageUrl
+                    ? `url(${maker.imageUrl})`
+                    : undefined,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
@@ -111,15 +113,21 @@ const MakerProfile = () => {
                 <Title className="mb-10">{maker.nickname}</Title>
                 <div className="flex gap-16">
                   <div className="flex flex-col">
-                    <MediumFont className="text-gray-500">팔로잉 {'>'}</MediumFont>
+                    <MediumFont className="text-gray-500">
+                      팔로잉 {'>'}
+                    </MediumFont>
                     <MediumFont>{maker.followingCount}</MediumFont>
                   </div>
                   <div className="flex flex-col">
-                    <MediumFont className="text-gray-500">팔로워 {'>'}</MediumFont>
+                    <MediumFont className="text-gray-500">
+                      팔로워 {'>'}
+                    </MediumFont>
                     <MediumFont>{maker.followerCount}</MediumFont>
                   </div>
                   <div className="flex flex-col">
-                    <MediumFont className="text-gray-500">전체 프로젝트 {'>'}</MediumFont>
+                    <MediumFont className="text-gray-500">
+                      전체 프로젝트 {'>'}
+                    </MediumFont>
                     <MediumFont>{maker.fundingCount}개</MediumFont>
                   </div>
                 </div>
@@ -129,9 +137,10 @@ const MakerProfile = () => {
             <button
               onClick={handleFollowToggle}
               className={`flex items-center justify-center gap-2 px-6 py-3 border rounded-md text-base font-medium transition 
-                ${maker.isFollowing
-                  ? 'border-gray-300 text-gray-500 hover:bg-gray-100'
-                  : 'border-blue-400 text-blue-400 hover:bg-blue-50'
+                ${
+                  maker.isFollowing
+                    ? 'border-gray-300 text-gray-500 hover:bg-gray-100'
+                    : 'border-blue-400 text-blue-400 hover:bg-blue-50'
                 }`}
             >
               {maker.isFollowing ? (
@@ -160,7 +169,8 @@ const MakerProfile = () => {
           <section className="w-full">
             <hr className="border-t border-gray-200 mt-20 mb-10" />
             <SubTitle className="ml-4 mb-4">
-              올린 프로젝트 <span className="text-blue-500">{maker.fundingList.length}</span>
+              올린 프로젝트{' '}
+              <span className="text-blue-500">{maker.fundingList.length}</span>
             </SubTitle>
             <div className="grid grid-cols-5 gap-4 mb-40">
               {maker.fundingList.map((project, index) => (

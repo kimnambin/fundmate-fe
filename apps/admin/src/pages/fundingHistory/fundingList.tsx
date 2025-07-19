@@ -17,9 +17,9 @@ const FundingList = () => {
   const [fundingList, setFundingList] = useState<FundingItem[]>([]);
   const [filteredList, setFilteredList] = useState<FundingItem[]>([]);
 
-  const [statusFilter, setStatusFilter] = useState<number>(0);     // 0: 전체, 1: 진행 중, 2: 완료됨
+  const [statusFilter, setStatusFilter] = useState<number>(0); // 0: 전체, 1: 진행 중, 2: 완료됨
   const [completeFilter, setCompleteFilter] = useState<number>(0); // 0: 75% 이상, 1: 75~100%, 2: 100% 이상
-  const [sortType, setSortType] = useState<number>(0);             // 0: 추천순, 1: 인기순, 2: 최신순, 3: 마감임박순
+  const [sortType, setSortType] = useState<number>(0); // 0: 추천순, 1: 인기순, 2: 최신순, 3: 마감임박순
 
   useEffect(() => {
     const fetchFundingList = async () => {
@@ -69,9 +69,9 @@ const FundingList = () => {
     if (sortType === 1) {
       filtered.sort((a, b) => b.current_amount - a.current_amount); // 인기순
     } else if (sortType === 2) {
-      filtered.sort((a, b) => a.remaining_day - b.remaining_day);   // 최신순
+      filtered.sort((a, b) => a.remaining_day - b.remaining_day); // 최신순
     } else if (sortType === 3) {
-      filtered.sort((a, b) => b.remaining_day - a.remaining_day);   // 마감임박순
+      filtered.sort((a, b) => b.remaining_day - a.remaining_day); // 마감임박순
     }
 
     setFilteredList(filtered);
@@ -84,8 +84,16 @@ const FundingList = () => {
           <SubTitle>펀딩 리스트</SubTitle>
 
           <div className="flex flex-wrap gap-2 relative">
-            <Dropdown kind="status" usage="click" onClick={setStatusFilter} />
-            <Dropdown kind="complete" usage="click" onClick={setCompleteFilter} />
+            <Dropdown
+              kind="status"
+              usage="click"
+              onClick={() => setStatusFilter}
+            />
+            <Dropdown
+              kind="complete"
+              usage="click"
+              onClick={() => setCompleteFilter}
+            />
           </div>
 
           <MediumFont className="mt-1">
@@ -97,7 +105,11 @@ const FundingList = () => {
         </div>
 
         <div className="flex justify-start md:justify-end">
-          <Dropdown kind="recommand" usage="click" onClick={setSortType} />
+          <Dropdown
+            kind="recommand"
+            usage="click"
+            onClick={() => setSortType}
+          />
         </div>
       </div>
 
@@ -107,11 +119,8 @@ const FundingList = () => {
             <VerticalCard
               key={idx}
               title={item.project_title}
-              image={item.image_url}
+              imageUrl={item.image_url}
               description={item.short_description}
-              currentAmount={item.current_amount}
-              achievement={item.achievement}
-              remainingDays={item.remaining_day}
             />
           ))
         ) : (

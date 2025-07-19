@@ -14,7 +14,7 @@ export const SupportedHorizontalCard = ({
   return (
     <div
       key={project.id}
-      onClick={() => navigate(`/projects/${project.projectId}`)}
+      onClick={() => navigate(`/projects/${project.id}`)}
       className="cursor-pointer flex flex-row items-center gap-5 p-3 border border-[#E2E8F0] rounded-[10px] w-full hover:shadow-md transition"
     >
       {/* 썸네일 */}

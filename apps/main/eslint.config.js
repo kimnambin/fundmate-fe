@@ -7,7 +7,6 @@ import tseslint from 'typescript-eslint';
 export default tseslint.config(
   { ignores: ['dist'] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -17,21 +16,20 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     rules: {
       ...reactHooks.configs.recommended.rules,
+
+      // ✅ React Refresh 관련 권장 설정
       'react-refresh/only-export-components': [
         'warn',
         {
           allowConstantExport: true,
         },
       ],
-    },
-  },
-  {
-    files: ['**/*.{ts,tsx}'],
-    rules: {
-      //사용하지 않는 변수에 대한 lint처리를 위해서 지정하였습니다
-      'no-unused-vars': 'off',
+
+      // ✅ 사용하지 않는 변수 경고 처리 + 밑줄 변수 무시
+      'no-unused-vars': 'off', // JS용 기본 off
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {

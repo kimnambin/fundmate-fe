@@ -30,12 +30,22 @@ export default defineConfig({
         'react',
         'react-dom',
         'react-router-dom',
+        'axios',
         '@ramonak/react-progress-bar',
       ],
     }),
   ],
   build: {
     target: 'esnext',
+    rollupOptions: {
+      external: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        'axios',
+        '@ramonak/react-progress-bar',
+      ],
+    },
   },
   server: {
     proxy: {

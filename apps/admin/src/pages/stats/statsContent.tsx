@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import StatsCalendar from "../../components/stats/StatsCalendar";
 import StatsSummary from "./statsSummary";
 import SupporterPieChart from "./SupporterPieChart";
 import StatsLineChart from "./StatsLineChart";
 import { Title } from "@repo/ui/styles";
 import { format, startOfMonth, endOfMonth } from "date-fns";
-import axios from "axios";
 
 const StatsContent: React.FC = () => {
   const today = new Date();
@@ -14,42 +13,13 @@ const StatsContent: React.FC = () => {
 
   const [startDate, setStartDate] = useState<string>(defaultStart);
   const [endDate, setEndDate] = useState<string>(defaultEnd);
-  const [graphData, setGraphData] = useState([]); 
 
   const handleDateChange = (start: string, end: string) => {
-    console.log("날짜 변경:", { start, end });
     setStartDate(start);
     setEndDate(end);
   };
 
   const targetMonth = startDate.slice(0, 7);
-
-  useEffect(() => {
-    const fetchGraphData = async () => {
-      try {
-        const res = await axios.get("/api/statistics/graph", {
-          params: { target: targetMonth },
-          withCredentials: true,
-        });
-
-        console.log("그래프 응답:", res.data);
-
-        const mapped = res.data.data.map((series: any) => ({
-          id: series.id === "amount" ? "모금액" : "후원자수",
-          data: series.data,
-        }));
-
-        setGraphData(mapped);
-      } catch (err) {
-        console.error("그래프 데이터 오류:", err);
-        setGraphData([]);
-      }
-    };
-
-    if (targetMonth) {
-      fetchGraphData();
-    }
-  }, [targetMonth]);
 
   return (
     <div className="w-full">
@@ -70,7 +40,7 @@ const StatsContent: React.FC = () => {
           </div>
 
           <div className="md:col-span-3 bg-white rounded-md p-6">
-            <StatsLineChart data={graphData} />
+            <StatsLineChart targetMonth={targetMonth} />
           </div>
         </div>
       </div>

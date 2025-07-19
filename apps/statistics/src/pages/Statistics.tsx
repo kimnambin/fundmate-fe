@@ -2,7 +2,6 @@ import { StatisticsBody } from '../components/StatisticsBody';
 import { StatisticsHeader } from '../components/StatisticsHeader';
 import { Layout } from '@repo/ui/styles';
 import { useState } from 'react';
-import { statisticsStore } from '../stores/StatisticsStore';
 
 const StatisticsPage = () => {
   const [dataSelection, setDataSelection] = useState<any>();

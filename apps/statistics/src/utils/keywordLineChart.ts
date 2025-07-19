@@ -50,13 +50,6 @@ export function convertOptionRawDataToRegionLineChart(
   const dataList = takenData[selected];
   if (!dataList || dataList.length === 0) return [];
 
-  const _valueKey: ValueType =
-    selected === 'people'
-      ? 'population'
-      : selected === 'house'
-        ? 'house_cnt'
-        : 'household_cnt';
-
   const regionMap = new Map<string, ConvertedLineChartData>();
 
   for (const yearData of dataList) {

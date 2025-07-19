@@ -23,6 +23,8 @@ export default defineConfig({
         'react',
         'react-dom',
         'react-router-dom',
+        '@tanstack/react-query',
+        'axios',
         '@ramonak/react-progress-bar',
       ],
     }),
@@ -33,6 +35,16 @@ export default defineConfig({
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
+    rollupOptions: {
+      external: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        '@tanstack/react-query',
+        'axios',
+        '@ramonak/react-progress-bar',
+      ],
+    },
   },
   resolve: {
     dedupe: ['react', 'react-dom', 'react-router-dom'],

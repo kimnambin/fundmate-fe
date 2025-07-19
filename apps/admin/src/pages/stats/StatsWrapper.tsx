@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import StatsCalendar from '../../components/stats/StatsCalendar';
 import StatsSummary from '../../pages/stats/statsSummary';
 import { format, startOfMonth, endOfMonth } from 'date-fns';

@@ -9,5 +9,6 @@ export const useGetProductInfo = (id: number) => {
       const res = await getProductInfo(id);
       return res.data;
     },
+    enabled: true,
   });
 };

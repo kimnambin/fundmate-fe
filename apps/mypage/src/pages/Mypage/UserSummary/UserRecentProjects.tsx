@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { useRecentViewedProjectsStore } from "../../../store/recentViewedProjects";
-import { SubTitle } from "@repo/ui/styles";
-import { VerticalCard } from "@repo/ui/components";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import { useRecentViewedProjectsStore } from '../../../store/recentViewedProjects';
+import { SubTitle } from '@repo/ui/styles';
+import { VerticalCard } from '@repo/ui/components';
+import axios from 'axios';
 
 interface Props {
   nickname: string;
@@ -19,7 +19,7 @@ interface Project {
 
 const UserRecentProjects = ({ nickname }: Props) => {
   const recentViewedProjects = useRecentViewedProjectsStore(
-    (state) => state.recentViewedProjects
+    (state) => state.recentViewedProjects,
   );
 
   const [projectList, setProjectList] = useState<Project[]>([]);
@@ -33,17 +33,17 @@ const UserRecentProjects = ({ nickname }: Props) => {
       setIsLoading(true);
 
       try {
-        const res = await axios.get("/api/users/mypage", {
+        const res = await axios.get('/api/users/mypage', {
           params: {
             project_id: projectIdList,
           },
           withCredentials: true,
         });
 
-        console.log("최근 본 프로젝트:", res.data.fundingGetList);
+        console.log('최근 본 프로젝트:', res.data.fundingGetList);
         setProjectList(res.data.fundingGetList || []);
       } catch (err) {
-        console.error("최근 본 프로젝트 조회 실패", err);
+        console.error('최근 본 프로젝트 조회 실패', err);
       } finally {
         setIsLoading(false);
       }
@@ -55,7 +55,7 @@ const UserRecentProjects = ({ nickname }: Props) => {
   return (
     <div className="flex flex-col gap-5 w-full">
       <SubTitle>
-        {nickname ? `${nickname}님이 최근 본 프로젝트` : "최근 본 프로젝트"}
+        {nickname ? `${nickname}님이 최근 본 프로젝트` : '최근 본 프로젝트'}
       </SubTitle>
 
       {isLoading ? (
@@ -67,12 +67,8 @@ const UserRecentProjects = ({ nickname }: Props) => {
           {projectList.slice(0, 12).map((project, index) => (
             <VerticalCard
               key={index}
-              imageId={project.image_id}
               title={project.title}
               description={project.short_description}
-              achievement={project.achievement}
-              amount={project.current_amount}
-              remainingDay={project.remaining_day}
             />
           ))}
         </div>

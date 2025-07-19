@@ -95,6 +95,16 @@ export const handlers = [
     } = data as PostPaymentRequest;
 
     console.log('입력한 내용들', data);
+    console.log(
+      paymentInfoId,
+      rewardId,
+      projectId,
+      amount,
+      scheduleDate,
+      address,
+      addressNumber,
+      addressInfo,
+    );
 
     return HttpResponse.json(
       { message: `${totalAmount}원 결좌이체 완료` },
@@ -103,6 +113,7 @@ export const handlers = [
   }),
 
   http.get(`/payments/`, async ({ request }) => {
+    console.log(request);
     return HttpResponse.json();
   }),
 ];

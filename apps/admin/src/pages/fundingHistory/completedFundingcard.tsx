@@ -16,15 +16,21 @@ interface FundingItem {
 }
 
 const CompletedFundingComponent = () => {
-  const [completedFunding, setCompletedFunding] = useState<FundingItem | null>(null);
+  const [_completedFunding, setCompletedFunding] = useState<FundingItem | null>(
+    null,
+  );
   const [fundingList, setFundingList] = useState<FundingItem[]>([]);
-  const [selectedFunding, setSelectedFunding] = useState<FundingItem | null>(null);
+  const [selectedFunding, setSelectedFunding] = useState<FundingItem | null>(
+    null,
+  );
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('/api/users/projects', { withCredentials: true });
+        const res = await axios.get('/api/users/projects', {
+          withCredentials: true,
+        });
 
         const data = res.data;
         const parsedCompleted: FundingItem = {
@@ -54,7 +60,8 @@ const CompletedFundingComponent = () => {
   };
 
   const displayedList = fundingList.slice(0, 4);
-  const getProgressWidth = (achievement: string) => `${Math.min(Number(achievement), 100)}%`;
+  const getProgressWidth = (achievement: string) =>
+    `${Math.min(Number(achievement), 100)}%`;
 
   return (
     <div className="w-full max-w-screen-xl bg-white rounded-md flex flex-col gap-4 px-12 md:px-4">
@@ -86,7 +93,8 @@ const CompletedFundingComponent = () => {
               </div>
               {(selectedFunding.start_date || selectedFunding.end_date) && (
                 <MediumFont className="text-[#7E7C7C]">
-                  {formatDate(selectedFunding.start_date)} ~ {formatDate(selectedFunding.end_date)}
+                  {formatDate(selectedFunding.start_date)} ~{' '}
+                  {formatDate(selectedFunding.end_date)}
                 </MediumFont>
               )}
             </div>
@@ -97,12 +105,16 @@ const CompletedFundingComponent = () => {
               <div className="relative w-full h-4 md:h-5 bg-gray-200 rounded-full">
                 <div
                   className="absolute top-0 left-0 h-4 md:h-5 bg-[#5FBDFF] rounded-full flex items-center justify-center"
-                  style={{ width: getProgressWidth(selectedFunding.achievement) }}
+                  style={{
+                    width: getProgressWidth(selectedFunding.achievement),
+                  }}
                 >
                   <span
                     className={clsx(
                       'text-[10px] md:text-sm font-medium',
-                      selectedFunding.achievement === '0' ? 'text-black' : 'text-white'
+                      selectedFunding.achievement === '0'
+                        ? 'text-black'
+                        : 'text-white',
                     )}
                   >
                     {selectedFunding.achievement}%
@@ -142,14 +154,18 @@ const CompletedFundingComponent = () => {
             <svg
               className={clsx(
                 'w-4 h-4 text-black transform transition-transform duration-300',
-                isOpen ? 'rotate-180' : 'rotate-0'
+                isOpen ? 'rotate-180' : 'rotate-0',
               )}
               fill="none"
               stroke="currentColor"
               strokeWidth={2}
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
             </svg>
           </button>
         </div>
@@ -158,7 +174,7 @@ const CompletedFundingComponent = () => {
       <div
         className={clsx(
           'transition-all duration-500 overflow-hidden',
-          isOpen ? 'max-h-[1000px] mt-4' : 'max-h-0'
+          isOpen ? 'max-h-[1000px] mt-4' : 'max-h-0',
         )}
       >
         {isOpen && displayedList.length > 0 && (
@@ -169,9 +185,13 @@ const CompletedFundingComponent = () => {
                 onClick={() => setSelectedFunding(item)}
                 className="border px-4 py-2 rounded-md bg-gray-50 cursor-pointer hover:bg-gray-100"
               >
-                <div className="font-semibold text-black">{item.project_title}</div>
+                <div className="font-semibold text-black">
+                  {item.project_title}
+                </div>
                 <div className="text-xs text-gray-400">
-                  성과율 {item.achievement}% | 현재 금액 {item.current_amount.toLocaleString()}원 | 남은일 {item.remaining_day}일
+                  성과율 {item.achievement}% | 현재 금액{' '}
+                  {item.current_amount.toLocaleString()}원 | 남은일{' '}
+                  {item.remaining_day}일
                 </div>
               </li>
             ))}

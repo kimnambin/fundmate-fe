@@ -13,8 +13,8 @@ export const PAYMENT_PAGE = 'https://fundmate-fe-payment.vercel.app';
 
 export default defineConfig(({ mode }) => {
   dotenv.config({ path: resolve(__dirname, '../../.env') });
-
-  const deploymentState = mode === 'production';
+  console.log(mode);
+  const deploymentState = false;
 
   return {
     plugins: [
@@ -42,6 +42,8 @@ export default defineConfig(({ mode }) => {
           'react',
           'react-dom',
           'react-router-dom',
+          '@tanstack/react-query',
+          'axios',
           '@ramonak/react-progress-bar',
         ],
       }),
@@ -51,6 +53,16 @@ export default defineConfig(({ mode }) => {
       target: 'esnext',
       minify: false,
       cssCodeSplit: false,
+      rollupOptions: {
+        external: [
+          'react',
+          'react-dom',
+          'react-router-dom',
+          '@tanstack/react-query',
+          'axios',
+          '@ramonak/react-progress-bar',
+        ],
+      },
     },
     resolve: {
       dedupe: [
@@ -58,6 +70,7 @@ export default defineConfig(({ mode }) => {
         'react-dom',
         'react-router-dom',
         '@ramonak/react-progress-bar',
+        '@tanstack/react-query',
       ],
     },
     server: {
