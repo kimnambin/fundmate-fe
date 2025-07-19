@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
-import dotenv from 'dotenv'
-import { resolve } from 'path'
+import dotenv from 'dotenv';
+import { resolve } from 'path';
 
-dotenv.config({ path: resolve(__dirname, '../../.env') })
+dotenv.config({ path: resolve(__dirname, '../../.env') });
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -48,8 +48,8 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,
-        cookieDomainRewrite: "",
+        cookieDomainRewrite: '',
       },
-    }
-  }
+    },
+  },
 });

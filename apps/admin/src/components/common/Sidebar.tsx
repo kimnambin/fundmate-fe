@@ -12,11 +12,12 @@ const Sidebar = () => {
   ];
 
   const makerMenu = [
-    { label: "펀딩 내역", path: "/fundinghistory" },
-    { label: "통계 관리", path: "/stats" },
-    { label: "결제 관리", path: "/paymentmanagement" },
-    { label: "프로젝트 만들기", path: "/" },
+    { label: "펀딩 내역", path: "/mypage/history" },
+    { label: "통계 관리", path: "/mypage/sellstats" },
+    { label: "결제 관리", path: "/mypage/paymentproceed" },
+    { label: "프로젝트 만들기", path: "/funding/create" },
   ];
+
 
   return (
     <div className="flex justify-end pr-10">

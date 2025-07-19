@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
 import { RotateCcw } from 'lucide-react';
 import { Title, MediumFont } from '@repo/ui/styles';
+import axios from 'axios';
+
+interface PaymentItem {
+  scheduleId: number;
+  productImage: string;
+  productName: string;
+  optionName: string;
+  date: string;
+  amount: number;
+  status: 'pending' | 'success';
+}
 
 interface PaymentSummaryData {
   totalPayments: number;
   totalRevenue: number;
   failedPayments: number;
 }
-
-// 더미 fetch 함수에서 number로 반환
-const fetchPaymentSummary = (): Promise<PaymentSummaryData> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        totalPayments: Math.floor(Math.random() * 100),
-        totalRevenue: Math.floor(Math.random() * 5000000), 
-        failedPayments: Math.floor(Math.random() * 10),
-      });
-    }, 500);
-  });
-};
 
 const getCurrentDateString = (): string => {
   const now = new Date();
@@ -33,19 +31,38 @@ const getCurrentDateString = (): string => {
 
 const PaymentSummary: React.FC = () => {
   const [summary, setSummary] = useState<PaymentSummaryData>({
-    totalPayments: 12,
-    totalRevenue: 2750000, 
-    failedPayments: 3,
+    totalPayments: 0,
+    totalRevenue: 0,
+    failedPayments: 0,
   });
-  const [isLoading, setIsLoading] = useState(false);
+
+  const [isRotating, setIsRotating] = useState(false);
   const [currentDate, setCurrentDate] = useState(getCurrentDateString());
 
-  const handleRefresh = async () => {
-    setIsLoading(true);
-    const newData = await fetchPaymentSummary();
-    setSummary(newData);
-    setCurrentDate(getCurrentDateString());
-    setIsLoading(false);
+  const fetchPaymentSummary = async () => {
+    try {
+      setIsRotating(true);
+
+      const res = await axios.get('/api/users/projects/payments', {
+        params: { page: 1, limit: 1000 },
+        withCredentials: true,
+      });
+
+      const payments: PaymentItem[] = res.data.data;
+
+      const totalPayments = payments.length;
+      const totalRevenue = payments
+        .filter((p) => p.status === 'success')
+        .reduce((sum, p) => sum + p.amount, 0);
+      const failedPayments = payments.filter((p) => p.status === 'pending').length;
+
+      setSummary({ totalPayments, totalRevenue, failedPayments });
+      setCurrentDate(getCurrentDateString());
+    } catch (error) {
+      console.error('결제 요약 조회 실패:', error);
+    } finally {
+      setTimeout(() => setIsRotating(false), 1000);
+    }
   };
 
   return (
@@ -58,8 +75,10 @@ const PaymentSummary: React.FC = () => {
             size={20}
             color="#999292"
             strokeWidth={2}
-            onClick={handleRefresh}
-            className={`cursor-pointer transition-transform ${isLoading ? 'animate-spin' : ''}`}
+            onClick={fetchPaymentSummary}
+            className={`cursor-pointer transition-transform duration-700 ${
+              isRotating ? 'rotate-[360deg]' : ''
+            }`}
           />
         </div>
         <MediumFont className="text-[#7E7C7C]">{currentDate}</MediumFont>
@@ -70,7 +89,7 @@ const PaymentSummary: React.FC = () => {
         <div className="flex gap-4 flex-wrap justify-end items-end text-right">
           {[
             { label: '총 결제 건수', value: `${summary.totalPayments.toLocaleString()}개` },
-            { label: '총 수익', value: `${summary.totalRevenue.toLocaleString()}원` }, 
+            { label: '총 수익', value: `${summary.totalRevenue.toLocaleString()}원` },
             { label: '미결제 실패', value: `${summary.failedPayments.toLocaleString()}회` },
           ].map(({ label, value }, idx, arr) => (
             <div key={label} className="flex items-end gap-4">

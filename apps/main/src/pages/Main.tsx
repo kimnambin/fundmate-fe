@@ -4,6 +4,7 @@ import { Layout } from '@repo/ui/styles';
 import { SwiperComponents } from '../components/mainPage/SwiperComponent';
 
 export const Main = () => {
+
   return (
     <>
       <Layout>

@@ -4,7 +4,6 @@ import { InterestingItems } from "./InterestingItems";
 import { MainCategory } from "./MainCategory";
 import { PopularItems } from "./PopularItems";
 
-
 export const MainContainer = () => {
   return (
     <MainFlex>

@@ -14,11 +14,11 @@
     "test": "jest"
   },
   "dependencies": {
-    "@repo/ui": "*",
     "@nivo/core": "^0.99.0",
     "@nivo/pie": "^0.99.0",
     "@originjs/vite-plugin-federation": "^1.4.1",
-    "@tanstack/react-query": "^5.81.2",
+    "@repo/ui": "*",
+    "@tanstack/react-query": "^5.81.5",
     "@uiw/react-markdown-editor": "^6.1.4",
     "date-fns": "^4.1.0",
     "html2pdf.js": "^0.9.3",
@@ -28,10 +28,12 @@
     "react-simple-south-korea-map-chart": "^1.1.1",
     "styled-components": "^6.1.19",
     "tailwind-styled-components": "^2.2.0",
+    "uuid": "^11.1.0",
     "vite-plugin-svgr": "^4.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@types/dotenv": "^6.1.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.4",
     "@types/react": "^19.1.2",

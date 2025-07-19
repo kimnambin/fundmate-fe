@@ -14,14 +14,14 @@ export {
   InputText,
   Modal,
   UserPageLayout,
-  Sidebar
+  Sidebar,
 } from './components';
 
 //assets
 export { Images } from './assets';
 export { CategoryIcons } from './assets';
 export { FundiIcon } from './assets';
-export { FundiMainImage } from './assets'
+export { FundiMainImage } from './assets';
 
 //styled-components
 export {
@@ -40,4 +40,8 @@ export {
 export { worker, handlers } from './mocks';
 
 //hooks
-export { commonApiInstance } from './hooks'
+export { commonApiInstance } from './hooks';
+
+//stores
+export { loadingStore } from './stores/loadingStore';
+export { loginStore } from './stores/loginStore';

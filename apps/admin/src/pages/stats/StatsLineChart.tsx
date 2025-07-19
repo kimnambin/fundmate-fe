@@ -1,39 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
+import axios from "axios";
 
-const StatsLineChart: React.FC = () => {
-  const data = [
-    {
-      id: "모금액",
-      data: [
-        { x: 0, y: 15 },
-        { x: 1, y: 28 },
-        { x: 2, y: 2 },
-        { x: 3, y: 27 },
-        { x: 4, y: 23 },
-        { x: 5, y: 24 },
-        { x: 6, y: 29 },
-        { x: 7, y: 31 },
-        { x: 8, y: 14 },
-        { x: 9, y: 7 },
-      ],
-    },
-    {
-      id: "후원자수",
-      data: [
-        { x: 0, y: 24 },
-        { x: 1, y: 31 },
-        { x: 2, y: 10 },
-        { x: 3, y: 14 },
-        { x: 4, y: 9 },
-        { x: 5, y: 6 },
-        { x: 6, y: 12 },
-        { x: 7, y: 5 },
-        { x: 8, y: 10 },
-        { x: 9, y: 6 },
-      ],
-    },
-  ];
+interface LineChartDataPoint {
+  x: number | string;
+  y: number;
+}
+
+interface LineChartSeries {
+  id: string;
+  data: LineChartDataPoint[];
+}
+
+interface StatsLineChartProps {
+  targetMonth: string;
+}
+
+const StatsLineChart: React.FC<StatsLineChartProps> = ({ targetMonth }) => {
+  const [data, setData] = useState<LineChartSeries[] | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!targetMonth) return;
+
+    const fetchGraphData = async () => {
+      try {
+        const res = await axios.get(`/api/statistics/graph?target=${targetMonth}`, {
+          withCredentials: true,
+        });
+
+        const graphData = res.data.data as LineChartSeries[];
+
+        const cleaned = graphData.map((series) => ({
+          ...series,
+          data: series.data.filter(
+            (point) => typeof point.y === "number" && !isNaN(point.y)
+          ),
+        }));
+
+        setData(cleaned);
+      } catch (error) {
+        console.error("통계 그래프 데이터 로드 실패:", error);
+        setData([]); 
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGraphData();
+  }, [targetMonth]);
+
+  const hasValidData =
+    Array.isArray(data) && data.some((series) => series.data.length > 0);
+
+  if (loading) {
+    return (
+      <div className="h-[300px] flex items-center justify-center text-gray-400">
+        불러오는 중...
+      </div>
+    );
+  }
+
+  if (!hasValidData) {
+    return (
+      <div className="h-[300px] flex items-center justify-center text-gray-500">
+        데이터가 없습니다.
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-[300px]">
@@ -44,7 +78,6 @@ const StatsLineChart: React.FC = () => {
         yScale={{
           type: "linear",
           min: 0,
-          max: 32,
           stacked: false,
           reverse: false,
         }}
