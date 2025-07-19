@@ -1,35 +1,94 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
+  format,
   startOfMonth,
   endOfMonth,
   startOfWeek,
   endOfWeek,
   addDays,
-  format,
-  addMonths,
-  subMonths,
   getISOWeek,
   isSameMonth,
   isSameDay,
+  setMonth,
+  setYear,
 } from 'date-fns';
 import classNames from 'classnames';
 
-const StatsCalendar: React.FC = () => {
+interface StatsCalendarProps {
+  onDateChange?: (startDate: string, endDate: string) => void;
+}
+
+const StatsCalendar: React.FC<StatsCalendarProps> = ({ onDateChange }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+
+  const years = Array.from({ length: 10 }, (_, i) => 2020 + i);
+  const months = Array.from({ length: 12 }, (_, i) => i);
+
+  const triggerDateRange = (date: Date) => {
+    const start = format(startOfMonth(date), 'yyyy-MM-dd');
+    const end = format(endOfMonth(date), 'yyyy-MM-dd');
+    onDateChange?.(start, end);
+  };
+
+  const handleMonthChange = (month: number) => {
+    const updated = setMonth(currentDate, month);
+    console.log("월 변경:", month + 1);
+    setCurrentDate(updated);
+    triggerDateRange(updated);
+  };
+
+  const handleYearChange = (year: number) => {
+    const updated = setYear(currentDate, year);
+    console.log("연도 변경:", year);
+    setCurrentDate(updated);
+    triggerDateRange(updated);
+  };
+
+  const handleDateClick = (date: Date) => {
+    console.log("날짜 클릭:", format(date, 'yyyy-MM-dd'));
+    setSelectedDate(date);
+    setCurrentDate(date);
+    triggerDateRange(date);
+  };
+
+  useEffect(() => {
+    console.log("초기 마운트 시 triggerDateRange");
+    triggerDateRange(currentDate);
+  }, []);
 
   const renderHeader = () => (
-    <div className="flex justify-between items-center w-full px-2">
-      <button onClick={() => setCurrentDate(subMonths(currentDate, 1))} className="text-[20px]">{`<`}</button>
-      <span className="text-[16px] font-normal">{format(currentDate, 'MMMM yyyy')}</span>
-      <button onClick={() => setCurrentDate(addMonths(currentDate, 1))} className="text-[20px]">{`>`}</button>
+    <div className="flex justify-center gap-3 items-center mb-2">
+      <select
+        className="border rounded px-2 py-1"
+        value={currentDate.getFullYear()}
+        onChange={(e) => handleYearChange(parseInt(e.target.value))}
+      >
+        {years.map((y) => (
+          <option key={y} value={y}>
+            {y}년
+          </option>
+        ))}
+      </select>
+
+      <select
+        className="border rounded px-2 py-1"
+        value={currentDate.getMonth()}
+        onChange={(e) => handleMonthChange(parseInt(e.target.value))}
+      >
+        {months.map((m) => (
+          <option key={m} value={m}>
+            {m + 1}월
+          </option>
+        ))}
+      </select>
     </div>
   );
 
   const renderDays = () => {
     const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
     return (
-      <div className="grid grid-cols-8 mt-2 w-full text-center text-sm">
+      <div className="grid grid-cols-8 w-full text-center text-sm">
         <div></div>
         {days.map((day) => (
           <div key={day} className="py-1">
@@ -50,7 +109,7 @@ const StatsCalendar: React.FC = () => {
     let day = startDate;
 
     while (day <= endDate) {
-      const weekStart = new Date(day); // 현재 주 시작일 (불변)
+      const weekStart = new Date(day);
       const weekNumber = getISOWeek(weekStart);
 
       const weekRow = [
@@ -63,9 +122,9 @@ const StatsCalendar: React.FC = () => {
       ];
 
       for (let i = 0; i < 7; i++) {
-        const cloneDay = new Date(day); // 불변 복사
+        const cloneDay = new Date(day);
         const formattedDate = format(cloneDay, 'd');
-        const isSelectedDay = isSameDay(cloneDay, selectedDate ?? new Date());
+        const isSelectedDay = isSameDay(cloneDay, selectedDate);
 
         weekRow.push(
           <div
@@ -79,7 +138,7 @@ const StatsCalendar: React.FC = () => {
                 'text-[#00406C]': !isSelectedDay && cloneDay.getDay() === 6,
               }
             )}
-            onClick={() => setSelectedDate(cloneDay)}
+            onClick={() => handleDateClick(cloneDay)}
           >
             {formattedDate}
           </div>

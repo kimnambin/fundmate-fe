@@ -1,17 +1,68 @@
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Title, MediumFont } from '@repo/ui/styles';
-import { Dropdown } from '@repo/ui/components'
+import { Dropdown } from '@repo/ui/components';
+import axios from 'axios';
+import { format, parseISO } from 'date-fns';
+
+interface PaymentItem {
+  scheduleId: number;
+  productImage: string;
+  productName: string;
+  optionName: string;
+  date: string;
+  amount: number;
+  status: 'pending' | 'success';
+}
+
+interface PaymentResponse {
+  data: PaymentItem[];
+  meta: {
+    totalItems: number;
+    totalPages: number;
+    currentPage: number;
+    limit: number;
+  };
+}
 
 const PaymentList = () => {
+  const [items, setItems] = useState<PaymentItem[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 5;
+
+  const fetchPayments = async (page: number) => {
+    try {
+      const res = await axios.get<PaymentResponse>('/api/users/projects/payments', {
+        params: { page, limit },
+        withCredentials: true,
+      });
+      setItems(res.data.data);
+      setCurrentPage(res.data.meta.currentPage);
+      setTotalPages(res.data.meta.totalPages);
+    } catch (error) {
+      console.error('결제 리스트 조회 실패:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPayments(currentPage);
+  }, [currentPage]);
+
+  const goToPage = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
   return (
     <div className="w-full bg-white border border-gray-300 rounded-md px-6 py-4 flex flex-col justify-between gap-6 min-h-[160px]">
-
       {/* 상단 타이틀 + 필터 */}
       <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <Title className="text-black">결제 내역 리스트</Title>
         <div className="flex gap-2">
-          <Dropdown kind='status' usage='click' onClick={(e) => console.log(e)} />
-          <Dropdown kind='recommand' usage='click' onClick={(e) => console.log(e)} />
+          <Dropdown kind="status" usage="click" onClick={(e) => console.log(e)} />
+          <Dropdown kind="recommand" usage="click" onClick={(e) => console.log(e)} />
         </div>
       </div>
 
@@ -26,43 +77,38 @@ const PaymentList = () => {
 
       {/* 테이블 본문 */}
       <div className="w-full flex flex-col divide-y divide-gray-200">
-        {Array.from({ length: 5 }).map((_, idx) => (
+        {items.map((item, idx) => (
           <Link
-            to={`/products/${idx}`}
-            key={idx}
+            to={`/products/${item.scheduleId}`}
+            key={item.scheduleId}
             className="flex items-center px-2 py-4 hover:bg-gray-50 transition"
           >
-            {/* 상품 */}
             <div className="flex items-center gap-4 basis-3/6">
               <img
-                src={`https://picsum.photos/seed/${idx}/70/70`}
-                alt={`상품 이미지 ${idx + 1}`}
+                src={item.productImage || `https://picsum.photos/seed/${idx}/70/70`}
+                alt={item.productName}
                 className="w-[70px] h-[70px] rounded object-cover"
               />
               <MediumFont className="text-sm sm:text-base text-black">
-                이것은 상품 상세 정보인데요 완전 신기하지 않나요!?
+                {item.productName}
               </MediumFont>
             </div>
 
-            {/* 옵션 */}
             <MediumFont className="basis-1/6 text-center text-sm sm:text-base text-black">
-              옵션 1번
+              {item.optionName}
             </MediumFont>
 
-            {/* 날짜 */}
             <MediumFont className="basis-1/6 text-center text-sm sm:text-base text-black">
-              2025.07.09
+              {format(parseISO(item.date), 'yyyy.MM.dd')}
             </MediumFont>
 
-            {/* 금액 */}
             <MediumFont className="basis-1/6 text-center text-sm sm:text-base text-black">
-              000,000,000원
+              {item.amount.toLocaleString()}원
             </MediumFont>
 
-            {/* 상태 */}
             <MediumFont className="basis-1/6 text-center text-sm sm:text-base font-medium">
-              <span className={idx % 2 === 0 ? 'text-[#49DB00]' : 'text-[#FB6565]'}>
-                {idx % 2 === 0 ? '성공' : '실패'}
+              <span className={item.status === 'success' ? 'text-[#49DB00]' : 'text-[#FB6565]'}>
+                {item.status === 'success' ? '성공' : '실패'}
               </span>
             </MediumFont>
           </Link>
@@ -70,20 +116,27 @@ const PaymentList = () => {
       </div>
 
       {/* 페이지네이션 */}
-      <div className="flex w-full justify-center">
-        <div className="flex justify-center items-center mt-[25px] gap-[10px]">
-          <button>{'<<'}</button>
-          <button>{'<'}</button>
-          <div className="flex gap-[15px] text-[23px]">
-            <span className="text-black">1</span>
-            <span className="text-[#7E7C7C]">2</span>
-            <span className="text-[#7E7C7C]">3</span>
-            <span className="text-[#7E7C7C]">4</span>
-            <span className="text-[#7E7C7C]">5</span>
-          </div>
-          <button>{'>'}</button>
-          <button>{'>>'}</button>
+      <div className="flex justify-center items-center mt-[25px] gap-[10px]">
+        <button onClick={() => goToPage(1)} disabled={currentPage === 1} className="cursor-pointer">{'<<'}</button>
+        <button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1} className="cursor-pointer">{'<'}</button>
+
+        <div className="flex gap-[15px] text-[23px]">
+          {Array.from({ length: totalPages }).map((_, idx) => {
+            const page = idx + 1;
+            return (
+              <span
+                key={page}
+                className={`cursor-pointer ${page === currentPage ? 'text-black' : 'text-[#7E7C7C]'}`}
+                onClick={() => goToPage(page)}
+              >
+                {page}
+              </span>
+            );
+          })}
         </div>
+
+        <button onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages} className="cursor-pointer">{'>'}</button>
+        <button onClick={() => goToPage(totalPages)} disabled={currentPage === totalPages} className="cursor-pointer">{'>>'}</button>
       </div>
     </div>
   );
