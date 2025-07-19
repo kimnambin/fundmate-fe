@@ -10,6 +10,7 @@ import type {
 } from '../types/Statistics.type';
 import { commonApiInstance } from '@repo/ui/hooks';
 import { useQuery } from '@tanstack/react-query';
+import { dataTypeStore, statisticsStore } from '../stores/StatisticsStore';
 
 interface StatisticsProps {
   setData: React.Dispatch<React.SetStateAction<any>>;
@@ -27,8 +28,22 @@ const getPublicData = async (data: any, selected: any) => {
 };
 
 export const StatisticsHeader = ({ setData }: StatisticsProps) => {
+  const setDataType = dataTypeStore((state) => state.setDataType);
   const [selected, setSelected] = useState<'keyword' | 'option'>('keyword');
-  const [isDataSubmitted, setIsDataSubmitted] = useState<boolean>(false);
+
+  const isKeywordDataSubmitted = statisticsStore(
+    (state) => state.isKeywordDataSubmitted,
+  );
+  const isOptionDataSubmitted = statisticsStore(
+    (state) => state.isOptionDataSubmitted,
+  );
+  const setKeywordDataSubmitted = statisticsStore(
+    (state) => state.setKeywordDataSubmitState,
+  );
+  const setOptionDataSubmitted = statisticsStore(
+    (state) => state.setOptionDataSubmitState,
+  );
+
   const [inputData, setInputData] = useState<any>({});
 
   const { refetch } = useQuery({
@@ -68,14 +83,33 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
   const handleDataRequest = async () => {
     await refetch()
       .then((response) => {
-        setIsDataSubmitted(true);
         setData({ takenData: response.data, selected: selected });
+        if (selected === 'keyword') {
+          setKeywordDataSubmitted(true);
+        } else {
+          setOptionDataSubmitted(true);
+          console.log(response.data);
+        }
       })
       .catch((err) => console.log(err));
   };
 
   const handleReset = () => {
-    setIsDataSubmitted(false);
+    if (selected === 'keyword') {
+      setKeywordDataSubmitted(false);
+      setDataSelection({
+        people: 0,
+        household: 0,
+        house: 0,
+      });
+    } else {
+      setOptionDataSubmitted(false);
+      setOptionSelection({
+        age_group: '',
+        gender: '',
+        area: ',',
+      });
+    }
   };
 
   return (
@@ -88,7 +122,10 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
             key="keyword"
             className={selected !== 'keyword' ? 'opacity-20' : ''}
             disabled={selected === 'keyword'}
-            onClick={() => setSelected('keyword')}
+            onClick={() => {
+              setSelected('keyword');
+              setDataType('keyword');
+            }}
           >
             <SubTitle>키워드별 분석</SubTitle>
           </button>
@@ -97,7 +134,10 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
             key="option"
             className={selected !== 'option' ? 'opacity-20' : ''}
             disabled={selected === 'option'}
-            onClick={() => setSelected('option')}
+            onClick={() => {
+              setSelected('option');
+              setDataType('option');
+            }}
           >
             <SubTitle>옵션별 분석</SubTitle>
           </button>
@@ -129,15 +169,23 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
         )}
       </div>
       <div className="flex flex-row justify-end mt-12">
-        <MainButton
-          label={isDataSubmitted ? '닫기' : '통계 확인하기'}
-          width="w-[200px]"
-          type="button"
-          onClick={isDataSubmitted ? handleReset : handleDataRequest}
-          isError={
-            selected === 'keyword' ? !dataErrorCondition : !optionErrorCondition
-          }
-        />
+        {selected === 'keyword' ? (
+          <MainButton
+            label={isKeywordDataSubmitted ? '닫기' : '통계 확인하기'}
+            width="w-[200px]"
+            type="button"
+            onClick={isKeywordDataSubmitted ? handleReset : handleDataRequest}
+            isError={!dataErrorCondition}
+          />
+        ) : (
+          <MainButton
+            label={isOptionDataSubmitted ? '닫기' : '통계 확인하기'}
+            width="w-[200px]"
+            type="button"
+            onClick={isOptionDataSubmitted ? handleReset : handleDataRequest}
+            isError={!optionErrorCondition}
+          />
+        )}
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import { FaCircle } from 'react-icons/fa6';
 import { MediumFont } from '@repo/ui/styles';
 
-interface PieItem {
+export interface PieItem {
   id: string;
   label: string;
   value: number;
