@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import axios from "axios";
-import userImg from "../assets/images/user.png";
-import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
-import { MainButton } from "@repo/ui/components";
-import { useTmpLogin } from "../../../../fundmate-fe/apps/mypage/src/hook/login";
+import { useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import userImg from '../assets/images/user.png';
+import { MediumFont, SubTitle, Title } from '@repo/ui/styles';
+import { MainButton } from '@repo/ui/components';
+import { useTmpLogin } from '../hooks/useTmpLogin';
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -14,29 +14,29 @@ export const Sidebar = () => {
 
   // 사용자 프로필 상태
   const [profile, setProfile] = useState({
-    nickname: "",
-    email: "",
-    contents: "",
-    imageUrl: "", 
+    nickname: '',
+    email: '',
+    contents: '',
+    imageUrl: '',
   });
 
   // 프로필 정보 호출
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("/api/users/mypage/profile", {
+        const res = await axios.get('/api/users/mypage/profile', {
           withCredentials: true,
         });
-        console.log("프로필 응답 데이터:", res.data);
+        console.log('프로필 응답 데이터:', res.data);
 
         setProfile({
           nickname: res.data.nickname,
           email: res.data.email,
           contents: res.data.contents,
-          imageUrl: res.data.imageUrl, 
+          imageUrl: res.data.imageUrl,
         });
       } catch (error) {
-        console.error("프로필 정보 불러오기 실패", error);
+        console.error('프로필 정보 불러오기 실패', error);
       }
     };
 
@@ -44,17 +44,17 @@ export const Sidebar = () => {
   }, []);
 
   const supporterMenu = [
-    { label: "후원한 프로젝트", path: "/mypage/projects/supported" },
-    { label: "찜한 프로젝트", path: "/mypage/projects/liked" },
-    { label: "팔로잉", path: "/mypage/projects/following" },
-    { label: "내 후기", path: "/mypage/projects/myreviews" },
+    { label: '후원한 프로젝트', path: '/mypage/projects/supported' },
+    { label: '찜한 프로젝트', path: '/mypage/projects/liked' },
+    { label: '팔로잉', path: '/mypage/projects/following' },
+    { label: '내 후기', path: '/mypage/projects/myreviews' },
   ];
 
   const makerMenu = [
-    { label: "펀딩 내역", path: "/mypage/history" },
-    { label: "통계 관리", path: "/mypage/sellstats" },
-    { label: "결제 관리", path: "/mypage/paymentproceed" },
-    { label: "프로젝트 만들기", path: "/funding/create" },
+    { label: '펀딩 내역', path: '/mypage/history' },
+    { label: '통계 관리', path: '/mypage/sellstats' },
+    { label: '결제 관리', path: '/mypage/paymentproceed' },
+    { label: '프로젝트 만들기', path: '/funding/create' },
   ];
 
   return (
@@ -63,7 +63,7 @@ export const Sidebar = () => {
       <div className="flex flex-col items-center gap-[20px] w-full">
         <div
           className="w-[120px] h-[120px] rounded-full overflow-hidden border border-gray-300 cursor-pointer"
-          onClick={() => navigate("/mypage")}
+          onClick={() => navigate('/mypage')}
         >
           <img
             src={profile.imageUrl || userImg}
@@ -72,16 +72,18 @@ export const Sidebar = () => {
           />
         </div>
         <div className="flex flex-col items-center gap-[10px]">
-          <Title>{profile.nickname ? `${profile.nickname} 님` : "닉네임 없음"}</Title>
+          <Title>
+            {profile.nickname ? `${profile.nickname} 님` : '닉네임 없음'}
+          </Title>
           <MediumFont className="text-[#7E7C7C]">{profile.email}</MediumFont>
           <MediumFont>
-            {profile.contents ? profile.contents : "한줄 소개가 없습니다."}
+            {profile.contents ? profile.contents : '한줄 소개가 없습니다.'}
           </MediumFont>
         </div>
         <MainButton
           label="내 정보 설정"
           width="w-full"
-          onClick={() => navigate("/user/settings")}
+          onClick={() => navigate('/user/settings')}
         />
       </div>
 
@@ -95,7 +97,10 @@ export const Sidebar = () => {
               to={path}
               className={({ isActive }) =>
                 `text-left text-[22px] font-medium pl-[10px] transition-colors ${
-                  isActive ? "text-[#5FBDFF]" : "text-black hover:text-[#5FBDFF]"}`
+                  isActive
+                    ? 'text-[#5FBDFF]'
+                    : 'text-black hover:text-[#5FBDFF]'
+                }`
               }
             >
               {label}
@@ -114,7 +119,10 @@ export const Sidebar = () => {
               to={path}
               className={({ isActive }) =>
                 `text-left text-[22px] font-medium pl-[10px] transition-colors ${
-                  isActive ? "text-[#5FBDFF]" : "text-black hover:text-[#5FBDFF]"}`
+                  isActive
+                    ? 'text-[#5FBDFF]'
+                    : 'text-black hover:text-[#5FBDFF]'
+                }`
               }
             >
               {label}
