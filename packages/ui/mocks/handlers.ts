@@ -38,45 +38,40 @@ interface PostPaymentRequest {
 }
 
 export const handlers = [
-  http.post(`/payments`, async ({ request }: { request: Request }) => {
-    const data = await request.json();
-    const { method, code, token, displayInfo, extra } = data as CardPayload;
-
-    console.log('입력한 내용들', data);
-
-    if (!displayInfo || !code || !method || !token || !extra) {
-      return HttpResponse.json(
-        {
-          message: '모든 입력창이 입력되지 않았습니다.',
-        },
-        { status: 400 },
-      );
-    }
-
-    return HttpResponse.json(
-      { message: '결제 완료', displayInfo },
-      { status: 201 },
-    );
-  }),
-
   http.post('/payments', async ({ request }: { request: Request }) => {
     const data = await request.json();
-    const { method, code, token, displayInfo, extra } = data as BankPayload;
 
-    console.log('입력한 내용들', data);
-
-    if (!displayInfo || !code || !method || !token || !extra) {
+    if (data.extra?.type === 'card') {
+      const { method, code, token, displayInfo, extra } = data as CardPayload;
+      if (!displayInfo || !code || !method || !token || !extra) {
+        return HttpResponse.json(
+          { message: '모든 입력창이 입력되지 않았습니다.' },
+          { status: 400 },
+        );
+      }
       return HttpResponse.json(
-        {
-          message: '모든 입력창이 입력되지 않았습니다.',
-        },
-        { status: 400 },
+        { message: '카드 결제 완료', displayInfo },
+        { status: 201 },
+      );
+    }
+
+    if (data.extra?.type === 'vbank') {
+      const { method, code, token, displayInfo, extra } = data as BankPayload;
+      if (!displayInfo || !code || !method || !token || !extra) {
+        return HttpResponse.json(
+          { message: '모든 입력창이 입력되지 않았습니다.' },
+          { status: 400 },
+        );
+      }
+      return HttpResponse.json(
+        { message: `${extra.owner}님 결좌이체 완료` },
+        { status: 201 },
       );
     }
 
     return HttpResponse.json(
-      { message: `${extra}님 결좌이체 완료` },
-      { status: 201 },
+      { message: '잘못된 결제 방식입니다.' },
+      { status: 400 },
     );
   }),
 
@@ -112,8 +107,8 @@ export const handlers = [
     );
   }),
 
-  http.get(`/payments/`, async ({ request }: { request: Request }) => {
+  http.get('/payments/', async ({ request }: { request: Request }) => {
     console.log(request);
-    return HttpResponse.json();
+    return HttpResponse.json({ message: '결제 조회 완료' }, { status: 200 });
   }),
 ];
