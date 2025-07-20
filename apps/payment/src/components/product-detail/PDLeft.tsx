@@ -14,9 +14,29 @@ import PDBox from './PDRight';
 import PDdetail from './PDdetail';
 import PDReview from './PDReview';
 
-const ProductDetail = () => {
+export interface User {
+  image_url: number;
+  nickname: string;
+  content: string | null;
+}
+
+export interface Option {
+  title: string;
+  description: string;
+  price: number;
+}
+
+export interface ProductDetailProps {
+  user: User;
+  options: Option[];
+  selectedOption?: number;
+  setSelectedOption?: (index: number) => void;
+}
+
+const ProductDetail: React.FC<ProductDetailProps> = ({ user, options }) => {
   const [currentPage, setCurrentPage] = useState<boolean>(true);
   const projectTitle = ['프로젝트 소개', '프로젝트 후기'];
+  const [selectedOption, setSelectedOption] = useState(0);
 
   return (
     <Wrapper>
@@ -38,7 +58,12 @@ const ProductDetail = () => {
       </Topic>
       <Main>
         <Box>{currentPage ? <PDdetail /> : <PDReview />}</Box>
-        <PDBox />
+        <PDBox
+          user={user}
+          options={options}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+        />
       </Main>
       <Blank></Blank>
     </Wrapper>

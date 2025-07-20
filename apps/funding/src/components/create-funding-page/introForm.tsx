@@ -4,10 +4,13 @@ import { Wrapper } from './createFunding.styles';
 import { WarningText } from '@repo/ui/styles';
 import { MainButton } from '@repo/ui/components';
 import FundiModal from './fundiModal';
+import { useAiSummarize } from '../../hooks/useAiSummarize';
 
 interface Props {
-  intro: string;
-  setIntro: (value: string) => void;
+  description: string;
+  setDescription: (value: string) => void;
+  aiSummary: string;
+  setAiSummary: (value: string) => void;
   isSubmit: boolean;
   isFundiOpen: boolean;
   setIsFundiOpen: (value: boolean) => void;
@@ -17,8 +20,10 @@ interface Props {
 }
 
 const IntroForm = ({
-  intro,
-  setIntro,
+  description,
+  setDescription,
+  aiSummary,
+  setAiSummary,
   isSubmit,
   isFundiOpen,
   setIsFundiOpen,
@@ -26,18 +31,37 @@ const IntroForm = ({
   copied,
   handleCopy,
 }: Props) => {
+  const { mutate: aiSummarize } = useAiSummarize();
+
+  const handleAISummarize = () => {
+    aiSummarize(
+      { message: description },
+      {
+        onSuccess: (res) => {
+          console.log('ai요약 성공: ', res);
+          setAiSummary(res.summary);
+        },
+        onError: (err) => {
+          alert('ai 요약 실패');
+          console.log('ai요약 실패: ', err);
+        },
+      },
+    );
+    setIsFundiOpen(true);
+  };
+
   return (
     <Wrapper>
       <Label>프로젝트 소개</Label>
       <div data-color-mode="light">
         <MarkdownEditor
-          value={intro}
+          value={description}
           height="400px"
           placeholder={'프로젝트(펀딩)에 대한 설명을 작성해주세요!'}
-          onChange={setIntro}
+          onChange={setDescription}
         />
       </div>
-      {isSubmit && intro.trim().length === 0 && (
+      {isSubmit && description.trim().length === 0 && (
         <WarningText>프로젝트 소개를 작성해주세요.</WarningText>
       )}
 
@@ -45,14 +69,15 @@ const IntroForm = ({
         <MainButton
           width="w-[200px]"
           label="AI 요약"
-          onClick={() => setIsFundiOpen(true)}
+          onClick={handleAISummarize}
         />
       </div>
 
       <FundiModal
         isFundiOpen={isFundiOpen}
         setIsFundiOpen={setIsFundiOpen}
-        intro={intro}
+        description={description}
+        aiSummary={aiSummary}
         summaryRef={summaryRef}
         copied={copied}
         handleCopy={handleCopy}

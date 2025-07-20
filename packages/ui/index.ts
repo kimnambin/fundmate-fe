@@ -1,5 +1,5 @@
 // utils
-export { ScrollToTop, formatPrice } from './utils';
+export { formatPrice } from './utils';
 
 // components
 export {
@@ -44,4 +44,3 @@ export { commonApiInstance } from './hooks';
 
 //stores
 export { loadingStore } from './stores/loadingStore';
-export { loginStore } from './stores/loginStore';

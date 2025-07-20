@@ -3,3 +3,8 @@ export const formatPrice = (value: string) => {
   if (!numberValue) return '';
   return Number(numberValue).toLocaleString('ko-KR');
 };
+
+export const formatPriceToNumber = (value: string): number => {
+  if (!value) return 0;
+  return Number(value.replace(/,/g, ''));
+};

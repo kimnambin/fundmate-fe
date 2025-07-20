@@ -7,14 +7,17 @@ import {
 } from '../styles/product-detail/productInfo.style';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import useQueryString from '../../hooks/useQueryString';
-import { productData } from './ProductInfo';
 import { MainButton } from '@repo/ui/components';
+import { useGetProductInfo } from '../../hooks/product/getProductInfo';
 
-const ProductIconBox = () => {
+interface ProductInfoProps {
+  projectId?: string;
+}
+
+const ProductIconBox: React.FC<ProductInfoProps> = ({ projectId }) => {
   const [click, setClick] = useState<boolean>(false);
 
-  useQueryString(productData.title);
+  const { data: productData } = useGetProductInfo(Number(projectId));
 
   const copyClip = () => {
     const currentUrl = window.location.href;
@@ -34,12 +37,12 @@ const ProductIconBox = () => {
           {click ? (
             <>
               <FaHeart className="w-7 h-7 text-red-600" />
-              <span>1</span>
+              <span>{(productData?.project.likes ?? 0) + 1}</span>
             </>
           ) : (
             <>
               <FaRegHeart className="w-7 h-7" />
-              <span>0</span>
+              <span>{productData?.project?.likes || 0}</span>
             </>
           )}
         </IconButton>
@@ -47,7 +50,7 @@ const ProductIconBox = () => {
           <IoShareSocialOutline className="w-8 h-8" />
         </IconButton>
       </IconGroup>
-      <Link to={`/payment?title=${productData.title}`} className="w-full">
+      <Link to={`/payment/${projectId}`} className="w-full">
         <MainButton
           label={'후원하기'}
           textSize={'text-base'}

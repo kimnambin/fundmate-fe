@@ -28,9 +28,10 @@ export const InterestingItems = () => {
           <>
             {data?.map((item: ProductType) => (
               <VerticalCard
-                key={item.imageId}
+                id={item.project_id}
+                key={item.project_id}
                 title={item.title}
-                description={item.shortDescription}
+                description={item.short_description}
                 isLoading={isLoading}
               />
             ))}

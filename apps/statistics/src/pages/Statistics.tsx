@@ -1,27 +1,16 @@
 import { StatisticsBody } from '../components/StatisticsBody';
 import { StatisticsHeader } from '../components/StatisticsHeader';
-import { Layout } from '@repo/ui/styles'
-import { Loading } from '@repo/ui/components';
-import { statisticsStore } from '../stores/StatisticsStore';
+import { Layout } from '@repo/ui/styles';
+import { useState } from 'react';
 
 const StatisticsPage = () => {
-  const isLoading = statisticsStore((state) => state.isLoading);
-  const isSubmit = statisticsStore((state) => state.isSubmit);
+  const [dataSelection, setDataSelection] = useState<any>();
 
   return (
     <Layout>
-      <div className='flex flex-col gap-10'>
-        <StatisticsHeader />
-        {
-          isLoading && (
-            <Layout>
-              <Loading />
-            </Layout>
-          )
-        }
-        {
-          isSubmit && <StatisticsBody />
-        }
+      <div className="flex flex-col gap-10">
+        <StatisticsHeader setData={setDataSelection} />
+        {!!dataSelection && <StatisticsBody rawData={dataSelection} />}
       </div>
     </Layout>
   );

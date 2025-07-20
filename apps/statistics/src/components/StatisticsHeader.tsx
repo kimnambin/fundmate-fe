@@ -2,46 +2,111 @@ import { SmallFont, SubTitle, Title } from '@repo/ui/styles';
 import { DataChoiceTable } from './DataChoiceTable';
 import { DataOptionChoiceTable } from './DataOptionChoice';
 import { MainButton } from '@repo/ui/components';
-import { useState } from 'react';
-import { statisticsStore } from '../stores/StatisticsStore';
-import type { OptionSelectionProps } from '../types/Statistics.type';
+import { useEffect, useState } from 'react';
 
-export const StatisticsHeader = () => {
-  const [dataSubmitPressed, setDataSubmitPressed] = useState<boolean>(false);
-  const [optionSubmitPressed, setOptionSubmitPressed] =
-    useState<boolean>(false);
-  const [selected, setSeleted] = useState<'keyword' | 'option'>('keyword');
+import type {
+  DataSelectionProps,
+  OptionSelectionProps,
+} from '../types/Statistics.type';
+import { commonApiInstance } from '@repo/ui/hooks';
+import { useQuery } from '@tanstack/react-query';
+import { dataTypeStore, statisticsStore } from '../stores/StatisticsStore';
 
-  const [dataSelection, setDataSelection] = useState<string[]>([]);
-  const [optionSelection, setOptionSelection] = useState<OptionSelectionProps>({
-    age: '',
-    gender: '',
-    region: '',
+interface StatisticsProps {
+  setData: React.Dispatch<React.SetStateAction<any>>;
+}
+
+const getPublicData = async (data: any, selected: any) => {
+  try {
+    const response = await commonApiInstance.post(`/datas/${selected}`, data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const StatisticsHeader = ({ setData }: StatisticsProps) => {
+  const setDataType = dataTypeStore((state) => state.setDataType);
+  const [selected, setSelected] = useState<'keyword' | 'option'>('keyword');
+
+  const isKeywordDataSubmitted = statisticsStore(
+    (state) => state.isKeywordDataSubmitted,
+  );
+  const isOptionDataSubmitted = statisticsStore(
+    (state) => state.isOptionDataSubmitted,
+  );
+  const setKeywordDataSubmitted = statisticsStore(
+    (state) => state.setKeywordDataSubmitState,
+  );
+  const setOptionDataSubmitted = statisticsStore(
+    (state) => state.setOptionDataSubmitState,
+  );
+
+  const [inputData, setInputData] = useState<any>({});
+
+  const { refetch } = useQuery({
+    queryKey: ['statistics', selected],
+    queryFn: () => getPublicData(inputData.filteredData, inputData.selected),
+    enabled: false,
   });
 
-  const dataErrorCondition = !!dataSelection.length;
+  const [dataSelection, setDataSelection] = useState<DataSelectionProps>({
+    people: 0,
+    household: 0,
+    house: 0,
+  });
+  const [optionSelection, setOptionSelection] = useState<OptionSelectionProps>({
+    age_group: '',
+    gender: '',
+    area: '',
+  });
+
+  useEffect(() => {
+    if (selected === 'keyword') {
+      setInputData({ filteredData: dataSelection, selected: selected });
+    } else {
+      setInputData({ filteredData: optionSelection, selected: selected });
+    }
+  }, [dataSelection, optionSelection]);
+
+  const dataErrorCondition =
+    !!dataSelection.people ||
+    !!dataSelection.household ||
+    !!dataSelection.house;
   const optionErrorCondition =
-    !!optionSelection.age &&
+    !!optionSelection.age_group &&
     !!optionSelection.gender &&
-    !!optionSelection.region;
+    !!optionSelection.area;
 
-  const setIsLoading = statisticsStore((state) => state.setIsLoading);
-  const setIsSubmit = statisticsStore((state) => state.setIsSubmit);
+  const handleDataRequest = async () => {
+    await refetch()
+      .then((response) => {
+        setData({ takenData: response.data, selected: selected });
+        if (selected === 'keyword') {
+          setKeywordDataSubmitted(true);
+        } else {
+          setOptionDataSubmitted(true);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
 
-  const handleNext = () => {
-    try {
-      if (selected === 'keyword') {
-        setDataSubmitPressed(true);
-      } else {
-        setOptionSubmitPressed(true);
-      }
-    } catch (error) {
-    } finally {
-      setIsLoading(true);
-      setTimeout(() => {
-        setIsSubmit(true);
-        setIsLoading(false);
-      }, 2000);
+  const handleReset = () => {
+    if (selected === 'keyword') {
+      setKeywordDataSubmitted(false);
+      setDataSelection({
+        people: 0,
+        household: 0,
+        house: 0,
+      });
+    } else {
+      setOptionDataSubmitted(false);
+      setOptionSelection({
+        age_group: '',
+        gender: '',
+        area: '',
+      });
     }
   };
 
@@ -55,7 +120,10 @@ export const StatisticsHeader = () => {
             key="keyword"
             className={selected !== 'keyword' ? 'opacity-20' : ''}
             disabled={selected === 'keyword'}
-            onClick={() => setSeleted('keyword')}
+            onClick={() => {
+              setSelected('keyword');
+              setDataType('keyword');
+            }}
           >
             <SubTitle>키워드별 분석</SubTitle>
           </button>
@@ -64,7 +132,10 @@ export const StatisticsHeader = () => {
             key="option"
             className={selected !== 'option' ? 'opacity-20' : ''}
             disabled={selected === 'option'}
-            onClick={() => setSeleted('option')}
+            onClick={() => {
+              setSelected('option');
+              setDataType('option');
+            }}
           >
             <SubTitle>옵션별 분석</SubTitle>
           </button>
@@ -77,7 +148,7 @@ export const StatisticsHeader = () => {
               selected={dataSelection}
               setSelected={setDataSelection}
             />
-            {dataSubmitPressed && !dataErrorCondition && (
+            {!dataErrorCondition && (
               <SmallFont className="text-red">
                 사용할 데이터를 체크해주세요
               </SmallFont>
@@ -89,20 +160,30 @@ export const StatisticsHeader = () => {
               selected={optionSelection}
               setSelected={setOptionSelection}
             />
-            {optionSubmitPressed && !optionErrorCondition && (
+            {!optionErrorCondition && (
               <SmallFont className="text-red">옵션을 선택해주세요</SmallFont>
             )}
           </>
         )}
       </div>
       <div className="flex flex-row justify-end mt-12">
-        <MainButton
-          label="통계 확인하기"
-          width="w-[200px]"
-          type="button"
-          onClick={handleNext}
-          isError={selected === 'keyword' ? !dataSelection : !optionSelection}
-        />
+        {selected === 'keyword' ? (
+          <MainButton
+            label={isKeywordDataSubmitted ? '닫기' : '통계 확인하기'}
+            width="w-[200px]"
+            type="button"
+            onClick={isKeywordDataSubmitted ? handleReset : handleDataRequest}
+            isError={!dataErrorCondition}
+          />
+        ) : (
+          <MainButton
+            label={isOptionDataSubmitted ? '닫기' : '통계 확인하기'}
+            width="w-[200px]"
+            type="button"
+            onClick={isOptionDataSubmitted ? handleReset : handleDataRequest}
+            isError={!optionErrorCondition}
+          />
+        )}
       </div>
     </>
   );

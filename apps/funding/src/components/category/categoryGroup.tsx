@@ -4,8 +4,8 @@ import { CategoriesWrapper } from './category.styles';
 
 interface CategoryConfig {
   filter: Filter;
-  value: string | null;
-  onSelect: (val: string) => void;
+  value: number | null;
+  onSelect: (val: number) => void;
 }
 
 interface Props {

@@ -1,21 +1,27 @@
-import { FaCheck } from "react-icons/fa6"
-import { CheckboxStyle } from "../styles/Checkbox.style";
+import { FaCheck } from 'react-icons/fa6';
+import { CheckboxStyle } from '../styles/Checkbox.style';
 
 type CustomRadioProps = {
   id: string;
   name: string;
-  value: string;
+  value: string | number;
   selected: string;
-  onChange: (value: string) => void
-}
+  onChange: (value: string) => void;
+};
 
-export const CustomRadio = ({ id, selected, value, name, onChange }: CustomRadioProps) => {
+export const CustomRadio = ({
+  id,
+  selected,
+  value,
+  name,
+  onChange,
+}: CustomRadioProps) => {
   const isSelected = selected === id;
 
   return (
     <div>
       <input
-        type='radio'
+        type="radio"
         id={id}
         name={name}
         value={value}
@@ -24,10 +30,8 @@ export const CustomRadio = ({ id, selected, value, name, onChange }: CustomRadio
         onChange={() => onChange(id)}
       />
       <CheckboxStyle htmlFor={id} $checked={isSelected}>
-        {
-          isSelected && <FaCheck className="text-white font-semibold" />
-        }
+        {isSelected && <FaCheck className="text-white font-semibold" />}
       </CheckboxStyle>
     </div>
-  )
-}
+  );
+};
