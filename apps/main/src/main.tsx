@@ -17,7 +17,7 @@ async function enableMocking() {
 
   // TODO : 좋은 방법은 아니지만 개발 모드 외에도 msw를 사용하는 방법
   const { worker } = await import('@repo/ui/mocks');
-  worker.start();
+  worker.start({ onUnhandledRequest: 'bypass' });
 }
 
 enableMocking().then(() => {

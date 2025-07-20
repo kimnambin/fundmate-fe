@@ -14,8 +14,8 @@ export const PAYMENT_PAGE = 'https://fundmate-fe-payment.vercel.app';
 export default defineConfig(({ mode }) => {
   dotenv.config({ path: resolve(__dirname, '../../.env') });
   console.log(mode);
-  const deploymentState = true;
-
+  const isDev = mode === 'development';
+  const deploymentState = !isDev;
   return {
     plugins: [
       react(),
@@ -76,7 +76,7 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         '/api': {
-          target: process.env.VITE_BACKEND_ADDRESS,
+          target: 'http://3.36.140.33:3000',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
           secure: false,
