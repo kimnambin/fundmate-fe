@@ -51,8 +51,8 @@ function App() {
             <Route path="request" element={<AskFundiPage />} />
             <Route path="response" element={<AskFundiResultPage />} />
           </Route>
-          <Route path="/product" element={<ProductPage />} />
-          <Route path="/payment">
+          <Route path="/product/:projectId" element={<ProductPage />} />
+          <Route path="/payment/:projectId">
             <Route index element={<PaymentPage />} />
             <Route path="completed" element={<PaymentCompleted />} />
             <Route path="detail" element={<PaymentDetail />} />
