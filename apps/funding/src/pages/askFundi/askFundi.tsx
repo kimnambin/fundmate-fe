@@ -41,13 +41,18 @@ const AskFundi = () => {
   } = useCategoryConfigs();
   const { mutateAsync: aiRequest } = useAiRequest();
 
-  const isValid = category && gender && age && content.trim().length > 0;
+  const isValid =
+    category !== null &&
+    gender !== null &&
+    age !== null &&
+    content.trim().length > 0;
 
   const navigate = useNavigate();
 
   const handleNext = async () => {
     setIsSubmit(true);
     setIsError(false);
+
     if (!isValid) return;
     setIsLoading(true);
 

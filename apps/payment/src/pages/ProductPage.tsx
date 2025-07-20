@@ -40,9 +40,9 @@ function ProductPage() {
     <FlexCol className="px-auto sm:px-[120px]">
       {!isMobile ? (
         <>
-          <FlexRow className="items-start">
+          <FlexRow className="items-start mt-0">
             <FlexItem>
-              <ProductImg imgId={productData.project.image_url} />
+              <ProductImg imgUrl={productData.project.image_url} />
             </FlexItem>
             <FlexItem>
               <ProductInfo
@@ -61,6 +61,7 @@ function ProductPage() {
           <ProductDetail
             user={productData.users}
             options={productData.options}
+            description={productData.project.description}
           />
         </>
       ) : (
@@ -69,6 +70,7 @@ function ProductPage() {
           <ProductDetail
             user={productData.users}
             options={productData.options}
+            description={productData.project.description}
           />
           <ProductIconBox />
         </>

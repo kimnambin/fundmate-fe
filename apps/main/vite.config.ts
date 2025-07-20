@@ -14,8 +14,8 @@ export const PAYMENT_PAGE = 'https://fundmate-fe-payment.vercel.app';
 export default defineConfig(({ mode }) => {
   dotenv.config({ path: resolve(__dirname, '../../.env') });
   console.log(mode);
-  const deploymentState = true;
-
+  const isDev = mode === 'development';
+  const deploymentState = !isDev;
   return {
     plugins: [
       react(),

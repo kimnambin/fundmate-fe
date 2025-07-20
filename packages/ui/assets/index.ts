@@ -1,8 +1,11 @@
-import FundiIcon from "../assets/icons/ic_fundi.png";
-export { FundiIcon }
+import FundiIcon from '../assets/icons/ic_fundi.png';
+export { FundiIcon };
 
 import FundiMainImage from '../assets/images/Fundmate.png';
-export { FundiMainImage }
+export { FundiMainImage };
+
+import UserDefault from '../assets/icons/userDefault.png';
+export { UserDefault };
 
 type assetsProps = {
   src: string;
@@ -56,4 +59,3 @@ export const CategoryIcons: Record<string, assetsProps> = Object.fromEntries(
       return 0;
     }),
 );
-

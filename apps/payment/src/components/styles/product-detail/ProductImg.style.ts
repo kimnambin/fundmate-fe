@@ -8,10 +8,15 @@ export const Wrapper = tw.div`
   items-start
   gap-4
   mt-8
+  max-h-[600px]      
+  min-h-[200px]       
 `;
 
 export const MainImg = tw.img`
-    w-full
-    h-[85%]
-    object-cover
+  w-full
+  h-[85%]
+  max-h-[600px]
+  object-cover
+  rounded-md          
+  transition-all    
 `;
