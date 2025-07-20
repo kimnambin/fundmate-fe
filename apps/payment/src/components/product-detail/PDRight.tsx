@@ -16,7 +16,15 @@ import {
 } from '../styles/product-detail/prdouctstyle.style';
 import { useState } from 'react';
 import { FollowingButton } from '@repo/ui/components';
-import { ProductDetailProps } from './PDLeft';
+import { Option, User } from './PDLeft';
+import { UserDefault } from '@repo/ui/assets';
+
+interface ProductDetailProps {
+  user: User;
+  options: Option[];
+  selectedOption?: number;
+  setSelectedOption?: (index: number) => void;
+}
 
 const PDBox: React.FC<ProductDetailProps> = ({
   user,
@@ -38,7 +46,7 @@ const PDBox: React.FC<ProductDetailProps> = ({
           <ProfileCard>
             <div className="flex flex-row items-center">
               <ProfileImg
-                src={`https://picsum.photos/id/${user.image_url == null ? 10 : user.image_url}/300/200`}
+                src={user.image_url ? user.image_url : UserDefault}
                 alt="prifile"
               />
               <GiftItemTitle>{user.nickname}</GiftItemTitle>

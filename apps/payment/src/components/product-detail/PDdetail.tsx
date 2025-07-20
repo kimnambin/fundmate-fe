@@ -1,9 +1,18 @@
 import { DescText } from '../styles/product-detail/prdouctstyle.style';
+import MarkdownEditor from '@uiw/react-markdown-editor';
 
-const PDdetail = () => {
+interface Props {
+  description: string;
+}
+
+const PDdetail = ({ description }: Props) => {
   return (
     <>
-      <DescText>여기에 프로젝트 소개가 담길 예정</DescText>
+      <DescText>
+        <div data-color-mode="light">
+          <MarkdownEditor.Markdown source={description} />
+        </div>
+      </DescText>
     </>
   );
 };
