@@ -38,7 +38,7 @@ interface PostPaymentRequest {
 }
 
 export const handlers = [
-  http.post(`/payments`, async ({ request }) => {
+  http.post(`/payments`, async ({ request }: { request: Request }) => {
     const data = await request.json();
     const { method, code, token, displayInfo, extra } = data as CardPayload;
 
@@ -59,7 +59,7 @@ export const handlers = [
     );
   }),
 
-  http.post('/payments', async ({ request }) => {
+  http.post('/payments', async ({ request }: { request: Request }) => {
     const data = await request.json();
     const { method, code, token, displayInfo, extra } = data as BankPayload;
 
@@ -80,7 +80,7 @@ export const handlers = [
     );
   }),
 
-  http.post('/reservations', async ({ request }) => {
+  http.post('/reservations', async ({ request }: { request: Request }) => {
     const data = await request.json();
     const {
       paymentInfoId,
@@ -112,7 +112,7 @@ export const handlers = [
     );
   }),
 
-  http.get(`/payments/`, async ({ request }) => {
+  http.get(`/payments/`, async ({ request }: { request: Request }) => {
     console.log(request);
     return HttpResponse.json();
   }),
