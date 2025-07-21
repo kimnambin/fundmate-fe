@@ -182,7 +182,7 @@ function CreateFunding() {
       createFunding(data, {
         onSuccess: (data) => {
           console.log('펀딩 개설 성공');
-          navigate(`/product/?id=${data.project_id}`);
+          navigate(`/product/${data.project_id}`);
         },
         onError: (error) => {
           alert('펀딩 개설 실패');

@@ -4,9 +4,13 @@ import axios from 'axios';
 import userImg from '../assets/images/user.png';
 import { MediumFont, SubTitle, Title } from '@repo/ui/styles';
 import { MainButton } from '@repo/ui/components';
+// import { useTmpLogin } from '../hooks/useTmpLogin';
 
 export const Sidebar = () => {
   const navigate = useNavigate();
+
+  // 로그인 임시 훅 실행
+  // useTmpLogin();
 
   // 사용자 프로필 상태
   const [profile, setProfile] = useState({

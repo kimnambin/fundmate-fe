@@ -31,9 +31,14 @@ export interface ProductDetailProps {
   options: Option[];
   selectedOption?: number;
   setSelectedOption?: (index: number) => void;
+  description: string;
 }
 
-const ProductDetail: React.FC<ProductDetailProps> = ({ user, options }) => {
+const ProductDetail: React.FC<ProductDetailProps> = ({
+  user,
+  options,
+  description,
+}) => {
   const [currentPage, setCurrentPage] = useState<boolean>(true);
   const projectTitle = ['프로젝트 소개', '프로젝트 후기'];
   const [selectedOption, setSelectedOption] = useState(0);
@@ -57,7 +62,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ user, options }) => {
         <Title>{currentPage ? projectTitle[0] : projectTitle[1]}</Title>
       </Topic>
       <Main>
-        <Box>{currentPage ? <PDdetail /> : <PDReview />}</Box>
+        <Box>
+          {currentPage ? <PDdetail description={description} /> : <PDReview />}
+        </Box>
         <PDBox
           user={user}
           options={options}

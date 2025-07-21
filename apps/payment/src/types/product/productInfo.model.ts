@@ -1,6 +1,6 @@
 export interface ProductInfoProps {
   project: {
-    image_url: number;
+    image_url: string;
     title: string;
     current_price: number;
     remaining_day: number;

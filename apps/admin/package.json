@@ -13,15 +13,16 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@repo/ui": "*",
     "@originjs/vite-plugin-federation": "^1.4.1",
     "@ramonak/react-progress-bar": "^5.4.0",
+    "@repo/ui": "*",
     "axios": "^1.10.0",
     "classnames": "^2.5.1",
     "lucide-react": "^0.525.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@rollup/rollup-darwin-arm64": "^4.45.1",
     "@tailwindcss/container-queries": "^0.1.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",

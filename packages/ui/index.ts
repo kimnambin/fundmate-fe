@@ -22,6 +22,7 @@ export { Images } from './assets';
 export { CategoryIcons } from './assets';
 export { FundiIcon } from './assets';
 export { FundiMainImage } from './assets';
+export { UserDefault } from './assets';
 
 //styled-components
 export {
