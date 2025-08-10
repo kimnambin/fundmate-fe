@@ -1,4 +1,11 @@
-<img src="https://private-user-images.githubusercontent.com/109705781/459805736-1e78d1c0-c20f-4758-a721-7cbb89d884c5.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTQ2MzQ1MDMsIm5iZiI6MTc1NDYzNDIwMywicGF0aCI6Ii8xMDk3MDU3ODEvNDU5ODA1NzM2LTFlNzhkMWMwLWMyMGYtNDc1OC1hNzIxLTdjYmI4OWQ4ODRjNS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODA4JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgwOFQwNjIzMjNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0xMWExZGNiNDdlYzdhZGFhNWY5NGY3ZmNhMGU5MTIwZDQxMWI1ZTU3MmE0MjNkYTg1ZGVkYmQ0OTFmYzgzZTczJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.1DNJ4ffnz8mlRymQAQCQXd1xmjLzT4a_gjN4Hwdj1qY" alt="배너" width="100%"/>
+<div align="center">
+
+![header](https://capsule-render.vercel.app/api?type=waving&color=e6e6fa&text=%20🤖Fundmate&animation=twinkling&fontSize=70&fontAlignY=40&fontAlign=50&height=250)
+
+
+
+</div>
+
 
 <br/>
 <br/>
