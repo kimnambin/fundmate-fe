@@ -2,10 +2,7 @@
 
 ![header](https://capsule-render.vercel.app/api?type=waving&color=e6e6fa&text=%20🤖Fundmate&animation=twinkling&fontSize=70&fontAlignY=40&fontAlign=50&height=250)
 
-
-
 </div>
-
 
 <br/>
 <br/>
@@ -71,28 +68,21 @@ FUNDMATE는 누구나 쉽게 펀딩을 개설하고 참여할 수 있도록 돕�
 | **TypeScript**                 | JavaScript에 정적 타입을 추가하여 사전 오류 방지                             | ![TypeScript Badge](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)     |
 | **Zustand**                    | 전역 상태 관리를 위한 간단하고 빠른 상태 관리 라이브러리                     | ![Zustand Badge](https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=zustand&logoColor=white)              |
 | **Jest**                       | 빠르고 직관적인 테스트 환경 제공                                             | ![Jest Badge](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)                       |
-| **Mock Service Worker**        | 외부 API 없이 응답 테스트                                                    | ![Mock Badge](https://img.shields.io/badge/MSW-FB542B?style=for-the-badge&logo=msw&logoColor=white)                         |
+| **Mock Service Worker**        | 외부 API 없이 응답 테스트 가능                                               | ![Mock Badge](https://img.shields.io/badge/MSW-FB542B?style=for-the-badge&logo=msw&logoColor=white)                         |
 
 <br/>
 
 ## 시연 영상
 
 메인 페이지
+![메인 페이지](./video/메인페이지.gif)
 
-<video width="640" height="360" controls>
-
-  <source src="./video/메인페이지.mp4" type="video/mp4">
-</video>
+<br/>
 
 AI 활용 + 통계
+![통계 페이지](./video/펀디에게물어봐.gif)
 
-<video width="640" height="360" controls>
-
-  <source src="./video/펀디에게물어봐.mp4" type="video/mp4">
-</video>
+<br/>
 
 결제 페이지
-
-<video width="640" height="360" controls>
-  <source src="./video/결제페이지.mp4" type="video/mp4">
-</video>
+![결제 페이지](./video/결제페이지.gif)
