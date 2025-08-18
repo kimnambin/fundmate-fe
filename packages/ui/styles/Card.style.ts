@@ -13,7 +13,6 @@ export const VerticalCardContainer = tw.div`
   w-full
   h-full
   @container/vertical
-
   hover:shadow-md
 `;
 
@@ -29,6 +28,5 @@ export const HorizontalCardContainer = tw.div`
   transition-shadow
   p-3
   bg-white
-
   hover:shadow-md
 `;

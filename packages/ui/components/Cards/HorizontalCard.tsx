@@ -15,40 +15,40 @@ export const HorizontalCard = ({
   description,
   progress,
 }: CardProps) => {
-  const imgSrc = imageUrl ?? 'https://picsum.photos/id/40/300/300';
   const [imageLoaded, setImageLoaded] = useState(false);
   const cardTitle = title ?? '이것은 상품의 제목입니다.';
   const cardDescription = description ?? '이것은 상품의 상세설명입니다.';
   const cardProgress = progress ?? 100;
 
   const navigate = useNavigate();
-  if (isLoading) {
-    return (
-      <HorizontalCardContainer className="shadow-lg animate-pulse">
-        <div className="bg-gray-200 rounded-xl relative flex shrink-0 grow-0 basis-[120px]"></div>
-        <div className="flex flex-col shrink-1 grow-1 items-start justify-between py-2 min-w-0 w-full">
-          <div className="flex flex-col w-full gap-2">
-            <div className="h-[20px] bg-gray-100 rounded-md"></div>
-            <div className="h-[20px] bg-gray-100 rounded-md"></div>
-          </div>
-          <div className="w-full">
-            <div className="h-[20px] bg-gray-100 rounded-md"></div>
-          </div>
-        </div>
-      </HorizontalCardContainer>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <HorizontalCardContainer className="shadow-lg animate-pulse">
+  //       <div className="bg-gray-200 rounded-xl relative flex shrink-0 grow-0 basis-[120px]"></div>
+  //       <div className="flex flex-col shrink-1 grow-1 items-start justify-between py-2 min-w-0 w-full">
+  //         <div className="flex flex-col w-full gap-2">
+  //           <div className="h-[20px] bg-gray-100 rounded-md"></div>
+  //           <div className="h-[20px] bg-gray-100 rounded-md"></div>
+  //         </div>
+  //         <div className="w-full">
+  //           <div className="h-[20px] bg-gray-100 rounded-md"></div>
+  //         </div>
+  //       </div>
+  //     </HorizontalCardContainer>
+  //   );
+  // }
+
   return (
     <HorizontalCardContainer onClick={() => navigate(`/product/${id}`)}>
       <div
         className={
           imageLoaded
-            ? 'relative flex shrink-0 grow-0 basis-[30%]'
-            : 'relative flex shrink-0 grow-0 basis-[30%] bg-gray-100 rounded-xl'
+            ? 'relative flex shrink-0 grow-0 basis-[40%]'
+            : 'relative flex shrink-0 grow-0 basis-[40%] bg-gray-100 rounded-xl'
         }
       >
         <img
-          src={imgSrc.toString()}
+          src={imageUrl}
           className={'w-full h-full object-cover rounded-xl'}
           onLoad={() => setImageLoaded(true)}
         />

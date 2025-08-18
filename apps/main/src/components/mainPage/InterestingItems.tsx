@@ -4,35 +4,38 @@ import {
   InterestingItemsGrid,
 } from '../../styles/Main/MainPageComponents.style';
 import type { ProductType } from '../../types/ProductType';
-import { commonApiInstance } from '@repo/ui/hooks';
-import { useQuery } from '@tanstack/react-query';
+// import { commonApiInstance } from '@repo/ui/hooks';
+// import { useQuery } from '@tanstack/react-query';
 import { GiNothingToSay } from 'react-icons/gi';
 import { Title } from '@repo/ui/styles';
+import { mockProducts } from '@repo/ui/mocks';
 
-const getMainPageData = async () => {
-  const response = await commonApiInstance.get('/api/projects?limit=8');
-  return response.data;
-};
+// const getMainPageData = async () => {
+//   const response = await commonApiInstance.get('/api/projects?limit=8');
+//   return response.data;
+// };
 
 export const InterestingItems = () => {
-  const { data, isLoading } = useQuery({
-    queryKey: ['InterestingItems'],
-    queryFn: getMainPageData,
-    staleTime: 1000 * 60,
-  });
+  // ============✔️TODO : 임시 데이터를 위한 주석===============
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ['InterestingItems'],
+  //   queryFn: getMainPageData,
+  //   staleTime: 1000 * 60,
+  // });
 
   return (
     <InterestingItemsContainer>
       <InterestingItemsGrid>
-        {data?.length ? (
+        {mockProducts?.length ? (
           <>
-            {data?.map((item: ProductType) => (
+            {mockProducts?.map((item: ProductType) => (
               <VerticalCard
                 id={item.project_id}
                 key={item.project_id}
                 title={item.title}
                 description={item.short_description}
-                isLoading={isLoading}
+                imageUrl={item.image_url}
+                // isLoading={isLoading}
               />
             ))}
           </>

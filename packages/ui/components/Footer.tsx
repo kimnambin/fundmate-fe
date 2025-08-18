@@ -1,4 +1,4 @@
-import { BigFont } from "../styles";
+import { SmallFont } from '../styles';
 
 export const Footer = () => {
   const date = new Date();
@@ -6,9 +6,9 @@ export const Footer = () => {
 
   return (
     <div className="w-full h-14 flex items-center justify-center border border-t-gray-300">
-      <BigFont>
+      <SmallFont>
         Copyright (c) {year} Status404. All Rights Reserved.
-      </BigFont>
+      </SmallFont>
     </div>
   );
 };

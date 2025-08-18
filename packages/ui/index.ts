@@ -38,10 +38,17 @@ export {
 } from './styles';
 
 //mocks
-export { worker, handlers } from './mocks';
+export {
+  worker,
+  handlers,
+  mockProducts,
+  mockPopularProducts,
+  mockRecentlyProducts,
+} from './mocks';
 
 //hooks
 export { commonApiInstance } from './hooks';
+export { useIsMobile } from './hooks';
 
 //stores
 export { loadingStore } from './stores/loadingStore';

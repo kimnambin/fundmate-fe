@@ -5,6 +5,9 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "types": ["vite/client"],
-    "lib": ["esnext", "dom", "dom.iterable"]
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "paths": {
+      "@hooks/*": ["/apps/payment/src/hooks/*"]
+    }
   }
 }

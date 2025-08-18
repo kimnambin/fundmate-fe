@@ -1,7 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
 interface BankPayload {
-  // userId: string;
   method: string;
   code: string;
   token: string;
@@ -13,7 +12,6 @@ interface BankPayload {
 }
 
 interface CardPayload {
-  // userId: string;
   method: string;
   code: string;
   token: string;

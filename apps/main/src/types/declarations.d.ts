@@ -29,4 +29,3 @@ declare module 'admin/MakerProfile';
 declare module 'admin/StatsPage';
 declare module 'admin/FundingHistory';
 declare module 'admin/PaymentManagement';
-

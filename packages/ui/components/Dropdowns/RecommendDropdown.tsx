@@ -1,19 +1,24 @@
-import { useEffect, useRef, useState } from "react";
-import { BiChevronDown } from "react-icons/bi"
-import type { DropdownProps } from "./Dropdown";
-import { useSearchParams } from "react-router-dom";
-import { SmallFont } from "../../styles";
-import { Menu, MenuButton, MenuItem, MenuItems } from "../../styles/Dropdown.Style";
+import { useEffect, useRef, useState } from 'react';
+import { BiChevronDown } from 'react-icons/bi';
+import type { DropdownProps } from './Dropdown';
+import { useSearchParams } from 'react-router-dom';
+import { SmallFont } from '../../styles';
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from '../../styles/Dropdown.Style';
 
 export const RecommendDropdown = ({ query, onClick }: DropdownProps) => {
   const [title, setTitle] = useState('정렬');
   const recommend = ['추천순', '인기순', '최신순', '마감임박순'];
   const [searchParams, setSearchParams] = useSearchParams();
   const [toggle, setToggle] = useState<boolean>(false);
-  const menuRef = useRef<HTMLDivElement | null>(null)
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    setTitle('정렬')
+    setTitle('정렬');
   }, [query]);
 
   useEffect(() => {
@@ -23,14 +28,14 @@ export const RecommendDropdown = ({ query, onClick }: DropdownProps) => {
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleQueryChange = (i: string) => {
     const currentQuery = new URLSearchParams(searchParams);
     currentQuery.set('recommend', i);
     setSearchParams(currentQuery);
-  }
+  };
 
   const handleClick = (i: number, v: string) => {
     if (query !== null) {
@@ -39,9 +44,9 @@ export const RecommendDropdown = ({ query, onClick }: DropdownProps) => {
       onClick(i);
     }
 
-    setToggle(!toggle)
+    setToggle(!toggle);
     setTitle(v);
-  }
+  };
 
   return (
     <Menu ref={menuRef}>
@@ -50,23 +55,26 @@ export const RecommendDropdown = ({ query, onClick }: DropdownProps) => {
           type="button"
           id="menu-button"
           aria-expanded={toggle}
-          aria-haspopup='true'
+          aria-haspopup="true"
           onClick={() => setToggle(!toggle)}
         >
           {title}
-          <BiChevronDown aria-hidden="true" className="-mr-1 size-5 text-gray-400" data-slot='icon' />
+          <BiChevronDown
+            aria-hidden="true"
+            className="-mr-1 size-5 text-gray-400"
+            data-slot="icon"
+          />
         </MenuButton>
       </div>
 
-      {
-        toggle && (
-          <MenuItems
-            aria-orientation="vertical"
-            aria-labelledby="menu-button"
-            tabIndex={-1}
-          >
-            <div className="py-1" role="none">
-              {
+      {toggle && (
+        <MenuItems
+          aria-orientation="vertical"
+          aria-labelledby="menu-button"
+          tabIndex={-1}
+        >
+          <div className="py-1" role="none">
+            {/* {
                 recommend.map((v, i) => (
                   <MenuItem
                     key={v}
@@ -78,13 +86,10 @@ export const RecommendDropdown = ({ query, onClick }: DropdownProps) => {
                     </SmallFont>
                   </MenuItem>
                 ))
-              }
-            </div>
-          </MenuItems>
-
-        )
-      }
-
+              } */}
+          </div>
+        </MenuItems>
+      )}
     </Menu>
-  )
-}
+  );
+};

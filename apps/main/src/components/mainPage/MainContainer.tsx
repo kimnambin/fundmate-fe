@@ -1,12 +1,12 @@
-import { MainFlex } from "../../styles/Main/MainPageComponents.style";
-import { Banner } from "./Banner";
-import { InterestingItems } from "./InterestingItems";
-import { MainCategory } from "./MainCategory";
-import { PopularItems } from "./PopularItems";
+import { MainFlex } from '../../styles/Main/MainPageComponents.style';
+import { Banner } from './Banner';
+import { InterestingItems } from './InterestingItems';
+import { MainCategory } from './MainCategory';
+import { PopularItems } from './PopularItems';
 
 export const MainContainer = () => {
   return (
-    <MainFlex>
+    <MainFlex className="flex-col lg:flex-row">
       <div className="flex flex-col gap-10 shrink grow">
         <Banner isLoading={false} />
         <MainCategory />
@@ -16,5 +16,5 @@ export const MainContainer = () => {
         <PopularItems />
       </div>
     </MainFlex>
-  )
-}
+  );
+};

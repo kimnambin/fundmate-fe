@@ -26,10 +26,10 @@ export const NavButton = tw.button<NavProps>`
 `;
 
 export const SwiperLayout = tw.div<{ $id: number }>`
-  px-[120px]
+  px-0
+  lg:px-[120px]
   py-10
   ${(p) => (p.$id === 2 ? 'bg-mainOpacity' : '')}
-  min-h-[400px]
 `;
 
 export const SwiperContainer = tw.div`

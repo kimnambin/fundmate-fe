@@ -11,4 +11,3 @@ export const MediumFont = tw.p`text-[16px] font-medium`;
 export const SmallFont = tw.p`text-[12px] font-medium`;
 
 export const WarningText = tw.p`text-red font-bold`;
-

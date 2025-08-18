@@ -2,7 +2,7 @@ import { Header } from '@repo/ui/components';
 import { Loading } from '@repo/ui/components';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useIsMobile } from './hooks/useMobile';
+import { useIsMobile } from '../../../packages/ui/hooks/isMobile';
 
 const ProductPage = lazy(() => import('./pages/ProductPage'));
 const PaymentPage = lazy(() => import('./pages/PaymentPage'));

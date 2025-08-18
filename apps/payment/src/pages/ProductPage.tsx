@@ -3,7 +3,7 @@ import ProductInfo from '../components/productPage/ProductInfo';
 import ProductDetail from '../components/product-detail/PDLeft';
 import { FlexCol, FlexItem, FlexRow } from '../components/styles/layout.style';
 import ProductIconBox from '../components/productPage/ProductIconBox';
-import { useIsMobile } from '../hooks/useMobile';
+import { useIsMobile } from '../../../../packages/ui/hooks/isMobile';
 import FundDetailMobile from '../components/mobile/MbProduct';
 import { useGetProductInfo } from '../hooks/product/getProductInfo';
 import { useTmpLogin } from '../hooks/user/useTmp';

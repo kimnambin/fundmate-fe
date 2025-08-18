@@ -1,4 +1,5 @@
 import logo from '../assets/images/Fundmate.png';
+import mobileLogo from '../assets/icons/ic_fundi.png';
 import userDefaultImage from '../assets/icons/userDefault.png';
 import { IoMdMenu } from 'react-icons/io';
 import {
@@ -15,9 +16,11 @@ import { CategoryIcons } from '../assets';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import fundi from '../assets/images/fundi.png';
-import { MediumFont, SubTitle } from '../styles';
+import { MediumFont, SmallFont, SubTitle } from '../styles';
 import { InputText } from './Inputs/Input';
 import { commonApiInstance } from '../hooks';
+import { useIsMobile } from '../hooks/isMobile';
+import { MdDriveFolderUpload } from 'react-icons/md';
 
 const menuBar = [
   {
@@ -108,16 +111,18 @@ export const Header = () => {
     }
   };
 
+  const isMobile = useIsMobile();
+
   return (
     <div className="flex flex-col shadow-md">
       <Container className="h-[100px] justify-between border-b border-gray-300">
         <img
-          src={logo}
+          src={isMobile ? mobileLogo : logo}
           alt="Logo"
           className="w-auto h-14 cursor-pointer"
           onClick={() => navigate('/')}
         />
-        <InputDiv>
+        <InputDiv className="relative w-full sm:w-auto">
           <InputText
             width="w-full"
             placeholder="검색어를 입력하세요."
@@ -125,22 +130,27 @@ export const Header = () => {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="border-main"
+            className="border-main sm:w-64"
           />
           <IoSearch
             className="absolute end-5 top-1/2 -translate-y-1/2 text-2xl text-[#26AAFF] cursor-pointer"
             onClick={handleClick}
           />
         </InputDiv>
-        <div className="flex flex-row gap-7 h-full items-center">
+        <div className="flex flex-row gap-0 md:gap-7 h-full items-center">
           <button
             onClick={handleCreateNavigate}
-            className="text-lg font-semibold"
+            className="text-lg font-semibold rounded-lg sm:shadow-md p-2 bg-white border-gray-100"
           >
-            <SubTitle>프로젝트 올리기</SubTitle>
+            {isMobile ? (
+              <MdDriveFolderUpload className="w-[56px] h-[52px] text-[#26AAFF]" />
+            ) : (
+              <SubTitle>프로젝트 업로드</SubTitle>
+            )}
           </button>
-          <div className="inline-block relative">
-            <LoginButton onClick={handleNavigate}>
+          {/* ============✔️TODO : 임시 데이터를 위한 주석=============== */}
+          <div className="none md:inline-block relative">
+            {/* <LoginButton onClick={handleNavigate}>
               <img
                 src={userDefaultImage}
                 alt="default user icon"
@@ -169,12 +179,12 @@ export const Header = () => {
                   <MediumFont>로그아웃</MediumFont>
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </Container>
       <SpaceContainer>
-        <div className=" flex flex-row items-center h-[60px] gap-7 text-lg">
+        <div className="flex flex-col items-center sm:flex-row items-center sm:h-[60px] mx-0 gap-4 md:gap-7 text-lg">
           <button
             type="button"
             onClick={setIsOpen}
@@ -187,7 +197,7 @@ export const Header = () => {
                 ([name, { src, menuName }], i) => (
                   <Link
                     to={`/search?category=${i}`}
-                    key={name}
+                    key={name + i}
                     className="flex flex-row items-center gap-5 rounded-lg hover:bg-gray-100 p-2"
                     state={{ menuName: menuName }}
                   >
@@ -204,7 +214,9 @@ export const Header = () => {
                 ? location.pathname === '/'
                 : currentFullPath.includes(v.route);
 
-            return (
+            return isMobile ? (
+              <></>
+            ) : (
               <button
                 key={v.name}
                 type="button"
@@ -218,7 +230,11 @@ export const Header = () => {
             );
           })}
         </div>
-        <FundiButton type="button" onClick={() => navigate('/fundi/request')}>
+        <FundiButton
+          type="button"
+          onClick={() => navigate('/fundi/request')}
+          className="my-2 md:my-4"
+        >
           <SubTitle>펀디에게 물어보기</SubTitle>
           <img src={fundi} className="w-6" />
         </FundiButton>

@@ -5,7 +5,8 @@ export const Container = tw.div`
   flex-row
   w-full
   items-center
-  px-[120px]
+  px-[10px]
+  md:px-[120px]
 `;
 
 export const SpaceContainer = tw.div`
@@ -14,7 +15,8 @@ export const SpaceContainer = tw.div`
   justify-between
   items-center
   w-full
-  px-[120px]
+  px-[10px]
+  md:px-[120px]
 `;
 
 export const InputDiv = tw.div`

@@ -14,27 +14,26 @@ export const VerticalCard = ({
   description,
   progress,
 }: CardProps) => {
-  const imgSrc = imageUrl ?? 'https://picsum.photos/id/40/300/300';
   const [imageLoaded, setImageLoaded] = useState(false);
   const cardTitle = title ?? '이것은 상품의 제목입니다.';
   const cardDescription = description ?? '이것은 상품의 상세설명입니다.';
   const cardProgress = progress ?? 100;
 
   const navigate = useNavigate();
-  if (isLoading) {
-    return (
-      <VerticalCardContainer className="shadow-lg">
-        <div className="flex flex-col h-full justify-between animate-pulse @[1px]/vertical:gap-3 @[250px]/vertical:gap-5 @[270px]/vertical:gap-7">
-          <div className="flex flex-col gap-3 h-full">
-            <div className="@[1px]/vertical:h-[200px] @[270px]/vertical:h-[250px] @[310px]/vertical:h-[290px] rounded-xl bg-gray-100 "></div>
-            <div className="bg-gray-100 rounded-md h-[20px] w-[50%]"></div>
-            <div className="bg-gray-100 rounded-md h-[20px]"></div>
-          </div>
-          <div className="bg-gray-100 rounded-md h-[20px]"></div>
-        </div>
-      </VerticalCardContainer>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <VerticalCardContainer className="shadow-lg">
+  //       <div className="flex flex-col h-full justify-between animate-pulse @[1px]/vertical:gap-3 @[250px]/vertical:gap-5 @[270px]/vertical:gap-7">
+  //         <div className="flex flex-col gap-3 h-full">
+  //           <div className="@[1px]/vertical:h-[200px] @[270px]/vertical:h-[250px] @[310px]/vertical:h-[290px] rounded-xl bg-gray-100 "></div>
+  //           <div className="bg-gray-100 rounded-md h-[20px] w-[50%]"></div>
+  //           <div className="bg-gray-100 rounded-md h-[20px]"></div>
+  //         </div>
+  //         <div className="bg-gray-100 rounded-md h-[20px]"></div>
+  //       </div>
+  //     </VerticalCardContainer>
+  //   );
+  // }
 
   return (
     <VerticalCardContainer onClick={() => navigate(`/product/${id}`)}>
@@ -42,7 +41,7 @@ export const VerticalCard = ({
         <div className="flex flex-col gap-3">
           <div className="relative">
             <img
-              src={imgSrc.toString()}
+              src={imageUrl}
               className={
                 imageLoaded
                   ? `w-full h-auto rounded-xl object-cover`
