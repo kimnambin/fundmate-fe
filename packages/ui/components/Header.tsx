@@ -1,12 +1,11 @@
 import logo from '../assets/images/Fundmate.png';
 import mobileLogo from '../assets/icons/ic_fundi.png';
-import userDefaultImage from '../assets/icons/userDefault.png';
 import { IoMdMenu } from 'react-icons/io';
 import {
   Container,
   FundiButton,
   InputDiv,
-  LoginButton,
+  // LoginButton,
   SpaceContainer,
 } from '../styles/Header.styles';
 import { IoSearch } from 'react-icons/io5';
@@ -16,9 +15,9 @@ import { CategoryIcons } from '../assets';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import fundi from '../assets/images/fundi.png';
-import { MediumFont, SmallFont, SubTitle } from '../styles';
+import { MediumFont, SubTitle } from '../styles';
 import { InputText } from './Inputs/Input';
-import { commonApiInstance } from '../hooks';
+// import { commonApiInstance } from '../hooks';
 import { useIsMobile } from '../hooks/isMobile';
 import { MdDriveFolderUpload } from 'react-icons/md';
 
@@ -56,8 +55,8 @@ export const Header = () => {
   const [searchInput, setSearchInput] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
-  const nickname = window.localStorage.getItem('nickname');
-  const [adminToggle, setAdminToggle] = useState(false);
+  // const nickname = window.localStorage.getItem('nickname');
+  // const [adminToggle, setAdminToggle] = useState(false);
   const currentFullPath = location.pathname + location.search;
 
   const handleClick = () => {
@@ -70,45 +69,46 @@ export const Header = () => {
     }
   };
 
-  const handleNavigate = () => {
-    if (nickname !== null) {
-      setAdminToggle(!adminToggle);
-    } else {
-      navigate('/login');
-    }
-  };
+  // const handleNavigate = () => {
+  //   if (nickname !== null) {
+  //     setAdminToggle(!adminToggle);
+  //   } else {
+  //     navigate('/login');
+  //   }
+  // };
 
-  const handlePortal = () => {
-    try {
-      navigate('/mypage');
-    } catch (error) {
-      alert('세션이 만료되었습니다.\n다시 로그인해주세요');
-      window.localStorage.removeItem('nickname');
-      navigate('/login');
-    }
-  };
+  // const handlePortal = () => {
+  //   try {
+  //     navigate('/mypage');
+  //   } catch (error) {
+  //     alert('세션이 만료되었습니다.\n다시 로그인해주세요');
+  //     window.localStorage.removeItem('nickname');
+  //     navigate('/login');
+  //   }
+  // };
 
-  const handleLogout = async () => {
-    await commonApiInstance
-      .post('/auth/logout')
-      .then((response) => {
-        console.log(response);
-        window.localStorage.removeItem('nickname');
-        setAdminToggle(false);
-        navigate('/');
-      })
-      .catch((error) => {
-        console.log(error);
-        alert('다시 시도해주세요');
-      });
-  };
+  // const handleLogout = async () => {
+  //   await commonApiInstance
+  //     .post('/auth/logout')
+  //     .then((response) => {
+  //       console.log(response);
+  //       window.localStorage.removeItem('nickname');
+  //       setAdminToggle(false);
+  //       navigate('/');
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       alert('다시 시도해주세요');
+  //     });
+  // };
 
   const handleCreateNavigate = () => {
-    if (nickname) {
-      navigate('/funding/create');
-    } else {
-      navigate('/login');
-    }
+    navigate('/funding/create');
+    // if (nickname) {
+    //   navigate('/funding/create');
+    // } else {
+    //   navigate('/login');
+    // }
   };
 
   const isMobile = useIsMobile();
@@ -126,7 +126,7 @@ export const Header = () => {
           <InputText
             width="w-full"
             placeholder="검색어를 입력하세요."
-            textSize="text-[18px]"
+            textSize="text-[16px] lg:text-[18px]"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleKeyDown}

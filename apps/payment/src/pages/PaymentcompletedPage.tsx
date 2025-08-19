@@ -8,7 +8,7 @@ import { BaseText, BoldBigText } from '../components/styles/text.style';
 import { Link } from 'react-router-dom';
 // import { useGetQueryString } from '../hooks/useGetQueryString';
 import { VerticalCard } from '@repo/ui/components';
-import { Blank } from '../components/styles/product-detail/prdouctstyle.style';
+import { Blank } from '../components/styles/product-detail/Product.style';
 import { useGetProductInfo } from '../hooks/product/getProductInfo';
 import { useGetQueryString } from '../hooks/useGetQueryString';
 import { useGetiInsertedId } from '../hooks/useGetiInsertedId';

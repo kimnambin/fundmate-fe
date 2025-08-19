@@ -2,8 +2,8 @@ import { BaseText, BoldBigText, LightColor } from '../styles/text.style';
 import { Box, BoxRow, FlexColsm, FlexRowsm } from '../styles/layout.style';
 import { Input, MoneyBox, Span } from '../styles/paymentPage/PaymentMid.style';
 import { formatPrice } from '@repo/ui/utils';
-import { useGetQueryString } from '../../hooks/useGetQueryString';
-import { useGetProductInfo } from '../../hooks/product/getProductInfo';
+// import { useGetQueryString } from '../../hooks/useGetQueryString';
+// import { useGetProductInfo } from '../../hooks/product/getProductInfo';
 
 interface PaymentMidProps {
   subText: string[];
@@ -20,18 +20,18 @@ const PaymentMid = ({
   nickname,
   email,
 }: PaymentMidProps) => {
-  const projectId = useGetQueryString();
-  const { data: productData } = useGetProductInfo(Number(projectId));
+  // const projectId = useGetQueryString();
+  // const { data: productData } = useGetProductInfo(Number(projectId));
 
-  if (!productData) return null;
+  // if (!productData) return null;
 
-  const optionData = productData.options[0];
+  // const optionData = productData.options[0];
 
   return (
     <div className="w-full">
-      <BoldBigText>{subText[0]}</BoldBigText>
-      <BoxRow>{optionData.title}</BoxRow>
-      <BoldBigText className="mt-6">{subText[1]}</BoldBigText>
+      {/* <BoldBigText>{subText[0]}</BoldBigText> */}
+      {/* <BoxRow>{optionData}</BoxRow> */}
+      <BoldBigText className="my-6">{subText[1]}</BoldBigText>
       <Box>
         <BaseText>후원금</BaseText>
         <MoneyBox>
@@ -47,7 +47,7 @@ const PaymentMid = ({
           <Span>원</Span>
         </MoneyBox>
       </Box>
-      <BoldBigText className="mt-6">{subText[2]}</BoldBigText>
+      <BoldBigText className="my-6">{subText[2]}</BoldBigText>
       <BoxRow>
         <FlexColsm className="items-start">
           <FlexRowsm className="py-2 justify-between">

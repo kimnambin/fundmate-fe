@@ -4,11 +4,11 @@ import {
   IconBox,
   IconButton,
   IconGroup,
-} from '../styles/product-detail/productInfo.style';
+} from '../styles/product-detail/ProductInfo.style';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MainButton } from '@repo/ui/components';
-import { useGetProductInfo } from '../../hooks/product/getProductInfo';
+// import { useGetProductInfo } from '../../hooks/product/getProductInfo';
 
 interface ProductInfoProps {
   projectId?: string;
@@ -16,8 +16,9 @@ interface ProductInfoProps {
 
 const ProductIconBox: React.FC<ProductInfoProps> = ({ projectId }) => {
   const [click, setClick] = useState<boolean>(false);
+  const [mockLike, _] = useState<number>(0);
 
-  const { data: productData } = useGetProductInfo(Number(projectId));
+  // const { data: productData } = useGetProductInfo(Number(projectId));
 
   const copyClip = () => {
     const currentUrl = window.location.href;
@@ -37,12 +38,12 @@ const ProductIconBox: React.FC<ProductInfoProps> = ({ projectId }) => {
           {click ? (
             <>
               <FaHeart className="w-7 h-7 text-red-600" />
-              <span>{(productData?.project.likes ?? 0) + 1}</span>
+              <span>{mockLike + 1}</span>
             </>
           ) : (
             <>
               <FaRegHeart className="w-7 h-7" />
-              <span>{productData?.project?.likes || 0}</span>
+              <span>{mockLike}</span>
             </>
           )}
         </IconButton>
@@ -55,7 +56,7 @@ const ProductIconBox: React.FC<ProductInfoProps> = ({ projectId }) => {
           label={'후원하기'}
           textSize={'text-base'}
           textWeight={'font-bold'}
-          className="w-72 px-6 py-3 ml-3.5  sm:w-full"
+          className="w-56 px-6 py-3 ml-3.5  md:w-full"
         />
       </Link>
     </IconBox>

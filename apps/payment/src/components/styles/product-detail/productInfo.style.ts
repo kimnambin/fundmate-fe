@@ -1,5 +1,5 @@
 import tw from 'tailwind-styled-components';
-import type { HasProps } from './prdouctstyle.style';
+import { HasProps } from './Product.style';
 
 export const Wrapper = tw.div`
   w-full
@@ -95,4 +95,29 @@ export const BaseButton = tw.button`
   font-bold
   transition
   ml-3.5
+`;
+
+export const ReviewCard = tw.div`
+  bg-white
+  rounded-lg
+  p-4
+  mb-4
+  shadow-md
+`;
+
+export const ReviewerName = tw.h4`
+  m-0
+  text-lg
+  font-bold
+`;
+
+export const ReviewDate = tw.p`
+  m-1
+  text-xs
+  text-gray-600
+`;
+
+export const ReviewContent = tw.p`
+  text-sm
+  leading-relaxed
 `;

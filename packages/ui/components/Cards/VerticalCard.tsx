@@ -7,7 +7,6 @@ import type { CardProps } from '../../types/cardType';
 import { useState } from 'react';
 
 export const VerticalCard = ({
-  isLoading,
   id,
   imageUrl,
   title,

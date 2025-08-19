@@ -1,11 +1,11 @@
 import { VerticalCard } from '@repo/ui/components';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
+// import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
-import { NavButton, NavigationContainer } from '../styles/Swiper.style';
+// import { NavButton, NavigationContainer } from '../styles/Swiper.style';
 // import { commonApiInstance } from '@repo/ui/hooks';
 // import { useQuery } from '@tanstack/react-query';
 import type { ProductType } from '../types/ProductType';

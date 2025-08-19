@@ -4,4 +4,6 @@ export {
   mockProducts,
   mockPopularProducts,
   mockRecentlyProducts,
+  mockreviewsData,
 } from './mockProducts';
+export { mockProductUserData } from './mockProductUser';

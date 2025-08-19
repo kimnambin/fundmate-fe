@@ -142,3 +142,21 @@ export const mockRecentlyProducts: ProductType[] = [
     remaining_day: 17,
   },
 ];
+
+export const mockreviewsData = [
+  {
+    name: '홍길동',
+    date: '2025-08-10',
+    content: '정말 만족스러운 서비스였습니다. 추천해요!',
+  },
+  {
+    name: '김철수',
+    date: '2025-08-12',
+    content: 'UI가 깔끔하고 사용하기 편했어요.',
+  },
+  {
+    name: '이영희',
+    date: '2025-08-15',
+    content: '기능이 다양해서 유용했어요. 다만 속도가 조금 느렸어요.',
+  },
+];

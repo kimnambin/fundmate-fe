@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { InputText, MainButton } from '@repo/ui/components';
 import { MediumFont, Title } from '@repo/ui/styles';
 import { emailVerifiedStore } from '../../stores/EmailVerifiedStore';
-// import { commonApiInstance } from "@repo/ui/hooks"
+import { commonApiInstance } from '@repo/ui/hooks';
 
 const schema = yup.object({
   password: yup.string().required(),
@@ -43,16 +43,16 @@ export const ChangePassword = () => {
       confirm_password: checkPassword,
     };
 
-    // await commonApiInstance
-    //   .patch('/auth/password', finalData)
-    //   .then((response) => {
-    //     console.log(response);
-    //     window.localStorage.removeItem('auth');
-    //     navigate('/login');
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    await commonApiInstance
+      .patch('/auth/password', finalData)
+      .then((response) => {
+        console.log(response);
+        window.localStorage.removeItem('auth');
+        navigate('/login');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

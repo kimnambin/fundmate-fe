@@ -7,7 +7,7 @@ import {
   Top,
   ValueP,
   Wrapper,
-} from '../styles/product-detail/productInfo.style';
+} from '../styles/product-detail/ProductInfo.style';
 import ProductIconBox from './ProductIconBox';
 import { formatDate } from '../../utils/date';
 
@@ -20,7 +20,7 @@ export const productPaymentData = [
   '예상 발송 및 시작일',
 ];
 
-interface ProductInfoProps {
+export interface ProductInfoProps {
   title: string;
   currentPrice: number;
   remainingDay: number;
@@ -51,7 +51,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             {key !== 'title' && <KeyP>{key}</KeyP>}
             <ValueP $ishas={key === 'title'}>
               {index === 0 && `${formatPrice(String(currentPrice))}원`}
-              {index === 1 && `${remainingDay}일`}
+              {index === 1 && `${remainingDay}일 후`}
             </ValueP>
           </Top>
         ))}
@@ -66,8 +66,8 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             <ValueP className="mb-0">
               {index === 0 && `${formatPrice(String(goalAmount))}원`}
               {index === 1 && formatDate(startDate)}
-              {index === 2 && formatDate(endDate)}
-              {index === 3 && formatDate(deliveryDate)}
+              {index === 2 && `${formatDate(endDate)} 예정`}
+              {index === 3 && `${formatDate(deliveryDate)}일 후`}
             </ValueP>
           </BottomItems>
         ))}

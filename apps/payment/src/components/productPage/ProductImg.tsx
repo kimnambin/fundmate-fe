@@ -5,6 +5,8 @@ interface Props {
 }
 
 const ProductImg = ({ imgUrl }: Props) => {
+  console.log('ProductImg rendered with imgUrl:', imgUrl);
+
   return (
     <Wrapper>
       <MainImg src={imgUrl || 'https://picsum.photos/id/1/300/200'} />

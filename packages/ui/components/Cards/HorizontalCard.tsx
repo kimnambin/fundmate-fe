@@ -9,7 +9,6 @@ import { useState } from 'react';
 export const HorizontalCard = ({
   id,
   number,
-  isLoading,
   imageUrl,
   title,
   description,

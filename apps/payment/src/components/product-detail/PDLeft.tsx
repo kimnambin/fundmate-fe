@@ -9,13 +9,13 @@ import {
   Box,
   Line,
   Blank,
-} from '../styles/product-detail/prdouctstyle.style';
+} from '../styles/product-detail/Product.style';
 import PDBox from './PDRight';
 import PDdetail from './PDdetail';
 import PDReview from './PDReview';
 
 export interface User {
-  image_url: number;
+  image_url: string;
   nickname: string;
   content: string | null;
 }

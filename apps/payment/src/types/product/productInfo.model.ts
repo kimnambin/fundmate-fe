@@ -1,5 +1,6 @@
 export interface ProductInfoProps {
   project: {
+    project_id?: number;
     image_url: string;
     title: string;
     current_price: number;

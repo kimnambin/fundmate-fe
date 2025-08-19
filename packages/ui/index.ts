@@ -44,6 +44,8 @@ export {
   mockProducts,
   mockPopularProducts,
   mockRecentlyProducts,
+  mockProductUserData,
+  mockreviewsData,
 } from './mocks';
 
 //hooks
@@ -52,3 +54,5 @@ export { useIsMobile } from './hooks';
 
 //stores
 export { loadingStore } from './stores/loadingStore';
+
+export { NotFound } from './components/Layouts/NotFound';

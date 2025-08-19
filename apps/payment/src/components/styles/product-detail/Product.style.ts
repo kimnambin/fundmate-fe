@@ -104,6 +104,7 @@ export const DescText = tw.p`
 export const GiftSection = tw.section`
   w-full 
   mt-6 
+  mb-12
   flex 
   flex-col 
   gap-4

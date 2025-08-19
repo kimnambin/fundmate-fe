@@ -1,52 +1,51 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import type { DropdownProps } from './Dropdown';
-import { useSearchParams } from 'react-router-dom';
-import { SmallFont } from '../../styles';
+// import { useSearchParams } from 'react-router-dom';
 import {
   Menu,
   MenuButton,
-  MenuItem,
+  // MenuItem,
   MenuItems,
 } from '../../styles/Dropdown.Style';
 
-export const RecommendDropdown = ({ query, onClick }: DropdownProps) => {
-  const [title, setTitle] = useState('정렬');
-  const recommend = ['추천순', '인기순', '최신순', '마감임박순'];
-  const [searchParams, setSearchParams] = useSearchParams();
+export const RecommendDropdown = ({}: DropdownProps) => {
+  const [title] = useState('정렬');
+  // const recommend = ['추천순', '인기순', '최신순', '마감임박순'];
+  // const [searchParams, setSearchParams] = useSearchParams();
   const [toggle, setToggle] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    setTitle('정렬');
-  }, [query]);
+  // useEffect(() => {
+  //   setTitle('정렬');
+  // }, [query]);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setToggle(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  // useEffect(() => {
+  //   const handleClickOutside = (e: MouseEvent) => {
+  //     if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+  //       setToggle(false);
+  //     }
+  //   };
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => document.removeEventListener('mousedown', handleClickOutside);
+  // }, []);
 
-  const handleQueryChange = (i: string) => {
-    const currentQuery = new URLSearchParams(searchParams);
-    currentQuery.set('recommend', i);
-    setSearchParams(currentQuery);
-  };
+  // const handleQueryChange = (i: string) => {
+  //   const currentQuery = new URLSearchParams(searchParams);
+  //   currentQuery.set('recommend', i);
+  //   setSearchParams(currentQuery);
+  // };
 
-  const handleClick = (i: number, v: string) => {
-    if (query !== null) {
-      handleQueryChange(i.toString());
-    } else if (onClick) {
-      onClick(i);
-    }
+  // const handleClick = (i: number, v: string) => {
+  //   if (query !== null) {
+  //     handleQueryChange(i.toString());
+  //   } else if (onClick) {
+  //     onClick(i);
+  //   }
 
-    setToggle(!toggle);
-    setTitle(v);
-  };
+  //   setToggle(!toggle);
+  //   setTitle(v);
+  // };
 
   return (
     <Menu ref={menuRef}>

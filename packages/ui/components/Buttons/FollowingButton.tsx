@@ -17,7 +17,7 @@ export const FollowingButton = ({
   return (
     <button
       onClick={toggleFollow}
-      className={`px-6 py-4 rounded border flex items-center gap-1
+      className={`px-4 py-2 rounded border flex items-center gap-1
           ${
             following
               ? 'bg-gray-100 text-gray-600 border-gray-300'

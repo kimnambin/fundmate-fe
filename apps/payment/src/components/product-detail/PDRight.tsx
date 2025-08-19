@@ -13,7 +13,7 @@ import {
   ProfileInfo,
   ProfileInfos,
   SelectButton,
-} from '../styles/product-detail/prdouctstyle.style';
+} from '../styles/product-detail/Product.style';
 import { useState } from 'react';
 import { FollowingButton } from '@repo/ui/components';
 import { Option, User } from './PDLeft';

@@ -3,9 +3,9 @@ import './index.css';
 import { Main } from './pages/Main';
 import { SearchPage } from './pages/SearchDivider';
 import { Header, Loading, UserPageLayout } from '@repo/ui/components';
-import { LogIn } from './pages/LogIn';
-import { SignUp } from './pages/SignUp';
-import { PasswordReset } from './pages/PasswordReset';
+// import { LogIn } from './pages/LogIn';
+// import { SignUp } from './pages/SignUp';
+// import { PasswordReset } from './pages/PasswordReset';
 import { Suspense, lazy } from 'react';
 import { Layout } from '@repo/ui/styles';
 

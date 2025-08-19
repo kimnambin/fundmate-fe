@@ -10,7 +10,7 @@ import {
   GiftPrice,
   ProfileCard,
   SelectButton,
-} from '../styles/product-detail/prdouctstyle.style';
+} from '../styles/product-detail/Product.style';
 
 interface OptionModalProps {
   isOpen: boolean;

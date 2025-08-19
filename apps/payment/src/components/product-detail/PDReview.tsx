@@ -1,10 +1,22 @@
-import { DescText } from '../styles/product-detail/prdouctstyle.style';
+import { mockreviewsData } from '@repo/ui/mocks';
+import {
+  ReviewCard,
+  ReviewContent,
+  ReviewDate,
+  ReviewerName,
+} from '../styles/product-detail/ProductInfo.style';
 
 const PDReview = () => {
   return (
-    <>
-      <DescText>후기후기</DescText>
-    </>
+    <div className="w-[80%]">
+      {mockreviewsData.map((review, index) => (
+        <ReviewCard key={index}>
+          <ReviewerName>{review.name}</ReviewerName>
+          <ReviewDate>{review.date}</ReviewDate>
+          <ReviewContent>{review.content}</ReviewContent>
+        </ReviewCard>
+      ))}
+    </div>
   );
 };
 
