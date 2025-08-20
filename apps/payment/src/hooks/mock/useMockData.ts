@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useMockStore from '../../store/useMockData';
+import useMockStore from '../../store/mock/mockDataStore';
 import {
   mockPopularProducts,
   mockProducts,

@@ -32,7 +32,8 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   const [addressData, setAddressData] = useState('');
   const [checks, setChecks] = useState([false, false]);
   const [showLoading, setShowLoading] = useState(false);
-  const [savedPaymentId, setSavedPaymentId] = useState<number | null>(null);
+  // TODO : 임시 값
+  const [savedPaymentId, setSavedPaymentId] = useState<number | null>(1);
 
   const handleCheck = (index: number) => {
     const newChecks = [...checks];
@@ -84,8 +85,6 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
     setShowLoading,
     setIsModalOpen,
   });
-
-  console.log(savedPaymentId);
 
   return (
     <>

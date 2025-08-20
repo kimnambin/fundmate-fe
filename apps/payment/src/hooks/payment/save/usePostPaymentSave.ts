@@ -3,8 +3,9 @@ import { AxiosError } from 'axios';
 
 import { useMutation } from '@tanstack/react-query';
 import { PaymentProps } from '../../../types/payement/modal.model';
-import { bankPaymentSave, CardPaymentSave } from '../../../api/payment';
+// import { bankPaymentSave, CardPaymentSave } from '../../../api/payment';
 import { coverSec } from '../../../utils/security';
+import { mockPostPayment } from '../../mock/useMockPayment';
 
 // import { useGetQueryString } from './useGetQueryString';
 
@@ -47,8 +48,8 @@ export const useTransferForm = ({
 
   const bankForm = useMutation({
     mutationFn: () =>
-      bankPaymentSave({
-        // userId: '1',
+      // bankPaymentSave
+      mockPostPayment({
         method,
         code: bank,
         token: 'fff',
@@ -139,8 +140,8 @@ export const useCardPayForm = ({
 
   const cardPaymentForm = useMutation({
     mutationFn: () =>
-      CardPaymentSave({
-        // userId: '1',
+      // CardPaymentSave({
+      mockPostPayment({
         method,
         code: bank,
         token: 'fff',

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { ProductDetailProps } from '../components/product-detail/PDLeft';
-import { ProductType } from '../../../../packages/ui/types/productType';
+import { ProductDetailProps } from '../../components/product-detail/PDLeft';
+import { ProductType } from '../../../../../packages/ui/types/productType';
 
 interface StoreState {
   projectId: number | null;
