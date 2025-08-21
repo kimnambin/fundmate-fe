@@ -9,7 +9,7 @@ export const mockPostPayment = async (data: {
     | {
         type: 'card';
         expMonth: string;
-        expYear: string;
+        expYear?: string;
       }
     | {
         type: 'vbank';
@@ -29,6 +29,7 @@ export const mockPostReservations = async (data: {
   address: string;
   addressNumber: number;
   addressInfo: string;
+  method: string;
 }) => {
   return axios.post('/reservations', data);
 };

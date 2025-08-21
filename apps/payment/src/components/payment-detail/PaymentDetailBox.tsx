@@ -2,8 +2,9 @@ import { MainButton } from '@repo/ui/components';
 import { BoxRow, FlexCol, FlexColsm, FlexRowsm } from '../styles/layout.style';
 import { BoldBigText, BoldText, LightColor } from '../styles/text.style';
 import { formatDate } from '../../utils/date';
-import { useDelPayment } from '../../hooks/payment/useDelPayment';
-import { useGetiInsertedId } from '../../hooks/useGetiInsertedId';
+// import { useDelPayment } from '../../hooks/payment/useDelPayment';
+import { useNavigate } from 'react-router-dom';
+// import { useGetiInsertedId } from '../../hooks/useGetiInsertedId';
 
 interface PdBoxProps {
   paymentInfoId: number;
@@ -32,14 +33,18 @@ const PaymentDetailBox = ({
     formatDate(scheduleDate),
   ];
 
-  const id = useGetiInsertedId();
+  // const id = useGetiInsertedId();
 
-  const { mutate: deletePayment } = useDelPayment();
+  // const { mutate: deletePayment } = useDelPayment();
+
+  const nav = useNavigate();
 
   const handleDelete = () => {
     const confirmed = window.confirm('정말로 후원을 취소하시겠습니까??');
     if (confirmed) {
-      deletePayment(Number(id));
+      // deletePayment();
+      alert('취소 완료!');
+      nav('/');
     }
   };
 

@@ -1,7 +1,7 @@
 import { Modal } from '@repo/ui/components';
 import { useState } from 'react';
-import { useGetQueryString } from '../../hooks/useGetQueryString';
-import { useGetProductInfo } from '../../hooks/product/getProductInfo';
+// import { useGetQueryString } from '../../hooks/useGetQueryString';
+// import { useGetProductInfo } from '../../hooks/product/getProductInfo';
 
 import {
   GiftCard,
@@ -11,6 +11,7 @@ import {
   ProfileCard,
   SelectButton,
 } from '../styles/product-detail/Product.style';
+import useMockData from '../../hooks/mock/useMockData';
 
 interface OptionModalProps {
   isOpen: boolean;
@@ -27,8 +28,9 @@ export const OptionModal: React.FC<OptionModalProps> = ({
     null
   );
 
-  const projectId = useGetQueryString();
-  const { data: productData } = useGetProductInfo(Number(projectId));
+  // const projectId = useGetQueryString();
+  // const { data: productData } = useGetProductInfo(Number(projectId));
+  const { userData } = useMockData();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -44,7 +46,7 @@ export const OptionModal: React.FC<OptionModalProps> = ({
         <h2 className="text-lg font-bold mb-4">선물을 선택하세요</h2>
 
         <div className="flex flex-row space-x-4 overflow-x-auto pb-2">
-          {productData?.options.map((gift, idx) => {
+          {userData?.options.map((gift, idx) => {
             const isSelected = selectedOptionIndex === idx;
 
             return (
@@ -63,6 +65,7 @@ export const OptionModal: React.FC<OptionModalProps> = ({
                       rewardId: idx,
                       price: gift.price,
                     });
+                    onClose?.();
                   }
                 }}
               >

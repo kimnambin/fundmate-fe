@@ -8,4 +8,5 @@ export interface PaymentPayload {
   address: string;
   addressNumber?: number;
   addressInfo?: string;
+  method: string;
 }

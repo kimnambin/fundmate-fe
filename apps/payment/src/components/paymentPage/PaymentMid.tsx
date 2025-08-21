@@ -27,6 +27,15 @@ const PaymentMid = ({
 
   // const optionData = productData.options[0];
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onlyNumbers = e.target.value.replace(/[^0-9]/g, '');
+    setAddAmount(onlyNumbers ? Number(onlyNumbers) : 0);
+  };
+
+  const handleBlur = () => {
+    setAddAmount(addAmount ? Number(addAmount) : 0);
+  };
+
   return (
     <div className="w-full">
       {/* <BoldBigText>{subText[0]}</BoldBigText> */}
@@ -37,13 +46,11 @@ const PaymentMid = ({
         <MoneyBox>
           <Input
             type="text"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              const onlyNumbers = e.target.value.replace(/[^0-9]/g, '');
-              setAddAmount(Number(onlyNumbers));
-            }}
-            value={formatPrice(String(addAmount))}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={addAmount === 1000 ? '' : formatPrice(String(addAmount))}
+            placeholder="1,000원"
           />
-
           <Span>원</Span>
         </MoneyBox>
       </Box>

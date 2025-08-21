@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useGetiInsertedId } from '../../hooks/useGetiInsertedId';
 import { usePatchReservation } from '../../hooks/payment/save/usePatchSavePayment';
 import { OptionModal } from '../modal/OptionModal';
+import useMockData from '../../hooks/mock/useMockData';
 
 interface OptionModalProps {
   price: number;

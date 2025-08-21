@@ -14,8 +14,11 @@ import {
   useGetoptionid,
   useGetQueryString,
 } from '../../hooks/useGetQueryString';
-import { useGetProductInfo } from '../../hooks/product/getProductInfo';
+// import { useGetProductInfo } from '../../hooks/product/getProductInfo';
 import { useSavePaymentStore } from '../../store/useSavepaymentStore';
+import { usePaymentStore } from '../../store/mock/mockPaymentStore';
+import useMockStore from '../../store/mock/mockDataStore';
+import { sevenWeeksLaterFormatted } from '../../utils/date';
 
 interface PaymentFinalProps {
   selectedPayment: string;
@@ -32,7 +35,6 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   const [addressData, setAddressData] = useState('');
   const [checks, setChecks] = useState([false, false]);
   const [showLoading, setShowLoading] = useState(false);
-  // TODO : 임시 값
   const [savedPaymentId, setSavedPaymentId] = useState<number | null>(1);
 
   const handleCheck = (index: number) => {
@@ -62,7 +64,9 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
   };
 
   const projectId = useGetQueryString();
-  const { data: productData } = useGetProductInfo(Number(projectId));
+  // const { data: productData } = useGetProductInfo(Number(projectId));
+
+  const { productData } = useMockStore();
 
   const optionid = useGetoptionid();
 
@@ -74,16 +78,19 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
     }
   }, [savedPaymentId]);
 
+  const { savedPayment } = usePaymentStore();
+
   const { reservePayment } = usePaymentForm({
     paymentInfoId: Number(savedPaymentId),
     rewardId: Number(optionid) ?? null,
     projectId: Number(projectId) ?? null,
     amount: addAmount,
-    totalAmount: productData?.project?.goal_amount ?? 0,
-    scheduleDate: productData?.project?.end_date ?? '',
+    totalAmount: productData?.goal_amount ?? 0,
+    scheduleDate: sevenWeeksLaterFormatted() ?? '',
     address: addressData,
     setShowLoading,
     setIsModalOpen,
+    method: selectedPayment ?? '알수없음',
   });
 
   return (
@@ -151,7 +158,7 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
 
       {isModalOpen &&
         modalType &&
-        (savedPaymentId ? (
+        (savedPayment ? (
           <PaymentModal
             addressData={addressData}
             addAmount={addAmount}

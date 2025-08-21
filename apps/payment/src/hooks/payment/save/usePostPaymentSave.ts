@@ -59,6 +59,7 @@ export const useTransferForm = ({
           owner,
         },
       }),
+
     onSuccess: (res) => {
       console.log('응답 데이터', res.data);
       const insertedId = res.data?.insertedId;
@@ -149,7 +150,7 @@ export const useCardPayForm = ({
         details: {
           type: 'card',
           expMonth: expiryDate.slice(0, 2),
-          expYear: expiryDate.slice(2),
+          expYear: expiryDate.slice(2) ?? 2027,
         },
       }),
     onSuccess: (res) => {

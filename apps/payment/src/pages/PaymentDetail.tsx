@@ -11,10 +11,10 @@ import { FlexCol } from '../components/styles/layout.style';
 // import { useGetiInsertedId } from '../hooks/useGetiInsertedId';
 // import { useGetQueryString } from '../hooks/useGetQueryString';
 import { useState } from 'react';
-import { Layout } from '@repo/ui/styles';
 import { usePaymentStore } from '../store/mock/mockPaymentStore';
 import useMockData from '../hooks/mock/useMockData';
 import { sevenWeeksLaterFormatted, todayDateFormatted } from '../utils/date';
+import { NotFound } from '@repo/ui/components';
 
 const PaymentDetail = () => {
   // const id = useGetiInsertedId();
@@ -24,7 +24,7 @@ const PaymentDetail = () => {
   // const { data: savePaymentData } = useGetSavePayment(Number(paymentSaveId));
 
   const savedPayment = usePaymentStore((state) => state.savedPayment);
-  const { id, productData, userData } = useMockData();
+  const { userData } = useMockData();
 
   // const projectId = useGetQueryString();
 
@@ -41,14 +41,11 @@ const PaymentDetail = () => {
   };
 
   if (!savedPayment) {
-    return (
-      <Layout>
-        <p>페이지를 찾을 수 없습니다</p>
-      </Layout>
-    );
+    return <NotFound />;
   }
 
-  // TODO : 취소 , 옵션 변경 기능 추가하기
+  // TODO : 옵션 업그레이드 시 -> 다른 곳도 수정이 되야 할듯
+  // 결제 취소 시 zustand에서도 삭제 되도록
 
   return (
     <FlexCol className="w-full px-6 sm:px-0 sm:w-[70%] mx-auto items-start">
@@ -70,10 +67,8 @@ const PaymentDetail = () => {
         onUpdatePrice={() => {}}
       />
       <PaymentDetailBottom
-        code={
-          savedPayment?.paymentInfoId == 1 ? '계좌이체' : '카드' || '알수 없음'
-        }
-        amount={productData?.amount || 1000}
+        code={savedPayment?.method}
+        amount={savedPayment?.amount || 1000}
         scheduleDate={sevenWeeksLaterFormatted() || ''}
       />
     </FlexCol>

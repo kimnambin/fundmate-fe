@@ -9,6 +9,7 @@ import { usePaymentStore } from '../../store/mock/mockPaymentStore';
 type PaymentProps = PaymentPayload & {
   setShowLoading?: (v: boolean) => void;
   setIsModalOpen: (v: boolean) => void;
+  method: string;
 };
 
 interface ErrorResponse {
@@ -24,6 +25,7 @@ export const usePaymentForm = ({
   address,
   setShowLoading,
   setIsModalOpen,
+  method,
 }: PaymentProps) => {
   const nav = useNavigate();
   const setSavedPayment = usePaymentStore((state) => state.setSavedPayment);
@@ -43,6 +45,7 @@ export const usePaymentForm = ({
         address,
         addressNumber: 6212,
         addressInfo: '',
+        method,
       }),
     onSuccess: () => {
       // const insertedId = response.data.insertedId;
@@ -54,6 +57,7 @@ export const usePaymentForm = ({
         totalAmount,
         scheduleDate,
         address,
+        method,
       });
 
       setShowLoading?.(true);
