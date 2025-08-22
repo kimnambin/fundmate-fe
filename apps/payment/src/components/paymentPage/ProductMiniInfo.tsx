@@ -22,7 +22,12 @@ const ProductMiniInfo = ({ title, imgUrl }: ProductMiniInfoProps) => {
   // const { data: productData } = useGetProductInfo(Number(projectId));
   return (
     <ProductInfo>
-      <ProductImg src={imgUrl ? imgUrl : UserDefault} alt="대표 이미지" />
+      <ProductImg
+        src={imgUrl ? imgUrl : UserDefault}
+        alt="대표 이미지"
+        loading="lazy"
+        decoding="async"
+      />
       <FlexColsm className="items-start justify-start">
         <Title>{title}</Title>
         <BoldBigText>후원 정보</BoldBigText>

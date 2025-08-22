@@ -5,7 +5,7 @@ interface BankPayload {
   code: string;
   token: string;
   displayInfo: string;
-  extra: {
+  details: {
     type: 'vbank';
     owner: string;
   };
@@ -16,7 +16,7 @@ interface CardPayload {
   code: string;
   token: string;
   displayInfo: string;
-  extra: {
+  details: {
     type: 'card';
     expMonth: string;
     expYear: string;
@@ -33,36 +33,56 @@ interface PostPaymentRequest {
   address: string;
   addressNumber: number;
   addressInfo: string;
+  method: string;
 }
 
 export const handlers = [
   http.post('/payments', async ({ request }: { request: Request }) => {
     const data = await request.json();
 
-    if (data.extra?.type === 'card') {
-      const { method, code, token, displayInfo, extra } = data as CardPayload;
-      if (!displayInfo || !code || !method || !token || !extra) {
+    if (!data.details || !data.details.type) {
+      return HttpResponse.json(
+        { message: '결제 타입이 누락되었습니다.' },
+        { status: 400 },
+      );
+    }
+
+    if (data.details.type === 'card') {
+      const { method, code, token, displayInfo, details } = data as CardPayload;
+
+      if (
+        !displayInfo ||
+        !code ||
+        !method ||
+        !token ||
+        !details ||
+        !details.expMonth ||
+        !details.expYear
+      ) {
         return HttpResponse.json(
           { message: '모든 입력창이 입력되지 않았습니다.' },
           { status: 400 },
         );
       }
+
       return HttpResponse.json(
         { message: '카드 결제 완료', displayInfo },
         { status: 201 },
       );
     }
 
-    if (data.extra?.type === 'vbank') {
-      const { method, code, token, displayInfo, extra } = data as BankPayload;
-      if (!displayInfo || !code || !method || !token || !extra) {
+    if (data.details.type === 'vbank') {
+      const { method, code, token, displayInfo, details } = data as BankPayload;
+
+      if (!displayInfo || !code || !method || !token || !details) {
         return HttpResponse.json(
           { message: '모든 입력창이 입력되지 않았습니다.' },
           { status: 400 },
         );
       }
+
       return HttpResponse.json(
-        { message: `${extra.owner}님 결좌이체 완료` },
+        { message: `${details.owner}님 결좌이체 완료` },
         { status: 201 },
       );
     }
@@ -72,7 +92,6 @@ export const handlers = [
       { status: 400 },
     );
   }),
-
   http.post('/reservations', async ({ request }: { request: Request }) => {
     const data = await request.json();
     const {
@@ -85,6 +104,7 @@ export const handlers = [
       address,
       addressNumber,
       addressInfo,
+      method,
     } = data as PostPaymentRequest;
 
     console.log('입력한 내용들', data);
@@ -97,15 +117,16 @@ export const handlers = [
       address,
       addressNumber,
       addressInfo,
+      method,
     );
 
     return HttpResponse.json(
-      { message: `${totalAmount}원 결좌이체 완료` },
+      { message: `${amount}원 결좌이체 완료` },
       { status: 201 },
     );
   }),
 
-  http.get('/payments/', async ({ request }: { request: Request }) => {
+  http.get('/payments', async ({ request }: { request: Request }) => {
     console.log(request);
     return HttpResponse.json({ message: '결제 조회 완료' }, { status: 200 });
   }),

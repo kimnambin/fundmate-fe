@@ -1,6 +1,4 @@
-import { ProductUserProps } from '../types/productUserType';
-
-export const mockProductUserData: ProductUserProps[] = [
+export const mockProductUserData = [
   {
     id: 1,
     user: {

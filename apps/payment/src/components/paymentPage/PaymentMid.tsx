@@ -48,7 +48,7 @@ const PaymentMid = ({
             type="text"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={addAmount === 1000 ? '' : formatPrice(String(addAmount))}
+            value={addAmount === 0 ? '' : formatPrice(String(addAmount))}
             placeholder="1,000원"
           />
           <Span>원</Span>

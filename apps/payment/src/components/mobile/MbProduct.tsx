@@ -34,6 +34,8 @@ export const FundDetailMobile: React.FC<FundDetailMobileProps> = ({
       <img
         src={img_url}
         alt="상품 이미지"
+        loading="lazy"
+        decoding="async"
         className="bg-gray-200 h-60 w-full rounded-md"
       />
 

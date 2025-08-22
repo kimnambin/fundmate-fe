@@ -5,5 +5,5 @@ export {
   mockPopularProducts,
   mockRecentlyProducts,
   mockreviewsData,
-} from './mockProducts';
-export { mockProductUserData } from './mockProductUser';
+} from './product/mockProducts';
+export { mockProductUserData } from './product/mockProductUser';

@@ -11,7 +11,7 @@ import {
 } from '../styles/modal/tansfetModal.style';
 import { PaymentProps } from '../../types/payement/modal.model';
 import PayConfirmModal from './confirm/PayConfirmModal';
-import { useTransferForm } from '../../hooks/payment/save/usePostPaymentSave';
+import { useTransferForm } from '../../hooks/payment/save/useTransferForm';
 
 export default function TransferModal({
   addressData,
@@ -23,20 +23,14 @@ export default function TransferModal({
   const bankList = ['KB', 'NH', 'SH', 'IBK', 'TOSS'];
 
   const {
-    bank,
-    number,
-    setNumber,
-    owner,
-    setOwner,
-    birthDate,
-    handleBankChange,
-    setBirthDate,
-    isFormValid,
-    handleClose,
+    register,
     handleTransfer,
+    confirmPayment,
+    handleClose,
     isConfirmModalOpen,
     setIsConfirmModalOpen,
-    confirmPayment,
+    errors,
+    isValid,
   } = useTransferForm({
     addressData,
     method,
@@ -52,6 +46,10 @@ export default function TransferModal({
           setIsConfirmModalOpen={setIsConfirmModalOpen}
           confirmPayment={confirmPayment}
           title={'transfer'}
+          setIsModalOpen={function (): void {
+            throw new Error('Function not implemented.');
+          }}
+          addAmount={0}
         />
       ) : (
         <ModalContainer>
@@ -64,8 +62,7 @@ export default function TransferModal({
             <Label>결제 은행</Label>
             <select
               className="w-full border rounded-md p-2 mb-4"
-              onChange={handleBankChange}
-              value={bank}
+              {...register('bank', { required: '은행을 선택해주세요' })}
             >
               <option value="">은행을 선택하세요</option>
               {bankList.map((v, i) => (
@@ -74,21 +71,28 @@ export default function TransferModal({
                 </option>
               ))}
             </select>
+            {errors.bank && (
+              <p className="text-red-500 text-sm">{errors.bank.message}</p>
+            )}
 
             <Label>계좌번호</Label>
             <Input
               placeholder="공백, - 없이 입력해주세요."
               type="text"
               inputMode="numeric"
-              pattern="[0-9]*"
-              required
+              maxLength={12}
               className="appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-              value={number}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                const onlyNums = e.target.value.replace(/\D/g, '');
-                setNumber(onlyNums.slice(0, 12));
-              }}
+              {...register('number', {
+                required: '계좌번호를 입력해주세요',
+                pattern: {
+                  value: /^[0-9]{8,12}$/,
+                  message: '숫자 8~12자리로 입력해주세요',
+                },
+              })}
             />
+            {errors.number && (
+              <p className="text-red-500 text-sm">{errors.number.message}</p>
+            )}
 
             <BottomWrapper>
               <div className="w-1/2">
@@ -97,10 +101,19 @@ export default function TransferModal({
                   type="text"
                   placeholder="예금주 명을 입력해주세요."
                   className="w-full border rounded-md p-2"
-                  value={owner}
-                  onChange={(e) => setOwner(e.target.value)}
+                  {...register('owner', {
+                    required: '예금주명을 입력해주세요',
+                    minLength: {
+                      value: 2,
+                      message: '2자 이상 입력해주세요',
+                    },
+                  })}
                 />
+                {errors.owner && (
+                  <p className="text-red-500 text-sm">{errors.owner.message}</p>
+                )}
               </div>
+
               <div className="w-1/2">
                 <Label>예금주 생년월일</Label>
                 <input
@@ -108,25 +121,31 @@ export default function TransferModal({
                   placeholder="예) 920101"
                   className="w-full border rounded-md p-2 appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   inputMode="numeric"
-                  pattern="[0-9]*"
                   maxLength={6}
-                  value={birthDate}
-                  onChange={(e) => {
-                    const onlyNums = e.target.value.replace(/\D/g, '');
-                    setBirthDate(onlyNums.slice(0, 6));
-                  }}
+                  {...register('birthDate', {
+                    required: '생년월일을 입력해주세요',
+                    pattern: {
+                      value: /^[0-9]{6}$/,
+                      message: '숫자 6자리로 입력해주세요',
+                    },
+                  })}
                 />
+                {errors.birthDate && (
+                  <p className="text-red-500 text-sm">
+                    {errors.birthDate.message}
+                  </p>
+                )}
               </div>
             </BottomWrapper>
 
             <MainButton
               label="저장"
               className="ml-0 w-full"
-              textSize={'text-base'}
-              textWeight={'font-bold'}
+              textSize="text-base"
+              textWeight="font-bold"
               onClick={handleTransfer}
-              isVerificated={!isFormValid}
-              isError={!isFormValid}
+              disabled={!isValid}
+              isError={!isValid}
             />
           </Wrapper>
         </ModalContainer>

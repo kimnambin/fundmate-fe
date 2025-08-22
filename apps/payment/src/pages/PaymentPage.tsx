@@ -30,9 +30,9 @@ const PaymentPage = () => {
     return <NotFound />;
   }
 
-  const optionData = userData?.options[0];
+  // const optionData = userData?.options[0];
 
-  const [addAmount, setAddAmount] = useState<number>(optionData?.price ?? 1000);
+  const [addAmount, setAddAmount] = useState<number>(0);
 
   return (
     <>

@@ -48,6 +48,8 @@ const PDBox: React.FC<ProductDetailProps> = ({
               <ProfileImg
                 src={user.image_url ? user.image_url : UserDefault}
                 alt="prifile"
+                loading="lazy"
+                decoding="async"
               />
               <GiftItemTitle>{user.nickname}</GiftItemTitle>
             </div>

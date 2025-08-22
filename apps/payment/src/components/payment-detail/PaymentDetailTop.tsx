@@ -13,7 +13,12 @@ const PaymentDetailTop = () => {
 
   return (
     <ProductInfo>
-      <ProductImg src={productData?.image_url} alt="대표 이미지" />
+      <ProductImg
+        src={productData?.image_url}
+        alt="대표 이미지"
+        loading="lazy"
+        decoding="async"
+      />
       <FlexColsm className="items-start justify-start">
         <Title>{productData?.title}</Title>
         <BoldBigText>

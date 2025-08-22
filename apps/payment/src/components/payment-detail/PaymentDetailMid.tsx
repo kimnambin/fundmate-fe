@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useGetiInsertedId } from '../../hooks/useGetiInsertedId';
 import { usePatchReservation } from '../../hooks/payment/save/usePatchSavePayment';
 import { OptionModal } from '../modal/OptionModal';
-import useMockData from '../../hooks/mock/useMockData';
+import { usePriceStore } from '../../store/mock/mockUpdatePrice';
 
 interface OptionModalProps {
   price: number;
@@ -32,23 +32,17 @@ const PaymentDetailMid: React.FC<OptionModalProps> = ({
   addressInfo,
   onUpdatePrice,
 }) => {
-  const title = ['선물 정보', '추가 후원 정보'];
-  const subTitle = ['선물 금액', '추가 후원금'];
-
   const [localPrice, setLocalPrice] = useState(price);
 
   useEffect(() => {
     setLocalPrice(price);
   }, [price]);
 
-  const content = [`${formatNum(localPrice)}원`, '0원'];
-
   const [, setSelectedRewardId] = useState<number | null>(null);
   const id = useGetiInsertedId();
 
   const patchAPI = usePatchReservation(Number(id));
 
-  // TODO : 낙관적 업데이트
   const handleSelectOption = async ({
     rewardId,
     price,
@@ -56,9 +50,11 @@ const PaymentDetailMid: React.FC<OptionModalProps> = ({
     rewardId: number;
     price: number;
   }) => {
-    setLocalPrice(price);
+    const { setUpdatedPrice } = usePriceStore.getState();
 
+    setLocalPrice(price);
     onUpdatePrice(price);
+    setUpdatedPrice(price);
 
     const payload = {
       rewardId: rewardId,
@@ -89,28 +85,27 @@ const PaymentDetailMid: React.FC<OptionModalProps> = ({
         onClose={onClose}
         onSelectOption={handleSelectOption}
       />
-      {title.map((v, idx) => (
-        <FlexCol className="items-start" key={v}>
-          <BoldBigText>{title[idx]}</BoldBigText>
-          <BoxRow className="justify-between items-start">
-            <FlexColsm className="items-start">
-              <FlexRowsm className="w-full py-2 flex justify-between items-center">
-                <BoldText className="flex-1 mr-3 text-xs">
-                  {subTitle[idx]}
-                </BoldText>
-                <BoldText className="text-left">{content[idx]}</BoldText>
-              </FlexRowsm>
-            </FlexColsm>
-            <MainButton
-              label="변경"
-              className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black"
-              textSize={'text-base'}
-              textWeight={'font-bold'}
-              onClick={handleOpenModal}
-            />
-          </BoxRow>
-        </FlexCol>
-      ))}
+
+      <FlexCol className="items-start">
+        <BoldBigText>선물 정보</BoldBigText>
+        <BoxRow className="justify-between items-start">
+          <FlexColsm className="items-start">
+            <FlexRowsm className="w-full py-2 flex justify-between items-center">
+              <BoldText className="flex-1 mr-3 text-xs">선물 금액</BoldText>
+              <BoldText className="text-left">
+                {formatNum(localPrice)}원
+              </BoldText>
+            </FlexRowsm>
+          </FlexColsm>
+          <MainButton
+            label="변경"
+            className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black"
+            textSize={'text-base'}
+            textWeight={'font-bold'}
+            onClick={handleOpenModal}
+          />
+        </BoxRow>
+      </FlexCol>
     </>
   );
 };

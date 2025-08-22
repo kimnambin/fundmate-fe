@@ -19,7 +19,11 @@ import { FlexRowsm } from '../styles/layout.style';
 import { PaymentProps } from '../../types/payement/modal.model';
 import { MainButton, Modal } from '@repo/ui/components';
 import PayConfirmModal from './confirm/PayConfirmModal';
-import { useCardPayForm } from '../../hooks/payment/save/usePostPaymentSave';
+// import { useCardPayForm } from '../../hooks/payment/save/usePostPaymentSave';
+import {
+  CardFormValues,
+  useCardPayForm,
+} from '../../hooks/payment/save/useCardForm';
 
 const CardPaymentModal = ({
   addressData,
@@ -30,16 +34,10 @@ const CardPaymentModal = ({
 }: PaymentProps) => {
   const placeholders = randomPlaceholder();
   const {
-    number,
-    setNumber,
-    expiryDate,
-    setExpiryDate,
-    cvc,
-    setCvc,
-    cardName,
-    setCardName,
+    register,
+    errors,
+    isValid,
     handleClose,
-    isFormValid,
     handleCardPay,
     isConfirmModalOpen,
     setIsConfirmModalOpen,
@@ -52,6 +50,13 @@ const CardPaymentModal = ({
     setSavedPaymentId,
   });
 
+  const keyMap: Record<number, keyof CardFormValues> = {
+    0: 'cardNumber0',
+    1: 'cardNumber1',
+    2: 'cardNumber2',
+    3: 'cardNumber3',
+  };
+
   return (
     <Modal isOpen={true} onClose={() => setIsModalOpen(false)}>
       {isConfirmModalOpen ? (
@@ -59,6 +64,10 @@ const CardPaymentModal = ({
           setIsConfirmModalOpen={setIsConfirmModalOpen}
           confirmPayment={confirmPayment}
           title={'card'}
+          setIsModalOpen={function (): void {
+            throw new Error('Function not implemented.');
+          }}
+          addAmount={0}
         />
       ) : (
         <div className="max-w-md mx-auto">
@@ -79,6 +88,8 @@ const CardPaymentModal = ({
             <img
               src="https://cdn-icons-png.flaticon.com/512/633/633611.png"
               alt="신용카드 아이콘"
+              loading="lazy"
+              decoding="async"
               className="w-6 h-6"
             />
             <label htmlFor="credit-card" className="ml-2">
@@ -93,14 +104,11 @@ const CardPaymentModal = ({
                 type="text"
                 inputMode="numeric"
                 maxLength={4}
-                value={number[index]}
                 placeholder={text}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  const onlyNums = e.target.value.replace(/\D/g, '');
-                  const inputNum = [...number];
-                  inputNum[index] = onlyNums.slice(0, 4);
-                  setNumber(inputNum);
-                }}
+                {...register(keyMap[index], {
+                  required: true,
+                  pattern: /^[0-9]{4}$/,
+                })}
               />
             ))}
           </CardInputContainer>
@@ -127,85 +135,64 @@ const CardPaymentModal = ({
             <div className="w-[48%]">
               <Label htmlFor="expiry-date">만료일</Label>
               <MouthBox>
-                <Select
-                  id="expiry-month"
-                  required
-                  className="mr-2"
-                  value={expiryDate}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                    setExpiryDate(e.target.value)
-                  }
-                >
-                  <option value="" disabled>
-                    MM
-                  </option>
-
+                <Select {...register('expiryMonth', { required: true })}>
+                  <option value="">MM</option>
                   {monthList().map(({ value, label }) => (
                     <option key={value} value={value}>
                       {label}
                     </option>
                   ))}
                 </Select>
-                <Select
-                  id="expiry-year"
-                  required
-                  value={expiryDate}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                    setExpiryDate(e.target.value)
-                  }
-                >
-                  <option value="" disabled>
-                    YY
-                  </option>
+
+                <Select {...register('expiryYear', { required: true })}>
+                  <option value="">YY</option>
                   {yearList().map((year) => (
                     <option key={year} value={year}>
                       {year}
                     </option>
                   ))}
                 </Select>
+
                 <IoCardOutline className="absolute right-2 w-6 h-6 mb-3" />
               </MouthBox>
             </div>
             <SecBox>
               <Label htmlFor="cvv">보안 코드</Label>
               <Input
-                id="cvv"
-                type="number"
+                type="text"
                 inputMode="numeric"
-                placeholder="3자리"
-                value={cvc}
-                required
-                pattern="[0-9]*"
                 maxLength={3}
-                className="pr-8 appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  const onlyNums = e.target.value.replace(/\D/g, '');
-                  setCvc(onlyNums.slice(0, 3));
-                }}
+                {...register('cvc', {
+                  required: true,
+                  pattern: /^[0-9]{3}$/,
+                })}
               />
+
               <IoCardOutline className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 mt-2" />
             </SecBox>
           </ExpiryBox>
 
           <Label htmlFor="card-name">카드 소유자 이름</Label>
           <Input
-            id="card-name"
             type="text"
             placeholder="J. Smith"
-            value={cardName}
-            required
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setCardName(e.target.value)
-            }
+            {...register('cardName', {
+              required: '이름을 입력해주세요',
+              minLength: 2,
+            })}
           />
+          {errors.cardName && (
+            <p className="text-red-500 text-sm">{errors.cardName.message}</p>
+          )}
+
           <MainButton
             label="저장"
             className="ml-0 w-full"
-            textSize={'text-base'}
-            textWeight={'font-bold'}
+            textSize="text-base"
+            textWeight="font-bold"
             onClick={handleCardPay}
-            isVerificated={!isFormValid}
-            isError={!isFormValid}
+            disabled={!isValid}
+            isError={!isValid}
           />
         </div>
       )}

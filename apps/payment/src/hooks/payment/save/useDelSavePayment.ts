@@ -1,15 +1,20 @@
 import { useMutation } from '@tanstack/react-query';
-import { delPaymentSave } from '../../../api/payment';
+// import { delPaymentSave } from '../../../api/payment';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
+import { usePaymentStore } from '../../../store/mock/mockPaymentStore';
 
 export const useDelSavePayment = () => {
   const nav = useNavigate();
+  const { delSavedPayment } = usePaymentStore();
 
   return useMutation({
-    mutationFn: async (id: number) => {
-      const res = await delPaymentSave(id);
-      return res.data;
+    // mutationFn: async (id: number) => {
+    //   const res = await delPaymentSave(id);
+    //   return res.data;
+    // },
+    mutationFn: async () => {
+      delSavedPayment();
     },
     onSuccess: () => {
       alert('성공적으로 삭제되었습니다.');

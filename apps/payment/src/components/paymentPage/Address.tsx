@@ -34,7 +34,7 @@ const Address = ({
   };
 
   return (
-    <FlexCol className="items-start justify-start gap-4 mb-10 px-6 sm:px-0">
+    <FlexCol className="items-start justify-start gap-4 mb-10 px-1.5 sm:px-0">
       <BoldBigText>주소 입력</BoldBigText>
       <FlexRowsm className="mt-5 w-full">
         <InputText
