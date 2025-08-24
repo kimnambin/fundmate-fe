@@ -4,7 +4,7 @@ import federation from '@originjs/vite-plugin-federation';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
 
-export const MAIN_PAGE = 'https://fundmate-fe.vercel.app';
+export const MAIN_PAGE = 'https://fundmate-fe-main.vercel.app/';
 export const FUNDING_PAGE = 'https://fundmate-fe-funding.vercel.app';
 export const STATISTICS_PAGE = 'https://fundmate-fe-statistics.vercel.app';
 export const MYPAGE = 'https://fundmate-fe-mypage.vercel.app';
