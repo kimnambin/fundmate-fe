@@ -99,7 +99,6 @@ export const handlers = [
       rewardId,
       projectId,
       amount,
-      totalAmount,
       scheduleDate,
       address,
       addressNumber,
