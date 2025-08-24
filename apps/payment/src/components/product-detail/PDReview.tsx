@@ -4,7 +4,7 @@ import {
   ReviewContent,
   ReviewDate,
   ReviewerName,
-} from '../styles/product-detail/ProductInfo.style';
+} from '../styles/product-detail/ProductInfos.style';
 
 const PDReview = () => {
   return (

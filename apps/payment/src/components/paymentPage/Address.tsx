@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FlexCol, FlexRowsm } from '../styles/layout.style';
 import { BoldBigText } from '../styles/text.style';
-import { BaseButton } from '../styles/product-detail/ProductInfo.style';
+import { BaseButton } from '../styles/product-detail/ProductInfos.style';
 import { InputText } from '../styles/paymentPage/Address.style';
 import { useIsMobile } from '@repo/ui/hooks';
 

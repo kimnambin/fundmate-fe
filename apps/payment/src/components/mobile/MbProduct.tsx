@@ -7,7 +7,7 @@ import {
   BottomItems,
   KeyP,
   ValueP,
-} from '../styles/product-detail/ProductInfo.style';
+} from '../styles/product-detail/ProductInfos.style';
 
 interface FundDetailMobileProps extends ProductInfoProps {
   img_url?: string;

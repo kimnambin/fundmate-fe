@@ -4,7 +4,7 @@ import {
   IconBox,
   IconButton,
   IconGroup,
-} from '../styles/product-detail/ProductInfo.style';
+} from '../styles/product-detail/ProductInfos.style';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MainButton } from '@repo/ui/components';

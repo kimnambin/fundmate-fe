@@ -7,7 +7,7 @@ import {
   Top,
   ValueP,
   Wrapper,
-} from '../styles/product-detail/ProductInfo.style';
+} from '../styles/product-detail/ProductInfos.style';
 import ProductIconBox from './ProductIconBox';
 import { formatDate } from '../../utils/date';
 
