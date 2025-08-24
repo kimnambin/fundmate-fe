@@ -47,6 +47,8 @@ function ProductPage() {
     return <NotFound />;
   }
 
+  console.log('id값은', id);
+
   return (
     <FlexCol className="px-auto sm:px-[120px]">
       {!isMobile ? (
