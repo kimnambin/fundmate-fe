@@ -55,7 +55,9 @@ function ProductPage() {
         <>
           <FlexRow className="items-start mt-0">
             <FlexItem>
-              <ProductImg imgUrl={productData.image_url} />
+              <ProductImg
+                imgUrl={productData?.image_url ?? productData.image_url}
+              />
             </FlexItem>
             <FlexItem>
               <ProductInfo
