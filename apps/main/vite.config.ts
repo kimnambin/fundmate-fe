@@ -73,16 +73,5 @@ export default defineConfig(({ mode }) => {
         '@tanstack/react-query',
       ],
     },
-    // server: {
-    //   proxy: {
-    //     '/api': {
-    //       target: process.env.VITE_BACKEND_ADDRESS,
-    //       changeOrigin: true,
-    //       rewrite: (path) => path.replace(/^\/api/, ''),
-    //       secure: false,
-    //       cookieDomainRewrite: '',
-    //     },
-    //   },
-    // },
   };
 });
