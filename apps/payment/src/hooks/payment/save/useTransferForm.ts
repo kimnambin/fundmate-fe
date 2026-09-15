@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { PaymentProps } from '../../../types/payement/modal.model';
+import { PaymentProps } from '../../../types/payment/modal.model';
 import { mockPostPayment } from '../../mock/useMockPayment';
 import { coverSec } from '../../../utils/security';
 import { useState } from 'react';
+import { notify } from '../../../utils/notify';
 
 export interface TransferFormValues {
   bank: string;
@@ -37,7 +38,7 @@ export const useTransferForm = ({
 
   const handleTransfer = handleSubmit(() => {
     if (!addressData || addressData.trim() === '') {
-      alert('주소 정보를 입력해주세요.');
+      notify.error('주소 정보를 입력해주세요.');
       return;
     }
     setIsConfirmModalOpen(true);
@@ -63,12 +64,12 @@ export const useTransferForm = ({
       if (insertedId) {
         setSavedPaymentId(insertedId);
       }
-      alert('결제수단이 등록되었습니다.');
+      notify.success('결제수단이 등록되었습니다.');
       setShowLoading?.(false);
     },
     onError: (err: AxiosError) => {
       console.error(err);
-      alert('입력한 내용을 다시 한번 확인해주세요');
+      notify.error('입력한 내용을 다시 한번 확인해주세요');
       setShowLoading?.(false);
       setIsConfirmModalOpen(false);
     },

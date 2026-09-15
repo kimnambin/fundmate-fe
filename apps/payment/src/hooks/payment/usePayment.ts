@@ -2,9 +2,10 @@ import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 // import { postReservations } from '../../api/reservations';
-import { PaymentPayload } from '../../types/payement/payment.model';
+import { PaymentPayload } from '../../types/payment/payment.model';
 import { mockPostReservations } from '../mock/useMockPayment';
 import { usePaymentStore } from '../../store/mock/mockPaymentStore';
+import { notify } from '../../utils/notify';
 
 type PaymentProps = PaymentPayload & {
   setShowLoading?: (v: boolean) => void;
@@ -62,7 +63,7 @@ export const usePaymentForm = ({
 
       setShowLoading?.(true);
       setIsModalOpen(false);
-      alert('기한이 되면 자동 결제됩니다.');
+      notify.info('기한이 되면 자동 결제됩니다.');
       setTimeout(() => {
         setShowLoading?.(false);
         // nav(`/payment/${projectId}/completed?id=${insertedId}`);
@@ -71,7 +72,7 @@ export const usePaymentForm = ({
     },
     onError: (err: AxiosError<ErrorResponse>) => {
       const errorMessage = err.response?.data.message;
-      alert(errorMessage);
+      notify.error(errorMessage ?? '결제 중 오류가 발생했습니다.');
       setIsModalOpen(false);
     },
   });

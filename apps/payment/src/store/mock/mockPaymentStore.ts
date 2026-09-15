@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { PaymentPayload } from '../../types/payement/payment.model';
+import { PaymentPayload } from '../../types/payment/payment.model';
 
 interface PaymentStore {
   savedPayment: PaymentPayload | null;

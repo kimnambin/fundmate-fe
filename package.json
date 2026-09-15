@@ -10,7 +10,8 @@
     "dev:host": "cd apps/main && npm run dev",
     "dev:all": "concurrently \"npm:preview:remote\" \"npm:dev:host\"",
     "preview:all": "turbo run preview --parallel",
-    "preview": "turbo run preview --parallel"
+    "preview": "turbo run preview --parallel",
+    "type-check": "turbo run type-check"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
