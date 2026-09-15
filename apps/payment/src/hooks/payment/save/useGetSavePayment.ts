@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getPaymentDetailSave } from '../../../api/payment';
-import { PaymentSavePayment } from '../../../types/payement/paymentSave.model';
+import { PaymentSavePayment } from '../../../types/payment/paymentSave.model';
 
 export const useGetSavePayment = (id: number) => {
   return useQuery<PaymentSavePayment, Error>({
