@@ -18,21 +18,15 @@ const PaymentPage = () => {
   // const { data: productData } = useGetProductInfo(Number(projectId));
 
   const [selectedPayment, setSelectedPayment] = useState<string>('');
+  // addAmount는 모든 hook 이후에 선언해야 Rules of Hooks를 지킬 수 있어 조건부 return 앞에 둔다.
+  const [addAmount, setAddAmount] = useState<number>(0);
 
   const isMobile = useIsMobile();
-  // useTmpLogin();
-
-  // const { data } = useGetUserInfo();
-
   const { productData, userData } = useMockData();
 
   if (!productData || !userData) {
     return <NotFound />;
   }
-
-  // const optionData = userData?.options[0];
-
-  const [addAmount, setAddAmount] = useState<number>(0);
 
   return (
     <>

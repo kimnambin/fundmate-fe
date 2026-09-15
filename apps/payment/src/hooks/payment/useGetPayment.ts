@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getReservations } from '../../api/reservations';
-import { Reservation } from '../../types/payement/paymentDeatil.model';
+import { Reservation } from '../../types/payment/paymentDetail.model';
 
 export const useGetPayment = (id: number) => {
   return useQuery<Reservation, Error>({

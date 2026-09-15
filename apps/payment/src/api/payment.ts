@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BankPayload, CardPayload } from '../types/payement/paymentSave.model';
+import { BankPayload, CardPayload } from '../types/payment/paymentSave.model';
 
 export const bankPaymentSave = (payload: BankPayload) => {
   return axios.post(`/api/payments`, payload);

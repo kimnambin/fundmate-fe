@@ -1,7 +1,7 @@
 import { MainButton } from '@repo/ui/components';
 import { BoldBigText, BoldText } from '../../styles/text.style';
 import { usePaymentStore } from '../../../store/mock/mockPaymentStore';
-import { PaymentPayload } from '../../../types/payement/payment.model';
+import { PaymentPayload } from '../../../types/payment/payment.model';
 
 interface PayConfirmProps {
   setIsConfirmModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { PaymentProps } from '../../../types/payement/modal.model';
+import { PaymentProps } from '../../../types/payment/modal.model';
 import { useState } from 'react';
 import { mockPostPayment } from '../../mock/useMockPayment';
 import { coverSec } from '../../../utils/security';
+import { notify } from '../../../utils/notify';
 
 export interface CardFormValues {
   cardNumber0: string;
@@ -42,7 +43,7 @@ export const useCardPayForm = ({
 
   const handleCardPay = handleSubmit(() => {
     if (!addressData || addressData.trim() === '') {
-      alert('주소 정보를 확인해주세요.');
+      notify.error('주소 정보를 확인해주세요.');
       return;
     }
     setIsConfirmModalOpen(true);
@@ -75,12 +76,12 @@ export const useCardPayForm = ({
       if (insertedId) {
         setSavedPaymentId(insertedId);
       }
-      alert('결제수단이 등록되었습니다.');
+      notify.success('결제수단이 등록되었습니다.');
       setShowLoading?.(false);
     },
     onError: (e: AxiosError) => {
       console.error(e);
-      alert('입력한 내용을 다시 한번 확인해주세요');
+      notify.error('입력한 내용을 다시 한번 확인해주세요');
       setShowLoading?.(false);
       setIsConfirmModalOpen(false);
     },

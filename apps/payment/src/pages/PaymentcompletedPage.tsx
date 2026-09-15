@@ -11,7 +11,7 @@ import { VerticalCard } from '@repo/ui/components';
 import { Blank } from '../components/styles/product-detail/Product.style';
 // import { useGetProductInfo } from '../hooks/product/getProductInfo';
 import { useGetQueryString } from '../hooks/useGetQueryString';
-import { useGetiInsertedId } from '../hooks/useGetiInsertedId';
+import { useGetInsertedId } from '../hooks/useGetInsertedId';
 import {
   mockProducts,
   mockPopularProducts,
@@ -23,7 +23,7 @@ const PaymentcompletedPage = () => {
   const projectId = useGetQueryString();
   // const { data: productData } = useGetProductInfo(Number(projectId));
 
-  const id = useGetiInsertedId();
+  const id = useGetInsertedId();
 
   const { productData } = useMockData();
 

@@ -4,7 +4,8 @@ import { BoldBigText, BoldText } from '../styles/text.style';
 import { formatNum } from '../../utils/numbers';
 
 import { useEffect, useState } from 'react';
-import { useGetiInsertedId } from '../../hooks/useGetiInsertedId';
+import { useGetInsertedId } from '../../hooks/useGetInsertedId';
+import { notify } from '../../utils/notify';
 import { usePatchReservation } from '../../hooks/payment/save/usePatchSavePayment';
 import { OptionModal } from '../modal/OptionModal';
 import { usePriceStore } from '../../store/mock/mockUpdatePrice';
@@ -39,7 +40,7 @@ const PaymentDetailMid: React.FC<OptionModalProps> = ({
   }, [price]);
 
   const [, setSelectedRewardId] = useState<number | null>(null);
-  const id = useGetiInsertedId();
+  const id = useGetInsertedId();
 
   const patchAPI = usePatchReservation(Number(id));
 
@@ -68,11 +69,11 @@ const PaymentDetailMid: React.FC<OptionModalProps> = ({
     patchAPI.mutate(payload, {
       onSuccess: () => {
         setSelectedRewardId(rewardId);
-        alert('선물이 변경이 완료되었습니다!');
+        notify.success('선물이 변경되었습니다!');
         onClose?.();
       },
       onError: () => {
-        alert('선물 변경 실패');
+        notify.error('선물 변경에 실패했습니다.');
         setLocalPrice(price);
       },
     });

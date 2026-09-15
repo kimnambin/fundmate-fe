@@ -9,7 +9,7 @@ import {
   Input,
   BottomWrapper,
 } from '../styles/modal/tansfetModal.style';
-import { PaymentProps } from '../../types/payement/modal.model';
+import { PaymentProps } from '../../types/payment/modal.model';
 import PayConfirmModal from './confirm/PayConfirmModal';
 import { useTransferForm } from '../../hooks/payment/save/useTransferForm';
 

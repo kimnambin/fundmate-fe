@@ -16,7 +16,7 @@ import {
 import { monthList, yearList } from '../../utils/date';
 import { BankBtn } from '../styles/modal/tansfetModal.style';
 import { FlexRowsm } from '../styles/layout.style';
-import { PaymentProps } from '../../types/payement/modal.model';
+import { PaymentProps } from '../../types/payment/modal.model';
 import { MainButton, Modal } from '@repo/ui/components';
 import PayConfirmModal from './confirm/PayConfirmModal';
 // import { useCardPayForm } from '../../hooks/payment/save/usePostPaymentSave';
