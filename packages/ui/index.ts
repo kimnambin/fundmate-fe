@@ -49,7 +49,6 @@ export {
 } from './mocks';
 
 //hooks
-export { commonApiInstance } from './hooks';
 export { useIsMobile } from './hooks';
 
 //stores
