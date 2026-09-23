@@ -21,7 +21,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InputText, MainButton } from '@repo/ui/components';
 import { MediumFont, SmallFont } from '@repo/ui/styles';
-import { commonApiInstance } from '@repo/ui/hooks';
+import axios from 'axios';
 import { useState } from 'react';
 
 const schema = yup.object({
@@ -47,8 +47,8 @@ export const LoginComponent = () => {
   });
 
   const onSubmit: SubmitHandler<LoginProps> = async (data) => {
-    await commonApiInstance
-      .post('/auth/login', data)
+    await axios
+      .post('/api/auth/login', data)
       .then((response) => {
         window.localStorage.setItem('nickname', response.data?.nickname);
         navigate('/');
