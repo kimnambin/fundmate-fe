@@ -11,6 +11,7 @@ import { useIsMobile } from '@repo/ui/hooks';
 
 // import { ProductInfoProps } from '../types/product/productInfo.model';
 import { sevenWeeksLaterFormatted, todayDateFormatted } from '../utils/date';
+import { UserDefault } from '@repo/ui/assets';
 
 import { NotFound } from '@repo/ui/components';
 import useMockData from '../hooks/mock/useMockData';
@@ -43,11 +44,16 @@ function ProductPage() {
 
   const { id, productData, userData } = useMockData();
 
-  if (!productData || !userData) {
+  if (!productData) {
     return <NotFound />;
   }
 
-  console.log('id값은', id);
+  if (!userData) {
+    return <NotFound />;
+  }
+
+  console.log('productData', productData);
+  console.log('userData', userData);
 
   return (
     <FlexCol className="px-auto sm:px-[120px]">
@@ -55,55 +61,56 @@ function ProductPage() {
         <>
           <FlexRow className="items-start mt-0">
             <FlexItem>
-              <ProductImg
-                imgUrl={productData?.image_url ?? productData.image_url}
-              />
+              <ProductImg imgUrl={productData?.image_url ?? UserDefault} />
             </FlexItem>
             <FlexItem>
-              <ProductInfo
-                title={productData.title}
-                currentPrice={productData.current_amount}
-                remainingDay={productData.remaining_day}
-                goalAmount={productData.goal_amount}
-                // startDate={productData.start_date}
-                // endDate={productData.end_date}
-                startDate={todayDateFormatted()}
-                endDate={sevenWeeksLaterFormatted()}
-                deliveryDate={String(productData.remaining_day)}
-                description={productData.short_description}
-                projectId={String(id)}
-              />
+              {productData && (
+                <ProductInfo
+                  title={productData.title}
+                  currentPrice={productData.current_amount}
+                  remainingDay={productData.remaining_day}
+                  goalAmount={productData.goal_amount}
+                  startDate={todayDateFormatted()}
+                  endDate={sevenWeeksLaterFormatted()}
+                  deliveryDate={String(productData.remaining_day)}
+                  projectId={String(id)}
+                />
+              )}
             </FlexItem>
           </FlexRow>
           {userData && (
             <ProductDetail
               user={userData.user}
               options={userData.options}
-              description={userData.description}
+              description={userData.description ?? '설명이 없습니다.'}
             />
           )}
         </>
       ) : (
         <>
-          <FundDetailMobile
-            title={productData.title}
-            currentPrice={productData.current_amount}
-            remainingDay={productData.remaining_day}
-            goalAmount={productData.goal_amount}
-            startDate={todayDateFormatted()}
-            endDate={sevenWeeksLaterFormatted()}
-            deliveryDate={String(productData.remaining_day)}
-            description={productData.short_description}
-            projectId={String(id)}
-            img_url={`https://picsum.photos/id/${id * 10}/350/300`}
-          />
-          {userData && (
+          {productData && (
+            <FundDetailMobile
+              title={productData.title}
+              currentPrice={productData.current_amount}
+              remainingDay={productData.remaining_day}
+              goalAmount={productData.goal_amount}
+              startDate={todayDateFormatted()}
+              endDate={sevenWeeksLaterFormatted()}
+              deliveryDate={String(productData.remaining_day)}
+              projectId={String(id)}
+              img_url={
+                id ? `https://picsum.photos/id/${id * 10}/350/300` : UserDefault
+              }
+            />
+          )}
+          {userData?.user && userData?.options && (
             <ProductDetail
               user={userData.user}
               options={userData.options}
-              description={userData.description}
+              description={userData.description ?? '설명이 없습니다.'}
             />
           )}
+
           <ProductIconBox projectId={String(id)} />
         </>
       )}

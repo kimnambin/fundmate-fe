@@ -9,9 +9,9 @@ import {
   Box,
   Line,
   Blank,
+  GiftDesc,
 } from '../styles/product-detail/Product.style';
 import PDBox from './PDRight';
-import PDdetail from './PDdetail';
 import PDReview from './PDReview';
 
 export interface User {
@@ -63,7 +63,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
       </Topic>
       <Main>
         <Box>
-          {currentPage ? <PDdetail description={description} /> : <PDReview />}
+          {currentPage ? <GiftDesc>{description}</GiftDesc> : <PDReview />}
         </Box>
         <PDBox
           user={user}
