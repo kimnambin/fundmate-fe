@@ -54,19 +54,6 @@ function CreateFunding() {
   const { mutate: createFunding } = useCreateFunding();
   const { mutateAsync: uploadImage } = useImageUpload();
 
-  // 로그인 임시 연동 코드
-  // useEffect(() => {
-  //   const autoLogin = async () => {
-  //     try {
-  //       await tempLogin('g@mail.com', 'zzz111');
-  //       console.log('임시 로그인');
-  //     } catch (err) {
-  //       console.log('로그인 실패: ', err);
-  //     }
-  //   };
-  //   autoLogin();
-  // }, []);
-
   const handleImageUpload = () => {
     fileInputRef.current?.click();
   };
