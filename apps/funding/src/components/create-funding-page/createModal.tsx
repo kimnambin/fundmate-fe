@@ -24,10 +24,14 @@ const CreateModal = ({
         <div className="flex gap-[20px] justify-center">
           <PointButton
             label="아니오"
-            width="w-[200px]"
+            width="w-full sm:w-[200px]"
             onClick={() => setIsSubmitOpen(false)}
           />
-          <MainButton label="예" width="w-[200px]" onClick={handleCreate} />
+          <MainButton
+            label="예"
+            width="w-full sm:w-[200px]"
+            onClick={handleCreate}
+          />
         </div>
       </div>
     </Modal>
