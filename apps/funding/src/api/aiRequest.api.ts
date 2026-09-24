@@ -1,7 +1,7 @@
-import { commonApiInstance } from '@repo/ui/hooks';
+import axios from 'axios';
 import type { aiRequestData } from '../types/aiRequest.types';
 
 export const aiRequest = async (data: aiRequestData) => {
-  const response = await commonApiInstance.post('/ai/requests', data);
+  const response = await axios.post('/api/ai/requests', data);
   return response.data;
 };
