@@ -53,10 +53,14 @@ const PayConfirmModal = ({
       <div className="flex gap-[20px] justify-center">
         <MainButton
           label="아니오"
-          width="w-[200px]"
+          width="w-full sm:w-[200px]"
           onClick={() => setIsConfirmModalOpen(false)}
         />
-        <MainButton label="예" width="w-[200px]" onClick={handleConfirm} />
+        <MainButton
+          label="예"
+          width="w-full sm:w-[200px]"
+          onClick={handleConfirm}
+        />
       </div>
     </div>
   );

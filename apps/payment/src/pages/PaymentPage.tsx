@@ -31,7 +31,7 @@ const PaymentPage = () => {
   return (
     <>
       {!isMobile ? (
-        <FlexRow className="items-start justify-between px-[120px]">
+        <FlexRow className="items-start justify-between px-6 md:px-[120px]">
           <FlexCol className="w-[55%] items-start gap-4">
             <Productinfos
               title={productData?.title}

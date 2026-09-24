@@ -44,13 +44,17 @@ const PaymentModal = ({
         <div className="flex gap-[20px] justify-center">
           <MainButton
             label="아니오"
-            width="w-[200px]"
+            width="w-full sm:w-[200px]"
             onClick={(e) => {
               e.stopPropagation();
               setIsModalOpen(false);
             }}
           />
-          <MainButton label="예" width="w-[200px]" onClick={onConfirmPayment} />
+          <MainButton
+            label="예"
+            width="w-full sm:w-[200px]"
+            onClick={onConfirmPayment}
+          />
         </div>
       </div>
     </Modal>

@@ -52,7 +52,7 @@ const PaymentDetailBottom = ({ code, amount, scheduleDate }: PdBottom) => {
               </BaseText>
 
               <BoldText
-                className={`flex text-left w-[240px] ${idx === 2 ? 'text-[#FB6565]' : 'text-black'}`}
+                className={`flex text-left w-[55%] sm:w-[240px] break-words ${idx === 2 ? 'text-[#FB6565]' : 'text-black'}`}
               >
                 {content[idx]}
               </BoldText>

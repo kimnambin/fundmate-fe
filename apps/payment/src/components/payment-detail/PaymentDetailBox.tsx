@@ -62,7 +62,7 @@ const PaymentDetailBox = ({
                 {payInfo[idx]}
               </LightColor>
               <BoldText
-                className={`flex-2 w-[320px] text-left ${idx === 0 || idx === 1 ? 'text-[#FB6565]' : 'text-black'}`}
+                className={`flex-2 w-[55%] sm:w-[320px] break-words text-left ${idx === 0 || idx === 1 ? 'text-[#FB6565]' : 'text-black'}`}
               >
                 {resPayInfo[idx]}
               </BoldText>

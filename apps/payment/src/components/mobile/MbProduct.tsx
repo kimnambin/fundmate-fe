@@ -30,7 +30,7 @@ export const FundDetailMobile: React.FC<FundDetailMobileProps> = ({
   ];
 
   return (
-    <div className="max-w-md mx-auto bg-white px-6 ">
+    <div className="w-full max-w-md mx-auto bg-white px-6">
       <img
         src={img_url}
         alt="상품 이미지"

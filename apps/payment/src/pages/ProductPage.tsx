@@ -56,7 +56,7 @@ function ProductPage() {
   console.log('userData', userData);
 
   return (
-    <FlexCol className="px-auto sm:px-[120px]">
+    <FlexCol className="px-auto sm:px-6 md:px-[120px]">
       {!isMobile ? (
         <>
           <FlexRow className="items-start mt-0">
