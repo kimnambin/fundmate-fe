@@ -5,11 +5,11 @@ import { Sidebar } from "../Sidebar"
 export const UserPageLayout = () => {
   return (
     <Layout className='mt-16'>
-      <div className="flex flex-row gap-16">
-        <div className="flex basis-auto shrink-1 order-0">
+      <div className="flex flex-col gap-8 lg:flex-row lg:gap-16">
+        <div className="flex w-full lg:w-auto basis-auto shrink-1 order-0">
           <Sidebar />
         </div>
-        <div className="flex grow shrink">
+        <div className="flex grow shrink min-w-0">
           <Outlet />
         </div>
       </div>

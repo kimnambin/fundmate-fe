@@ -58,7 +58,7 @@ export const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-[400px] bg-white rounded-[10px] flex flex-col items-center gap-[40px]">
+    <aside className="w-full lg:w-[400px] bg-white rounded-[10px] flex flex-col items-center gap-[40px]">
       {/* 유저 프로필 */}
       <div className="flex flex-col items-center gap-[20px] w-full">
         <div
@@ -90,13 +90,13 @@ export const Sidebar = () => {
       {/* 나의 활동 (서포터) */}
       <div className="w-full flex flex-col gap-[14px] p-2">
         <SubTitle className="text-gray-400">나의 활동 (서포터)</SubTitle>
-        <div className="flex flex-col gap-[10px]">
+        <div className="grid grid-cols-2 gap-[10px] lg:flex lg:flex-col">
           {supporterMenu.map(({ label, path }) => (
             <NavLink
               key={label}
               to={path}
               className={({ isActive }) =>
-                `text-left text-[22px] font-medium pl-[10px] transition-colors ${
+                `text-left text-lg sm:text-[22px] font-medium pl-[10px] transition-colors ${
                   isActive
                     ? 'text-[#5FBDFF]'
                     : 'text-black hover:text-[#5FBDFF]'
@@ -112,13 +112,13 @@ export const Sidebar = () => {
       {/* 나의 활동 (메이커) */}
       <div className="w-full flex flex-col gap-[14px] p-2">
         <SubTitle className="text-gray-400">나의 활동 (메이커)</SubTitle>
-        <div className="flex flex-col gap-[10px]">
+        <div className="grid grid-cols-2 gap-[10px] lg:flex lg:flex-col">
           {makerMenu.map(({ label, path }) => (
             <NavLink
               key={label}
               to={path}
               className={({ isActive }) =>
-                `text-left text-[22px] font-medium pl-[10px] transition-colors ${
+                `text-left text-lg sm:text-[22px] font-medium pl-[10px] transition-colors ${
                   isActive
                     ? 'text-[#5FBDFF]'
                     : 'text-black hover:text-[#5FBDFF]'
