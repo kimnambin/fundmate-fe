@@ -78,7 +78,7 @@ const PaymentList = () => {
       </div>
 
       {/* 테이블 헤더 */}
-      <div className="w-full flex px-2 py-3 border-b border-gray-300 text-center text-base font-medium text-black">
+      <div className="hidden sm:flex w-full px-2 py-3 border-b border-gray-300 text-center text-base font-medium text-black">
         <div className="basis-3/6">상품</div>
         <div className="basis-1/6">옵션</div>
         <div className="basis-1/6">날짜</div>
@@ -92,34 +92,38 @@ const PaymentList = () => {
           <Link
             to={`/products/${item.scheduleId}`}
             key={item.scheduleId}
-            className="flex items-center px-2 py-4 hover:bg-gray-50 transition"
+            className="flex flex-wrap sm:flex-nowrap items-center gap-y-2 px-2 py-4 hover:bg-gray-50 transition"
           >
-            <div className="flex items-center gap-4 basis-3/6">
+            <div className="flex items-center gap-4 basis-full sm:basis-3/6 min-w-0">
               <img
                 src={
                   item.productImage || `https://picsum.photos/seed/${idx}/70/70`
                 }
                 alt={item.productName}
-                className="w-[70px] h-[70px] rounded object-cover"
+                className="w-[70px] h-[70px] shrink-0 rounded object-cover"
               />
               <MediumFont className="text-sm sm:text-base text-black">
                 {item.productName}
               </MediumFont>
             </div>
 
-            <MediumFont className="basis-1/6 text-center text-sm sm:text-base text-black">
+            <MediumFont className="basis-1/2 sm:basis-1/6 sm:text-center text-sm sm:text-base text-black">
+              <span className="sm:hidden text-[#7E7C7C]">옵션 </span>
               {item.optionName}
             </MediumFont>
 
-            <MediumFont className="basis-1/6 text-center text-sm sm:text-base text-black">
+            <MediumFont className="basis-1/2 sm:basis-1/6 sm:text-center text-sm sm:text-base text-black">
+              <span className="sm:hidden text-[#7E7C7C]">날짜 </span>
               {format(parseISO(item.date), 'yyyy.MM.dd')}
             </MediumFont>
 
-            <MediumFont className="basis-1/6 text-center text-sm sm:text-base text-black">
+            <MediumFont className="basis-1/2 sm:basis-1/6 sm:text-center text-sm sm:text-base text-black">
+              <span className="sm:hidden text-[#7E7C7C]">금액 </span>
               {item.amount.toLocaleString()}원
             </MediumFont>
 
-            <MediumFont className="basis-1/6 text-center text-sm sm:text-base font-medium">
+            <MediumFont className="basis-1/2 sm:basis-1/6 sm:text-center text-sm sm:text-base font-medium">
+              <span className="sm:hidden text-[#7E7C7C]">상태 </span>
               <span
                 className={
                   item.status === 'success'

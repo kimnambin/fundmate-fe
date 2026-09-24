@@ -64,12 +64,12 @@ const CompletedFundingComponent = () => {
     `${Math.min(Number(achievement), 100)}%`;
 
   return (
-    <div className="w-full max-w-screen-xl bg-white rounded-md flex flex-col gap-4 px-12 md:px-4">
+    <div className="w-full max-w-screen-xl bg-white rounded-md flex flex-col gap-4 px-4">
       <Title>최근 완료된 펀딩</Title>
 
       {selectedFunding ? (
-        <div className="flex flex-col md:flex-row gap-12 w-full">
-          <div className="w-[420px] max-w-[420px] h-[240px] bg-gray-300 rounded-lg shrink-0 overflow-hidden">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-12 w-full">
+          <div className="w-full md:w-[420px] md:max-w-[420px] h-[200px] md:h-[240px] bg-gray-300 rounded-lg shrink-0 overflow-hidden">
             {selectedFunding.image_url ? (
               <img
                 src={selectedFunding.image_url}

@@ -95,10 +95,10 @@ const MakerProfile = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex flex-grow">
-        <main className="flex flex-col flex-grow p-8 w-full max-w-[1720px] mx-auto mt-10">
+        <main className="flex flex-col flex-grow p-4 sm:p-8 w-full max-w-[1720px] mx-auto mt-10">
           {/* 프로필 헤더 */}
-          <section className="w-full flex items-center justify-between mb-10">
-            <div className="flex items-center gap-14">
+          <section className="w-full flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between mb-10">
+            <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-14">
               <div
                 className="w-[130px] h-[130px] rounded-full bg-gray-300 shrink-0"
                 style={{
@@ -110,8 +110,8 @@ const MakerProfile = () => {
                 }}
               />
               <div className="flex flex-col">
-                <Title className="mb-10">{maker.nickname}</Title>
-                <div className="flex gap-16">
+                <Title className="mb-4 sm:mb-10">{maker.nickname}</Title>
+                <div className="flex gap-6 sm:gap-16">
                   <div className="flex flex-col">
                     <MediumFont className="text-gray-500">
                       팔로잉 {'>'}
@@ -158,7 +158,7 @@ const MakerProfile = () => {
           </section>
 
           {/* 소개 */}
-          <section className="w-full mb-32">
+          <section className="w-full mb-16 sm:mb-32">
             <hr className="border-t border-gray-200 mb-6" />
             <MediumFont className="text-gray-500 text-left">
               {maker.contents || '한줄 소개 / 현재 등록한 소개가 없습니다.'}
@@ -167,12 +167,12 @@ const MakerProfile = () => {
 
           {/* 프로젝트 목록 */}
           <section className="w-full">
-            <hr className="border-t border-gray-200 mt-20 mb-10" />
+            <hr className="border-t border-gray-200 mt-10 sm:mt-20 mb-10" />
             <SubTitle className="ml-4 mb-4">
               올린 프로젝트{' '}
               <span className="text-blue-500">{maker.fundingList.length}</span>
             </SubTitle>
-            <div className="grid grid-cols-5 gap-4 mb-40">
+            <div className="grid grid-cols-2 gap-4 mb-20 sm:grid-cols-3 sm:mb-40 md:grid-cols-4 lg:grid-cols-5">
               {maker.fundingList.map((project, index) => (
                 <VerticalCard
                   key={index}
