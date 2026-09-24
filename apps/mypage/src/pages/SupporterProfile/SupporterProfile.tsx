@@ -88,8 +88,8 @@ const ProfilePage = () => {
     <Layout>
       <div className="flex flex-col items-center w-full">
         {/* 상단 프로필 박스 */}
-        <div className="flex items-center justify-between gap-[20px] bg-white w-full px-[10px] py-[20px]">
-          <div className="flex flex-row gap-10 items-start">
+        <div className="flex flex-col items-start gap-[20px] sm:flex-row sm:items-center sm:justify-between bg-white w-full px-[10px] py-[20px]">
+          <div className="flex flex-row gap-5 sm:gap-10 items-start">
             {/* ← 이전 버튼 + 프로필 이미지 */}
             <div className="flex flex-col items-start gap-[5px] relative">
               <button
@@ -112,18 +112,18 @@ const ProfilePage = () => {
             <div className="flex flex-col justify-between gap-[15px]">
               <Title>{profile.nickname}</Title>
 
-              <div className="flex items-start gap-[55px]">
-                <div className="flex flex-col gap-[5px] min-w-[70px] text-center">
+              <div className="flex items-start gap-3 sm:gap-[55px]">
+                <div className="flex flex-col gap-[5px] min-w-[56px] sm:min-w-[70px] text-center">
                   <MediumFont className="text-[#999A9A]">팔로잉 &gt;</MediumFont>
                   <SubTitle className="min-h-[24px]">{profile.followingCount}</SubTitle>
                 </div>
 
-                <div className="flex flex-col gap-[5px] min-w-[70px] text-center">
+                <div className="flex flex-col gap-[5px] min-w-[56px] sm:min-w-[70px] text-center">
                   <MediumFont className="text-[#999A9A]">팔로워 &gt;</MediumFont>
                   <SubTitle className="min-h-[24px]">{profile.followerCount}</SubTitle>
                 </div>
 
-                <div className="flex flex-col gap-[5px] min-w-[70px] text-center">
+                <div className="flex flex-col gap-[5px] min-w-[56px] sm:min-w-[70px] text-center">
                   <MediumFont className="text-[#999A9A]">후원횟수 &gt;</MediumFont>
                   <SubTitle className="min-h-[24px]">{profile.paymentCount ?? 0}</SubTitle>
                 </div>

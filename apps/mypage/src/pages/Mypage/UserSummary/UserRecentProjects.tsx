@@ -63,7 +63,7 @@ const UserRecentProjects = ({ nickname }: Props) => {
       ) : projectList.length === 0 ? (
         <div className="text-gray-400">최근 본 프로젝트가 없습니다.</div>
       ) : (
-        <div className="grid grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {projectList.slice(0, 12).map((project, index) => (
             <VerticalCard
               key={index}

@@ -52,7 +52,7 @@ const MyReviews = () => {
       </div>
 
       {/* 테이블 헤더 */}
-      <div className="w-full flex px-2 py-3 border-b border-gray-300 text-center text-base font-medium text-black">
+      <div className="hidden sm:flex w-full px-2 py-3 border-b border-gray-300 text-center text-base font-medium text-black">
         <div className="basis-3/6">상품</div>
         <div className="basis-3/6">후기</div>
       </div>
@@ -68,10 +68,10 @@ const MyReviews = () => {
             <div
               key={idx}
               onClick={() => navigate(`/projects/${item.project_id}`)} // ✅ 상세 페이지 이동
-              className="flex items-center px-2 py-4 hover:bg-gray-50 transition cursor-pointer"
+              className="flex flex-col items-start gap-3 sm:flex-row sm:items-center px-2 py-4 hover:bg-gray-50 transition cursor-pointer"
             >
               {/* 상품 */}
-              <div className="flex items-center gap-6 basis-5/6">
+              <div className="flex items-center gap-3 sm:gap-6 basis-full sm:basis-5/6">
                 <img
                   src={item.image_url}
                   alt={item.title}
@@ -83,7 +83,7 @@ const MyReviews = () => {
               </div>
 
               {/* 후기 */}
-              <div className="flex items-center basis-3/6 px-4">
+              <div className="flex items-center basis-full sm:basis-3/6 px-0 sm:px-4">
                 <MediumFont className="text-sm sm:text-base text-black">
                   {item.content}
                 </MediumFont>

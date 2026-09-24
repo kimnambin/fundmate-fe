@@ -60,7 +60,7 @@ const SupportedProjects = () => {
       ) : projects.length === 0 ? (
         <div className="text-gray-400">후원한 프로젝트가 없습니다.</div>
       ) : (
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           {projects.map((project) => (
             <div
               key={project.id}

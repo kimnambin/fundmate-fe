@@ -21,13 +21,13 @@ export const SupportedHorizontalCard = ({
       <img
         src={project.thumbnailUrl}
         alt={project.title}
-        className="w-auto h-[150px] object-cover rounded-[6px]"
+        className="w-auto h-[110px] sm:h-[150px] shrink-0 object-cover rounded-[6px]"
       />
 
       {/* 우측 정보 영역 */}
-      <div className="flex flex-col gap-3">
+      <div className="flex min-w-0 flex-col gap-3">
         {/* 후원일 + 후원번호 */}
-        <div className="flex flex-row gap-[10px] leading-[12px] text-[#7E7C7C]">
+        <div className="flex flex-row flex-wrap gap-x-[10px] gap-y-1 leading-[12px] text-[#7E7C7C]">
           <MediumFont>후원일 {project.supportDate}</MediumFont>
           <MediumFont>후원번호 {project.supportNumber}</MediumFont>
         </div>

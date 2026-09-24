@@ -30,7 +30,7 @@ const UserSummary = () => {
         <Title>
           {nickname ? `${nickname}님 안녕하세요.` : "안녕하세요."}
         </Title>
-        <div className="flex flex-row gap-7">
+        <div className="flex flex-col gap-4 md:flex-row md:gap-7">
           <UserStats />
           <UserFollowStats />
         </div>

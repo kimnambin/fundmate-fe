@@ -157,7 +157,7 @@ const UserProfileSetting = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col items-center w-[600px]">
+      <div className="flex flex-col items-center w-full max-w-[600px]">
         <Title className="w-full mb-10">내 정보 설정</Title>
 
         <div className="flex flex-col items-center gap-3 mb-10">
@@ -260,7 +260,7 @@ const UserProfileSetting = () => {
 
           <div>
             <label className="text-base font-medium">카테고리 선택</label>
-            <div className="grid grid-cols-4 gap-3 mt-3">
+            <div className="grid grid-cols-2 gap-3 mt-3 sm:grid-cols-4">
               {categories.map((category) => (
                 <button
                   key={category}

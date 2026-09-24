@@ -62,7 +62,7 @@ const LikedProjects = () => {
       {loading ? (
         <div>Loading...</div>
       ) : projects.length > 0 ? (
-        <div className="grid grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {projects.map((project) => {
             const progress = Math.round(
               (project.currentAmount / project.targetAmount) * 100
