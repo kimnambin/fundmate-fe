@@ -13,7 +13,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { MediumFont, SmallFont, Title } from "@repo/ui/styles"
 import { InputText, MainButton } from "@repo/ui/components"
-import { commonApiInstance } from "@repo/ui/hooks"
+import axios from "axios"
 import useTimer from "../../hooks/useTimer"
 
 export const schema = yup.object({
@@ -67,7 +67,7 @@ export const SignUpComponent = () => {
       category_id: userCategory
     }
     console.log(finalData);
-    await commonApiInstance.post('/auth/signup', finalData)
+    await axios.post('/api/auth/signup', finalData)
       .then(response => {
         console.log(response);
         navigate('/login')
@@ -81,7 +81,7 @@ export const SignUpComponent = () => {
     if (errors.email) {
       return;
     } else {
-      await commonApiInstance.post('/auth/codes/send', { email: getValues('email') })
+      await axios.post('/api/auth/codes/send', { email: getValues('email') })
         .then(response => {
           console.log(response);
           resetTimer();
@@ -98,7 +98,7 @@ export const SignUpComponent = () => {
   }
 
   const codeVerificationHandle = async () => {
-    await commonApiInstance.post('/auth/codes/verify',
+    await axios.post('/api/auth/codes/verify',
       {
         email: getValues('email'),
         code: getValues('verificationCode')

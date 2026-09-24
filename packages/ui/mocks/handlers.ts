@@ -129,4 +129,40 @@ export const handlers = [
     console.log(request);
     return HttpResponse.json({ message: '결제 조회 완료' }, { status: 200 });
   }),
+
+  http.post('/api/auth/login', async ({ request }) => {
+    const { email } = (await request.json()) as { email: string };
+    return HttpResponse.json(
+      {
+        token: 'mock-token',
+        nickname: 'mock-nickname',
+        user: { email },
+      },
+      { status: 200 },
+    );
+  }),
+
+  http.post('/api/auth/signup', async ({ request }) => {
+    const body = await request.json();
+    console.log('회원가입 요청', body);
+    return HttpResponse.json({ message: '회원가입 완료' }, { status: 201 });
+  }),
+
+  http.post('/api/auth/codes/send', async ({ request }) => {
+    const body = await request.json();
+    console.log('인증번호 발송 요청', body);
+    return HttpResponse.json({ message: '인증번호 발송 완료' }, { status: 200 });
+  }),
+
+  http.post('/api/auth/codes/verify', async ({ request }) => {
+    const body = await request.json();
+    console.log('인증번호 확인 요청', body);
+    return HttpResponse.json({ message: '인증 완료' }, { status: 200 });
+  }),
+
+  http.patch('/api/auth/password', async ({ request }) => {
+    const body = await request.json();
+    console.log('비밀번호 변경 요청', body);
+    return HttpResponse.json({ message: '비밀번호 변경 완료' }, { status: 200 });
+  }),
 ];

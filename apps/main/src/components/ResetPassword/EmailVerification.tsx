@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { InputText, MainButton } from "@repo/ui/components";
 import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 import useTimer from "../../hooks/useTimer";
-import { commonApiInstance } from "@repo/ui/hooks";
+import axios from "axios";
 import { emailVerifiedStore } from "../../stores/EmailVerifiedStore";
 
 const schema = yup.object({
@@ -34,7 +34,7 @@ export const EmailVerificationComponent = () => {
   } = useTimer()
 
   const verificateHandleClick = async () => {
-    await commonApiInstance.post('/auth/codes/send', { email: getValues('email') })
+    await axios.post('/api/auth/codes/send', { email: getValues('email') })
       .then(response => {
         setVerificateRequest(true);
         console.log(response);
@@ -48,7 +48,7 @@ export const EmailVerificationComponent = () => {
   }
 
   const onSubmit = async () => {
-    await commonApiInstance.post('/auth/codes/verify', {
+    await axios.post('/api/auth/codes/verify', {
       email: getValues('email'),
       code: getValues('verificationCode')
     })

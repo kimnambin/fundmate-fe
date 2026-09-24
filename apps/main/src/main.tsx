@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 
 async function enableMocking() {
   const { worker } = await import('@repo/ui/mocks');
-  worker.start({ onUnhandledRequest: 'bypass' });
+  worker.start();
 }
 
 enableMocking().then(() => {
