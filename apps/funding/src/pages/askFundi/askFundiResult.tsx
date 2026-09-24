@@ -53,7 +53,7 @@ const AskFundiResult = () => {
       </div>
 
       <ResultWrapper ref={ref} isCapture={isCapture}>
-        <div className="flex gap-[80px]">
+        <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-start lg:gap-[80px]">
           <Map data={data} />
           <PieChart data={chartData} />
         </div>

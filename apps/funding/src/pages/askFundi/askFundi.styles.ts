@@ -17,6 +17,6 @@ export const ResultWrapper = tw.div<{ isCapture: boolean }>`
 
 export const Bottom = tw.div`
     flex justify-end 
-    pt-[24px] px-[120px] -mb-[6px] -mx-[120px]
+    pt-[24px] px-4 -mx-4 sm:px-[120px] sm:-mx-[120px] -mb-[6px]
     border-t border-line
 `;

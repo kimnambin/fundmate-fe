@@ -34,7 +34,7 @@ const FundiModal = ({
           onClick={() => setIsFundiOpen(false)}
         />
       </div>
-      <div className="flex flex-col gap-5 min-w-[400px] max-w-[80vw]">
+      <div className="flex flex-col gap-5 w-[75vw] sm:w-auto sm:min-w-[400px] max-w-[80vw]">
         <div className="flex flex-col gap-[10px]">
           <Title>내가 입력한 내용</Title>
           {description ? (

@@ -28,7 +28,7 @@ const FundingDetail = () => {
           <img
             src={itemData.itemImg}
             alt="itemImg"
-            className="rounded-[6px] w-[508px] h-[461px]"
+            className="rounded-[6px] w-full h-auto object-cover sm:w-[508px] sm:h-[461px]"
           />
           <ItemTitleTextWrapper>
             <Title>{itemData.title}</Title>

@@ -7,7 +7,7 @@ interface Props {
 
 const PieChart = ({ data }: Props) => {
   return (
-    <div className="w-[400px] h-[300px] my-auto mx-0">
+    <div className="w-full max-w-[400px] h-[300px] my-auto mx-0 shrink-0">
       <ResponsivePie
         data={data}
         colors={{ datum: 'data.color' }}

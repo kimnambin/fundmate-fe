@@ -38,7 +38,7 @@ export const ButtonWrapper = tw.div`
 
 export const FundingDetailTab = tw.div`
   flex
-  -mx-[120px] pl-[120px] py-[25px] mt-[40px]
+  -mx-4 pl-4 sm:-mx-[120px] sm:pl-[120px] py-[25px] mt-[40px]
   gap-[30px]
   border-b-[1px] border-line
   border-t-[1px] border-line
