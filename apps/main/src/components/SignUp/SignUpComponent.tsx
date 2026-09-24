@@ -207,7 +207,7 @@ export const SignUpComponent = () => {
             </InputContainer>
             <InputContainer>
               <MediumFont>카테고리 선택</MediumFont>
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
                 {
                   Object.entries(categories).map(([_, { menuName }], i) => (
                     <UserCategoryButton type="button" key={i + 1} $selected={userCategory === i + 1} onClick={() => setUserCategory(i + 1)}>

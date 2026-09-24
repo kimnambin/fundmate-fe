@@ -5,14 +5,15 @@ export const UserLayout = tw.div`
   flex-row
   justify-center
   items-center
-  my-[100px]
+  my-10 sm:my-[100px]
 `
 
 export const UserContainer = tw.div`
   flex
   flex-col
   justify-between
-  w-[30%]
+  w-full max-w-[420px]
+  lg:w-[30%] lg:min-w-[360px] lg:max-w-none
   gap-7
 `
 
