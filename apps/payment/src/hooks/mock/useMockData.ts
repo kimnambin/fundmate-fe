@@ -16,6 +16,17 @@ const useProjectData = () => {
   const projectId = useGetQueryString();
   const id = Number(projectId);
 
+  const defaultProductData: ProductType = {
+    project_id: 0,
+    image_url: '',
+    title: '',
+    short_description: '',
+    goal_amount: 0,
+    current_amount: 0,
+    achievement: 0,
+    remaining_day: 0,
+  };
+
   useEffect(() => {
     setProjectId(id);
 
@@ -29,13 +40,19 @@ const useProjectData = () => {
       (item) => item.project_id === id
     ) as ProductType | undefined;
 
-    setProductData(foundProductData || null);
+    setProductData(foundProductData ?? defaultProductData);
 
     if (foundProductData) {
       const foundUserData = mockProductUserData.find((user) => user.id === id);
-      setUserData(foundUserData || null);
+      setUserData(
+        foundUserData ?? {
+          user: { image_url: '', nickname: '', content: null },
+          options: [],
+          description: '',
+        }
+      );
     }
-  }, [setProjectId, setProductData, setUserData]);
+  }, [id, setProjectId, setProductData, setUserData]);
 
   return { id, productData, userData };
 };

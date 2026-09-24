@@ -28,7 +28,6 @@ export interface ProductInfoProps {
   startDate: string;
   endDate: string;
   deliveryDate: string;
-  description: string;
   projectId?: string;
 }
 
