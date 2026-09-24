@@ -4,14 +4,14 @@ import {
   InterestingItemsGrid,
 } from '../../styles/Main/MainPageComponents.style';
 import type { ProductType } from '../../types/ProductType';
-// import { commonApiInstance } from '@repo/ui/hooks';
+// import axios from 'axios';
 // import { useQuery } from '@tanstack/react-query';
 import { GiNothingToSay } from 'react-icons/gi';
 import { Title } from '@repo/ui/styles';
 import { mockProducts } from '@repo/ui/mocks';
 
 // const getMainPageData = async () => {
-//   const response = await commonApiInstance.get('/api/projects?limit=8');
+//   const response = await axios.get('/api/projects?limit=8');
 //   return response.data;
 // };
 

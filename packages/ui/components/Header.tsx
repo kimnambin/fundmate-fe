@@ -17,7 +17,7 @@ import React, { useState } from 'react';
 import fundi from '../assets/images/fundi.png';
 import { MediumFont, SubTitle } from '../styles';
 import { InputText } from './Inputs/Input';
-// import { commonApiInstance } from '../hooks';
+// import axios from 'axios';
 import { useIsMobile } from '../hooks/isMobile';
 import { MdDriveFolderUpload } from 'react-icons/md';
 
@@ -88,8 +88,8 @@ export const Header = () => {
   // };
 
   // const handleLogout = async () => {
-  //   await commonApiInstance
-  //     .post('/auth/logout')
+  //   await axios
+  //     .post('/api/auth/logout')
   //     .then((response) => {
   //       console.log(response);
   //       window.localStorage.removeItem('nickname');
