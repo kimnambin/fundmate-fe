@@ -89,7 +89,7 @@ const ProfilePage = () => {
       <div className="flex flex-col items-center w-full">
         {/* 상단 프로필 박스 */}
         <div className="flex flex-col items-start gap-[20px] sm:flex-row sm:items-center sm:justify-between bg-white w-full px-[10px] py-[20px]">
-          <div className="flex flex-row gap-5 sm:gap-10 items-start">
+          <div className="flex flex-col gap-5 sm:flex-row sm:gap-10 items-start">
             {/* ← 이전 버튼 + 프로필 이미지 */}
             <div className="flex flex-col items-start gap-[5px] relative">
               <button
