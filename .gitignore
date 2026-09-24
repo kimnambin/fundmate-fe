@@ -16,3 +16,7 @@ public/dist
 ./apps/mypage/node_modules
 ./apps/payment/node_modules
 ./apps/statistics/node_modules
+
+# 로컬 전용 문서
+/docs/
+/ARCHITECTURE.md

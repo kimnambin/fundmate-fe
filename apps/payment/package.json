@@ -11,7 +11,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "jest",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit -p tsconfig.app.json"
   },
   "dependencies": {
     "@originjs/vite-plugin-federation": "^1.4.1",
