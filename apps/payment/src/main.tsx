@@ -3,8 +3,19 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-const queryClient = new QueryClient();
+import {
+  MutationCache,
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import { handleUnauthorizedError, shouldRetryQuery } from '@repo/ui/utils';
+
+const queryClient = new QueryClient({
+  queryCache: new QueryCache({ onError: handleUnauthorizedError }),
+  mutationCache: new MutationCache({ onError: handleUnauthorizedError }),
+  defaultOptions: { queries: { retry: shouldRetryQuery } },
+});
 
 async function enableMocking() {
   // if (import.meta.env.MODE !== 'development' || typeof window === 'undefined') {

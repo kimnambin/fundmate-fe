@@ -3,7 +3,7 @@ import { SearchContainer } from '../../styles/Search/SearchContainer.style';
 import { SearchHeader } from './SearchHeader';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-// import { commonApiInstance } from '@repo/ui/hooks';
+// import axios from 'axios';
 import type { ProductType } from '../../types/ProductType';
 import { GiNothingToSay } from 'react-icons/gi';
 import { Title } from '@repo/ui/styles';
@@ -46,7 +46,7 @@ export const SearchComponent = () => {
   //   } else {
   //     pathname = `/api/projects/${queryKey[0]}`;
   //   }
-  //   await commonApiInstance
+  //   await axios
   //     .get(pathname)
   //     .then((response) => {
   //       setData(response.data);

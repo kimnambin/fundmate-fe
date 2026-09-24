@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 // import { NavButton, NavigationContainer } from '../styles/Swiper.style';
-// import { commonApiInstance } from '@repo/ui/hooks';
+// import axios from 'axios';
 // import { useQuery } from '@tanstack/react-query';
 import type { ProductType } from '../types/ProductType';
 import { GiNothingToSay } from 'react-icons/gi';
@@ -29,7 +29,7 @@ interface SwiperItemsProps {
 //     return;
 //   }
 
-//   // const response = await commonApiInstance.get(pathname);
+//   // const response = await axios.get(pathname);
 //   // return response.data;
 // };
 
