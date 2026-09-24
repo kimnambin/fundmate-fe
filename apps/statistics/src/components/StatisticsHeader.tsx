@@ -8,7 +8,7 @@ import type {
   DataSelectionProps,
   OptionSelectionProps,
 } from '../types/Statistics.type';
-import { commonApiInstance } from '@repo/ui/hooks';
+import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { dataTypeStore, statisticsStore } from '../stores/StatisticsStore';
 
@@ -18,7 +18,7 @@ interface StatisticsProps {
 
 const getPublicData = async (data: any, selected: any) => {
   try {
-    const response = await commonApiInstance.post(`/datas/${selected}`, data);
+    const response = await axios.post(`/api/datas/${selected}`, data);
     return response.data;
   } catch (error) {
     console.error(error);
