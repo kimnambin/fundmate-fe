@@ -112,9 +112,9 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
 
   return (
     <>
-      <div className="flex flex-row gap-10 items-center">
+      <div className="flex flex-col gap-3 sm:flex-row sm:gap-10 sm:items-center">
         <Title>타겟층 통계 및 지역 분석</Title>
-        <div className="flex flex-row gap-7">
+        <div className="flex flex-row gap-5 sm:gap-7">
           <button
             type="button"
             key="keyword"
@@ -166,11 +166,11 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
           </>
         )}
       </div>
-      <div className="flex flex-row justify-end mt-12">
+      <div className="flex flex-row justify-end mt-8 sm:mt-12">
         {selected === 'keyword' ? (
           <MainButton
             label={isKeywordDataSubmitted ? '닫기' : '통계 확인하기'}
-            width="w-[200px]"
+            width="w-full sm:w-[200px]"
             type="button"
             onClick={isKeywordDataSubmitted ? handleReset : handleDataRequest}
             isError={!dataErrorCondition}
@@ -178,7 +178,7 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
         ) : (
           <MainButton
             label={isOptionDataSubmitted ? '닫기' : '통계 확인하기'}
-            width="w-[200px]"
+            width="w-full sm:w-[200px]"
             type="button"
             onClick={isOptionDataSubmitted ? handleReset : handleDataRequest}
             isError={!optionErrorCondition}

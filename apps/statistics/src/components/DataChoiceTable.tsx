@@ -21,8 +21,8 @@ export const DataChoiceTable = ({
   return (
     <table className="table-fixed w-full">
       <colgroup>
-        <col className="w-[55px]" />
-        <col className="max-w-[300px] w-[300px]" />
+        <col className="w-[48px] sm:w-[55px]" />
+        <col className="w-[96px] sm:max-w-[300px] sm:w-[300px]" />
         <col />
       </colgroup>
       <thead>

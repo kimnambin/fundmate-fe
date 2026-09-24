@@ -19,8 +19,8 @@ export const PieDataTable = ({ data }: PieDataTableProps) => {
     <table className="w-full p-4 h-full">
       <colgroup>
         <col />
-        <col className="max-w-[300px] w-[300px]" />
-        <col className="max-w-[300px] w-[300px]" />
+        <col className="w-[84px] sm:max-w-[300px] sm:w-[300px]" />
+        <col className="w-[76px] sm:max-w-[300px] sm:w-[300px]" />
       </colgroup>
       <thead className="border-b border-r-gray-200">
         <tr>

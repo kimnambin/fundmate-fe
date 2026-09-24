@@ -129,22 +129,22 @@ export const StatisticsBody = ({ rawData }: dataProps) => {
                         <HorizonLine />
                         <div
                           key={k}
-                          className="flex flex-row h-[450px] w-full gap-10"
+                          className="flex flex-col lg:flex-row lg:h-[450px] w-full gap-6 lg:gap-10"
                         >
-                          <div className="flex shrink basis-[30%] w-full">
+                          <div className="flex h-[300px] lg:h-auto shrink lg:basis-[30%] w-full">
                             <StatisticsPie data={pieData[k]} />
                           </div>
-                          <div className="flex shrink-1 grow overflow-scroll overflow-x-hidden">
+                          <div className="flex shrink-1 grow max-h-[320px] lg:max-h-none overflow-scroll overflow-x-hidden">
                             <PieDataTable data={pieData[k]} />
                           </div>
                         </div>
                       </div>
                       <>
                         {normalLineData[k].length ? (
-                          <div className="h-[600px] w-full flex flex-col gap-5">
+                          <div className="w-full flex flex-col gap-5">
                             <Title>연도별 {dataKind[k]} 추이</Title>
                             <HorizonLine />
-                            <div className="h-[600px]">
+                            <div className="h-[360px] sm:h-[600px]">
                               <LineData data={normalLineData[k]} />
                             </div>
                           </div>
@@ -155,7 +155,7 @@ export const StatisticsBody = ({ rawData }: dataProps) => {
                           <div className="w-full flex flex-col gap-5">
                             <Title>연도별 {dataKind[k]} 증감 추이</Title>
                             <HorizonLine />
-                            <div className="h-[600px] ">
+                            <div className="h-[360px] sm:h-[600px]">
                               <LineData data={transitionLineData[k]} />
                             </div>
                           </div>
@@ -177,21 +177,21 @@ export const StatisticsBody = ({ rawData }: dataProps) => {
                   <div className="flex flex-col gap-5">
                     <Title>2023년 기준 인구 상황</Title>
                     <HorizonLine />
-                    <div className="flex flex-row h-[450px] w-full gap-10">
-                      <div className="flex shrink basis-[30%] w-full">
+                    <div className="flex flex-col lg:flex-row lg:h-[450px] w-full gap-6 lg:gap-10">
+                      <div className="flex h-[300px] lg:h-auto shrink lg:basis-[30%] w-full">
                         <StatisticsPie data={optionPieData} />
                       </div>
-                      <div className="flex shrink-1 grow overflow-scroll overflow-x-hidden">
+                      <div className="flex shrink-1 grow max-h-[320px] lg:max-h-none overflow-scroll overflow-x-hidden">
                         <PieDataTable data={optionPieData} />
                       </div>
                     </div>
                   </div>
                 </>
               )}
-              <div className="h-[600px] w-full flex flex-col gap-5">
+              <div className="w-full flex flex-col gap-5">
                 <Title>연도별 인구 변화 추이</Title>
                 <HorizonLine />
-                <div className="h-[600px]">
+                <div className="h-[360px] sm:h-[600px]">
                   <LineData data={optionLineData} />
                 </div>
               </div>

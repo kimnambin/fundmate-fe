@@ -24,7 +24,7 @@ export const DataOptionChoiceTable = ({
   return (
     <table className="table-fixed w-full">
       <colgroup>
-        <col className="max-w-[300px] w-[100px]" />
+        <col className="w-[72px] sm:w-[100px]" />
         <col />
       </colgroup>
       <thead>
@@ -46,7 +46,7 @@ export const DataOptionChoiceTable = ({
                 <MediumFont>{v.menuName}</MediumFont>
               </TableDataStyle>
               <TableDataStyle>
-                <div className="grid grid-cols-9 gap-1">
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-9 lg:gap-1">
                   {v.options.map(({ id, value }) => (
                     <div
                       key={value}
