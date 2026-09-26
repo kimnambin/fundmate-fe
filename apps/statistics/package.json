@@ -8,6 +8,7 @@
     "dev": "vite --port 5005",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "type-check": "tsc --noEmit -p tsconfig.app.json",
     "preview": "vite preview --port 5005",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
