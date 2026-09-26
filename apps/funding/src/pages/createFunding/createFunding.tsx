@@ -147,7 +147,6 @@ function CreateFunding() {
 
     try {
       const imageUrl = await uploadImage(imageFile);
-      console.log(imageUrl);
 
       const data: CreateFundingData = {
         image_url: imageUrl,
@@ -168,7 +167,6 @@ function CreateFunding() {
 
       createFunding(data, {
         onSuccess: (data) => {
-          console.log('펀딩 개설 성공');
           navigate(`/product/${data.project_id}`);
         },
         onError: (error) => {
@@ -178,7 +176,7 @@ function CreateFunding() {
       });
     } catch (err) {
       alert('이미지 업로드 실패');
-      console.log('이미지 업로드 실패: ', err);
+      console.error('이미지 업로드 실패: ', err);
     }
   };
 

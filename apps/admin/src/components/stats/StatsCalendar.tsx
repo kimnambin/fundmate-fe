@@ -33,27 +33,23 @@ const StatsCalendar: React.FC<StatsCalendarProps> = ({ onDateChange }) => {
 
   const handleMonthChange = (month: number) => {
     const updated = setMonth(currentDate, month);
-    console.log("월 변경:", month + 1);
     setCurrentDate(updated);
     triggerDateRange(updated);
   };
 
   const handleYearChange = (year: number) => {
     const updated = setYear(currentDate, year);
-    console.log("연도 변경:", year);
     setCurrentDate(updated);
     triggerDateRange(updated);
   };
 
   const handleDateClick = (date: Date) => {
-    console.log("날짜 클릭:", format(date, 'yyyy-MM-dd'));
     setSelectedDate(date);
     setCurrentDate(date);
     triggerDateRange(date);
   };
 
   useEffect(() => {
-    console.log("초기 마운트 시 triggerDateRange");
     triggerDateRange(currentDate);
   }, []);
 

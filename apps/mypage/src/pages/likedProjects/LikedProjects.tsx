@@ -33,7 +33,6 @@ const LikedProjects = () => {
           withCredentials: true,
         });
 
-        console.log("찜한 프로젝트 조회:", res.data);
 
         const formatted: Project[] = res.data.map((item) => ({
           id: item.project_id,

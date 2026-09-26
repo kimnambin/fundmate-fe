@@ -21,6 +21,7 @@ export default tseslint.config(
     },
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     rules: {
+      'no-console': ['error', { allow: ['warn', 'error'] }],
       ...reactHooks.configs.recommended.rules,
 
       // ✅ React Refresh 관련 권장 설정

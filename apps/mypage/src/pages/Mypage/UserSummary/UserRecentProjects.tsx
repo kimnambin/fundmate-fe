@@ -40,7 +40,6 @@ const UserRecentProjects = ({ nickname }: Props) => {
           withCredentials: true,
         });
 
-        console.log('최근 본 프로젝트:', res.data.fundingGetList);
         setProjectList(res.data.fundingGetList || []);
       } catch (err) {
         console.error('최근 본 프로젝트 조회 실패', err);

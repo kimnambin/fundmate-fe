@@ -35,12 +35,10 @@ const MakerProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (!user_id) return;
-      console.log(`메이커 조회 요청: ${user_id}`);
 
       try {
         const res = await axios.get(`/api/users/maker/${user_id}`);
         const data = res.data;
-        console.log('메이커 데이터 조회 성공:', data);
         setMaker(data);
       } catch (err) {
         console.error('메이커 정보 불러오기 실패:', err);

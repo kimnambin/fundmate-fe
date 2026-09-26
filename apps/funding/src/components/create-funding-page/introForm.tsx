@@ -38,12 +38,11 @@ const IntroForm = ({
       { message: description },
       {
         onSuccess: (res) => {
-          console.log('ai요약 성공: ', res);
           setAiSummary(res.summary);
         },
         onError: (err) => {
           alert('ai 요약 실패');
-          console.log('ai요약 실패: ', err);
+          console.error('ai요약 실패: ', err);
         },
       },
     );

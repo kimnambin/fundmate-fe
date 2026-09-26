@@ -52,8 +52,6 @@ function ProductPage() {
     return <NotFound />;
   }
 
-  console.log('productData', productData);
-  console.log('userData', userData);
 
   return (
     <FlexCol className="px-auto sm:px-[120px]">

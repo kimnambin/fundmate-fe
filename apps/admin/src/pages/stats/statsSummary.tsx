@@ -34,7 +34,6 @@ const StatsSummary: React.FC<Props> = ({ startDate, endDate }) => {
         withCredentials: true,
       });
 
-      console.log("통계 응답 결과:", res.data); 
 
       const { fundingCount, statistic } = res.data;
 

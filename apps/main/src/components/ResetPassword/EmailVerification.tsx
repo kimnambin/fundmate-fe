@@ -35,9 +35,8 @@ export const EmailVerificationComponent = () => {
 
   const verificateHandleClick = async () => {
     await axios.post('/api/auth/codes/send', { email: getValues('email') })
-      .then(response => {
+      .then(() => {
         setVerificateRequest(true);
-        console.log(response);
         resetTimer();
         startTimer();
         if (hasTimerEnded && verificateRequested) setVerificateRequest(false);
@@ -52,8 +51,7 @@ export const EmailVerificationComponent = () => {
       email: getValues('email'),
       code: getValues('verificationCode')
     })
-      .then(response => {
-        console.log(response);
+      .then(() => {
         setEmail(getValues('email'));
         setCode(getValues('verificationCode'));
         window.localStorage.setItem('auth', 'done')

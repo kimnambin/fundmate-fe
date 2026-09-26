@@ -23,11 +23,6 @@ const UserStats = () => {
         setLikeCount(res.data.likeCount);
         setCommentCount(res.data.commentCount);
 
-        console.log("펀딩 찜 후기 데이터", {
-          paymentCount: res.data.paymentCount,
-          likeCount: res.data.likeCount,
-          commentCount: res.data.commentCount,
-        });
       } catch (err) {
         console.error("유저 통계 정보 조회 실패:", err);
       }

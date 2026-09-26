@@ -26,10 +26,6 @@ const UserFollowStats = () => {
         setFollowing(followingTotal);
         setFollower(followerTotal);
 
-        console.log("팔로잉 팔로워 데이터", {
-          following: followingTotal,
-          follower: followerTotal,
-        });
       } catch (err) {
         console.error("팔로우 정보 조회 실패:", err);
       }

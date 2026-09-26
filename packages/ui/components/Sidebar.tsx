@@ -27,7 +27,6 @@ export const Sidebar = () => {
         const res = await axios.get('/api/users/mypage/profile', {
           withCredentials: true,
         });
-        console.log('프로필 응답 데이터:', res.data);
 
         setProfile({
           nickname: res.data.nickname,

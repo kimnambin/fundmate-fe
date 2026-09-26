@@ -72,7 +72,6 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
 
   useEffect(() => {
     if (insertedId !== null) {
-      console.log('정상적으로 insertedId 반영됨:', insertedId);
 
       reservePayment();
     }

@@ -31,8 +31,6 @@ const Following = () => {
           getFollowerUsers(),
         ]);
 
-        console.log('팔로잉 목록:', followingsRes);
-        console.log('팔로워 목록:', followersRes);
 
         const formattedFollowings = followingsRes.map((user) => ({
           id: user.userId,

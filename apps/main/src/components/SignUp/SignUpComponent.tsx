@@ -66,10 +66,8 @@ export const SignUpComponent = () => {
       code: verificationCode,
       category_id: userCategory
     }
-    console.log(finalData);
     await axios.post('/api/auth/signup', finalData)
-      .then(response => {
-        console.log(response);
+      .then(() => {
         navigate('/login')
       })
       .catch(error => {
@@ -82,8 +80,7 @@ export const SignUpComponent = () => {
       return;
     } else {
       await axios.post('/api/auth/codes/send', { email: getValues('email') })
-        .then(response => {
-          console.log(response);
+        .then(() => {
           resetTimer();
           startTimer();
           setVerificateRequest(true)
@@ -103,8 +100,7 @@ export const SignUpComponent = () => {
         email: getValues('email'),
         code: getValues('verificationCode')
       })
-      .then(response => {
-        console.log(response);
+      .then(() => {
         setCodeChecked('pass');
         setVerificated(true);
       })

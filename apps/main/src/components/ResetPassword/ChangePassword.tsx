@@ -45,13 +45,12 @@ export const ChangePassword = () => {
 
     await axios
       .patch('/api/auth/password', finalData)
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         window.localStorage.removeItem('auth');
         navigate('/login');
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 

@@ -21,7 +21,6 @@ const MyReviews = () => {
         const res = await axios.get('/api/users/mypage/comments', {
           withCredentials: true,
         });
-        console.log('후기 전체 응답:', res);
 
         if (Array.isArray(res.data?.data)) {
           setReviews(res.data.data);

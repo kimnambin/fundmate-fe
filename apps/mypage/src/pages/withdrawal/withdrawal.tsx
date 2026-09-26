@@ -33,13 +33,11 @@ const Withdrawal = () => {
           withCredentials: true,
         });
       } catch (checkErr) {
-        if (
+        const isWithdrawn =
           axios.isAxiosError(checkErr) &&
           (checkErr.response?.status === 401 ||
-            checkErr.response?.status === 404)
-        ) {
-          console.log("탈퇴 성공 확인됨");
-        } else {
+            checkErr.response?.status === 404);
+        if (!isWithdrawn) {
           console.error("유저 확인 중 알 수 없는 오류:", checkErr);
         }
       }

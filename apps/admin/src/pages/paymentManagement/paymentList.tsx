@@ -67,12 +67,10 @@ const PaymentList = () => {
           <Dropdown
             kind="status"
             usage="click"
-            onClick={(e) => console.log(e)}
           />
           <Dropdown
             kind="recommand"
             usage="click"
-            onClick={(e) => console.log(e)}
           />
         </div>
       </div>

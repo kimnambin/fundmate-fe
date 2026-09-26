@@ -40,10 +40,6 @@ const StatsHeader: React.FC = () => {
 
       const { fundingCount, statistic } = res.data;
 
-      console.log('통계 데이터 로딩 완료:');
-      console.log('총 프로젝트 수:', fundingCount);
-      console.log('총 후원자 수:', statistic?.count);
-      console.log('총 모금액:', statistic?.totalAmount);
 
       setSummary({
         totalSupportCount: fundingCount || 0,
