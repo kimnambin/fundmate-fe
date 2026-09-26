@@ -82,8 +82,8 @@ const PaymentFinal: React.FC<PaymentFinalProps> = ({
 
   const { reservePayment } = usePaymentForm({
     paymentInfoId: Number(savedPaymentId),
-    rewardId: Number(optionid) ?? null,
-    projectId: Number(projectId) ?? null,
+    rewardId: Number(optionid),
+    projectId: Number(projectId),
     amount: addAmount,
     totalAmount: productData?.goal_amount ?? 0,
     scheduleDate: sevenWeeksLaterFormatted() ?? '',

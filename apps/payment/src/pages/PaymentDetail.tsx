@@ -53,14 +53,14 @@ const PaymentDetail = () => {
       <PaymentDetailBox
         paymentInfoId={savedPayment?.paymentInfoId || 123456}
         createdAt={todayDateFormatted() || ''}
-        scheduleDate={`${sevenWeeksLaterFormatted()}후 결제` || ''}
+        scheduleDate={`${sevenWeeksLaterFormatted()}후 결제`}
       />
       <PaymentDetailMid
         price={userData?.options[0].price || 1000}
         isOpen={isModalOpen}
         handleOpenModal={handleOpenModal}
         onClose={handleCloseModal}
-        scheduleDate={`${sevenWeeksLaterFormatted()}일 남음` || ''}
+        scheduleDate={`${sevenWeeksLaterFormatted()}일 남음`}
         address={savedPayment?.address || ''}
         addressNumber={savedPayment?.addressNumber || 0}
         addressInfo={savedPayment?.addressInfo || ''}

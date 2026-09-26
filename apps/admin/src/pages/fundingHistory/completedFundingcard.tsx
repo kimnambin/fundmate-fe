@@ -16,9 +16,7 @@ interface FundingItem {
 }
 
 const CompletedFundingComponent = () => {
-  const [_completedFunding, setCompletedFunding] = useState<FundingItem | null>(
-    null,
-  );
+  const [, setCompletedFunding] = useState<FundingItem | null>(null);
   const [fundingList, setFundingList] = useState<FundingItem[]>([]);
   const [selectedFunding, setSelectedFunding] = useState<FundingItem | null>(
     null,

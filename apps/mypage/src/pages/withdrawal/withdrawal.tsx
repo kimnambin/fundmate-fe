@@ -32,10 +32,11 @@ const Withdrawal = () => {
         await axios.get("/api/users/mypage", {
           withCredentials: true,
         });
-      } catch (checkErr: any) {
+      } catch (checkErr) {
         if (
-          checkErr.response?.status === 401 ||
-          checkErr.response?.status === 404
+          axios.isAxiosError(checkErr) &&
+          (checkErr.response?.status === 401 ||
+            checkErr.response?.status === 404)
         ) {
           console.log("탈퇴 성공 확인됨");
         } else {
@@ -49,13 +50,14 @@ const Withdrawal = () => {
 
       // 로그인 페이지로 이동
       navigate("/login");
-    } catch (err: any) {
+    } catch (err) {
       console.error("회원 탈퇴 실패:", err);
 
-      if (err.response?.status === 500) {
+      const response = axios.isAxiosError(err) ? err.response : undefined;
+      if (response?.status === 500) {
         alert("❌비밀번호가 일치하지 않습니다.");
       } else {
-        alert(err?.response?.data?.message || "회원 탈퇴 중 오류가 발생했습니다.");
+        alert(response?.data?.message || "회원 탈퇴 중 오류가 발생했습니다.");
       }
     }
   };

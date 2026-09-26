@@ -72,7 +72,7 @@ export const SearchComponent = () => {
       return [];
     }
 
-    let allToProducts = [
+    const allToProducts = [
       ...mockProducts,
       ...mockPopularProducts,
       ...mockRecentlyProducts,

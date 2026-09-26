@@ -45,8 +45,11 @@ const StatsSummary: React.FC<Props> = ({ startDate, endDate }) => {
         supporterCount: statistic?.count || 0,
         paymentCount: statistic?.paymentCount || 0,
       });
-    } catch (err: any) {
-      console.error("통계 데이터 로딩 실패:", err?.response?.data || err.message || err);
+    } catch (err) {
+      const detail = axios.isAxiosError(err)
+        ? err.response?.data || err.message
+        : err;
+      console.error("통계 데이터 로딩 실패:", detail);
     }
   };
 

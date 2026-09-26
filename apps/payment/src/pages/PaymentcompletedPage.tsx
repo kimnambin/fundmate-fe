@@ -27,7 +27,7 @@ const PaymentcompletedPage = () => {
 
   const { productData } = useMockData();
 
-  let allToProducts = [
+  const allToProducts = [
     ...mockProducts,
     ...mockPopularProducts,
     ...mockRecentlyProducts,

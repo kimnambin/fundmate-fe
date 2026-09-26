@@ -34,7 +34,7 @@ const Following = () => {
         console.log('팔로잉 목록:', followingsRes);
         console.log('팔로워 목록:', followersRes);
 
-        const formattedFollowings = followingsRes.map((user: any) => ({
+        const formattedFollowings = followingsRes.map((user) => ({
           id: user.userId,
           name: user.nickname,
           nickname: user.nickname, // 서포터 페이지 라우팅용
@@ -43,7 +43,7 @@ const Following = () => {
           imageUrl: user.imageUrl ?? undefined,
         }));
 
-        const formattedFollowers = followersRes.map((user: any) => ({
+        const formattedFollowers = followersRes.map((user) => ({
           id: user.userId,
           name: user.nickname,
           nickname: user.nickname, // 서포터 페이지 라우팅용

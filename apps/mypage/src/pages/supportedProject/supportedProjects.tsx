@@ -5,6 +5,17 @@ import type { SupportedProject } from '../../api/supportedProjects';
 import { Title } from '@repo/ui/styles';
 import { SupportedHorizontalCard } from '../../components/common/SupportHorizontalCard';
 
+interface SupportedPaymentItem {
+  scheduleId: number;
+  projectId: number;
+  createdAt: string;
+  productName: string;
+  optionName: string;
+  totalAmount: number;
+  scheduleDate: string;
+  productImage: string;
+}
+
 const SupportedProjects = () => {
   const [projects, setProjects] = useState<SupportedProject[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -23,7 +34,7 @@ const SupportedProjects = () => {
 
         if (!Array.isArray(rawData)) return;
 
-        const formatted: SupportedProject[] = rawData.map((item: any) => ({
+        const formatted: SupportedProject[] = rawData.map((item: SupportedPaymentItem) => ({
           id: item.scheduleId,
           projectId: item.projectId,
           supportDate: item.createdAt.slice(0, 10).replace(/-/g, '.'),

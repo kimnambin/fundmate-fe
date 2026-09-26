@@ -1,13 +1,19 @@
 import axios from 'axios';
 
-export const getFollowingUsers = async () => {
+export interface FollowUserResponse {
+  userId: number;
+  nickname: string;
+  imageUrl?: string | null;
+}
+
+export const getFollowingUsers = async (): Promise<FollowUserResponse[]> => {
   const res = await axios.get("/api/users/mypage/following", {
     withCredentials: true,
   });
   return res.data?.following ?? [];
 };
 
-export const getFollowerUsers = async () => {
+export const getFollowerUsers = async (): Promise<FollowUserResponse[]> => {
   const res = await axios.get("/api/users/mypage/follower", {
     withCredentials: true,
   });
