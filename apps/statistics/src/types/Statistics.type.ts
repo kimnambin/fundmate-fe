@@ -69,3 +69,28 @@ export type NivoDataGroup = {
   type: 'house' | 'household' | 'people';
   data: NivoDataItem[];
 }[];
+
+// 키워드별 분석 API 응답: 조회 항목(people/house/household)마다 값이 담기는 필드가 다르다
+export interface KeywordRegionRow {
+  adm_cd: string;
+  adm_nm: string;
+  population?: string; // people
+  house_cnt?: string; // house
+  household_cnt?: string; // household
+}
+
+export interface KeywordYearlyData {
+  year: number;
+  result: KeywordRegionRow[];
+}
+
+export interface KeywordTakenData {
+  people?: KeywordYearlyData[];
+  household?: KeywordYearlyData[];
+  house?: KeywordYearlyData[];
+}
+
+// StatisticsHeader가 조회 결과를 StatisticsBody로 넘길 때 사용하는 값
+export type StatisticsResponse =
+  | { selected: 'keyword'; takenData: KeywordTakenData }
+  | { selected: 'option'; takenData: PopulationYearlyData[] };

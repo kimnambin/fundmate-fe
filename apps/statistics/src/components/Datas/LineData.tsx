@@ -6,7 +6,7 @@ interface DataProps {
 }
 
 export interface DataArrayProps {
-  id: any;
+  id: string | number;
   data: DataProps[];
 }
 

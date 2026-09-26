@@ -7,16 +7,24 @@ import { useEffect, useState } from 'react';
 import type {
   DataSelectionProps,
   OptionSelectionProps,
+  StatisticsResponse,
 } from '../types/Statistics.type';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { dataTypeStore, statisticsStore } from '../stores/StatisticsStore';
 
 interface StatisticsProps {
-  setData: React.Dispatch<React.SetStateAction<any>>;
+  setData: React.Dispatch<React.SetStateAction<StatisticsResponse | undefined>>;
 }
 
-const getPublicData = async (data: any, selected: any) => {
+type StatisticsRequest =
+  | { selected: 'keyword'; filteredData: DataSelectionProps }
+  | { selected: 'option'; filteredData: OptionSelectionProps };
+
+const getPublicData = async (
+  data: DataSelectionProps | OptionSelectionProps,
+  selected: 'keyword' | 'option',
+) => {
   try {
     const response = await axios.post(`/api/datas/${selected}`, data);
     return response.data;
@@ -43,14 +51,6 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
     (state) => state.setOptionDataSubmitState,
   );
 
-  const [inputData, setInputData] = useState<any>({});
-
-  const { refetch } = useQuery({
-    queryKey: ['statistics', selected],
-    queryFn: () => getPublicData(inputData.filteredData, inputData.selected),
-    enabled: false,
-  });
-
   const [dataSelection, setDataSelection] = useState<DataSelectionProps>({
     people: 0,
     household: 0,
@@ -60,6 +60,17 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
     age_group: '',
     gender: '',
     area: '',
+  });
+
+  const [inputData, setInputData] = useState<StatisticsRequest>({
+    selected: 'keyword',
+    filteredData: dataSelection,
+  });
+
+  const { refetch } = useQuery({
+    queryKey: ['statistics', selected],
+    queryFn: () => getPublicData(inputData.filteredData, inputData.selected),
+    enabled: false,
   });
 
   useEffect(() => {

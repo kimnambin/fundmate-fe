@@ -2,7 +2,10 @@ import { Title } from '@repo/ui/styles';
 import { HorizonLine } from '../styles/Common.style';
 import { useState, useEffect } from 'react';
 import { StatisticsPie } from './Datas/PieData';
-import { convert2024DataToChartFormat } from '../utils/pieChartConverter';
+import {
+  convert2024DataToChartFormat,
+  type ConvertedChartData,
+} from '../utils/pieChartConverter';
 import { PieDataTable, type PieItem } from './Datas/PieDataTable';
 import { dataTypeStore, statisticsStore } from '../stores/StatisticsStore';
 import { LineData } from './Datas/LineData';
@@ -12,21 +15,14 @@ import {
 } from '../utils/keywordLineChart';
 import { convertOptionRawDataToNivoPie } from '../utils/optionPieChartConverter';
 import { convertOptionRawDataToLineChart } from '../utils/optionLineDataConverter';
+import type { StatisticsResponse } from '../types/Statistics.type';
 
 interface dataProps {
-  rawData: StatisticsDataProps;
+  rawData: StatisticsResponse;
 }
 
-interface StatisticsDataProps {
-  takenData: any;
-  selected: string;
-}
-
-interface keywordDataProps {
-  people: any;
-  household: any;
-  house: any;
-}
+type KeywordKey = 'people' | 'household' | 'house';
+type KeywordGroup<T> = Record<KeywordKey, T>;
 
 type NivoLineDatum = {
   x: string | number;
@@ -34,7 +30,7 @@ type NivoLineDatum = {
 };
 
 type NivoLineSeries = {
-  id: any;
+  id: string | number;
   data: NivoLineDatum[];
 };
 
@@ -51,22 +47,24 @@ export const StatisticsBody = ({ rawData }: dataProps) => {
   const isOptionDataSubmitted = statisticsStore(
     (state) => state.isOptionDataSubmitted,
   );
-  const keyword: (keyof keywordDataProps)[] = ['people', 'household', 'house'];
-  const selected = rawData.selected;
-  const filteredData = rawData.takenData;
-  const [pieData, setPieData] = useState<keywordDataProps>({
+  const keyword: KeywordKey[] = ['people', 'household', 'house'];
+  const [pieData, setPieData] = useState<
+    KeywordGroup<ConvertedChartData[]>
+  >({
     people: [],
     household: [],
     house: [],
   });
-  const [normalLineData, setNormalLineData] = useState<keywordDataProps>({
+  const [normalLineData, setNormalLineData] = useState<
+    KeywordGroup<NivoLineSeries[]>
+  >({
     people: [],
     household: [],
     house: [],
   });
 
   const [transitionLineData, setTransitionLineData] =
-    useState<keywordDataProps>({
+    useState<KeywordGroup<NivoLineSeries[]>>({
       people: [],
       household: [],
       house: [],
@@ -76,10 +74,13 @@ export const StatisticsBody = ({ rawData }: dataProps) => {
   const [optionLineData, setOptionLineData] = useState<NivoLineSeries[]>([]);
 
   useEffect(() => {
-    if (selected === 'keyword') {
-      const updatedPieData: Partial<keywordDataProps> = {};
-      const updatedLineData: Partial<keywordDataProps> = {};
-      const updatedTransitionLineData: Partial<keywordDataProps> = {};
+    if (rawData.selected === 'keyword') {
+      const filteredData = rawData.takenData;
+      const updatedPieData: Partial<KeywordGroup<ConvertedChartData[]>> = {};
+      const updatedLineData: Partial<KeywordGroup<NivoLineSeries[]>> = {};
+      const updatedTransitionLineData: Partial<
+        KeywordGroup<NivoLineSeries[]>
+      > = {};
 
       keyword.forEach((k) => {
         const tempPie = convert2024DataToChartFormat(filteredData, k);
@@ -107,6 +108,7 @@ export const StatisticsBody = ({ rawData }: dataProps) => {
         ...updatedTransitionLineData,
       }));
     } else {
+      const filteredData = rawData.takenData;
       const tempPie = convertOptionRawDataToNivoPie(filteredData, 2023);
       setOptionPieData(tempPie);
       const tempLine = convertOptionRawDataToLineChart(filteredData);
@@ -121,7 +123,7 @@ export const StatisticsBody = ({ rawData }: dataProps) => {
           {isKeywordDataSubmitted ? (
             <>
               <div className="flex flex-col gap-10">
-                {keyword.map((k: keyof keywordDataProps) =>
+                {keyword.map((k) =>
                   pieData[k].length ? (
                     <>
                       <div className="flex flex-col gap-5">

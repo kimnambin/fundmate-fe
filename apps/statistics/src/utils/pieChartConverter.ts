@@ -1,24 +1,6 @@
+import type { KeywordTakenData as TakenData } from '../types/Statistics.type';
+
 type SelectedType = 'people' | 'household' | 'house';
-
-type CommonResult = {
-  adm_cd: string;
-  adm_nm: string;
-};
-
-type PeopleResult = CommonResult & { population: string };
-type HouseResult = CommonResult & { house_cnt: string };
-type HouseholdResult = CommonResult & { household_cnt: string };
-
-type YearlyData<T> = {
-  year: number;
-  result: T[];
-};
-
-type TakenData = {
-  people: YearlyData<PeopleResult>[];
-  household: YearlyData<HouseholdResult>[];
-  house: YearlyData<HouseResult>[];
-};
 
 export type ConvertedChartData = {
   id: string;
@@ -32,13 +14,13 @@ export function convert2024DataToChartFormat(
   selected: SelectedType,
 ): ConvertedChartData[] {
   const year = 2023;
-  const yearlyArray = takenData[selected] as Array<YearlyData<any>>;
+  const yearlyArray = takenData[selected];
   if (!yearlyArray) return [];
   const yearData = yearlyArray.find((data) => data.year === year);
 
   if (!yearData) return [];
 
-  return yearData.result.map((item: any, index: number) => {
+  return yearData.result.map((item, index) => {
     const valueKey =
       selected === 'people'
         ? 'population'

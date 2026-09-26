@@ -1,34 +1,11 @@
+import type {
+  KeywordTakenData as TakenData,
+  KeywordYearlyData as YearlyData,
+} from '../types/Statistics.type';
+
 // 타입 정의
 type SelectedType = 'people' | 'household' | 'house';
 type ValueType = 'population' | 'house_cnt' | 'household_cnt';
-
-type CommonResult = {
-  adm_cd: string;
-  adm_nm: string;
-};
-
-type PeopleResult = CommonResult & {
-  population: string;
-};
-
-type HouseResult = CommonResult & {
-  house_cnt: string;
-};
-
-type HouseholdResult = CommonResult & {
-  household_cnt: string;
-};
-
-type YearlyData<T> = {
-  year: number;
-  result: T[];
-};
-
-type TakenData = {
-  people?: YearlyData<PeopleResult>[];
-  household?: YearlyData<HouseholdResult>[];
-  house?: YearlyData<HouseResult>[];
-};
 
 type LineChartDataPoint = {
   x: number; // year
@@ -59,11 +36,11 @@ export function convertOptionRawDataToRegionLineChart(
 
       // valueKey 타입별로 안전하게 접근
       if (selected === 'people') {
-        value = Number((item as PeopleResult).population);
+        value = Number(item.population);
       } else if (selected === 'house') {
-        value = Number((item as HouseResult).house_cnt);
+        value = Number(item.house_cnt);
       } else {
-        value = Number((item as HouseholdResult).household_cnt);
+        value = Number(item.household_cnt);
       }
 
       if (!regionMap.has(regionName)) {
@@ -104,7 +81,7 @@ export function calculateGrowthNivoLineData(
   selected: 'people' | 'house' | 'household',
 ): NivoLineData[] {
   let valueKey: ValueType;
-  let dataByYear: YearlyData<any>[] | undefined;
+  let dataByYear: YearlyData[] | undefined;
 
   switch (selected) {
     case 'people':
@@ -140,10 +117,10 @@ export function calculateGrowthNivoLineData(
 
     growthByRegion.forEach((regionGrowth) => {
       const prevRegion = prevYearData.find(
-        (r: any) => r.adm_cd === regionGrowth.adm_cd,
+        (r) => r.adm_cd === regionGrowth.adm_cd,
       );
       const currRegion = currYearData.find(
-        (r: any) => r.adm_cd === regionGrowth.adm_cd,
+        (r) => r.adm_cd === regionGrowth.adm_cd,
       );
 
       if (prevRegion && currRegion) {
