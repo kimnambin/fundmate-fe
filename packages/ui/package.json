@@ -6,6 +6,7 @@
     "./components": "./components/index.ts",
     "./assets": "./assets/index.ts",
     "./utils": "./utils/index.ts",
+    "./query-client": "./utils/queryClient.ts",
     "./styles": "./styles/index.ts",
     "./mocks": "./mocks/index.ts",
     "./hooks": "./hooks/index.ts",
@@ -31,6 +32,7 @@
     "typescript": "5.5.4"
   },
   "peerDependencies": {
+    "@tanstack/react-query": "^5.83.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

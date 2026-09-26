@@ -1,21 +1,12 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import {
-  MutationCache,
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
-import { handleUnauthorizedError, shouldRetryQuery } from '@repo/ui/utils';
+import { createQueryClient } from '@repo/ui/query-client';
 import GlobalStyle from './styles/global.ts';
 
-const queryClient = new QueryClient({
-  queryCache: new QueryCache({ onError: handleUnauthorizedError }),
-  mutationCache: new MutationCache({ onError: handleUnauthorizedError }),
-  defaultOptions: { queries: { retry: shouldRetryQuery } },
-});
+const queryClient = createQueryClient();
 
 async function enableMocking() {
   const { worker } = await import('@repo/ui/mocks');
