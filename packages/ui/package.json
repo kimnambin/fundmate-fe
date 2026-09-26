@@ -14,15 +14,20 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint \"**/*.ts\"",
+    "test": "jest",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@tanstack/react-query": "^5.83.0",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.14.12",
     "eslint": "^8.57.0",
+    "jest": "^30.0.4",
     "tailwindcss": "^3.4.17",
+    "ts-jest": "^29.4.0",
     "typescript": "5.5.4"
   },
   "peerDependencies": {
