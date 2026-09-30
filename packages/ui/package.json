@@ -8,6 +8,10 @@
     "./utils": "./utils/index.ts",
     "./query-client": "./utils/queryClient.ts",
     "./api-client": "./utils/apiClient.ts",
+    "./vite-federation": {
+      "types": "./vite/federation.d.mts",
+      "default": "./vite/federation.mjs"
+    },
     "./styles": "./styles/index.ts",
     "./mocks": "./mocks/index.ts",
     "./hooks": "./hooks/index.ts",

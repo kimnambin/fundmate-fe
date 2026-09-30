@@ -3,6 +3,10 @@ import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
+import {
+  FEDERATION_SHARED,
+  federationDedupe,
+} from '@repo/ui/vite-federation';
 
 export const MAIN_PAGE = 'https://fundmate-fe-main.vercel.app/';
 export const FUNDING_PAGE = 'https://fundmate-fe-funding.vercel.app';
@@ -38,14 +42,7 @@ export default defineConfig(({ mode }) => {
             ? `${STATISTICS_PAGE}/assets/remoteEntry.js`
             : 'http://localhost:5005/assets/remoteEntry.js',
         },
-        shared: [
-          'react',
-          'react-dom',
-          'react-router-dom',
-          '@tanstack/react-query',
-          'axios',
-          '@ramonak/react-progress-bar',
-        ],
+        shared: FEDERATION_SHARED,
       }),
     ],
     build: {
@@ -54,24 +51,11 @@ export default defineConfig(({ mode }) => {
       minify: false,
       cssCodeSplit: false,
       rollupOptions: {
-        external: [
-          'react',
-          'react-dom',
-          'react-router-dom',
-          '@tanstack/react-query',
-          'axios',
-          '@ramonak/react-progress-bar',
-        ],
+        external: FEDERATION_SHARED,
       },
     },
     resolve: {
-      dedupe: [
-        'react',
-        'react-dom',
-        'react-router-dom',
-        '@ramonak/react-progress-bar',
-        '@tanstack/react-query',
-      ],
+      dedupe: federationDedupe,
     },
   };
 });

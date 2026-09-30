@@ -12,7 +12,7 @@
     "preview": "vite preview --port 5002",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {
     "@nivo/core": "^0.99.0",

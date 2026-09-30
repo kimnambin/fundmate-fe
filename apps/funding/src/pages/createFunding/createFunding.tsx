@@ -2,7 +2,7 @@ import { MainButton } from '@repo/ui/components';
 import { Layout, Title, WarningText } from '@repo/ui/styles';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { formatPriceToNumber } from '../../../../../packages/ui/utils/format';
+import { formatPriceToNumber } from '@repo/ui/utils';
 import AddedItem from '../../components/added-item/addedItem';
 import CategoryGroup from '../../components/category/categoryGroup';
 import CreateModal from '../../components/create-funding-page/createModal';

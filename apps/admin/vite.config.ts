@@ -3,6 +3,11 @@ import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
+import {
+  FEDERATION_SHARED,
+  federationDedupe,
+  apiProxy,
+} from '@repo/ui/vite-federation';
 
 dotenv.config({ path: resolve(__dirname, '../../.env') });
 // https://vite.dev/config/
@@ -21,44 +26,19 @@ export default defineConfig({
         './PaymentSummary': './src/pages/paymentManagement/paymentSummary.tsx',
         './StatsPage': './src/pages/stats/statsPage.tsx',
       },
-      shared: [
-        'react',
-        'react-dom',
-        'react-router-dom',
-        'axios',
-        '@ramonak/react-progress-bar',
-      ],
+      shared: FEDERATION_SHARED,
     }),
   ],
   build: {
     target: 'esnext',
     rollupOptions: {
-      external: [
-        'react',
-        'react-dom',
-        'react-router-dom',
-        'axios',
-        '@ramonak/react-progress-bar',
-      ],
+      external: FEDERATION_SHARED,
     },
   },
   resolve: {
-    dedupe: [
-      'react',
-      'react-dom',
-      'react-router-dom',
-      '@ramonak/react-progress-bar',
-    ],
+    dedupe: federationDedupe,
   },
   server: {
-    proxy: {
-      '/api': {
-        target: process.env.VITE_BACKEND_ADDRESS,
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-        secure: false,
-        cookieDomainRewrite: '',
-      },
-    },
+    proxy: apiProxy(process.env.VITE_BACKEND_ADDRESS),
   },
 });
