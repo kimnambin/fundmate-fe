@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiClient } from '@repo/ui/api-client';
 
 export interface Project {
   id: number;
@@ -13,7 +13,7 @@ export interface Project {
 
 export const getLikedProjects = async (): Promise<Project[]> => {
   try {
-    const response = await axios.get<Project[]>("/api/mypage/liked-projects");
+    const response = await apiClient.get<Project[]>("/api/mypage/liked-projects");
     return response.data;
   } catch (error) {
     console.error("Failed to fetch liked projects:", error);

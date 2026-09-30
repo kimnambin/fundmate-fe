@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { apiClient } from '@repo/ui/api-client';
 import { SubTitle } from "@repo/ui/styles";
 import {
   FollowerTextContainer,
@@ -15,8 +15,8 @@ const UserFollowStats = () => {
       try {
 
         const [followingRes, followerRes] = await Promise.all([
-          axios.get("/api/users/mypage/following", { withCredentials: true }),
-          axios.get("/api/users/mypage/follower", { withCredentials: true }),
+          apiClient.get("/api/users/mypage/following"),
+          apiClient.get("/api/users/mypage/follower"),
         ]);
 
 

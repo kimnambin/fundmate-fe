@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiClient } from '@repo/ui/api-client';
 
 // 타입 필요 시 정의
 export interface SupportedProject {
@@ -15,7 +15,7 @@ export interface SupportedProject {
 // 사용자 후원한 프로젝트 리스트 불러오기
 export const getSupportedProjects = async (): Promise<SupportedProject[]> => {
   try {
-    const response = await axios.get<SupportedProject[]>("/api/users/me/supported-projects");
+    const response = await apiClient.get<SupportedProject[]>("/api/users/me/supported-projects");
     return response.data;
   } catch (error) {
     console.error("Failed to fetch supported projects:", error);

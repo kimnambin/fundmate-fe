@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { RotateCcw } from 'lucide-react';
 import { Title, MediumFont } from '@repo/ui/styles';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 
 interface PaymentItem {
   scheduleId: number;
@@ -43,9 +43,8 @@ const PaymentSummary: React.FC = () => {
     try {
       setIsRotating(true);
 
-      const res = await axios.get('/api/users/projects/payments', {
+      const res = await apiClient.get('/api/users/projects/payments', {
         params: { page: 1, limit: 1000 },
-        withCredentials: true,
       });
 
       const payments: PaymentItem[] = res.data.data;

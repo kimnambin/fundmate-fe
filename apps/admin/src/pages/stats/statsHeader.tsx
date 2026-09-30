@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { RotateCcw } from 'lucide-react';
 import { Title, MediumFont } from '@repo/ui/styles';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 
 interface StatsSummaryData {
   totalSupportCount: number;
@@ -34,9 +34,7 @@ const StatsHeader: React.FC = () => {
   const handleRefresh = async () => {
     setIsRotating(true);
     try {
-      const res = await axios.get('/api/users/projects/statistics', {
-        withCredentials: true,
-      });
+      const res = await apiClient.get('/api/users/projects/statistics');
 
       const { fundingCount, statistic } = res.data;
 

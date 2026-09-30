@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Title, SubTitle, MediumFont } from '@repo/ui/styles';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 import clsx from 'clsx';
 
 interface FundingItem {
@@ -26,9 +26,7 @@ const CompletedFundingComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('/api/users/projects', {
-          withCredentials: true,
-        });
+        const res = await apiClient.get('/api/users/projects');
 
         const data = res.data;
         const parsedCompleted: FundingItem = {

@@ -1,5 +1,5 @@
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 
 export const userInfo = () => {
-  return axios.get(`/api/users/mypage/profile`);
+  return apiClient.get(`/api/users/mypage/profile`);
 };

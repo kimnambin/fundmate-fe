@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 import { Title, MediumFont } from '@repo/ui/styles';
 
 interface ReviewItem {
@@ -18,9 +18,7 @@ const MyReviews = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axios.get('/api/users/mypage/comments', {
-          withCredentials: true,
-        });
+        const res = await apiClient.get('/api/users/mypage/comments');
 
         if (Array.isArray(res.data?.data)) {
           setReviews(res.data.data);

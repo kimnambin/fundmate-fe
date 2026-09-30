@@ -9,7 +9,7 @@ import type {
   OptionSelectionProps,
   StatisticsResponse,
 } from '../types/Statistics.type';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { dataTypeStore, statisticsStore } from '../stores/StatisticsStore';
 
@@ -26,7 +26,7 @@ const getPublicData = async (
   selected: 'keyword' | 'option',
 ) => {
   try {
-    const response = await axios.post(`/api/datas/${selected}`, data);
+    const response = await apiClient.post(`/api/datas/${selected}`, data);
     return response.data;
   } catch (error) {
     console.error(error);

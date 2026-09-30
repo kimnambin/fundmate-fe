@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { apiClient } from '@repo/ui/api-client';
 import { FaGift, FaHeart, FaCommentDots } from "react-icons/fa";
 import { SubTitle } from "@repo/ui/styles";
 
@@ -14,9 +14,8 @@ const UserStats = () => {
     const fetchStats = async () => {
       try {
 
-        const res = await axios.get("/api/users/mypage", {
+        const res = await apiClient.get("/api/users/mypage", {
           params: { project_id: [] }, //임시 전달값
-          withCredentials: true,
         });
 
         setPaymentCount(res.data.paymentCount);

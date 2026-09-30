@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Title, MediumFont } from '@repo/ui/styles';
 import { Dropdown } from '@repo/ui/components';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 import { format, parseISO } from 'date-fns';
 
 interface PaymentItem {
@@ -33,11 +33,10 @@ const PaymentList = () => {
 
   const fetchPayments = async (page: number) => {
     try {
-      const res = await axios.get<PaymentResponse>(
+      const res = await apiClient.get<PaymentResponse>(
         '/api/users/projects/payments',
         {
           params: { page, limit },
-          withCredentials: true,
         },
       );
       setItems(res.data.data);

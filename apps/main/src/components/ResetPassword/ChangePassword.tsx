@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { InputText, MainButton } from '@repo/ui/components';
 import { MediumFont, Title } from '@repo/ui/styles';
 import { emailVerifiedStore } from '../../stores/EmailVerifiedStore';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 
 const schema = yup.object({
   password: yup.string().required(),
@@ -43,7 +43,7 @@ export const ChangePassword = () => {
       confirm_password: checkPassword,
     };
 
-    await axios
+    await apiClient
       .patch('/api/auth/password', finalData)
       .then(() => {
         window.localStorage.removeItem('auth');

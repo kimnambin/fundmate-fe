@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { apiClient } from '@repo/ui/api-client';
 import UserStats from "./UserStats";
 import UserFollowStats from "./UserFollowStats";
 import UserRecentProjects from "./UserRecentProjects";
@@ -11,9 +11,7 @@ const UserSummary = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await axios.get("/api/users/mypage/profile", {
-          withCredentials: true,
-        });
+        const response = await apiClient.get("/api/users/mypage/profile");
         setNickname(response.data.nickname);
       } catch (error) {
         console.error("유저 프로필 조회 실패:", error);

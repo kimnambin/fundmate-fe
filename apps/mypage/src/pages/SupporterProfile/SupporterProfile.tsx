@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 import { Layout, MediumFont, SubTitle, Title } from '@repo/ui/styles';
 import { Loading } from '@repo/ui/components';
 
@@ -35,7 +35,7 @@ const ProfilePage = () => {
     const fetchProfile = async () => {
       if (!user_id) return;
       try {
-        const response = await axios.get(`/api/users/maker/${user_id}`);
+        const response = await apiClient.get(`/api/users/maker/${user_id}`);
         setProfile(response.data);
       } catch (error) {
         console.error('프로필 조회 실패:', error);
@@ -51,11 +51,11 @@ const ProfilePage = () => {
 
     try {
       if (profile.isFollowing) {
-        await axios.delete('/api/users/following', {
+        await apiClient.delete('/api/users/following', {
           data: { following_id: Number(user_id) },
         });
       } else {
-        await axios.post('/api/users/following', {
+        await apiClient.post('/api/users/following', {
           following_id: Number(user_id),
         });
       }

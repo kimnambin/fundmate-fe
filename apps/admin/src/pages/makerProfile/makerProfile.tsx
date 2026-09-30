@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 import { VerticalCard } from '@repo/ui/components';
 import { AiOutlinePlus, AiOutlineCheck } from 'react-icons/ai';
 import { Title, SubTitle, MediumFont, Layout } from '@repo/ui/styles';
@@ -37,7 +37,7 @@ const MakerProfile = () => {
       if (!user_id) return;
 
       try {
-        const res = await axios.get(`/api/users/maker/${user_id}`);
+        const res = await apiClient.get(`/api/users/maker/${user_id}`);
         const data = res.data;
         setMaker(data);
       } catch (err) {
@@ -54,11 +54,11 @@ const MakerProfile = () => {
 
     try {
       if (maker.isFollowing) {
-        await axios.delete('/api/users/following', {
+        await apiClient.delete('/api/users/following', {
           data: { following_id: Number(user_id) },
         });
       } else {
-        await axios.post('/api/users/following', {
+        await apiClient.post('/api/users/following', {
           following_id: Number(user_id),
         });
       }

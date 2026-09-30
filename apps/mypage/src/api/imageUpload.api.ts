@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 import { v4 as uuidv4 } from 'uuid';
 
 export const getPresignedUrl = async (file: File) => {
@@ -6,7 +7,7 @@ export const getPresignedUrl = async (file: File) => {
   const extension = file.name.split('.').pop();
   const newFileName = `${uuid}.${extension}`;
 
-  const response = await axios.get('/api/upload/presign', {
+  const response = await apiClient.get('/api/upload/presign', {
     params: {
       filename: newFileName,
       contentType: file.type,
@@ -24,6 +25,6 @@ export const uploadImageToS3 = async (presignedUrl: string, file: File) => {
 };
 
 export const uploadComplete = async (key: string) => {
-  const response = await axios.post('/api/upload/complete', { key });
+  const response = await apiClient.post('/api/upload/complete', { key });
   return response.data;
 };

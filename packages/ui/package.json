@@ -7,10 +7,13 @@
     "./assets": "./assets/index.ts",
     "./utils": "./utils/index.ts",
     "./query-client": "./utils/queryClient.ts",
+    "./api-client": "./utils/apiClient.ts",
     "./styles": "./styles/index.ts",
     "./mocks": "./mocks/index.ts",
     "./hooks": "./hooks/index.ts",
-    "./loadingStore": "./stores/loadingStore.ts"
+    "./loadingStore": "./stores/loadingStore.ts",
+    "./tailwind-preset": "./tailwind-preset.js",
+    "./fonts.css": "./styles/fonts.css"
   },
   "license": "MIT",
   "scripts": {
@@ -37,6 +40,7 @@
     "react-dom": "^19.1.0"
   },
   "dependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
     "@ramonak/react-progress-bar": "^5.4.0",
     "axios": "^1.10.0",
     "msw": "^2.10.4",

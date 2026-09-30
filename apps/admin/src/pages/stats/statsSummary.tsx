@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SubTitle, MediumFont } from "@repo/ui/styles";
-import axios from "axios";
+import { apiClient } from '@repo/ui/api-client';
+import { isAxiosError } from 'axios';
 
 interface StatsData {
   fundingCount: number;
@@ -29,9 +30,8 @@ const StatsSummary: React.FC<Props> = ({ startDate, endDate }) => {
 
   const fetchStats = async () => {
     try {
-      const res = await axios.get("/api/users/projects/statistics", {
+      const res = await apiClient.get("/api/users/projects/statistics", {
         params: { start: startDate, end: endDate },
-        withCredentials: true,
       });
 
 
@@ -45,7 +45,7 @@ const StatsSummary: React.FC<Props> = ({ startDate, endDate }) => {
         paymentCount: statistic?.paymentCount || 0,
       });
     } catch (err) {
-      const detail = axios.isAxiosError(err)
+      const detail = isAxiosError(err)
         ? err.response?.data || err.message
         : err;
       console.error("통계 데이터 로딩 실패:", detail);

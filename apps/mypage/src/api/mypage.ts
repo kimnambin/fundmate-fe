@@ -1,7 +1,7 @@
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 
 export const getProductInfo = () => {
-  return axios.get(`/api/projects`);
+  return apiClient.get(`/api/projects`);
 };
 
 interface SettingsPayload {
@@ -14,5 +14,5 @@ interface SettingsPayload {
 }
 
 export const settings = (payload: SettingsPayload) => {
-  return axios.put(`/api/users/mypage/profile`, payload);
+  return apiClient.put(`/api/users/mypage/profile`, payload);
 };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { apiClient } from '@repo/ui/api-client';
+import { isAxiosError } from 'axios';
 import { FundiMainImage } from "@repo/ui/assets";
 import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 import { InputText, MainButton } from "@repo/ui/components";
@@ -20,26 +21,23 @@ const Withdrawal = () => {
 
     try {
       // 회원 탈퇴 API 요청
-      const res = await axios.delete("/api/users/account", {
-        withCredentials: true,
+      const res = await apiClient.delete("/api/users/account", {
         data: { password }, // password를 req.body로 전달
       });
 
       alert(res.data.message || "회원 탈퇴가 완료되었습니다.");
 
       // 로그인 상태 확인 요청 → 401 or 404면 정상 탈퇴된 것으로 간주
+      // (401이 정상 결과이므로 공통 401 리다이렉트가 동작하지 않게 validateStatus로 직접 판단한다)
       try {
-        await axios.get("/api/users/mypage", {
-          withCredentials: true,
+        const check = await apiClient.get("/api/users/mypage", {
+          validateStatus: () => true,
         });
-      } catch (checkErr) {
-        const isWithdrawn =
-          axios.isAxiosError(checkErr) &&
-          (checkErr.response?.status === 401 ||
-            checkErr.response?.status === 404);
-        if (!isWithdrawn) {
-          console.error("유저 확인 중 알 수 없는 오류:", checkErr);
+        if (check.status !== 401 && check.status !== 404) {
+          console.error("유저 확인 중 알 수 없는 상태:", check.status);
         }
+      } catch (checkErr) {
+        console.error("유저 확인 중 알 수 없는 오류:", checkErr);
       }
 
       // 클라이언트 토큰 삭제
@@ -51,7 +49,7 @@ const Withdrawal = () => {
     } catch (err) {
       console.error("회원 탈퇴 실패:", err);
 
-      const response = axios.isAxiosError(err) ? err.response : undefined;
+      const response = isAxiosError(err) ? err.response : undefined;
       if (response?.status === 500) {
         alert("❌비밀번호가 일치하지 않습니다.");
       } else {

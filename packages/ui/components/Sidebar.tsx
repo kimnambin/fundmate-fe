@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { apiClient } from '../utils/apiClient';
 import userImg from '../assets/images/user.png';
 import { MediumFont, SubTitle, Title } from '@repo/ui/styles';
 import { MainButton } from '@repo/ui/components';
@@ -24,9 +24,7 @@ export const Sidebar = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get('/api/users/mypage/profile', {
-          withCredentials: true,
-        });
+        const res = await apiClient.get('/api/users/mypage/profile');
 
         setProfile({
           nickname: res.data.nickname,

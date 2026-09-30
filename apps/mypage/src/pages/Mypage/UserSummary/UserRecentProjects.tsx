@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRecentViewedProjectsStore } from '../../../store/recentViewedProjects';
 import { SubTitle } from '@repo/ui/styles';
 import { VerticalCard } from '@repo/ui/components';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 
 interface Props {
   nickname: string;
@@ -33,11 +33,10 @@ const UserRecentProjects = ({ nickname }: Props) => {
       setIsLoading(true);
 
       try {
-        const res = await axios.get('/api/users/mypage', {
+        const res = await apiClient.get('/api/users/mypage', {
           params: {
             project_id: projectIdList,
           },
-          withCredentials: true,
         });
 
         setProjectList(res.data.fundingGetList || []);

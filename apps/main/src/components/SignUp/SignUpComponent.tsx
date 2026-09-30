@@ -13,7 +13,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { MediumFont, SmallFont, Title } from "@repo/ui/styles"
 import { InputText, MainButton } from "@repo/ui/components"
-import axios from "axios"
+import { apiClient } from '@repo/ui/api-client';
 import useTimer from "../../hooks/useTimer"
 
 export const schema = yup.object({
@@ -66,7 +66,7 @@ export const SignUpComponent = () => {
       code: verificationCode,
       category_id: userCategory
     }
-    await axios.post('/api/auth/signup', finalData)
+    await apiClient.post('/api/auth/signup', finalData)
       .then(() => {
         navigate('/login')
       })
@@ -79,7 +79,7 @@ export const SignUpComponent = () => {
     if (errors.email) {
       return;
     } else {
-      await axios.post('/api/auth/codes/send', { email: getValues('email') })
+      await apiClient.post('/api/auth/codes/send', { email: getValues('email') })
         .then(() => {
           resetTimer();
           startTimer();
@@ -95,7 +95,7 @@ export const SignUpComponent = () => {
   }
 
   const codeVerificationHandle = async () => {
-    await axios.post('/api/auth/codes/verify',
+    await apiClient.post('/api/auth/codes/verify',
       {
         email: getValues('email'),
         code: getValues('verificationCode')

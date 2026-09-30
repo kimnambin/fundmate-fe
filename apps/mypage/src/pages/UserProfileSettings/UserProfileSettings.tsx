@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { MediumFont, Title } from '@repo/ui/styles';
 import { InputText, MainButton } from '@repo/ui/components';
 import { useImageUpload } from '../../hook/useImageUpload';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 
 const categories = [
   '예술',
@@ -61,10 +61,9 @@ const UserProfileSetting = () => {
   useEffect(() => {
     const loadUserProfile = async () => {
       try {
-        const res = await axios.get(
+        const res = await apiClient.get(
           `/api/users/mypage/profile?ts=${Date.now()}`,
           {
-            withCredentials: true,
           },
         );
         const data = res.data;
@@ -127,9 +126,7 @@ const UserProfileSetting = () => {
     };
 
     try {
-      await axios.put('/api/users/mypage/profile', payload, {
-        withCredentials: true,
-      });
+      await apiClient.put('/api/users/mypage/profile', payload);
 
       alert('프로필이 저장되었습니다!');
       window.location.href = '/mypage';

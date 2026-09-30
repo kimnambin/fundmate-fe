@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 import { useNavigate } from 'react-router-dom';
 import type { SupportedProject } from '../../api/supportedProjects';
 import { Title } from '@repo/ui/styles';
@@ -26,9 +26,7 @@ const SupportedProjects = () => {
 
     const fetchSupportedProjects = async () => {
       try {
-        const res = await axios.get('/api/users/mypage/payments', {
-          withCredentials: true,
-        });
+        const res = await apiClient.get('/api/users/mypage/payments');
 
         const rawData = res.data?.data ?? [];
 

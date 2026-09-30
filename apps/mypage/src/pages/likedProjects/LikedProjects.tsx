@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 import { Title } from '@repo/ui/styles';
 import { VerticalCard } from '@repo/ui/components';
 
@@ -29,9 +29,7 @@ const LikedProjects = () => {
   useEffect(() => {
     const fetchLikedProjects = async () => {
       try {
-        const res = await axios.get<LikedProjectFromAPI[]>('/api/users/likes', {
-          withCredentials: true,
-        });
+        const res = await apiClient.get<LikedProjectFromAPI[]>('/api/users/likes');
 
 
         const formatted: Project[] = res.data.map((item) => ({

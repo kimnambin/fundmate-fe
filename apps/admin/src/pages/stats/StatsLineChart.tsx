@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
-import axios from "axios";
+import { apiClient } from '@repo/ui/api-client';
 
 interface LineChartDataPoint {
   x: number | string;
@@ -25,9 +25,7 @@ const StatsLineChart: React.FC<StatsLineChartProps> = ({ targetMonth }) => {
 
     const fetchGraphData = async () => {
       try {
-        const res = await axios.get(`/api/statistics/graph?target=${targetMonth}`, {
-          withCredentials: true,
-        });
+        const res = await apiClient.get(`/api/statistics/graph?target=${targetMonth}`);
 
         const graphData = res.data.data as LineChartSeries[];
 

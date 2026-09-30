@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { VerticalCard } from '@repo/ui/components';
 import { SubTitle, MediumFont } from '@repo/ui/styles';
 import { Dropdown } from '@repo/ui/components';
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 
 interface FundingItem {
   project_title: string;
@@ -24,9 +24,7 @@ const FundingList = () => {
   useEffect(() => {
     const fetchFundingList = async () => {
       try {
-        const res = await axios.get('/api/users/projects', {
-          withCredentials: true,
-        });
+        const res = await apiClient.get('/api/users/projects');
 
         const funding = res.data.fundingList.map((item: FundingItem) => ({
           ...item,

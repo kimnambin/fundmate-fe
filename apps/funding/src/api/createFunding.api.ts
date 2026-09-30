@@ -1,7 +1,7 @@
-import axios from 'axios';
+import { apiClient } from '@repo/ui/api-client';
 import type { CreateFundingData } from '../types/createFunding.types';
 
 export const createFunding = async (data: CreateFundingData) => {
-  const response = await axios.post('/api/projects', data);
+  const response = await apiClient.post('/api/projects', data);
   return response.data;
 };
