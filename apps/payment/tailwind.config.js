@@ -1,24 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  presets: [require('@repo/ui/tailwind-preset')],
   content: [
     './src/*.tsx',
     './src/**/*.{js,ts,jsx,tsx}',
     '../../packages/ui/**/*.{js,ts,jsx,tsx}',
   ],
-  theme: {
-    extend: {
-      colors: {
-        primary: '#1D4ED8',
-        secondary: '#F59E0B',
-        main: '#5fbdff',
-      },
-      fontFamily: {
-        sans: ['Pretendard'],
-      },
-      animation: {
-        'spin-slow': 'spin 3s linear infinite',
-      },
-    },
-  },
-  plugins: [],
 };
