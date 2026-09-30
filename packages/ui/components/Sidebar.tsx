@@ -72,7 +72,7 @@ export const Sidebar = () => {
           <Title>
             {profile.nickname ? `${profile.nickname} 님` : '닉네임 없음'}
           </Title>
-          <MediumFont className="text-[#7E7C7C]">{profile.email}</MediumFont>
+          <MediumFont className="text-sub-text">{profile.email}</MediumFont>
           <MediumFont>
             {profile.contents ? profile.contents : '한줄 소개가 없습니다.'}
           </MediumFont>
@@ -95,8 +95,8 @@ export const Sidebar = () => {
               className={({ isActive }) =>
                 `text-left text-[22px] font-medium pl-[10px] transition-colors ${
                   isActive
-                    ? 'text-[#5FBDFF]'
-                    : 'text-black hover:text-[#5FBDFF]'
+                    ? 'text-main'
+                    : 'text-black hover:text-main'
                 }`
               }
             >
@@ -117,8 +117,8 @@ export const Sidebar = () => {
               className={({ isActive }) =>
                 `text-left text-[22px] font-medium pl-[10px] transition-colors ${
                   isActive
-                    ? 'text-[#5FBDFF]'
-                    : 'text-black hover:text-[#5FBDFF]'
+                    ? 'text-main'
+                    : 'text-black hover:text-main'
                 }`
               }
             >

@@ -4,7 +4,7 @@ import { SearchHeader } from './SearchHeader';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 // import axios from 'axios';
-import type { ProductType } from '../../types/ProductType';
+import type { ProductType } from '@repo/ui/types';
 import { GiNothingToSay } from 'react-icons/gi';
 import { Title } from '@repo/ui/styles';
 import {

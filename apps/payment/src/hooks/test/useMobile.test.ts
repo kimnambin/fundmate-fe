@@ -3,7 +3,7 @@
  */
 
 import { renderHook, act } from '@testing-library/react';
-import { useIsMobile } from '../../../../../packages/ui/hooks/isMobile';
+import { useIsMobile } from '@repo/ui/hooks';
 
 describe('useIsMobile', () => {
   const originalInnerWidth = window.innerWidth;

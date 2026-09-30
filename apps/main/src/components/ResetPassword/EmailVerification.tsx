@@ -8,6 +8,7 @@ import { InputText, MainButton } from "@repo/ui/components";
 import { MediumFont, SubTitle, Title } from "@repo/ui/styles";
 import useTimer from "../../hooks/useTimer";
 import { apiClient } from '@repo/ui/api-client';
+import { STORAGE_KEYS } from '@repo/ui/utils';
 import { emailVerifiedStore } from "../../stores/EmailVerifiedStore";
 
 const schema = yup.object({
@@ -54,7 +55,7 @@ export const EmailVerificationComponent = () => {
       .then(() => {
         setEmail(getValues('email'));
         setCode(getValues('verificationCode'));
-        window.localStorage.setItem('auth', 'done')
+        window.localStorage.setItem(STORAGE_KEYS.emailVerified, 'done')
         setSearchParams({ 'auth': 'done' });
       })
       .catch(error => {

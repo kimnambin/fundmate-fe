@@ -62,7 +62,7 @@ const PaymentDetailBox = ({
                 {payInfo[idx]}
               </LightColor>
               <BoldText
-                className={`flex-2 w-[320px] text-left ${idx === 0 || idx === 1 ? 'text-[#FB6565]' : 'text-black'}`}
+                className={`flex-2 w-[320px] text-left ${idx === 0 || idx === 1 ? 'text-red' : 'text-black'}`}
               >
                 {resPayInfo[idx]}
               </BoldText>
@@ -71,7 +71,7 @@ const PaymentDetailBox = ({
         </FlexColsm>
         <MainButton
           label="취소하기"
-          className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black"
+          className="bg-line w-16 sm:w-[10%] p-2 text-xs text-black"
           textSize={'text-base'}
           textWeight={'font-bold'}
           onClick={handleDelete}

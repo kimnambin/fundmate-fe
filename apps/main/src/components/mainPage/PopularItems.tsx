@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { MediumFont, Title } from '@repo/ui/styles';
 // import axios from 'axios';
 // import { useQuery } from '@tanstack/react-query';
-import type { ProductType } from '../../types/ProductType';
+import type { ProductType } from '@repo/ui/types';
 import { useState } from 'react';
 import { GiNothingToSay } from 'react-icons/gi';
 import { mockPopularProducts } from '@repo/ui/mocks';

@@ -1,4 +1,5 @@
 import { isAxiosError } from 'axios';
+import { STORAGE_KEYS } from './storageKeys';
 
 // 401이 와도 로그인 화면 자체에서는 이동시키지 않는다 (로그인 실패 응답 등)
 const AUTH_PATHS = ['/login', '/signup', '/reset'];
@@ -11,7 +12,7 @@ export const handleUnauthorizedError = (error: unknown) => {
   if (!isUnauthorizedError(error)) return;
   if (AUTH_PATHS.includes(window.location.pathname)) return;
 
-  window.localStorage.removeItem('nickname');
+  window.localStorage.removeItem(STORAGE_KEYS.nickname);
   window.location.assign('/login');
 };
 

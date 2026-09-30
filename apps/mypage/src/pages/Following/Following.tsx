@@ -101,22 +101,22 @@ const Following = () => {
             className={`flex items-center gap-1 py-2 ${
               showFollowings
                 ? 'font-semibold shadow-[inset_0_-2px_0_0_#000000]'
-                : 'text-[#343F59]'
+                : 'text-text-unactive'
             }`}
           >
             <MediumFont>팔로잉</MediumFont>
-            <span className="text-[#5FBDFF]">{followings.length}</span>
+            <span className="text-main">{followings.length}</span>
           </button>
           <button
             onClick={() => setShowFollowings(false)}
             className={`flex items-center gap-1 py-2 ${
               !showFollowings
                 ? 'font-semibold shadow-[inset_0_-2px_0_0_#000000]'
-                : 'text-[#343F59]'
+                : 'text-text-unactive'
             }`}
           >
             <MediumFont>팔로워</MediumFont>
-            <span className="text-[#5FBDFF]">{followers.length}</span>
+            <span className="text-main">{followers.length}</span>
           </button>
         </div>
 

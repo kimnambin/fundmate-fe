@@ -8,7 +8,7 @@ import { Navigation } from 'swiper/modules';
 // import { NavButton, NavigationContainer } from '../styles/Swiper.style';
 // import axios from 'axios';
 // import { useQuery } from '@tanstack/react-query';
-import type { ProductType } from '../types/ProductType';
+import type { ProductType } from '@repo/ui/types';
 import { GiNothingToSay } from 'react-icons/gi';
 import { Title } from '@repo/ui/styles';
 import { mockProducts } from '@repo/ui/mocks';

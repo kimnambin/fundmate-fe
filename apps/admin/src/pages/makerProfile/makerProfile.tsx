@@ -79,7 +79,7 @@ const MakerProfile = () => {
           <div className="text-gray-500">존재하지 않는 메이커입니다.</div>
           <button
             onClick={() => navigate(-1)}
-            className="text-[#5FBDFF] text-sm underline"
+            className="text-main text-sm underline"
           >
             이전 페이지로 돌아가기
           </button>

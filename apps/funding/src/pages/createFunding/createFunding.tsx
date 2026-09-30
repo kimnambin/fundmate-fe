@@ -16,7 +16,7 @@ import PointButton from '../../components/point-button/pointButton';
 import { DEFAULT_OPTION } from '../../constants/items';
 import { useCategoryConfigs } from '../../hooks/useCategoryConfigs';
 import { useCreateFunding } from '../../hooks/useCreateFunding';
-import { useImageUpload } from '../../hooks/useImageUpload';
+import { useImageUpload } from '@repo/ui/image-upload';
 import type {
   CreateFundingData,
   Option,

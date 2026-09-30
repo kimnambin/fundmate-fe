@@ -96,10 +96,10 @@ const MyReviews = () => {
         <button className="cursor-pointer">{'<'}</button>
         <div className="flex gap-[15px] text-[23px]">
           <span className="cursor-pointer text-black">1</span>
-          <span className="cursor-pointer text-[#7E7C7C]">2</span>
-          <span className="cursor-pointer text-[#7E7C7C]">3</span>
-          <span className="cursor-pointer text-[#7E7C7C]">4</span>
-          <span className="cursor-pointer text-[#7E7C7C]">5</span>
+          <span className="cursor-pointer text-sub-text">2</span>
+          <span className="cursor-pointer text-sub-text">3</span>
+          <span className="cursor-pointer text-sub-text">4</span>
+          <span className="cursor-pointer text-sub-text">5</span>
         </div>
         <button className="cursor-pointer">{'>'}</button>
         <button className="cursor-pointer">{'>>'}</button>

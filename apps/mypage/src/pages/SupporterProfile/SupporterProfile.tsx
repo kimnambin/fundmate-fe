@@ -73,7 +73,7 @@ const ProfilePage = () => {
           <div className="text-gray-500">존재하지 않는 사용자입니다.</div>
           <button
             onClick={() => navigate(-1)}
-            className="text-[#5FBDFF] text-sm underline"
+            className="text-main text-sm underline"
           >
             이전 페이지로 돌아가기
           </button>
@@ -94,7 +94,7 @@ const ProfilePage = () => {
             <div className="flex flex-col items-start gap-[5px] relative">
               <button
                 onClick={() => navigate(-1)}
-                className="absolute -top-20 left-2 text-[#5FBDFF] text-sm underline"
+                className="absolute -top-20 left-2 text-main text-sm underline"
               >
                 ← 이전으로
               </button>
@@ -138,7 +138,7 @@ const ProfilePage = () => {
               className={`flex items-center px-[12px] py-[12px] border rounded-[5px] gap-[12px] text-[14px] ${
                 profile.isFollowing
                   ? 'border-[#A7A7A7] text-[#A7A7A7]'
-                  : 'border-[#5FBDFF] text-[#5FBDFF]'
+                  : 'border-main text-main'
               }`}
             >
               {profile.isFollowing ? (
@@ -164,7 +164,7 @@ const ProfilePage = () => {
 
         {/* 하단 프로필 소개 영역 */}
         <div className="w-full mt-[20px] p-[20px] bg-white">
-          <SubTitle className="mb-[10px] border-b-2 border-[#5FBDFF] inline-block pb-[2px]">
+          <SubTitle className="mb-[10px] border-b-2 border-main inline-block pb-[2px]">
             프로필
           </SubTitle>
           <div className="w-full border-b border-gray-200 mb-[10px]" />
@@ -176,7 +176,7 @@ const ProfilePage = () => {
         {/* 프로젝트 카드 영역 (메이커일 때만 노출) */}
         {profile.fundingList && profile.fundingList.length > 0 && (
           <div className="w-full mt-[120px] p-[20px] bg-white">
-            <SubTitle className="mb-[10px] border-b-2 border-[#5FBDFF] inline-block pb-[2px]">
+            <SubTitle className="mb-[10px] border-b-2 border-main inline-block pb-[2px]">
               등록한 프로젝트
             </SubTitle>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">

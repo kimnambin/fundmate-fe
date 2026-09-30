@@ -3,8 +3,9 @@ import {
   getPresignedUrl,
   uploadComplete,
   uploadImageToS3,
-} from '../api/imageUpload.api';
+} from './imageUpload.api';
 
+// presigned URL 발급 → S3 업로드 → 업로드 완료 알림까지 하고 최종 이미지 URL을 돌려준다.
 export const useImageUpload = () => {
   return useMutation({
     mutationFn: async (file: File) => {

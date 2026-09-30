@@ -121,7 +121,7 @@ const PaymentList = () => {
                 className={
                   item.status === 'success'
                     ? 'text-[#49DB00]'
-                    : 'text-[#FB6565]'
+                    : 'text-red'
                 }
               >
                 {item.status === 'success' ? '성공' : '실패'}
@@ -154,7 +154,7 @@ const PaymentList = () => {
             return (
               <span
                 key={page}
-                className={`cursor-pointer ${page === currentPage ? 'text-black' : 'text-[#7E7C7C]'}`}
+                className={`cursor-pointer ${page === currentPage ? 'text-black' : 'text-sub-text'}`}
                 onClick={() => goToPage(page)}
               >
                 {page}

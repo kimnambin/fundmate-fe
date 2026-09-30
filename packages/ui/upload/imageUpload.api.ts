@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { apiClient } from '@repo/ui/api-client';
 import { v4 as uuidv4 } from 'uuid';
+import { apiClient } from '../utils/apiClient';
 
 export const getPresignedUrl = async (file: File) => {
   const uuid = uuidv4();
@@ -16,6 +16,7 @@ export const getPresignedUrl = async (file: File) => {
   return response.data;
 };
 
+// S3는 외부 도메인이므로 공통 apiClient(withCredentials, 401 처리) 대신 axios를 직접 쓴다.
 export const uploadImageToS3 = async (presignedUrl: string, file: File) => {
   await axios.put(presignedUrl, file, {
     headers: {

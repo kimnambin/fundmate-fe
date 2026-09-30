@@ -5,6 +5,7 @@ export { StatisticsTableData };
 export { StatisticsOptionData };
 
 export { formatPrice, formatPriceToNumber } from './format';
+export { STORAGE_KEYS } from './storageKeys';
 export {
   isUnauthorizedError,
   handleUnauthorizedError,

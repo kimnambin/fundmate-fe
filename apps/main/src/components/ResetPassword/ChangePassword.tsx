@@ -7,6 +7,7 @@ import { InputText, MainButton } from '@repo/ui/components';
 import { MediumFont, Title } from '@repo/ui/styles';
 import { emailVerifiedStore } from '../../stores/EmailVerifiedStore';
 import { apiClient } from '@repo/ui/api-client';
+import { STORAGE_KEYS } from '@repo/ui/utils';
 
 const schema = yup.object({
   password: yup.string().required(),
@@ -46,7 +47,7 @@ export const ChangePassword = () => {
     await apiClient
       .patch('/api/auth/password', finalData)
       .then(() => {
-        window.localStorage.removeItem('auth');
+        window.localStorage.removeItem(STORAGE_KEYS.emailVerified);
         navigate('/login');
       })
       .catch((error) => {

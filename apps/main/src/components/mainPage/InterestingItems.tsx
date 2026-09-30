@@ -3,7 +3,7 @@ import {
   InterestingItemsContainer,
   InterestingItemsGrid,
 } from '../../styles/Main/MainPageComponents.style';
-import type { ProductType } from '../../types/ProductType';
+import type { ProductType } from '@repo/ui/types';
 // import axios from 'axios';
 // import { useQuery } from '@tanstack/react-query';
 import { GiNothingToSay } from 'react-icons/gi';

@@ -144,9 +144,9 @@ export const SelectButton = tw.button`
   self-end
   px-4 
   py-2
-  bg-[#DFF2FF]
-  text-[#5FBDFF]
-  border-2 border-[#5FBDFF]
+  bg-sub-color
+  text-main
+  border-2 border-main
   rounded-md 
   text-sm 
   font-bold
@@ -159,7 +159,7 @@ export const Blank = tw.div`
 
 export const Button = tw.button`
   px-4 py-2
-  bg-[#5FBDFF]
+  bg-main
   text-white
   text-sm
   font-semibold

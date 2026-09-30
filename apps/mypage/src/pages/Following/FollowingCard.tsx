@@ -30,7 +30,7 @@ export const FollowingCard = ({
         className="flex items-center gap-4 cursor-pointer"
         onClick={handleProfileClick}
       >
-        <div className="w-14 h-14 rounded-full bg-slate-200 flex items-center justify-center text-[#5FBDFF] text-lg font-medium">
+        <div className="w-14 h-14 rounded-full bg-slate-200 flex items-center justify-center text-main text-lg font-medium">
           {initial}
         </div>
         <div className="text-[18px] font-semibold">{name}</div>

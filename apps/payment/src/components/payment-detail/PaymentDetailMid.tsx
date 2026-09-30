@@ -100,7 +100,7 @@ const PaymentDetailMid: React.FC<OptionModalProps> = ({
           </FlexColsm>
           <MainButton
             label="변경"
-            className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black"
+            className="bg-line w-16 sm:w-[10%] p-2 text-xs text-black"
             textSize={'text-base'}
             textWeight={'font-bold'}
             onClick={handleOpenModal}

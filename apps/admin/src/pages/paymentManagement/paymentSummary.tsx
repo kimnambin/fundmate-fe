@@ -80,7 +80,7 @@ const PaymentSummary: React.FC = () => {
             }`}
           />
         </div>
-        <MediumFont className="text-[#7E7C7C]">{currentDate}</MediumFont>
+        <MediumFont className="text-sub-text">{currentDate}</MediumFont>
       </div>
 
       {/* 하단: 데이터 항목 */}
@@ -93,7 +93,7 @@ const PaymentSummary: React.FC = () => {
           ].map(({ label, value }, idx, arr) => (
             <div key={label} className="flex items-end gap-4">
               <div className="flex flex-col items-end min-w-[120px]">
-                <MediumFont className="text-[#7E7C7C]">{label}</MediumFont>
+                <MediumFont className="text-sub-text">{label}</MediumFont>
                 <MediumFont className="text-black text-lg">{value}</MediumFont>
               </div>
               {idx !== arr.length - 1 && (

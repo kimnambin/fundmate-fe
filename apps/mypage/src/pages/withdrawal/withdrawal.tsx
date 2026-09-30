@@ -89,7 +89,7 @@ const Withdrawal = () => {
               label="회원탈퇴"
               onClick={handleWithdrawal}
               width="w-full"
-              className="border border-[#FB6565] text-[#FB6565] !hover:bg-[#fb656510] bg-transparent transition"
+              className="border border-red text-red !hover:bg-[#fb656510] bg-transparent transition"
             />
             <MainButton
               onClick={() => navigate(-1)}

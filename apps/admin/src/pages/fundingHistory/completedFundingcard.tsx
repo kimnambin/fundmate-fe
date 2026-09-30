@@ -83,12 +83,12 @@ const CompletedFundingComponent = () => {
                 <SubTitle className="text-black">
                   {selectedFunding.project_title || '제목 없음'}
                 </SubTitle>
-                <span className="bg-[#5FBDFF] text-white text-xs md:text-sm font-bold px-2 py-[2px] rounded-md">
+                <span className="bg-main text-white text-xs md:text-sm font-bold px-2 py-[2px] rounded-md">
                   완료
                 </span>
               </div>
               {(selectedFunding.start_date || selectedFunding.end_date) && (
-                <MediumFont className="text-[#7E7C7C]">
+                <MediumFont className="text-sub-text">
                   {formatDate(selectedFunding.start_date)} ~{' '}
                   {formatDate(selectedFunding.end_date)}
                 </MediumFont>
@@ -100,7 +100,7 @@ const CompletedFundingComponent = () => {
               <MediumFont className="text-black">진행률</MediumFont>
               <div className="relative w-full h-4 md:h-5 bg-gray-200 rounded-full">
                 <div
-                  className="absolute top-0 left-0 h-4 md:h-5 bg-[#5FBDFF] rounded-full flex items-center justify-center"
+                  className="absolute top-0 left-0 h-4 md:h-5 bg-main rounded-full flex items-center justify-center"
                   style={{
                     width: getProgressWidth(selectedFunding.achievement),
                   }}
@@ -123,13 +123,13 @@ const CompletedFundingComponent = () => {
             <div className="flex flex-col gap-[2px]">
               <div className="flex items-center gap-2">
                 <MediumFont className="text-black">모금액</MediumFont>
-                <MediumFont className="text-[#7E7C7C]">
+                <MediumFont className="text-sub-text">
                   {selectedFunding.current_amount.toLocaleString()}원
                 </MediumFont>
               </div>
               <div className="flex items-center gap-2">
                 <MediumFont className="text-black">참여인원</MediumFont>
-                <MediumFont className="text-[#7E7C7C]">
+                <MediumFont className="text-sub-text">
                   {selectedFunding.sponsor ?? '0'}명
                 </MediumFont>
               </div>

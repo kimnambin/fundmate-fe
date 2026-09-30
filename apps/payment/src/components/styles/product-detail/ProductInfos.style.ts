@@ -85,7 +85,7 @@ export const IconButton = tw.button`
 `;
 
 export const BaseButton = tw.button`
-  bg-[#5FBDFF]
+  bg-main
   text-white
   w-full
   px-6

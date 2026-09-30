@@ -5,7 +5,7 @@ import PaymentMid from '../components/paymentPage/PaymentMid';
 import PaySelect from '../components/paymentPage/PaySelect';
 import PaymentFinal from '../components/paymentPage/PaymentFinal';
 import { useState } from 'react';
-import { useIsMobile } from '../../../../packages/ui/hooks/isMobile';
+import { useIsMobile } from '@repo/ui/hooks';
 // import { useTmpLogin } from '../hooks/user/useTmp';
 // import { useGetUserInfo } from '../hooks/user/useGetUserInfo';
 import useMockData from '../store/mock/mockDataStore';

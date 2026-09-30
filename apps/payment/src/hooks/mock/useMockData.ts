@@ -7,7 +7,7 @@ import {
   mockRecentlyProducts,
 } from '@repo/ui/mocks';
 import { useGetQueryString } from '../useGetQueryString';
-import { ProductType } from '../../../../../packages/ui/types/productType';
+import { ProductType } from '@repo/ui/types';
 
 const useProjectData = () => {
   const { setProjectId, setProductData, setUserData, productData, userData } =

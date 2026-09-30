@@ -52,7 +52,7 @@ const PaymentDetailBottom = ({ code, amount, scheduleDate }: PdBottom) => {
               </BaseText>
 
               <BoldText
-                className={`flex text-left w-[240px] ${idx === 2 ? 'text-[#FB6565]' : 'text-black'}`}
+                className={`flex text-left w-[240px] ${idx === 2 ? 'text-red' : 'text-black'}`}
               >
                 {content[idx]}
               </BoldText>
@@ -61,7 +61,7 @@ const PaymentDetailBottom = ({ code, amount, scheduleDate }: PdBottom) => {
         </FlexColsm>
         <MainButton
           label="취소하기"
-          className="bg-[#E2E8F0] w-16 sm:w-[10%] p-2 text-xs text-black"
+          className="bg-line w-16 sm:w-[10%] p-2 text-xs text-black"
           textSize={'text-base'}
           textWeight={'font-bold'}
           onClick={handleDelete}

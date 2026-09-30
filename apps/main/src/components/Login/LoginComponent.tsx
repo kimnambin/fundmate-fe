@@ -22,6 +22,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { InputText, MainButton } from '@repo/ui/components';
 import { MediumFont, SmallFont } from '@repo/ui/styles';
 import { apiClient } from '@repo/ui/api-client';
+import { STORAGE_KEYS } from '@repo/ui/utils';
 import { useState } from 'react';
 
 const schema = yup.object({
@@ -50,7 +51,7 @@ export const LoginComponent = () => {
     await apiClient
       .post('/api/auth/login', data)
       .then((response) => {
-        window.localStorage.setItem('nickname', response.data?.nickname);
+        window.localStorage.setItem(STORAGE_KEYS.nickname, response.data?.nickname);
         navigate('/');
       })
       .catch((error) => {

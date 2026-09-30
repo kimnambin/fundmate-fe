@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, type ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MediumFont, Title } from '@repo/ui/styles';
 import { InputText, MainButton } from '@repo/ui/components';
-import { useImageUpload } from '../../hook/useImageUpload';
+import { useImageUpload } from '@repo/ui/image-upload';
 import { apiClient } from '@repo/ui/api-client';
 
 const categories = [
@@ -228,7 +228,7 @@ const UserProfileSetting = () => {
               <select
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
-                className="w-full mt-2 p-3 border border-slate-300 rounded-md focus:border-[#5FBDFF] focus:outline-none"
+                className="w-full mt-2 p-3 border border-slate-300 rounded-md focus:border-main focus:outline-none"
               >
                 <option value="">선택</option>
                 {ageOptions.map((option) => (
@@ -250,7 +250,7 @@ const UserProfileSetting = () => {
             <textarea
               value={intro}
               onChange={(e) => setIntro(e.target.value)}
-              className="w-full mt-2 p-3 border border-slate-300 rounded-md resize-none h-[100px] focus:border-[#5FBDFF] focus:outline-none"
+              className="w-full mt-2 p-3 border border-slate-300 rounded-md resize-none h-[100px] focus:border-main focus:outline-none"
               placeholder="자기소개를 입력하세요"
             />
           </div>
@@ -265,7 +265,7 @@ const UserProfileSetting = () => {
                   onClick={() => handleCategoryClick(category)}
                   className={`px-4 py-2 rounded-full h-[50px] text-sm transition ${
                     selectedCategory === category
-                      ? 'bg-[#5FBDFF] text-white'
+                      ? 'bg-main text-white'
                       : 'bg-gray-200 text-gray-700'
                   }`}
                 >
@@ -288,7 +288,7 @@ const UserProfileSetting = () => {
 
           <button
             type="button"
-            className="mt-6 w-full h-[48px] flex justify-center items-center rounded-md underline text-[#7E7C7C] mb-[120px]"
+            className="mt-6 w-full h-[48px] flex justify-center items-center rounded-md underline text-sub-text mb-[120px]"
             onClick={() => navigate('/user/withdrawal')}
           >
             <MediumFont>회원탈퇴</MediumFont>

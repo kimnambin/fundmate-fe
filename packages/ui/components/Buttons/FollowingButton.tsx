@@ -21,7 +21,7 @@ export const FollowingButton = ({
           ${
             following
               ? 'bg-gray-100 text-gray-600 border-gray-300'
-              : 'bg-white text-[#5FBDFF] border-[#5FBDFF]'
+              : 'bg-white text-main border-main'
           }`}
     >
       {following ? '✔ 팔로잉' : '+ 팔로우'}
