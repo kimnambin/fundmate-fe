@@ -12,17 +12,17 @@ import {
 } from './fundingDetail.styles';
 import HeartIcon from '../../assets/icons/ic_heart.svg';
 import ShareIcon from '../../assets/icons/ic_share.svg';
-import MainButton from '../../components/main-button/mainButton';
+import { MainButton } from '@repo/ui/components';
+import { Layout } from '@repo/ui/styles';
 import { useState } from 'react';
 import FundingPlanContent from '../../components/funding-detail-tab/fundingPlanContent';
 import FundingReviewContent from '../../components/funding-detail-tab/fundingReviewContent';
-import { Layout } from '../../styles/layout';
 
 const FundingDetail = () => {
   const [activeTab, setActiveTab] = useState<'plan' | 'review'>('plan');
 
   return (
-    <Layout>
+    <Layout className="min-h-[calc(100vh-216px)]">
       <Wrapper>
         <ItemTitleWrapper>
           <img
@@ -89,7 +89,7 @@ const FundingDetail = () => {
                 width="w-full"
                 textSize="text-[20px]"
                 textWeight="font-bold"
-                className="ml-[10px]"
+                className="ml-[10px] px-[16px]"
               />
             </ButtonWrapper>
           </ItemTitleTextWrapper>
