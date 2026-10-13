@@ -35,6 +35,18 @@ export default defineConfig({
       external: FEDERATION_SHARED,
     },
   },
+  experimental: {
+    // remote가 host(main) 페이지에 로드되면 lazy 청크의 preload 의존성(JS/CSS)이
+    // host origin의 `/assets/...`로 요청되어 깨진다. 청크 자신의 URL 기준으로 해석한다.
+    renderBuiltUrl(filename, { hostType }) {
+      if (hostType === 'js') {
+        return {
+          runtime: `new URL(${JSON.stringify("../" + filename)}, import.meta.url).href`,
+        };
+      }
+      return { relative: true };
+    },
+  },
   server: {
     proxy: apiProxy(process.env.VITE_BACKEND_ADDRESS),
   },
