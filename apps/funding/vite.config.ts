@@ -29,6 +29,8 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
+    // html2pdf(html2canvas+jsPDF, ~524kB)는 PDF 저장 시에만 동적 import 되므로 허용한다.
+    chunkSizeWarningLimit: 550,
     rollupOptions: {
       external: FEDERATION_SHARED,
     },
