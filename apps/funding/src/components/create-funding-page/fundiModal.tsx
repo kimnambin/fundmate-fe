@@ -1,7 +1,7 @@
 import { FundiIcon } from '@repo/ui/assets';
 import { Modal } from '@repo/ui/components';
 import { MediumFont, Title } from '@repo/ui/styles';
-import MarkdownEditor from '@uiw/react-markdown-editor';
+import MarkdownPreview from '@uiw/react-markdown-preview/nohighlight';
 import { FiCheck, FiCopy } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
 import { HorizontalLine } from '../../pages/createFunding/createFunding.styles';
@@ -42,7 +42,7 @@ const FundiModal = ({
               data-color-mode="light"
               className="max-h-[200px] overflow-y-scroll relative custom-scroll"
             >
-              <MarkdownEditor.Markdown source={description} />
+              <MarkdownPreview source={description} />
             </div>
           ) : (
             <MediumFont className="text-sub-text">

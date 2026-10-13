@@ -1,10 +1,14 @@
-import MarkdownEditor from '@uiw/react-markdown-editor';
+import { lazy, Suspense } from 'react';
 import { Label } from '../input-text/inputText.styles';
 import { Wrapper } from './createFunding.styles';
 import { WarningText } from '@repo/ui/styles';
 import { MainButton } from '@repo/ui/components';
 import FundiModal from './fundiModal';
 import { useAiSummarize } from '../../hooks/useAiSummarize';
+
+const MarkdownEditor = lazy(
+  () => import('@uiw/react-md-editor/nohighlight'),
+);
 
 interface Props {
   description: string;
@@ -53,12 +57,16 @@ const IntroForm = ({
     <Wrapper>
       <Label>프로젝트 소개</Label>
       <div data-color-mode="light">
-        <MarkdownEditor
-          value={description}
-          height="400px"
-          placeholder={'프로젝트(펀딩)에 대한 설명을 작성해주세요!'}
-          onChange={setDescription}
-        />
+        <Suspense fallback={<div className="h-[400px]" />}>
+          <MarkdownEditor
+            value={description}
+            height="400px"
+            textareaProps={{
+              placeholder: '프로젝트(펀딩)에 대한 설명을 작성해주세요!',
+            }}
+            onChange={(value) => setDescription(value ?? '')}
+          />
+        </Suspense>
       </div>
       {isSubmit && description.trim().length === 0 && (
         <WarningText>프로젝트 소개를 작성해주세요.</WarningText>

@@ -1,13 +1,13 @@
 import { MainButton } from '@repo/ui/components';
 import { SmallFont, Title, Layout } from '@repo/ui/styles';
-import MarkdownEditor from '@uiw/react-markdown-editor';
-import html2pdf from 'html2pdf.js';
-import { useRef, useState } from 'react';
+import MarkdownPreview from '@uiw/react-markdown-preview/nohighlight';
+import { lazy, Suspense, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LeftArrow from '../../assets/icons/ic_left-arrow.svg';
-import PieChart from '../../components/chart/pie';
-import Map from '../../components/map/map';
 import { Bottom, ResultWrapper } from './askFundi.styles';
+
+const PieChart = lazy(() => import('../../components/chart/pie'));
+const Map = lazy(() => import('../../components/map/map'));
 
 const AskFundiResult = () => {
   const location = useLocation();
@@ -33,6 +33,7 @@ const AskFundiResult = () => {
       },
     };
 
+    const { default: html2pdf } = await import('html2pdf.js');
     await html2pdf().set(opt).from(ref.current).save();
     setIsCapture(false);
   };
@@ -54,11 +55,13 @@ const AskFundiResult = () => {
 
       <ResultWrapper ref={ref} isCapture={isCapture}>
         <div className="flex gap-[80px]">
-          <Map data={data} />
-          <PieChart data={chartData} />
+          <Suspense fallback={null}>
+            <Map data={data} />
+            <PieChart data={chartData} />
+          </Suspense>
         </div>
         <div data-color-mode="light">
-          <MarkdownEditor.Markdown source={response?.message} />
+          <MarkdownPreview source={response?.message} />
         </div>
       </ResultWrapper>
       <Bottom>
