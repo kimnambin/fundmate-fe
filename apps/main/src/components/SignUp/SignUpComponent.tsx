@@ -48,7 +48,7 @@ export const SignUpComponent = () => {
     handleSubmit,
     getValues,
     trigger,
-    formState: { errors, isValid } } = useForm<SignUpProps>({
+    formState: { errors, isValid, isSubmitting } } = useForm<SignUpProps>({
       resolver: yupResolver(schema),
       shouldFocusError: false,
       mode: 'onChange',
@@ -218,7 +218,8 @@ export const SignUpComponent = () => {
               className="my-5"
               isError={!isValid || !userCategory}
               width="w-full"
-              label="가입하기"
+              label={isSubmitting ? '가입 중...' : '가입하기'}
+              disabled={isSubmitting}
             />
           </form>
           <UserNaigater>

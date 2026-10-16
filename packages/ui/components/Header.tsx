@@ -20,6 +20,7 @@ import { InputText } from './Inputs/Input';
 // import axios from 'axios';
 import { useIsMobile } from '../hooks/isMobile';
 import { MdDriveFolderUpload } from 'react-icons/md';
+import { GlobalLoadingBar } from './GlobalLoadingBar';
 
 const menuBar = [
   {
@@ -115,6 +116,7 @@ export const Header = () => {
 
   return (
     <div className="flex flex-col shadow-md">
+      <GlobalLoadingBar />
       <Container className="h-[100px] justify-between border-b border-gray-300">
         <img
           src={isMobile ? mobileLogo : logo}

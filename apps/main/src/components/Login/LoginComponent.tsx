@@ -39,7 +39,7 @@ export const LoginComponent = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginProps>({
     resolver: yupResolver(schema),
     shouldFocusError: false,
@@ -86,7 +86,8 @@ export const LoginComponent = () => {
             <MainButton
               type="submit"
               width="w-full"
-              label="로그인"
+              label={isSubmitting ? '로그인 중...' : '로그인'}
+              disabled={isSubmitting}
             ></MainButton>
             {isError && (
               <SmallFont className="text-red">

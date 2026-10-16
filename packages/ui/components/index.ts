@@ -20,3 +20,4 @@ export { InputText } from './Inputs/Input';
 export { UserPageLayout } from './Layouts/UserPageLayout';
 
 export { NotFound } from './Layouts/NotFound';
+export { GlobalLoadingBar } from './GlobalLoadingBar';

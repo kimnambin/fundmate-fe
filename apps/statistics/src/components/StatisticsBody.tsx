@@ -131,12 +131,12 @@ export const StatisticsBody = ({ rawData }: dataProps) => {
                         <HorizonLine />
                         <div
                           key={k}
-                          className="flex flex-row h-[450px] w-full gap-10"
+                          className="flex flex-col lg:flex-row lg:h-[450px] w-full gap-6 lg:gap-10"
                         >
-                          <div className="flex shrink basis-[30%] w-full">
+                          <div className="flex shrink basis-[30%] w-full h-[350px] lg:h-auto">
                             <StatisticsPie data={pieData[k]} />
                           </div>
-                          <div className="flex shrink-1 grow overflow-scroll overflow-x-hidden">
+                          <div className="flex shrink-1 grow overflow-scroll overflow-x-hidden max-h-[350px] lg:max-h-none">
                             <PieDataTable data={pieData[k]} />
                           </div>
                         </div>
@@ -179,11 +179,11 @@ export const StatisticsBody = ({ rawData }: dataProps) => {
                   <div className="flex flex-col gap-5">
                     <Title>2023년 기준 인구 상황</Title>
                     <HorizonLine />
-                    <div className="flex flex-row h-[450px] w-full gap-10">
-                      <div className="flex shrink basis-[30%] w-full">
+                    <div className="flex flex-col lg:flex-row lg:h-[450px] w-full gap-6 lg:gap-10">
+                      <div className="flex shrink basis-[30%] w-full h-[350px] lg:h-auto">
                         <StatisticsPie data={optionPieData} />
                       </div>
-                      <div className="flex shrink-1 grow overflow-scroll overflow-x-hidden">
+                      <div className="flex shrink-1 grow overflow-scroll overflow-x-hidden max-h-[350px] lg:max-h-none">
                         <PieDataTable data={optionPieData} />
                       </div>
                     </div>
