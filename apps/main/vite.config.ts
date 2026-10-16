@@ -8,12 +8,12 @@ import {
   federationDedupe,
 } from '@repo/ui/vite-federation';
 
-export const MAIN_PAGE = 'https://fundmate-fe-main.vercel.app/';
-export const FUNDING_PAGE = 'https://fundmate-fe-funding.vercel.app';
-export const STATISTICS_PAGE = 'https://fundmate-fe-statistics.vercel.app';
-export const MYPAGE = 'https://fundmate-fe-mypage.vercel.app';
-export const ADMIN_PAGE = 'https://fundmate-fe-admin.vercel.app';
-export const PAYMENT_PAGE = 'https://fundmate-fe-payment.vercel.app';
+export const MAIN_PAGE = 'https://fundmate-mu.vercel.app/';
+export const FUNDING_PAGE = 'https://fundmate-funding.vercel.app';
+export const STATISTICS_PAGE = 'https://fundmate-statistics.vercel.app';
+export const MYPAGE = 'https://fundmate-mypage.vercel.app';
+export const ADMIN_PAGE = 'https://fundmate-admin.vercel.app';
+export const PAYMENT_PAGE = 'https://fundmate-payment.vercel.app';
 
 export default defineConfig(({ mode }) => {
   dotenv.config({ path: resolve(__dirname, '../../.env') });
