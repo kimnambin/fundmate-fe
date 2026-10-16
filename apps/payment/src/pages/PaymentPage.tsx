@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useIsMobile } from '@repo/ui/hooks';
 // import { useTmpLogin } from '../hooks/user/useTmp';
 // import { useGetUserInfo } from '../hooks/user/useGetUserInfo';
-import useMockData from '../store/mock/mockDataStore';
+import useMockData from '../hooks/mock/useMockData';
 import { NotFound } from '@repo/ui/components';
 // import { useGetQueryString } from '../hooks/useGetQueryString';
 // import { useGetProductInfo } from '../hooks/product/getProductInfo';

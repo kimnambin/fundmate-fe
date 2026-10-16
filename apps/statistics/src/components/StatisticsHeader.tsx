@@ -67,7 +67,9 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
     filteredData: dataSelection,
   });
 
-  const { refetch } = useQuery({
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const { refetch, isFetching } = useQuery({
     queryKey: ['statistics', selected],
     queryFn: () => getPublicData(inputData.filteredData, inputData.selected),
     enabled: false,
@@ -91,19 +93,25 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
     !!optionSelection.area;
 
   const handleDataRequest = async () => {
-    await refetch()
-      .then((response) => {
-        setData({ takenData: response.data, selected: selected });
-        if (selected === 'keyword') {
-          setKeywordDataSubmitted(true);
-        } else {
-          setOptionDataSubmitted(true);
-        }
-      })
-      .catch((err) => console.error(err));
+    setErrorMessage('');
+    // react-query의 refetch는 실패해도 reject하지 않고 결과에 에러를 담아 돌려준다.
+    const response = await refetch();
+    if (response.isError || !response.data) {
+      setErrorMessage(
+        '통계 데이터를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.',
+      );
+      return;
+    }
+    setData({ takenData: response.data, selected: selected });
+    if (selected === 'keyword') {
+      setKeywordDataSubmitted(true);
+    } else {
+      setOptionDataSubmitted(true);
+    }
   };
 
   const handleReset = () => {
+    setErrorMessage('');
     if (selected === 'keyword') {
       setKeywordDataSubmitted(false);
       setDataSelection({
@@ -123,7 +131,7 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
 
   return (
     <>
-      <div className="flex flex-row gap-10 items-center">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-10 sm:items-center">
         <Title>타겟층 통계 및 지역 분석</Title>
         <div className="flex flex-row gap-7">
           <button
@@ -133,6 +141,7 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
             disabled={selected === 'keyword'}
             onClick={() => {
               setSelected('keyword');
+              setErrorMessage('');
               setDataType('keyword');
             }}
           >
@@ -145,6 +154,7 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
             disabled={selected === 'option'}
             onClick={() => {
               setSelected('option');
+              setErrorMessage('');
               setDataType('option');
             }}
           >
@@ -177,20 +187,39 @@ export const StatisticsHeader = ({ setData }: StatisticsProps) => {
           </>
         )}
       </div>
+      {errorMessage && (
+        <SmallFont className="text-red" role="alert">
+          {errorMessage}
+        </SmallFont>
+      )}
       <div className="flex flex-row justify-end mt-12">
         {selected === 'keyword' ? (
           <MainButton
-            label={isKeywordDataSubmitted ? '닫기' : '통계 확인하기'}
+            label={
+              isFetching
+                ? '불러오는 중...'
+                : isKeywordDataSubmitted
+                  ? '닫기'
+                  : '통계 확인하기'
+            }
             width="w-[200px]"
             type="button"
+            disabled={isFetching}
             onClick={isKeywordDataSubmitted ? handleReset : handleDataRequest}
             isError={!dataErrorCondition}
           />
         ) : (
           <MainButton
-            label={isOptionDataSubmitted ? '닫기' : '통계 확인하기'}
+            label={
+              isFetching
+                ? '불러오는 중...'
+                : isOptionDataSubmitted
+                  ? '닫기'
+                  : '통계 확인하기'
+            }
             width="w-[200px]"
             type="button"
+            disabled={isFetching}
             onClick={isOptionDataSubmitted ? handleReset : handleDataRequest}
             isError={!optionErrorCondition}
           />

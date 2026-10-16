@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import './index.css';
 import { Main } from './pages/Main';
 import { SearchPage } from './pages/SearchDivider';
@@ -36,10 +36,14 @@ const FundingHistory = lazy(() => import('admin/FundingHistory'));
 const PaymentManagement = lazy(() => import('admin/PaymentManagement'));
 
 function App() {
+  const { pathname } = useLocation();
+
   return (
     <>
       <Header />
-      <Suspense fallback={<Loading />}>
+      {/* react-router v7은 이동을 transition으로 처리해 lazy 로딩 중에도 이전 화면을 유지하므로,
+          경로가 바뀔 때 경계를 새로 만들어 fallback(로딩)이 보이게 한다. */}
+      <Suspense key={pathname} fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/search" element={<SearchPage />} />

@@ -51,7 +51,7 @@ function CreateFunding() {
   const [copied, setCopied] = useState(false);
 
   const { configs, category, gender, age } = useCategoryConfigs();
-  const { mutate: createFunding } = useCreateFunding();
+  const { mutate: createFunding, isPending: isCreating } = useCreateFunding();
   const { mutateAsync: uploadImage } = useImageUpload();
 
   const handleImageUpload = () => {
@@ -290,8 +290,9 @@ function CreateFunding() {
         <div className="flex justify-end">
           <MainButton
             width="w-[200px]"
-            label="개설하기"
+            label={isCreating ? '개설 중...' : '개설하기'}
             onClick={handleSubmit}
+            disabled={isCreating}
           />
           <CreateModal
             isSubmitOpen={isSubmitOpen}
