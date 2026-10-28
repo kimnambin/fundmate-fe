@@ -28,7 +28,7 @@ export const SingleCategory = ({
         {isMobile ? (
           <></>
         ) : (
-          <SubTitle className="text-[0px] lg:text-[16px]">{name}</SubTitle>
+          <SubTitle className="text-[0px] lg:text-[16px] whitespace-nowrap">{name}</SubTitle>
         )}
       </SingleCategoryContainer>
     </Link>

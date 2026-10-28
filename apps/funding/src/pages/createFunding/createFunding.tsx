@@ -185,120 +185,126 @@ function CreateFunding() {
       <CreateFundingStyle>
         <Title>프로젝트(펀딩) 개설</Title>
 
-        <div className="flex flex-col gap-[20px]">
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
-          <ImageUpload preview={preview} onClick={handleImageUpload} />
-          {isSubmit && imageFile === null && (
-            <WarningText>이미지를 등록해주세요.</WarningText>
-          )}
-        </div>
-
-        <InfoForm
-          title={title}
-          setTitle={setTitle}
-          isSubmit={isSubmit}
-          goalAmount={goalAmount}
-          setGoalAmount={setGoalAmount}
-          startDate={startDate}
-          setStartDate={setStartDate}
-          endDate={endDate}
-          setEndDate={setEndDate}
-          isInvalidDate={isInvalidDate}
-          deliveryDate={deliveryDate}
-          setDeliveryDate={setDeliveryDate}
-        />
-
-        <IntroForm
-          description={description}
-          setDescription={setDescription}
-          aiSummary={aiSummary}
-          setAiSummary={setAiSummary}
-          isSubmit={isSubmit}
-          isFundiOpen={isFundiOpen}
-          setIsFundiOpen={setIsFundiOpen}
-          summaryRef={summaryRef}
-          copied={copied}
-          handleCopy={handleCopy}
-        />
-
-        <InputTextArea
-          label="한 줄 소개"
-          placeholder="한 줄 소개를 입력하세요."
-          value={shortDescription}
-          onChange={(e) => setShortDescription(e.target.value)}
-          maxLength={50}
-          width="sm:w-[350px]"
-          isError={isSubmit && shortDescription.trim().length === 0}
-        />
-
-        <CompWrapper>
-          <Label>분류</Label>
-          <CategoryGroup configs={configs} />
-          {isSubmit &&
-            (category === null || gender === null || age === null) && (
-              <WarningText>카테고리와 타겟층을 선택하세요.</WarningText>
-            )}
-        </CompWrapper>
-
-        <CompWrapper>
-          <div className="w-auto flex justify-between items-center">
-            <Label>상품 추가</Label>
-            {addedOptions.length < 5 && (
-              <PointButton
-                label="상품 추가하기"
-                onClick={() => setIsAddOpen(true)}
+        <div className="flex flex-col lg:flex-row gap-[30px] lg:gap-[50px]">
+          <div className="flex flex-col gap-[30px] lg:w-[400px] lg:shrink-0">
+            <div className="flex flex-col gap-[20px]">
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
               />
-            )}
-          </div>
-          <OptionAddModal
-            isAddOpen={isAddOpen}
-            setIsAddOpen={setIsAddOpen}
-            isAdd={isAdd}
-            optionTitle={optionTitle}
-            setOptionTitle={setOptionTitle}
-            optionContent={optionContent}
-            setOptionContent={setOptionContent}
-            optionPrice={optionPrice}
-            setOptionPrice={setOptionPrice}
-            handleAdd={handleAdd}
-          />
+              <ImageUpload preview={preview} onClick={handleImageUpload} />
+              {isSubmit && imageFile === null && (
+                <WarningText>이미지를 등록해주세요.</WarningText>
+              )}
+            </div>
 
-          <div className="flex flex-col gap-[10px]">
-            {addedOptions.map((option, index) => (
-              <AddedItem
-                key={index}
-                price={String(option.price)}
-                title={option.title}
-                content={option.description}
-                onRemove={() => {
-                  handleDelete(index);
-                }}
+            <InfoForm
+              title={title}
+              setTitle={setTitle}
+              isSubmit={isSubmit}
+              goalAmount={goalAmount}
+              setGoalAmount={setGoalAmount}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              isInvalidDate={isInvalidDate}
+              deliveryDate={deliveryDate}
+              setDeliveryDate={setDeliveryDate}
+            />
+
+            <InputTextArea
+              label="한 줄 소개"
+              placeholder="한 줄 소개를 입력하세요."
+              value={shortDescription}
+              onChange={(e) => setShortDescription(e.target.value)}
+              maxLength={50}
+              width="sm:w-[350px]"
+              isError={isSubmit && shortDescription.trim().length === 0}
+            />
+
+            <CompWrapper>
+              <Label>분류</Label>
+              <CategoryGroup configs={configs} />
+              {isSubmit &&
+                (category === null || gender === null || age === null) && (
+                  <WarningText>카테고리와 타겟층을 선택하세요.</WarningText>
+                )}
+            </CompWrapper>
+          </div>
+
+          <div className="flex flex-col gap-[30px] min-w-0 flex-1">
+            <IntroForm
+              description={description}
+              setDescription={setDescription}
+              aiSummary={aiSummary}
+              setAiSummary={setAiSummary}
+              isSubmit={isSubmit}
+              isFundiOpen={isFundiOpen}
+              setIsFundiOpen={setIsFundiOpen}
+              summaryRef={summaryRef}
+              copied={copied}
+              handleCopy={handleCopy}
+            />
+
+            <CompWrapper>
+              <div className="w-auto flex justify-between items-center">
+                <Label>상품 추가</Label>
+                {addedOptions.length < 5 && (
+                  <PointButton
+                    label="상품 추가하기"
+                    onClick={() => setIsAddOpen(true)}
+                  />
+                )}
+              </div>
+              <OptionAddModal
+                isAddOpen={isAddOpen}
+                setIsAddOpen={setIsAddOpen}
+                isAdd={isAdd}
+                optionTitle={optionTitle}
+                setOptionTitle={setOptionTitle}
+                optionContent={optionContent}
+                setOptionContent={setOptionContent}
+                optionPrice={optionPrice}
+                setOptionPrice={setOptionPrice}
+                handleAdd={handleAdd}
               />
-            ))}
-          </div>
-          {isSubmit && addedOptions.length === 0 && (
-            <WarningText>상품을 추가해주세요.</WarningText>
-          )}
-        </CompWrapper>
 
-        <div className="flex justify-end">
-          <MainButton
-            width="w-[200px]"
-            label={isCreating ? '개설 중...' : '개설하기'}
-            onClick={handleSubmit}
-            disabled={isCreating}
-          />
-          <CreateModal
-            isSubmitOpen={isSubmitOpen}
-            setIsSubmitOpen={setIsSubmitOpen}
-            handleCreate={handleCreate}
-          />
+              <div className="flex flex-col gap-[10px]">
+                {addedOptions.map((option, index) => (
+                  <AddedItem
+                    key={index}
+                    price={String(option.price)}
+                    title={option.title}
+                    content={option.description}
+                    onRemove={() => {
+                      handleDelete(index);
+                    }}
+                  />
+                ))}
+              </div>
+              {isSubmit && addedOptions.length === 0 && (
+                <WarningText>상품을 추가해주세요.</WarningText>
+              )}
+            </CompWrapper>
+
+            <div className="flex justify-end">
+              <MainButton
+                width="w-[200px]"
+                label={isCreating ? '개설 중...' : '개설하기'}
+                onClick={handleSubmit}
+                disabled={isCreating}
+              />
+              <CreateModal
+                isSubmitOpen={isSubmitOpen}
+                setIsSubmitOpen={setIsSubmitOpen}
+                handleCreate={handleCreate}
+              />
+            </div>
+          </div>
         </div>
       </CreateFundingStyle>
     </Layout>

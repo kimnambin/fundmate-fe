@@ -25,6 +25,7 @@ export const InterestingItems = () => {
 
   return (
     <InterestingItemsContainer>
+      <Title>추천 프로젝트</Title>
       <InterestingItemsGrid>
         {mockProducts?.length ? (
           <>
@@ -40,7 +41,7 @@ export const InterestingItems = () => {
             ))}
           </>
         ) : (
-          <div className="col-span-4 row-span-2 h-[600px] w-full flex flex-col items-center justify-center gap-7 opacity-20">
+          <div className="col-span-full h-[300px] w-full flex flex-col items-center justify-center gap-7 opacity-20">
             <GiNothingToSay className="text-[70px]" />
             <Title>프로젝트가 없습니다</Title>
           </div>

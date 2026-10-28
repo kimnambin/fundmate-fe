@@ -12,7 +12,7 @@ export const Banner = ({ isLoading }: BannerProps) => {
   }
   return (
     <div>
-      <img src={bannerImage} alt="banner" className="w-full h-full object-cover rounded-xl" />
+      <img src={bannerImage} alt="banner" className="w-full h-[200px] sm:h-[280px] lg:h-[340px] object-cover rounded-xl" />
     </div>
   )
 }

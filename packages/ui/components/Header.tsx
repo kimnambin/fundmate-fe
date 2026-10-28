@@ -147,7 +147,7 @@ export const Header = () => {
             {isMobile ? (
               <MdDriveFolderUpload className="w-[56px] h-[52px] text-[#26AAFF]" />
             ) : (
-              <SubTitle>프로젝트 업로드</SubTitle>
+              <SubTitle className="whitespace-nowrap">프로젝트 업로드</SubTitle>
             )}
           </button>
           {/* ============✔️TODO : 임시 데이터를 위한 주석=============== */}
@@ -190,10 +190,10 @@ export const Header = () => {
           <button
             type="button"
             onClick={setIsOpen}
-            className="flex flex-row items-center gap-2 relative"
+            className="flex flex-row items-center gap-2 relative shrink-0"
           >
             <IoMdMenu />
-            <SubTitle>카테고리</SubTitle>
+            <SubTitle className="whitespace-nowrap">카테고리</SubTitle>
             <CateogoryContainer $isOpen={isOpen}>
               {Object.entries(CategoryIcons).map(
                 ([name, { src, menuName }], i) => (
@@ -222,7 +222,7 @@ export const Header = () => {
               <button
                 key={v.name}
                 type="button"
-                className={`px-3 h-full ${isActive ? 'shadow-[inset_0_-2px_0_0_#26AAFF]' : 'transition-shadow'}`}
+                className={`px-3 h-full whitespace-nowrap ${isActive ? 'shadow-[inset_0_-2px_0_0_#26AAFF]' : 'transition-shadow'}`}
                 onClick={() => {
                   if (!isActive) navigate(v.route);
                 }}
@@ -235,9 +235,9 @@ export const Header = () => {
         <FundiButton
           type="button"
           onClick={() => navigate('/fundi/request')}
-          className="my-2 md:my-4"
+          className="my-2 md:my-4 shrink-0"
         >
-          <SubTitle>펀디에게 물어보기</SubTitle>
+          <SubTitle className="whitespace-nowrap">펀디에게 물어보기</SubTitle>
           <img src={fundi} className="w-6" />
         </FundiButton>
       </SpaceContainer>

@@ -1,4 +1,6 @@
 import { lazy, Suspense } from 'react';
+import '@uiw/react-md-editor/markdown-editor.css';
+import '@uiw/react-markdown-preview/markdown.css';
 import { Label } from '../input-text/inputText.styles';
 import { Wrapper } from './createFunding.styles';
 import { WarningText } from '@repo/ui/styles';

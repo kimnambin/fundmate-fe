@@ -10,24 +10,28 @@ export const MainFlex = tw.div`
 
 //InterestingItems
 export const InterestingItemsContainer = tw.div`
-  h-[55%]
+  flex
+  flex-col
+  gap-5
+  w-full
 `;
 
 export const InterestingItemsGrid = tw.div`
   grid
-  grid-cols-2 grid-rows-1
-  lg:grid-cols-4 
-  lg:grid-rows-2
-  gap-3
-  h-full
+  grid-cols-2
+  md:grid-cols-3
+  gap-4
 `;
 
 //MainCategory
 export const MainCategoryContainer = tw.div`
-  flex
-  flex-row
-  justify-around
-  items-center
+  grid
+  grid-cols-4
+  lg:grid-cols-8
+  justify-items-center
+  items-start
+  gap-x-3
+  gap-y-6
 `;
 
 //PopularItems
@@ -46,8 +50,7 @@ export const PopularItemsHeader = tw.div`
 `;
 
 export const PopularItemsGrid = tw.div`
-  grid
-  grid-rows-5
-  gap-1.5
-  h-full
+  flex
+  flex-col
+  gap-3
 `;
