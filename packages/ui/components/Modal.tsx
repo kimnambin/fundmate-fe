@@ -1,7 +1,6 @@
 import type React from 'react';
 
-import { createPortal } from 'react-dom';
-import { Background, ModalContent, Wrapper } from '../styles/modal.style';
+import { Dialog, DialogContent } from './ui/dialog';
 
 interface Props {
   children: React.ReactNode;
@@ -9,14 +8,11 @@ interface Props {
   onClose?: () => void;
 }
 
+/** shadcn Dialog(Radix) 기반으로 재구현한 Modal. 기존 isOpen/onClose/children API는 그대로 유지된다. */
 export const Modal = ({ children, isOpen, onClose }: Props) => {
-  if (!isOpen) return null;
-
-  return createPortal(
-    <Wrapper>
-      <Background onClick={onClose} />
-      <ModalContent>{children}</ModalContent>
-    </Wrapper>,
-    document.body,
+  return (
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose?.()}>
+      <DialogContent>{children}</DialogContent>
+    </Dialog>
   );
 };

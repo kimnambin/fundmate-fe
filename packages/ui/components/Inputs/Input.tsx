@@ -1,7 +1,7 @@
 import React from 'react';
-import { Wrapper } from '../../styles/Input.style';
+import { Input } from '../ui/input';
 import { Title } from '../../styles';
-import { InputStyle } from '../../styles/Input.style';
+import { cn } from '../../utils/cn';
 
 interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -12,11 +12,25 @@ interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
 }
 
-export const InputText = ({ label, type = 'text', width, textSize, isError, ...props }: InputTextProps) => {
+/** shadcn Input 위에 기존 InputText API(label/width/textSize 등)를 유지한 래퍼. */
+export const InputText = ({
+  label,
+  type = 'text',
+  width,
+  textSize,
+  isError,
+  className,
+  ...props
+}: InputTextProps) => {
   return (
-    <Wrapper $width={width}>
+    <div className={cn(width ?? 'w-auto', 'flex flex-col gap-[20px]')}>
       {label && <Title>{label}</Title>}
-      <InputStyle type={type} $textSize={textSize} $isError={isError} {...props} />
-    </Wrapper>
+      <Input
+        type={type}
+        isError={isError}
+        className={cn(textSize ?? 'text-[14px]', className)}
+        {...props}
+      />
+    </div>
   );
 };

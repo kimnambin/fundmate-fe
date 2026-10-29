@@ -28,7 +28,14 @@ module.exports = {
       containers: {
         '2xs': '16rem',
       },
+      borderRadius: {
+        // shadcn/ui 컴포넌트(Button, Card, Dialog 등)가 기대하는 반경 토큰.
+        lg: '0.5rem',
+        md: '0.375rem',
+        sm: '0.25rem',
+      },
     },
   },
-  plugins: [require('@tailwindcss/container-queries')],
+  // tailwindcss-animate: shadcn/ui Dialog, DropdownMenu의 data-[state=open]:animate-in 등에 필요.
+  plugins: [require('@tailwindcss/container-queries'), require('tailwindcss-animate')],
 };

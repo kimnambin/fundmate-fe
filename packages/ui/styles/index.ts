@@ -1,4 +1,3 @@
-export { HorizontalCardContainer, VerticalCardContainer } from './Card.style';
 export { Layout } from './Layout.style';
 export {
   Title,

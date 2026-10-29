@@ -1,10 +1,12 @@
 import React from 'react';
+import { Button } from '../ui/button';
 
 type FollowingButtonProps = {
   following: boolean;
   setFollowing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/** shadcn Button(outline/secondary variant)으로 재구현한 팔로우 토글 버튼. */
 export const FollowingButton = ({
   following,
   setFollowing,
@@ -15,16 +17,13 @@ export const FollowingButton = ({
   };
 
   return (
-    <button
+    <Button
+      variant={following ? 'secondary' : 'outline'}
+      size="sm"
       onClick={toggleFollow}
-      className={`px-4 py-2 rounded border flex items-center gap-1
-          ${
-            following
-              ? 'bg-gray-100 text-gray-600 border-gray-300'
-              : 'bg-white text-main border-main'
-          }`}
+      className="gap-1 rounded-full"
     >
       {following ? '✔ 팔로잉' : '+ 팔로우'}
-    </button>
+    </Button>
   );
 };

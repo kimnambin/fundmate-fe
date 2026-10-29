@@ -1,5 +1,5 @@
 import ProgressBar from '@ramonak/react-progress-bar';
-import { VerticalCardContainer } from '../../styles/Card.style';
+import { Card } from '../ui/card';
 import { useNavigate } from 'react-router-dom';
 import { HeartButton } from '../Likes/HeartButton';
 import { MediumFont, SubTitle } from '../../styles';
@@ -35,7 +35,10 @@ export const VerticalCard = ({
   // }
 
   return (
-    <VerticalCardContainer onClick={() => navigate(`/product/${id}`)}>
+    <Card
+      className="flex h-full w-full cursor-pointer flex-col grow justify-between @container/vertical"
+      onClick={() => navigate(`/product/${id}`)}
+    >
       <div className="flex flex-col h-full justify-between @[1px]/vertical:gap-3 @[200px]/vertical:gap-5 @[270px]/vertical:gap-7">
         <div className="flex flex-col gap-3">
           <div className="relative">
@@ -69,6 +72,6 @@ export const VerticalCard = ({
           />
         </div>
       </div>
-    </VerticalCardContainer>
+    </Card>
   );
 };
