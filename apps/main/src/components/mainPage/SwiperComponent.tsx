@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { SwiperItems } from '../Swiper';
 import { SwiperContainer, SwiperLayout } from '../../styles/Swiper.style';
-import { Title } from '@repo/ui/styles';
+import { MediumFont, Title } from '@repo/ui/styles';
 import { GiNothingToSay } from 'react-icons/gi';
 
 interface SwiperComponentsProps {
@@ -21,11 +21,12 @@ export const SwiperComponents = ({
     <SwiperLayout $id={componentId}>
       <SwiperContainer>
         {componentId === 2 ? (
-          <div className="flex flex-col justify-between items-start px-6">
+          <div className="flex flex-col gap-4 px-6">
             <Title className="text-xl font-semibold">{componentName}</Title>
-            <div className="col-span-4 row-span-2 w-full flex flex-col items-center justify-center gap-4 opacity-20">
-              <GiNothingToSay className="text-[70px]" />
-              <Title>프로젝트가 없습니다</Title>
+            {/* 큰 빈 박스 대신 한 줄짜리 보더 카드로 — 스크롤 중 불필요한 공백을 줄였다. */}
+            <div className="flex w-full items-center gap-3 rounded-xl border border-dashed border-gray-200 px-6 py-4 text-gray-400">
+              <GiNothingToSay className="text-[24px] shrink-0" />
+              <MediumFont className="text-gray-400">마감 임박 프로젝트가 아직 없어요</MediumFont>
             </div>
           </div>
         ) : (

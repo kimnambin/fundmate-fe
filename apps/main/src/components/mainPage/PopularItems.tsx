@@ -42,7 +42,9 @@ export const PopularItems = () => {
       <PopularItemsHeader>
         <div className="flex flex-col items-start">
           <Title>인기 프로젝트</Title>
-          <MediumFont className="text-gray-400">{lastUpdated} 기준</MediumFont>
+          {lastUpdated && (
+            <MediumFont className="text-gray-400">{lastUpdated} 기준</MediumFont>
+          )}
         </div>
         <Link to="/search?popular=1" className="text-base text-gray-400">
           <MediumFont>전체보기</MediumFont>

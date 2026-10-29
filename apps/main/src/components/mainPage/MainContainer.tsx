@@ -8,14 +8,9 @@ export const MainContainer = () => {
     <div className="flex flex-col gap-10 w-full">
       <Banner isLoading={false} />
       <MainCategory />
-      <div className="flex flex-col lg:flex-row gap-10 lg:gap-12">
-        <div className="min-w-0 flex-1">
-          <InterestingItems />
-        </div>
-        <div className="w-full lg:w-[420px] lg:shrink-0">
-          <PopularItems />
-        </div>
-      </div>
+      {/* 좌우 분할(추천 3개 vs 인기 5개) 대신 세로로 쌓아 섹션 간 높이 불균형을 없앴다. */}
+      <InterestingItems />
+      <PopularItems />
     </div>
   );
 };

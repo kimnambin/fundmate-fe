@@ -20,6 +20,7 @@ export const InterestingItemsGrid = tw.div`
   grid
   grid-cols-2
   md:grid-cols-3
+  xl:grid-cols-5
   gap-4
 `;
 
@@ -50,7 +51,9 @@ export const PopularItemsHeader = tw.div`
 `;
 
 export const PopularItemsGrid = tw.div`
-  flex
-  flex-col
-  gap-3
+  grid
+  grid-cols-1
+  sm:grid-cols-2
+  xl:grid-cols-3
+  gap-4
 `;

@@ -64,7 +64,7 @@ export const HorizontalCard = ({
           <MediumFont className="truncate whitespace-nowrap">
             {cardTitle}
           </MediumFont>
-          <MediumFont className="text-gray-500">{cardDescription}</MediumFont>
+          <MediumFont className="text-gray-500 line-clamp-2">{cardDescription}</MediumFont>
         </div>
         <div className="w-full">
           <SubTitle className="text-[#26AAFF]">{cardProgress}% 달성</SubTitle>
