@@ -19,7 +19,8 @@
     "./loadingStore": "./stores/loadingStore.ts",
     "./tailwind-preset": "./tailwind-preset.js",
     "./fonts.css": "./styles/fonts.css",
-    "./image-upload": "./upload/index.ts"
+    "./image-upload": "./upload/index.ts",
+    "./theme": "./theme/index.ts"
   },
   "license": "MIT",
   "scripts": {
@@ -47,6 +48,10 @@
     "react-dom": "^19.1.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.3",
+    "@mui/material": "^6.4.3",
     "@ramonak/react-progress-bar": "^5.4.0",
     "@tailwindcss/container-queries": "^0.1.1",
     "axios": "^1.10.0",

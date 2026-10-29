@@ -1,4 +1,4 @@
-import { ButtonWrapper } from "../../styles/Button.styles";
+import Button from '@mui/material/Button';
 
 interface MainButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isError?: boolean;
@@ -9,6 +9,7 @@ interface MainButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
   label: string;
 }
 
+/** MUI Button 위에 기존 MainButton API(label/isError/isVerificated 등)를 유지한 래퍼. */
 export const MainButton = ({
   isError,
   isVerificated,
@@ -16,18 +17,25 @@ export const MainButton = ({
   textSize,
   textWeight,
   label,
+  disabled,
+  style,
   ...props
 }: MainButtonProps) => {
   return (
-    <ButtonWrapper
-      $width={width}
-      $textSize={textSize}
-      $textWeight={textWeight}
-      $isError={isError}
-      $isVerificated={isVerificated}
-      {...props}
+    <Button
+      variant="contained"
+      color={isError ? 'inherit' : 'primary'}
+      disabled={disabled || isError || isVerificated}
+      disableElevation
+      sx={{
+        width: width ?? 'auto',
+        fontSize: textSize ?? 14,
+        fontWeight: textWeight ?? 400,
+      }}
+      style={style}
+      {...(props as React.ComponentProps<typeof Button>)}
     >
       {label}
-    </ButtonWrapper>
+    </Button>
   );
-}
+};

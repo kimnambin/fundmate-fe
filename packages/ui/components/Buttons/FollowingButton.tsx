@@ -1,10 +1,14 @@
 import React from 'react';
+import Button from '@mui/material/Button';
+import CheckIcon from '@mui/icons-material/Check';
+import AddIcon from '@mui/icons-material/Add';
 
 type FollowingButtonProps = {
   following: boolean;
   setFollowing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/** MUI Button(outlined/contained toggle)으로 재구현한 팔로우 토글 버튼. */
 export const FollowingButton = ({
   following,
   setFollowing,
@@ -15,16 +19,15 @@ export const FollowingButton = ({
   };
 
   return (
-    <button
+    <Button
+      variant={following ? 'contained' : 'outlined'}
+      color={following ? 'inherit' : 'primary'}
+      size="small"
+      startIcon={following ? <CheckIcon fontSize="small" /> : <AddIcon fontSize="small" />}
       onClick={toggleFollow}
-      className={`px-4 py-2 rounded border flex items-center gap-1
-          ${
-            following
-              ? 'bg-gray-100 text-gray-600 border-gray-300'
-              : 'bg-white text-main border-main'
-          }`}
+      sx={{ borderRadius: 999 }}
     >
-      {following ? '✔ 팔로잉' : '+ 팔로우'}
-    </button>
+      {following ? '팔로잉' : '팔로우'}
+    </Button>
   );
 };
